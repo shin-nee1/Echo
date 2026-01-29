@@ -106,3 +106,36 @@
     box-shadow: 0 0 30px hsl(var(--cyan) / 0.2);
   }
 }
+
+/* ===== PROTOTYPE BACKGROUND UTILITIES ===== */
+
+/* Grid overlay */
+.bg-grid {
+  /* Use a slightly brighter white-cyan tint for the lines */
+  background-image:
+    linear-gradient(to right, rgba(0, 229, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 229, 255, 0.15) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.vignette {
+  /* Softens the edges so the grid doesn't hit the screen borders harshly */
+  background: radial-gradient(
+    circle at center,
+    transparent 20%,
+    rgba(2, 8, 10, 0.7) 70%,
+    #02080a 100%
+  );
+}
+
+/* Slow floating halo */
+@keyframes float-slow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-halo {
+  animation: float-slow 18s ease-in-out infinite;
+}
+
