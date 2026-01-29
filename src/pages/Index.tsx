@@ -5,6 +5,7 @@ import PortfolioSection from "@/components/PortfolioSection";
 import CTASection from "@/components/CTASection";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import InfoSection from "@/components/InfoSection";
+import WhyUsSection from "@/components/WhyUsSection";
 import { Button } from "@/components/ui/button";
 import { Code, Palette, TrendingUp, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -169,35 +170,7 @@ const Index = () => {
       <PortfolioSection />
 
       {/* ================= WHY US ================= */}
-      <section className="py-24 bg-card/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Why Echo &"
-            highlight="Impact?"
-            subtitle="What makes us different"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whyUs.map((item, i) => (
-              <div
-                key={i}
-                className="card-glass p-6 hover-glow w-full max-w-[clamp(18rem,90%,28rem)] mx-auto"
-              >
-                <div className="w-10 h-10 mb-4 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center">
-                  <span className="font-display font-bold text-cyan">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <h3 className="font-display font-semibold text-lg mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WhyUsSection />
 
       {/* ================= FAQ ================= */}
       <section className="py-24">
