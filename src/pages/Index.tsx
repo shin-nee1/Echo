@@ -189,14 +189,13 @@ const Index = () => {
             </Accordion>
                   {/* SHOW ALL BUTTON */}
       <div className="mt-6 text-center">
-        <Button
-          asChild
-          size="lg"
-          className="bg-cyan text-background hover:bg-cyan/90 px-8"
-        >
-          <Link to="/faq">Show All FAQs</Link>
-        </Button>
-      </div>
+  <Link to="/faq">
+    <Button size="lg" className="bg-cyan text-background hover:bg-cyan/90 px-8">
+      Show All FAQs
+    </Button>
+  </Link>
+</div>
+
 
           </div>
         </div>

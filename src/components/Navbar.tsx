@@ -168,18 +168,18 @@ const Navbar = () => {
             </Link>
 
             <Link
-              to="/about"
+              to="/About"
               className={`text-sm font-medium transition-colors hover:text-cyan ${
-                isActive("/about") ? "text-cyan" : "text-muted-foreground"
+                isActive("/About") ? "text-cyan" : "text-muted-foreground"
               }`}
             >
               About
             </Link>
 
             <Link
-              to="/contact"
+              to="/Contact"
               className={`text-sm font-medium transition-colors hover:text-cyan ${
-                isActive("/contact") ? "text-cyan" : "text-muted-foreground"
+                isActive("/Contact") ? "text-cyan" : "text-muted-foreground"
               }`}
             >
               Contact
