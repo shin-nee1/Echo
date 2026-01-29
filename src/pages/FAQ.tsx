@@ -10,52 +10,157 @@ import {
 const FAQ = () => {
   const faqCategories = [
     {
-      title: "General",
-      highlight: "Questions",
+      title: "Working With",
+      highlight: "Echo & Impact",
       faqs: [
-        { 
-          question: "What services does Echo & Impact offer?", 
-          answer: "We offer a comprehensive suite of digital services including brand design, UI/UX design, web and mobile development, e-commerce solutions, SEO, social media marketing, and growth strategies. Our full-service approach ensures all your digital needs are covered under one roof." 
+        {
+          question: "How do I get started working with your team?",
+          answer: "Getting started is simple! Fill out our contact form with your project details, and we'll schedule a discovery call within 48 hours to discuss your needs and determine if we're a good fit."
         },
-        { 
-          question: "How long does a typical project take?", 
-          answer: "Project timelines vary based on scope and complexity. A simple website takes 2-4 weeks, while complex applications may take 2-3 months. We'll provide a detailed timeline during our initial consultation." 
+        {
+          question: "What types of businesses do you work with?",
+          answer: "We specialize in working with growth-stage startups, established SMBs, and enterprise companies looking to improve their digital presence. Our sweet spot is ambitious teams who value quality and collaboration."
         },
-        { 
-          question: "What is your pricing structure?", 
-          answer: "We offer flexible pricing based on project requirements. We work with fixed-price projects, retainers, and hourly rates depending on what suits your needs best. Contact us for a custom quote tailored to your specific requirements." 
+        {
+          question: "Do you work with clients internationally?",
+          answer: "Yes! We work with clients globally and have experience collaborating across time zones. We use async communication tools and flexible scheduling to make remote partnerships seamless."
         },
-        { 
-          question: "Do you work with startups or only established businesses?", 
-          answer: "We work with businesses of all sizes! From early-stage startups to established enterprises, we tailor our approach to match your specific needs, goals, and budget." 
+        {
+          question: "What makes your approach different from other agencies?",
+          answer: "We combine senior talent, strategic thinking, and hands-on execution in a boutique setting. You won't be handed off to junior staff—the people you meet are the people who do the work."
         },
       ]
     },
     {
-      title: "Design",
-      highlight: "Services",
+      title: "Scope, Pricing, And",
+      highlight: "Contracts",
       faqs: [
-        { question: "Can you work with our existing brand guidelines?", answer: "Absolutely! We can work within your existing brand framework or help you develop new guidelines from scratch. Our team excels at both maintaining brand consistency and creating fresh visual identities." },
-        { question: "What design tools do you use?", answer: "We use industry-standard tools including Figma, Adobe Creative Suite, and Sketch. We're flexible and can adapt to your preferred tools for seamless collaboration." },
-        { question: "Do you provide design revisions?", answer: "Yes, all our design packages include revision rounds. The exact number depends on your project scope, but we always work closely with you to ensure the final result exceeds expectations." },
+        {
+          question: "How do you price your projects?",
+          answer: "We offer both project-based pricing and retainer arrangements depending on your needs. Project pricing is based on scope, complexity, and timeline. We're always transparent about costs upfront."
+        },
+        {
+          question: "What's the typical project budget range?",
+          answer: "Our projects typically range from $10,000 to $150,000+, depending on scope. We have solutions for various budgets and can help you prioritize features to match your investment level."
+        },
+        {
+          question: "Do you require long-term contracts?",
+          answer: "Not necessarily. While we love building long-term partnerships, we also take on single projects. Our retainer clients enjoy priority scheduling and discounted rates."
+        },
+        {
+          question: "What's included in your proposals?",
+          answer: "Our proposals include detailed scope, timeline, deliverables, payment schedule, and terms. You'll know exactly what you're getting and when to expect it."
+        },
       ]
     },
     {
-      title: "Development",
-      highlight: "Services",
+      title: "Process &",
+      highlight: "Delivery",
       faqs: [
-        { question: "What technologies do you specialize in?", answer: "We specialize in modern web technologies including React, Next.js, TypeScript, Node.js, and various cloud platforms. For mobile, we work with React Native and native iOS/Android development." },
-        { question: "Do you offer ongoing support and maintenance?", answer: "Yes, we offer comprehensive maintenance packages to keep your digital products running smoothly, securely, and up-to-date. Our support plans range from basic updates to full 24/7 coverage." },
-        { question: "Can you integrate with existing systems?", answer: "Yes, we have extensive experience integrating with CRMs, payment gateways, ERPs, and custom APIs. We'll assess your current tech stack and create seamless integrations." },
+        {
+          question: "What does your typical project process look like?",
+          answer: "We follow a proven process: Discovery → Strategy → Design → Development → Testing → Launch → Support. Each phase has clear milestones and checkpoints for your feedback."
+        },
+        {
+          question: "How long do projects typically take?",
+          answer: "Timeline varies by scope. A brand identity might take 4-6 weeks, while a full website redesign could be 8-12 weeks. We'll provide realistic timelines during our discovery call."
+        },
+        {
+          question: "How do you handle revisions and feedback?",
+          answer: "We build revision rounds into every project phase. You'll have ample opportunity to provide feedback, and we use collaborative tools to make the review process smooth and efficient."
+        },
+        {
+          question: "What happens if the project scope changes?",
+          answer: "Scope changes happen—we get it. We'll discuss the impact on timeline and budget, provide a change order for approval, and adjust accordingly. No surprises."
+        },
       ]
     },
     {
-      title: "Marketing",
-      highlight: "& Growth",
+      title: "Ownership,",
+      highlight: "Rights & Data",
       faqs: [
-        { question: "How do you measure marketing success?", answer: "We track key performance indicators (KPIs) specific to your goals—whether that's traffic, conversions, engagement, or ROI. You'll receive regular reports with actionable insights and recommendations." },
-        { question: "Do you offer social media management?", answer: "Yes, we provide full social media management including content creation, scheduling, community management, and paid advertising across all major platforms." },
-        { question: "How quickly can I expect to see marketing results?", answer: "Results vary by strategy. SEO typically takes 3-6 months to show significant results, while paid advertising can generate leads immediately. We'll set realistic expectations during our strategy session." },
+        {
+          question: "Who owns the final deliverables?",
+          answer: "You do! Upon final payment, all deliverables and intellectual property rights transfer to you completely. You'll have full ownership of everything we create."
+        },
+        {
+          question: "Will I receive source files?",
+          answer: "Absolutely. We provide all source files, assets, and documentation. You'll never be locked into working with us—though we hope you'll want to continue!"
+        },
+        {
+          question: "How do you handle confidential information?",
+          answer: "We take confidentiality seriously. We're happy to sign NDAs and follow strict data handling protocols. Your business information stays secure."
+        },
+        {
+          question: "Can I use the work in my portfolio?",
+          answer: "Yes, and we'd love to feature the work in our portfolio too (with your permission). Great work deserves to be showcased!"
+        },
+      ]
+    },
+    {
+      title: "Remote Work &",
+      highlight: "Global Clients",
+      faqs: [
+        {
+          question: "How do you collaborate with remote teams?",
+          answer: "We use a combination of Slack, Zoom, Figma, and project management tools to stay connected. Regular check-ins ensure everyone stays aligned regardless of location."
+        },
+        {
+          question: "What time zones do you work in?",
+          answer: "Our core team is primarily in US time zones, but we have experience working with clients globally. We're flexible and will find meeting times that work for everyone."
+        },
+        {
+          question: "Do you ever meet in person?",
+          answer: "While we work remotely, we're open to in-person meetings for major milestones or kickoffs when it makes sense. Some of our best work has started with face-to-face workshops."
+        },
+        {
+          question: "How do you maintain quality remotely?",
+          answer: "Remote work is in our DNA. We have refined processes, clear documentation, and regular touchpoints that ensure quality never suffers regardless of where we're working from."
+        },
+      ]
+    },
+    {
+      title: "Long-Term",
+      highlight: "Support",
+      faqs: [
+        {
+          question: "Do you offer ongoing support after launch?",
+          answer: "Yes! We offer maintenance retainers, training sessions, and ongoing optimization services. We're committed to your long-term success, not just the launch."
+        },
+        {
+          question: "What kind of post-launch services do you provide?",
+          answer: "We offer hosting management, security updates, performance optimization, content updates, analytics reporting, and strategic consulting to help you grow."
+        },
+        {
+          question: "How quickly can you respond to urgent issues?",
+          answer: "Retainer clients receive priority support with guaranteed response times. For critical issues, we offer same-day response and resolution whenever possible."
+        },
+        {
+          question: "Can you train our team on the new systems?",
+          answer: "Absolutely. We provide comprehensive training and documentation so your team feels confident managing and updating your new digital assets."
+        },
+      ]
+    },
+    {
+      title: "Fit &",
+      highlight: "Expectations",
+      faqs: [
+        {
+          question: "How do I know if we're a good fit?",
+          answer: "We look for clients who value quality, communicate openly, and are ready to collaborate. Our discovery call helps both parties determine if the partnership will thrive."
+        },
+        {
+          question: "What do you expect from clients?",
+          answer: "Timely feedback, clear communication, and trust in our expertise. The best results come from true collaboration where both parties are invested in success."
+        },
+        {
+          question: "What if we're not happy with the work?",
+          answer: "Your satisfaction is our priority. We have built-in revision rounds and maintain open communication to address concerns early. We'll work together until it's right."
+        },
+        {
+          question: "Can we start with a small project first?",
+          answer: "Absolutely! Many of our long-term clients started with a smaller project to test the waters. It's a great way to experience our process and build trust."
+        },
       ]
     },
   ];
