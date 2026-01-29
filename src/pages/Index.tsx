@@ -38,12 +38,6 @@ const Index = () => {
     },
   ];
 
-  const whyUs = [
-    { title: "Expert Team", description: "Senior designers & engineers" },
-    { title: "Proven Results", description: "Measurable business impact" },
-    { title: "End-to-End", description: "From idea to launch" },
-    { title: "Always Available", description: "Fast & reliable support" },
-  ];
 
   const faqs = [
     {
@@ -193,6 +187,17 @@ const Index = () => {
                 </AccordionItem>
               ))}
             </Accordion>
+                  {/* SHOW ALL BUTTON */}
+      <div className="mt-6 text-center">
+        <Button
+          asChild
+          size="lg"
+          className="bg-cyan text-background hover:bg-cyan/90 px-8"
+        >
+          <Link to="/faq">Show All FAQs</Link>
+        </Button>
+      </div>
+
           </div>
         </div>
       </section>
