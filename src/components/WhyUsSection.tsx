@@ -1,100 +1,92 @@
 import { useState } from "react";
-import SectionHeader from "./SectionHeader";
+import { ChevronRight } from "lucide-react";
 
 interface WhyUsItem {
   title: string;
   description: string;
 }
 
-interface WhyUsSectionProps {
-  items?: WhyUsItem[];
-}
-
-const defaultItems: WhyUsItem[] = [
-  { title: "Expert Team", description: "Skilled professionals with years of industry experience" },
-  { title: "Proven Results", description: "Track record of successful projects and satisfied clients" },
-  { title: "Full Service", description: "End-to-end solutions from design to deployment" },
-  { title: "24/7 Support", description: "Always here to help when you need us" },
+const items: WhyUsItem[] = [
+  { title: "PARTNERSHIP", description: "We don't just work for you; we work with you as a dedicated extension of your internal team." },
+  { title: "SEAMLESS COLLABORATION", description: "Integrated workflows that ensure every stage of the project is transparent and efficient." },
+  { title: "SENIOR EXPERTISE", description: "Direct access to senior-level talent who have built products for global brands." },
+  { title: "FULL TRANSPARENCY", description: "No hidden costs or black-box processes. You see exactly what we see, every step of the way." },
+  { title: "UNIFIED TEAM", description: "A collective of specialists across design and dev working under one single vision." },
+  { title: "CLIENT-FIRST", description: "Your business goals drive our creative decisions, ensuring real impact over just aesthetics." },
 ];
 
-const WhyUsSection = ({ items = defaultItems }: WhyUsSectionProps) => {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  const handleClick = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
+const WhyUsSection = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-20 bg-card/30">
-      <div className="container mx-auto px-6">
-        <SectionHeader 
-          title="Why Echo &" 
-          highlight="Impact?" 
-          subtitle="What sets us apart from the rest"
-        />
+    <section className="relative py-32 overflow-hidden bg-transparent">
+      {/* 3D Decorative Assets */}
+      <div className="absolute top-10 left-10 w-48 h-48 opacity-40 animate-float pointer-events-none">
+        <img src="/assets/3d-cube-1.png" alt="" className="w-full h-full object-contain" />
+      </div>
+      <div className="absolute bottom-10 right-10 w-64 h-64 opacity-40 animate-float-slow pointer-events-none">
+        <img src="/assets/3d-cube-2.png" alt="" className="w-full h-full object-contain" />
+      </div>
 
-        <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-stretch min-h-[400px]">
-          {items.map((item, index) => {
-            const isExpanded = expandedIndex === index;
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-24">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-white">
+            Why Echo & <span className="text-cyan">Impact?</span>
+          </h2>
+        </div>
 
-            return (
-              <div
-                key={index}
-                onClick={() => handleClick(index)}
-                className={`
-                  card-glass cursor-pointer relative overflow-hidden
-                  transition-all duration-500 ease-out
-                  ${isExpanded ? 'flex-1 md:flex-[3] p-6 md:p-8' : 'flex-none md:w-20 p-4 md:p-6'}
-                  hover-glow group
-                `}
-              >
-                {/* Number - top in collapsed, moves inside expanded */}
-                <div
-                  className={`
-                    absolute top-4 left-1/2 -translate-x-1/2 w-10 h-10 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center
-                    text-cyan font-display font-bold transition-all duration-500
-                    ${isExpanded ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}
-                  `}
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </div>
+        {/* The "Echo" List Structure */}
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-center items-center gap-0">
+          {items.map((item, index) => (
+            <div
+              key={index}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="relative group cursor-pointer transition-all duration-500 ease-in-out"
+              style={{
+                flex: hoveredIndex === index ? "4" : "1",
+                minWidth: hoveredIndex === index ? "300px" : "80px",
+                height: "450px"
+              }}
+            >
+              {/* Vertical Line Separators */}
+              <div className="absolute inset-y-0 left-0 w-px bg-white/10 group-hover:bg-cyan/40 transition-colors" />
+              {index === items.length - 1 && (
+                <div className="absolute inset-y-0 right-0 w-px bg-white/10" />
+              )}
 
-                {/* Vertical Text - collapsed */}
-                <div
-                  className={`
-                    absolute top-16 left-1/2 -translate-x-1/2
-                    flex flex-col items-center justify-start h-full transition-all duration-500
-                    ${isExpanded ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'}
-                  `}
-                >
-                  <h3
-                    className="font-display font-semibold text-lg text-center"
-                    style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
-                  >
+              {/* Vertical Text (Collapsed State) */}
+              <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
+                hoveredIndex === index ? "opacity-0 -translate-y-10" : "opacity-100"
+              }`}>
+                <h3 className="font-display text-sm font-black tracking-[0.4em] uppercase text-white/40 whitespace-nowrap -rotate-90">
+                  {item.title}
+                </h3>
+              </div>
+
+              {/* Expanded Content */}
+              <div className={`absolute inset-0 p-10 flex flex-col justify-center transition-all duration-700 ${
+                hoveredIndex === index ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+              }`}>
+                <div className="space-y-6">
+                  <div className="w-12 h-12 rounded-full border border-cyan/30 flex items-center justify-center">
+                    <ChevronRight className="text-cyan w-6 h-6" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white tracking-tight">
                     {item.title}
                   </h3>
-                </div>
-
-                {/* Horizontal content - expanded */}
-                <div
-                  className={`
-                    flex flex-col transition-all duration-500
-                    ${isExpanded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}
-                  `}
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center shrink-0">
-                      <span className="text-cyan font-display font-bold">{String(index + 1).padStart(2, "0")}</span>
-                    </div>
-                    <div>
-                      <h3 className="font-display font-semibold text-xl mb-2 text-cyan">{item.title}</h3>
-                      <p className="text-muted-foreground">{item.description}</p>
-                    </div>
-                  </div>
+                  <p className="text-slate-400 leading-relaxed text-sm lg:text-base">
+                    {item.description}
+                  </p>
                 </div>
               </div>
-            );
-          })}
+
+              {/* Hover Glow Effect */}
+              <div className={`absolute inset-0 bg-gradient-to-b from-cyan/5 to-transparent transition-opacity duration-500 ${
+                hoveredIndex === index ? "opacity-100" : "opacity-0"
+              }`} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
