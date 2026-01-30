@@ -15,14 +15,14 @@ const services = [
     highlight: "Build what brings brands to life.",
     description: "Websites and online stores to full-scale mobile and web apps, we develop digital experiences that perform flawlessly, scale easily, and move as fast as your ideas.",
     icon: " </> ",
-    href: "/development"
+    href: "/develop"
   },
   {
     title: "MARKETING",
     highlight: "Grow what matters most.",
     description: "We market with a focus on performance. From organic SEO and content to paid media and growth strategy, we deliver measurable results that impact your bottom line.",
     icon: "📢",
-    href: "/marketing"
+    href: "/market"
   }
 ];
 
