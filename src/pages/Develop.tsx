@@ -1,96 +1,134 @@
+import React from "react";
 import ServicePageLayout from "@/components/ServicePageLayout";
-import { Search, FileCode, Code, TestTube, Rocket, Settings } from "lucide-react";
+import PageHero from "@/components/PageHero";
+import InfoSectionTWO from "@/components/InfoSectionTWO";
+import ProcessSection from "@/components/ProcessSection";
+import ServicesGrid from "@/components/ServicesGrid";
+import PortfolioSection from "@/components/PortfolioSection";
+import ServiceNavigationBanner from "@/components/ServiceNavigationBanner";
+import CTASection from "@/components/CTASection";
 
 const Develop = () => {
-  const processSteps = [
-    { icon: Search, number: "01", title: "Discovery", description: "Understanding requirements, user needs, and technical specifications for your project." },
-    { icon: FileCode, number: "02", title: "Wireframes (UI)", description: "Creating detailed wireframes and user interface designs before development begins." },
-    { icon: Code, number: "03", title: "Build", description: "Expert developers bring your project to life with clean, efficient code." },
-    { icon: TestTube, number: "04", title: "Quality Assurance", description: "Rigorous testing ensures everything works flawlessly across all devices." },
-    { icon: Rocket, number: "05", title: "Launch", description: "Smooth deployment and launch with monitoring for optimal performance." },
-    { icon: Settings, number: "06", title: "Maintenance", description: "Ongoing support and updates to keep your product running smoothly." },
+  // 1. Development Process Data
+  const developSteps = [
+    { number: "1", title: "Discovery", description: "Understanding requirements, user needs, and technical specs.", icon: "🔍" },
+    { number: "2", title: "Wireframes", description: "Creating detailed UI wireframes before development begins.", icon: "📐" },
+    { number: "3", title: "Build", description: "Expert developers bring your project to life with clean code.", icon: "💻" },
+    { number: "4", title: "QA Testing", description: "Rigorous testing ensures flawlessness across all devices.", icon: "🧪" },
+    { number: "5", title: "Launch", description: "Smooth deployment and monitoring for optimal performance.", icon: "🚀" }
   ];
 
-  const services = [
-    { 
-      title: "Website Development", 
-      description: "Custom websites built for performance and scalability.",
-      items: ["Responsive Design", "CMS Integration", "E-commerce", "SEO Optimized"]
+  // 2. Development Services Data
+  const developServices = [
+    {
+      title: "Website Development",
+      items: [
+        "Custom high-performance websites",
+        "CMS Integration (Headless & Traditional)",
+        "E-commerce & Storefront solutions",
+        "SEO-friendly architecture",
+        "Responsive & accessible design"
+      ]
     },
-    { 
-      title: "Desktop Application Development", 
-      description: "Powerful desktop applications for Windows, Mac, and Linux.",
-      items: ["Cross-Platform", "Native Performance", "Offline Capability", "System Integration"]
+    {
+      title: "Mobile App Development",
+      items: [
+        "Native iOS & Android development",
+        "Cross-platform (React Native / Flutter)",
+        "Mobile UI/UX implementation",
+        "App Store & Play Store deployment",
+        "Push notifications & API sync"
+      ]
     },
-    { 
-      title: "Mobile Application Development", 
-      description: "Native and cross-platform mobile apps.",
-      items: ["iOS Development", "Android Development", "React Native", "Flutter"]
+    {
+      title: "Desktop Applications",
+      items: [
+        "Cross-platform (Windows, Mac, Linux)",
+        "Native performance & system integration",
+        "Offline-first capability",
+        "Secure enterprise software",
+        "Automated update systems"
+      ]
     },
-    { 
-      title: "Data & Batch Application Development", 
-      description: "Enterprise-grade data processing solutions.",
-      items: ["ETL Pipelines", "Data Analytics", "Automation", "Reporting Systems"]
+    {
+      title: "API & Backend Systems",
+      items: [
+        "RESTful & GraphQL API development",
+        "Microservices architecture",
+        "Database design & optimization",
+        "Third-party system integrations",
+        "Cloud infrastructure & DevOps"
+      ]
     },
-    { 
-      title: "API Development", 
-      description: "Robust APIs that power your applications.",
-      items: ["RESTful APIs", "GraphQL", "Microservices", "Third-party Integration"]
-    },
-    { 
-      title: "E-commerce Solutions", 
-      description: "Complete online shopping experiences.",
-      items: ["Custom Storefronts", "Payment Integration", "Inventory Management", "Order Tracking"]
-    },
+    {
+      title: "Data & Automation",
+      items: [
+        "ETL pipelines & data processing",
+        "Enterprise-grade automation",
+        "Custom reporting & analytics",
+        "Legacy system modernization",
+        "Scalable cloud batch processing"
+      ]
+    }
   ];
 
   return (
-    <ServicePageLayout
-      // Hero
-      heroTitle={
-        <>
-          We Build The <span className="text-cyan">Digital Experiences</span> That<br />
-          Bring Your <span className="text-cyan">Brand</span> To Life.
-        </>
-      }
-      heroSubtitle="Development Isn't Just Code, It's Craftsmanship."
-      heroCta="Start Your Development Project"
-      heroImagePlaceholder="Development Hero Image Placeholder"
-      
-      // Info Section
-      infoTitle="What is"
-      infoHighlight="Develop?"
-      infoParagraphs={[
-        "Development is the art of turning ideas into functional digital products. It's where design meets technology to create experiences that users love.",
-        "Our development process focuses on clean code, scalable architecture, and user-centric solutions that grow with your business.",
-        "From simple websites to complex enterprise applications, we build digital products that are fast, reliable, and built to last.",
-      ]}
-      infoImagePlaceholder="Development Concept Image"
-      
-      // Process Section
-      processTitle="Development"
-      processHighlight="Process"
-      processSubtitle="Our systematic approach to building exceptional digital products"
-      processSteps={processSteps}
-      
-      // Services Section
-      servicesTitle="Develop"
-      servicesHighlight="Services"
-      servicesSubtitle="End-to-end development solutions for your digital needs"
-      services={services}
-      
-      // Cross Sell
-      crossSellTitle="Interested In Design Or Marketing?"
-      crossSellLinks={[
-        { text: "Explore Design", href: "/design" },
-        { text: "Explore Marketing", href: "/market" },
-      ]}
-      
-      // Final CTA
-      ctaTitle="Let's Build What Brings Your Ideas"
-      ctaHighlight="To Life"
-      ctaSubtitle="Development Isn't Just Code, It's Craftsmanship."
-    />
+    <ServicePageLayout>
+      <PageHero
+        title={
+          <>
+            We Build The <span className="text-cyan">Digital Experiences</span> That<br />
+            Bring Your <span className="text-cyan">Brand</span> To Life.
+          </>
+        }
+        subtitle="Development Isn't Just Code. It's Craftsmanship."
+        ctaText="Start Your Development Project"
+      />
+
+      <InfoSectionTWO
+        title="What is"
+        highlight="Develop?"
+        paragraphs={[
+          "At Echo & Impact, development is the art of turning ideas into functional digital products. It is where design meets technology to create experiences that users love.",
+          "Our development process focuses on clean code, scalable architecture, and user-centric solutions that grow seamlessly with your business needs.",
+          "From high-speed websites to complex enterprise applications, we build digital products that are fast, reliable, and engineered to last."
+        ]}
+      />
+
+      {/* STEP 1: HOW WE DO IT (Process) */}
+      <ProcessSection 
+        title="Development" 
+        highlight="Process" 
+        steps={developSteps} 
+      />
+
+      {/* STEP 2: WHAT WE DO (Services) */}
+      <ServicesGrid 
+        title="Development" 
+        highlight="Services" 
+        services={developServices} 
+      />
+
+      <PortfolioSection />
+
+      {/* Cross-navigating to Design and Marketing */}
+      <ServiceNavigationBanner
+        titlePrefix="Interested In"
+        highlight1="Design"
+        middleText="Or"
+        highlight2="Marketing"
+        leftBtnText="Explore Design"
+        leftBtnLink="/design"
+        rightBtnText="Explore Marketing"
+        rightBtnLink="/market"
+      />
+
+      <CTASection
+        title="Let's Build What Brings Your"
+        highlight="Ideas To Life"
+        subtitle="Development Isn't Just Code. It's Craftsmanship."
+      />
+    </ServicePageLayout>
   );
 };
 

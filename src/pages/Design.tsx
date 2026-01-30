@@ -1,95 +1,130 @@
 import ServicePageLayout from "@/components/ServicePageLayout";
-import { Search, Lightbulb, PenTool, Layers, CheckCircle } from "lucide-react";
+import PageHero from "@/components/PageHero";
+import InfoSection from "@/components/InfoSection";
+import ProcessSection from "@/components/ProcessSection";
+import ServicesGrid from "@/components/ServicesGrid"; // Grid comes after Process now
+import PortfolioSection from "@/components/PortfolioSection";
+import ServiceNavigationBanner from "@/components/ServiceNavigationBanner";
+import CTASection from "@/components/CTASection";
 
 const Design = () => {
-  const processSteps = [
-    { icon: Search, number: "01", title: "Discovery", description: "We dive deep into understanding your brand, target audience, and goals to create a solid foundation." },
-    { icon: Lightbulb, number: "02", title: "Concept", description: "Our creative team develops multiple concepts and directions for your approval." },
-    { icon: PenTool, number: "03", title: "Creation", description: "We bring the approved concept to life with meticulous attention to detail." },
-    { icon: Layers, number: "04", title: "Refinement", description: "Iterative feedback and revisions ensure the final product exceeds expectations." },
-    { icon: CheckCircle, number: "05", title: "Delivery", description: "Final assets are prepared and delivered in all required formats." },
+  // 1. Process Data
+  const designSteps = [
+    { number: "1", title: "Discovery", description: "Clarifying your brand, audience, and goals.", icon: "🔍" },
+    { number: "2", title: "Concept", description: "Defining creative direction and visual language.", icon: "💡" },
+    { number: "3", title: "Creation", description: "Designing identity and core assets.", icon: "🎨" },
+    { number: "4", title: "Refinement", description: "Polishing details upon any feedback.", icon: "💬" },
+    { number: "5", title: "Delivery", description: "Preparing final files, systems, and handover.", icon: "🚀" }
   ];
 
-  const services = [
-    { 
-      title: "Brand Identity & Guidelines", 
-      description: "Complete brand identity systems that define your visual language.",
-      items: ["Logo Design", "Color Palette", "Typography", "Brand Guidelines"]
+  // 2. Services Data
+  const designServices = [
+    {
+      title: "Brand Identity & Guidelines",
+      items: [
+        "Logo systems & typographic structure",
+        "Color palettes & visual language",
+        "Brand voice & messaging guidelines",
+        "Complete brand guidelines for consistency",
+        "Asset libraries & templates"
+      ]
     },
-    { 
-      title: "Logo Design", 
-      description: "Memorable logos that capture your brand essence.",
-      items: ["Concept Development", "Vector Graphics", "Multiple Variations", "Usage Guidelines"]
+    {
+      title: "UI/UX Design",
+      items: [
+        "UX research & user journey flows",
+        "Wireframes and layouts",
+        "UI design systems & components",
+        "Prototypes & usability structure",
+        "Product UI/UX for web & mobile applications"
+      ]
     },
-    { 
-      title: "Creative Direction", 
-      description: "Strategic creative leadership for campaigns and projects.",
-      items: ["Art Direction", "Visual Strategy", "Campaign Concepts", "Style Guides"]
+    {
+      title: "Creative Direction",
+      items: [
+        "Visual direction & mood boards",
+        "Campaign concepts & content themes",
+        "Art direction for shoots & productions",
+        "Content frameworks & storytelling structure",
+        "Style consistency across platforms"
+      ]
     },
-    { 
-      title: "Photography & Videography", 
-      description: "Professional visual content that tells your story.",
-      items: ["Product Photography", "Lifestyle Shoots", "Video Production", "Post-Processing"]
+    {
+      title: "Photography & Videography",
+      items: [
+        "Social media content shoot, creation & post edit",
+        "Product, lifestyle, and brand photography",
+        "Founder and team video content",
+        "Short-form content direction & production",
+        "Post editing, color grading, and delivery"
+      ]
     },
-    { 
-      title: "UI/UX Design", 
-      description: "User-centered design for digital products.",
-      items: ["User Research", "Wireframing", "Prototyping", "Usability Testing"]
-    },
-    { 
-      title: "Print & Packaging", 
-      description: "Tangible brand experiences through print materials.",
-      items: ["Business Cards", "Brochures", "Packaging Design", "Marketing Materials"]
-    },
+    {
+      title: "Motion & Graphic Design",
+      items: [
+        "Motion graphics & brand animations",
+        "Social media graphics & digital collateral",
+        "Explainers, transitions, and visual effects",
+        "Campaign graphics & promotional material"
+      ]
+    }
   ];
 
   return (
-    <ServicePageLayout
-      // Hero
-      heroTitle={
-        <>
-          We Shape How The <span className="text-cyan">World</span> Sees,<br />
-          Understands, And <span className="text-cyan">Experiences</span> Your Brand.
-        </>
-      }
-      heroSubtitle="Creative design solutions that capture attention and inspire action."
-      heroCta="Start Your Design Project"
-      heroImagePlaceholder="Design Hero Image Placeholder"
-      
-      // Info Section
-      infoTitle="What is"
-      infoHighlight="Design?"
-      infoParagraphs={[
-        "Design is the visual language of your brand. It's how you communicate your values, personality, and promise to your audience before a single word is read.",
-        "Great design goes beyond aesthetics—it creates emotional connections, builds trust, and drives action. It's strategic, intentional, and always in service of your goals.",
-        "At Echo & Impact, we combine creativity with strategy to deliver designs that not only look stunning but also perform brilliantly.",
-      ]}
-      infoImagePlaceholder="Design Concept Image"
-      
-      // Process Section
-      processTitle="Design"
-      processHighlight="Process"
-      processSubtitle="Our proven methodology for delivering exceptional design"
-      processSteps={processSteps}
-      
-      // Services Section
-      servicesTitle="Design"
-      servicesHighlight="Services"
-      servicesSubtitle="Comprehensive design solutions for every need"
-      services={services}
-      
-      // Cross Sell
-      crossSellTitle="Interested In Development Or Marketing?"
-      crossSellLinks={[
-        { text: "Explore Development", href: "/develop" },
-        { text: "Explore Marketing", href: "/market" },
-      ]}
-      
-      // Final CTA
-      ctaTitle="Let's Shape Your"
-      ctaHighlight="Brand"
-      ctaSubtitle="We Shape How The World Sees, Understands, And Experiences Your Brand."
-    />
+    <ServicePageLayout>
+      <PageHero
+        title={
+          <>
+            We Shape How The <span className="text-cyan">World</span> Sees,<br />
+            Understands, And <span className="text-cyan">Experiences</span> Your Brand.
+          </>
+        }
+        subtitle="Great Design Isn't Decoration. It's Direction."
+        ctaText="Shape your Next Move"
+      />
+
+      <InfoSection
+        title="What is"
+        highlight="Design?"
+        paragraphs={[
+          "At Echo & Impact, design goes far beyond visuals—it's the strategic foundation that defines how your brand communicates and behaves.",
+          "From brand identity to product UI/UX, every element is crafted with intention to ensure your brand looks consistent and feels unified.",
+          "Our focus remains: design that creates recognition, builds trust, and sets the direction for everything that follows."
+        ]}
+      />
+
+      {/* STEP 1: HOW WE DO IT (Process) */}
+      <ProcessSection 
+        title="Design" 
+        highlight="Process" 
+        steps={designSteps} 
+      />
+
+      {/* STEP 2: WHAT WE DO (Services) */}
+      <ServicesGrid 
+        title="Design" 
+        highlight="Services" 
+        services={designServices} 
+      />
+      <PortfolioSection/>
+      <ServiceNavigationBanner
+      titlePrefix="Interested In"
+      highlight1="Development"
+      middleText="Or"
+      highlight2="Marketing"
+      leftBtnText="Explore Development"
+      leftBtnLink="/development"
+      rightBtnText="Explore Marketing"
+      rightBtnLink="/marketing"
+      />
+      <CTASection
+          title="Let's Shape Your"
+          highlight="Brand"
+          subtitle="We shape how the world Sees, Understands, And Experiences Your Brand."
+        />
+
+
+    </ServicePageLayout>
   );
 };
 

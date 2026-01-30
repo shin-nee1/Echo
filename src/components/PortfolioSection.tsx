@@ -45,42 +45,46 @@ const PortfolioSection = () => {
   return (
     <section className="relative py-32 bg-transparent overflow-hidden">
       {/* Header Container */}
-      <div className="container mx-auto px-6 mb-16">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-white tracking-tight">
-              Explore <span className="text-cyan">Our Portfolio</span>
-            </h2>
-          </div>
+<div className="container mx-auto px-6 mb-16 lg:mb-24">
+  <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
+    <div className="relative">
+      {/* MATCHING THE HEADING STYLE */}
+      <h2 className="text-white text-5xl md:text-6xl font-extrabold tracking-tighter leading-tight uppercase">
+        Explore <span className="text-[#00d8ff]">Our Portfolio</span>
+      </h2>
+      
+      {/* MATCHING THE CYAN ACCENT BAR */}
+      <div className="absolute -bottom-4 left-0 w-20 h-1.5 bg-[#00d8ff] rounded-full shadow-[0_0_20px_rgba(0,216,255,0.6)]" />
+    </div>
 
-          {/* Navigation Controls */}
-          <div className="flex items-center gap-4">
-            <div className="flex gap-2 mr-4">
-              <button 
-                onClick={prevSlide}
-                disabled={currentIndex === 0}
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-              >
-                <ArrowLeft className="w-5 h-5 text-white" />
-              </button>
-              <button 
-                onClick={nextSlide}
-                disabled={currentIndex === portfolioItems.length - 1}
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-              >
-                <ArrowRight className="w-5 h-5 text-white" />
-              </button>
-            </div>
-            
-            <Button 
-              variant="outline" 
-              className="rounded-full border-white/10 bg-white/5 hover:bg-cyan hover:text-black px-8 py-6 transition-all font-bold"
-            >
-              View All
-            </Button>
-          </div>
-        </div>
+    {/* Navigation Controls */}
+    <div className="flex items-center gap-6">
+      <div className="flex gap-3">
+        <button 
+          onClick={prevSlide}
+          disabled={currentIndex === 0}
+          className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all disabled:opacity-20 disabled:cursor-not-allowed group"
+        >
+          <ArrowLeft className="w-6 h-6 text-white group-hover:text-[#00d8ff] transition-colors" />
+        </button>
+        <button 
+          onClick={nextSlide}
+          disabled={currentIndex === portfolioItems.length - 1}
+          className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all disabled:opacity-20 disabled:cursor-not-allowed group"
+        >
+          <ArrowRight className="w-6 h-6 text-white group-hover:text-[#00d8ff] transition-colors" />
+        </button>
       </div>
+      
+      <Button 
+        variant="outline" 
+        className="hidden md:flex rounded-full border-white/10 bg-white/5 hover:bg-[#00d8ff] hover:text-black px-10 py-7 transition-all font-black uppercase tracking-widest text-xs"
+      >
+        View All
+      </Button>
+    </div>
+  </div>
+</div>
 
       {/* Sliding Track */}
       <div className="relative">

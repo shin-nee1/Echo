@@ -1,58 +1,62 @@
 const HaloBackground = () => {
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#02080a]">
-      {/* 1. BASE LAYER: The Halos (Glows behind the grid) */}
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#010608]">
+      {/* 1. Base Layer: Deep Radial Depth (Darker center than edges) */}
+      <div 
+        className="absolute inset-0" 
+        style={{ 
+          background: "radial-gradient(circle at 50% 50%, #02121a 0%, #010608 100%)" 
+        }} 
+      />
+
+      {/* 2. LEFT refined halo: Lower opacity, wider blur */}
       <div
         className="
           absolute
           top-1/2
-          left-[-20%]
+          left-[-15%]
           -translate-y-1/2
-          w-[900px]
-          h-[900px]
+          w-[1000px]
+          h-[1000px]
           rounded-full
-          bg-cyan/20
-          blur-[260px]
+          bg-cyan/[0.08] 
+          blur-[180px]
           animate-halo
         "
       />
 
-      <div
-        className="
-          absolute
-          top-1/2
-          right-[-20%]
-          -translate-y-1/2
-          w-[900px]
-          h-[900px]
-          rounded-full
-          bg-cyan/20
-          blur-[260px]
-          animate-halo
-        "
-      />
-
-      {/* 2. MIDDLE LAYER: The Grid (Moved here so halos light it up) */}
-      {/* Opacity boosted to 0.15 for high-end visibility */}
-      <div className="absolute inset-0 bg-grid opacity-[0.15] z-0" />
-
-      {/* 3. TOP LAYER: The Vignette (Fades the grid into the edges) */}
-      <div className="absolute inset-0 vignette z-10" />
-
-      {/* Subtle center depth (Optional: placed on top for center focus) */}
+      {/* 3. RIGHT refined halo: Offset for asymmetry */}
       <div
         className="
           absolute
           top-[20%]
-          left-1/2
-          -translate-x-1/2
-          w-[600px]
-          h-[600px]
+          right-[-10%]
+          w-[800px]
+          h-[800px]
           rounded-full
-          bg-cyan/10
-          blur-[220px]
+          bg-cyan/[0.05]
+          blur-[150px]
+          animate-float-slow
         "
       />
+
+      {/* 4. The "Premium" Grid: Very low opacity + Radial Mask */}
+      <div 
+        className="absolute inset-0 z-0 opacity-[0.12]" 
+        style={{ 
+          backgroundImage: `
+            linear-gradient(to right, rgba(0, 229, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 229, 255, 0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px',
+          // This mask is what makes it look premium: it fades out before hitting the edges
+          WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 90%)',
+          maskImage: 'radial-gradient(circle at center, black 40%, transparent 90%)'
+        }} 
+      />
+
+      {/* 5. Vignette: Softens the whole scene */}
+      <div className="absolute inset-0 vignette bg-gradient-to-b from-transparent to-[#010608]/80" />
     </div>
   );
 };

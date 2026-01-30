@@ -17,7 +17,6 @@ const TestimonialCarousel = ({ testimonials }: TestimonialCarouselProps) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Mouse Parallax Logic
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({
@@ -43,83 +42,94 @@ const TestimonialCarousel = ({ testimonials }: TestimonialCarouselProps) => {
   const current = testimonials[currentIndex];
 
   return (
-    <section className="relative py-40 overflow-hidden bg-transparent">
+    <section className="relative py-32 overflow-hidden bg-transparent">
       {/* Background Atmosphere */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(8,229,255,0.04)_0%,_transparent_65%)]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(0,216,255,0.06)_0%,_transparent_70%)]" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-28">
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-[0.2em]">
-            <span className="text-cyan">Testimonials</span>
-          </h2>
+        
+        {/* BRANDED ASYMMETRIC HEADER */}
+        <div className="flex flex-col md:flex-row md:items-start lg:items-center gap-6 md:gap-12 mb-24 relative">
+          <div className="relative shrink-0">
+            <h2 className="text-white text-5xl md:text-7xl font-extrabold tracking-tighter leading-none uppercase">
+              Client <span className="text-[#00d8ff]">Echoes</span>
+            </h2>
+            {/* SIGNATURE GLOW BAR */}
+            <div className="absolute -bottom-6 left-0 w-24 h-1.5 bg-[#00d8ff] rounded-full shadow-[0_0_20px_rgba(0,216,255,0.6)]" />
+          </div>
+
+          {/* RHYTHM TEXT */}
+          <p className="text-slate-400 text-lg md:text-xl font-normal max-w-sm leading-snug pt-1 md:pt-2 border-l border-white/10 md:pl-8">
+            Real impact measured by <br className="hidden md:block" />
+            the voices of our partners.
+          </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto flex items-center justify-center">
+        <div className="relative max-w-5xl mx-auto flex items-center justify-center pt-10">
           
           {/* Parallax Halo Rings */}
           <div 
-            className="absolute inset-0 flex items-center justify-center pointer-events-none transition-transform duration-700 ease-out"
+            className="absolute inset-0 flex items-center justify-center pointer-events-none transition-transform duration-1000 ease-out"
             style={{ 
               transform: `translate(${mousePos.x}px, ${mousePos.y}px)` 
             }}
           >
-            <div className="absolute w-[450px] md:w-[600px] aspect-square border border-white/10 rounded-full animate-[spin_50s_linear_infinite]" />
+            <div className="absolute w-[450px] md:w-[650px] aspect-square border border-white/5 rounded-full animate-[spin_60s_linear_infinite]" />
             <div 
-              className="absolute w-[550px] md:w-[750px] aspect-square border border-white/[0.03] rounded-full animate-[spin_80s_linear_infinite_reverse]"
-              style={{ transform: `translate(${mousePos.x * -0.4}px, ${mousePos.y * -0.4}px)` }}
+              className="absolute w-[550px] md:w-[850px] aspect-square border border-cyan/5 rounded-full animate-[spin_100s_linear_infinite_reverse]"
+              style={{ transform: `translate(${mousePos.x * -0.3}px, ${mousePos.y * -0.3}px)` }}
             />
           </div>
 
-          {/* Content Block */}
+          {/* Carousel Content */}
           <div className="relative w-full flex flex-col items-center z-10">
             
-            <div className="mb-10 relative">
-              <div className="absolute inset-0 bg-cyan blur-2xl opacity-20" />
-              <div className="relative w-14 h-14 rounded-full bg-[#050B10] border border-cyan/40 flex items-center justify-center">
-                <Quote className="w-5 h-5 text-cyan fill-cyan" />
+            <div className="mb-12 relative group">
+              <div className="absolute inset-0 bg-[#00d8ff] blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-700" />
+              <div className="relative w-16 h-16 rounded-2xl bg-[#050B10] border border-[#00d8ff]/30 flex items-center justify-center shadow-[0_0_15px_rgba(0,216,255,0.1)]">
+                <Quote className="w-6 h-6 text-[#00d8ff] fill-[#00d8ff]/20" />
               </div>
             </div>
 
-            {/* Reduced, Refined Text Size */}
-            <div className={`text-center transition-all duration-500 ease-out max-w-2xl ${
-              isAnimating ? "opacity-0 scale-95 blur-md" : "opacity-100 scale-100 blur-0"
+            <div className={`text-center transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] max-w-3xl ${
+              isAnimating ? "opacity-0 -translate-y-4 blur-xl" : "opacity-100 translate-y-0 blur-0"
             }`}>
-              <blockquote className="text-lg md:text-xl text-slate-200 font-light leading-relaxed mb-10 italic tracking-wide">
+              <blockquote className="text-xl md:text-3xl text-white font-medium leading-tight mb-12 tracking-tight">
                 "{current.quote}"
               </blockquote>
               
-              <div className="flex flex-col items-center gap-4">
-                <div className="relative w-16 h-16 rounded-full p-[1px] bg-gradient-to-b from-cyan/40 to-transparent">
-                  <div className="w-full h-full rounded-full bg-[#050B10] overflow-hidden p-1 border border-white/5">
+              <div className="flex flex-col items-center gap-6">
+                <div className="relative w-20 h-20 rounded-full p-[2px] bg-gradient-to-b from-[#00d8ff]/40 to-transparent shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                  <div className="w-full h-full rounded-full bg-[#010a0f] overflow-hidden p-1 border border-white/10">
                     <img 
-                      src={current.avatar || "/api/placeholder/64/64"} 
+                      src={current.avatar || "/api/placeholder/80/80"} 
                       alt={current.name} 
-                      className="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-700" 
+                      className="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-1000" 
                     />
                   </div>
                 </div>
-                <div className="text-center">
-                  <p className="text-white font-black tracking-[0.3em] uppercase text-[10px] mb-1">{current.name}</p>
-                  <p className="text-cyan/50 text-[9px] font-black tracking-[0.4em] uppercase">{current.role}</p>
+                <div className="space-y-2">
+                  <p className="text-white font-black tracking-[0.4em] uppercase text-xs">{current.name}</p>
+                  <p className="text-[#00d8ff] text-[10px] font-black tracking-[0.5em] uppercase opacity-70">{current.role}</p>
                 </div>
               </div>
             </div>
 
-            {/* Nav Controls */}
-            <div className="flex items-center gap-8 mt-20">
+            {/* Controls with Cyan Accents */}
+            <div className="flex items-center gap-12 mt-20">
               <button 
                 onClick={goToPrevious}
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-cyan hover:text-black transition-all group relative overflow-hidden"
+                className="w-14 h-14 rounded-xl border border-white/10 flex items-center justify-center hover:border-[#00d8ff]/50 hover:bg-[#00d8ff]/5 transition-all duration-500 group"
               >
-                <ChevronLeft className="w-5 h-5 text-white group-hover:text-inherit relative z-10" />
+                <ChevronLeft className="w-6 h-6 text-white group-hover:text-[#00d8ff] transition-colors" />
               </button>
               <button 
                 onClick={goToNext}
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-cyan hover:text-black transition-all group relative overflow-hidden"
+                className="w-14 h-14 rounded-xl border border-white/10 flex items-center justify-center hover:border-[#00d8ff]/50 hover:bg-[#00d8ff]/5 transition-all duration-500 group"
               >
-                <ChevronRight className="w-5 h-5 text-white group-hover:text-inherit relative z-10" />
+                <ChevronRight className="w-6 h-6 text-white group-hover:text-[#00d8ff] transition-colors" />
               </button>
             </div>
           </div>
