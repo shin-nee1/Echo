@@ -211,8 +211,6 @@ const About = () => {
         highlight="Together?"
         subtitle="Let's create something amazing for your brand."
       />
-
-      <Footer />
     </div>
   );
 };

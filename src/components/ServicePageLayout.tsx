@@ -1,6 +1,5 @@
 import * as React from "react";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 
 interface ServicePageLayoutProps {
   children: React.ReactNode;
@@ -12,7 +11,7 @@ const ServicePageLayout = ({ children }: ServicePageLayoutProps) => {
     <div className="min-h-screen bg-[#010a0f] text-white selection:bg-cyan/30">
       <Navbar />
       <main>{children}</main>
-      <Footer />
+      
     </div>
   );
 };

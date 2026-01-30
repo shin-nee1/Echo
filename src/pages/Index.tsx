@@ -156,7 +156,7 @@ const Index = () => {
           subtitle="We shape how the world experiences your brand."
         />
 
-        <Footer />
+       
       </main>
     </div>
   );
