@@ -1,96 +1,134 @@
+import React from "react";
 import ServicePageLayout from "@/components/ServicePageLayout";
-import { Search, Target, Megaphone, BarChart3, Zap, TrendingUp } from "lucide-react";
+import PageHero from "@/components/PageHero";
+import InfoSection from "@/components/InfoSection";
+import ProcessSection from "@/components/ProcessSection";
+import ServicesGrid from "@/components/ServicesGrid";
+import PortfolioSection from "@/components/PortfolioSection";
+import ServiceNavigationBanner from "@/components/ServiceNavigationBanner";
+import CTASection from "@/components/CTASection";
 
 const Market = () => {
-  const processSteps = [
-    { icon: Search, number: "01", title: "Discovery", description: "Analyzing your market, competitors, and target audience to inform strategy." },
-    { icon: Target, number: "02", title: "Strategy", description: "Developing a comprehensive marketing strategy aligned with your goals." },
-    { icon: Megaphone, number: "03", title: "Execution", description: "Implementing campaigns across the right channels for maximum impact." },
-    { icon: BarChart3, number: "04", title: "Analytics", description: "Tracking performance metrics and gathering actionable insights." },
-    { icon: Zap, number: "05", title: "Optimization", description: "Continuously refining strategies based on data and results." },
-    { icon: TrendingUp, number: "06", title: "Growth", description: "Scaling successful strategies for sustainable business growth." },
+  // 1. Marketing Process Data
+  const marketSteps = [
+    { number: "1", title: "Discovery", description: "Clarifying your brand, audience and goals.", icon: "📊" },
+    { number: "2", title: "Setup", description: "Setting up your platforms, tracking and assets.", icon: "🎯" },
+    { number: "3", title: "Execution", description: "Launching your campaingns and content with precision.", icon: "📢" },
+    { number: "4", title: "Optimization", description: "Refining creative, targeting, and strategy based on real data.", icon: "📈" },
+    { number: "5", title: "Reporting", description: "Providing clear insights, actions and next steps for growth.", icon: "💰" }
   ];
 
-  const services = [
-    { 
-      title: "Paid Social Media Marketing", 
-      description: "Strategic paid campaigns that reach your ideal audience.",
-      items: ["Facebook Ads", "Instagram Ads", "LinkedIn Ads", "TikTok Ads"]
+  // 2. Marketing Services Data
+  const marketServices = [
+    {
+      title: "Growth Strategy",
+      items: [
+        "Market positioning & competitor analysis",
+        "Target audience profiling & segmentation",
+        "Conversion rate optimization (CRO)",
+        "Funnel architecture & lead gen strategy",
+        "Brand growth roadmaps"
+      ]
     },
-    { 
-      title: "Social Media Management", 
-      description: "Building and engaging your community across platforms.",
-      items: ["Content Calendar", "Community Management", "Growth Strategy", "Influencer Outreach"]
+    {
+      title: "Content Marketing",
+      items: [
+        "Social media strategy & management",
+        "Copywriting & narrative storytelling",
+        "Email marketing & automation flows",
+        "SEO-driven blog & editorial content",
+        "Video content distribution strategy"
+      ]
     },
-    { 
-      title: "SEO & Content Marketing", 
-      description: "Organic growth through strategic content.",
-      items: ["Keyword Research", "On-Page SEO", "Blog Writing", "Link Building"]
+    {
+      title: "Paid Media & Ads",
+      items: [
+        "Meta Ads (Instagram & Facebook)",
+        "Google Search & Display Ads",
+        "LinkedIn B2B lead generation",
+        "TikTok for Business & creative testing",
+        "Budget management & ROI reporting"
+      ]
     },
-    { 
-      title: "Email & SMS Marketing", 
-      description: "Direct communication that converts.",
-      items: ["Campaign Strategy", "Automation", "A/B Testing", "List Management"]
+    {
+      title: "Influencer & PR",
+      items: [
+        "Influencer sourcing & management",
+        "Brand partnership opportunities",
+        "Press release & media outreach",
+        "Community building & engagement",
+        "Event marketing & activation support"
+      ]
     },
-    { 
-      title: "Analytics & Intelligence", 
-      description: "Data-driven insights for smarter decisions.",
-      items: ["Performance Tracking", "Custom Dashboards", "ROI Analysis", "Competitive Analysis"]
-    },
-    { 
-      title: "Creative Content Production", 
-      description: "Compelling content that captures attention.",
-      items: ["Video Production", "Graphic Design", "Copywriting", "Photography"]
-    },
+    {
+      title: "Performance Data",
+      items: [
+        "Custom analytics dashboards",
+        "A/B testing & heat-mapping",
+        "Monthly performance reports",
+        "Attribution modeling & tracking",
+        "Data-driven scaling recommendations"
+      ]
+    }
   ];
 
   return (
-    <ServicePageLayout
-      // Hero
-      heroTitle={
-        <>
-          We Turn Creativity Into <span className="text-cyan">Measurable</span>,<br />
-          Scalable <span className="text-cyan">Growth</span>.
-        </>
-      }
-      heroSubtitle="Marketing Isn't Noise. It's Precision."
-      heroCta="Start Your Marketing Project"
-      heroImagePlaceholder="Marketing Hero Image Placeholder"
-      
-      // Info Section
-      infoTitle="What is"
-      infoHighlight="Market?"
-      infoParagraphs={[
-        "Marketing is the bridge between your brand and your audience. It's how you attract, engage, and convert prospects into loyal customers.",
-        "In today's digital landscape, effective marketing requires a blend of creativity, data analysis, and strategic thinking to cut through the noise.",
-        "We combine proven strategies with innovative approaches to deliver marketing that doesn't just get attention—it drives measurable results.",
-      ]}
-      infoImagePlaceholder="Marketing Concept Image"
-      
-      // Process Section
-      processTitle="Marketing"
-      processHighlight="Process"
-      processSubtitle="Our data-driven approach to achieving your marketing goals"
-      processSteps={processSteps}
-      
-      // Services Section
-      servicesTitle="Market"
-      servicesHighlight="Services"
-      servicesSubtitle="Comprehensive marketing solutions for sustainable growth"
-      services={services}
-      
-      // Cross Sell
-      crossSellTitle="Interested In Design Or Development?"
-      crossSellLinks={[
-        { text: "Explore Design", href: "/design" },
-        { text: "Explore Development", href: "/develop" },
-      ]}
-      
-      // Final CTA
-      ctaTitle="Let's Grow Where It"
-      ctaHighlight="Matters"
-      ctaSubtitle="Marketing Isn't Noise. It's Precision."
-    />
+    <ServicePageLayout>
+      <PageHero
+        title={
+          <>
+            We Scale How The <span className="text-cyan">World</span> Finds,<br />
+            Follows, And <span className="text-cyan">Invests</span> In Your Brand.
+          </>
+        }
+        subtitle="Marketing Isn't Noise. It's Precision."
+        ctaText="Scale your Next Move"
+      />
+
+      <InfoSection
+        title="What is"
+        highlight="Marketing?"
+        paragraphs={[
+          "At Echo & Impact, marketing is more than just visibility—it is the strategic engine that drives attention, converts interest, and builds long-term brand authority.",
+          "From performance-led paid media to narrative-driven content strategy, we ensure every campaign is backed by data and executed with creative excellence.",
+          "Our focus remains: marketing that creates impact, fuels growth, and ensures your brand is not just seen, but remembered and chosen."
+        ]}
+      />
+
+      {/* STEP 1: HOW WE DO IT (Process) */}
+      <ProcessSection 
+        title="Marketing" 
+        highlight="Process" 
+        steps={marketSteps} 
+      />
+
+      {/* STEP 2: WHAT WE DO (Services) */}
+      <ServicesGrid 
+        title="Marketing" 
+        highlight="Services" 
+        services={marketServices} 
+      />
+
+      <PortfolioSection />
+
+      {/* Cross-navigating to Design and Development */}
+      <ServiceNavigationBanner
+        titlePrefix="Interested In"
+        highlight1="Design"
+        middleText="Or"
+        highlight2="Development"
+        leftBtnText="Explore Design"
+        leftBtnLink="/design"
+        rightBtnText="Explore Development"
+        rightBtnLink="/development"
+      />
+
+      <CTASection
+        title="Let's Scale Your"
+        highlight="Impact"
+        subtitle="We scale how the world Finds, Follows, And Invests In Your Brand."
+      />
+    </ServicePageLayout>
   );
 };
 
