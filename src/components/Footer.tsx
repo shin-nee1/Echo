@@ -1,5 +1,6 @@
 import { Facebook, Linkedin, Twitter, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { serviceTitleToSlug } from "@/data/servicesData";
 
 const Footer = () => {
   const footerSections = [
@@ -36,9 +37,19 @@ const Footer = () => {
     },
     {
       title: "Company",
-      links: ["Our Work", "About Us", "Contact", "FAQs"],
+      links: [
+        { text: "Our Work", href: "/work" },
+        { text: "About Us", href: "/about" },
+        { text: "Contact", href: "/contact" },
+        { text: "FAQs", href: "/faq" },
+      ],
     },
   ];
+
+  const getServiceLink = (linkText: string): string => {
+    const slug = serviceTitleToSlug[linkText];
+    return slug ? `/services/${slug}` : "/services";
+  };
 
   return (
     <footer className="bg-gradient-to-b from-[#030f14] to-[#010507] text-white pt-24 pb-12 relative border-t border-white/10">
@@ -94,18 +105,36 @@ const Footer = () => {
                 <h4 className="text-xl font-bold tracking-tight text-white">{section.title}</h4>
               </div>
               <ul className="space-y-5">
-                {section.links.map((link) => (
-                  <li key={link} className="flex items-center gap-3 group cursor-pointer">
-                    <ArrowRight className="w-3 h-3 text-cyan opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                    {/* All service links go to SubServicesPage */}
-                    <Link
-                      to="/services"
-                      className="text-slate-300 text-[14px] font-medium group-hover:text-white transition-colors"
-                    >
-                      {link}
-                    </Link>
-                  </li>
-                ))}
+                {section.links.map((link) => {
+                  // Handle Company section with explicit hrefs
+                  if (typeof link === "object" && "href" in link) {
+                    return (
+                      <li key={link.text} className="flex items-center gap-3 group cursor-pointer">
+                        <ArrowRight className="w-3 h-3 text-cyan opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                        <Link
+                          to={link.href}
+                          className="text-slate-300 text-[14px] font-medium group-hover:text-white transition-colors"
+                        >
+                          {link.text}
+                        </Link>
+                      </li>
+                    );
+                  }
+                  
+                  // Handle service links
+                  const linkText = link as string;
+                  return (
+                    <li key={linkText} className="flex items-center gap-3 group cursor-pointer">
+                      <ArrowRight className="w-3 h-3 text-cyan opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                      <Link
+                        to={getServiceLink(linkText)}
+                        className="text-slate-300 text-[14px] font-medium group-hover:text-white transition-colors"
+                      >
+                        {linkText}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

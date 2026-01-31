@@ -1,21 +1,23 @@
 import React from "react";
-import { Check } from "lucide-react"; // Optional: Adds a nice icon for bullets
+import { Check } from "lucide-react";
 
-const WhatIsSection = () => {
-  // Static data
-  const title = "What is Our Amazing Service";
-  const highlightedWord = "Amazing";
-  const description =
-    "Our service helps you achieve your goals faster, safer, and more efficiently than ever before. We combine cutting-edge technology with intuitive design to deliver a seamless experience.";
-  const bulletPoints = [
-    "Fast and reliable performance",
-    "Highly secure and private",
-    "User-friendly and intuitive interface",
-    "Customizable to your needs",
-  ];
-  const imageSrc = "/images/what-is-service.jpg";
-  const imageAlt = "Illustration of our service";
+interface WhatIsSectionProps {
+  title: string;
+  highlightedWord: string;
+  description: string;
+  bulletPoints: string[];
+  imageSrc: string;
+  imageAlt: string;
+}
 
+const WhatIsSection = ({
+  title,
+  highlightedWord,
+  description,
+  bulletPoints,
+  imageSrc,
+  imageAlt,
+}: WhatIsSectionProps) => {
   const titleParts = title.split(highlightedWord);
 
   return (

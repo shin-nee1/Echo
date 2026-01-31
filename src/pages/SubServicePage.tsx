@@ -1,3 +1,4 @@
+import { useParams, Navigate } from "react-router-dom";
 import ServicePageLayout from "@/components/ServicePageLayout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
@@ -5,16 +6,19 @@ import WhyUsSection from "@/components/WhyUsSection";
 import FAQ from "@/components/FAQ";
 import FeaturesCarousel from "@/components/FeaturesCarousel";
 import WhatIsSection from "@/components/WhatIsSection";
+import { getServiceBySlug } from "@/data/servicesData";
 
 const SubServicePage = () => {
-  // Define features for the carousel
-  const featureList = [
-    { title: "Fast", description: "Blazing-fast performance.", imageSrc: "/images/feature-fast.jpg" },
-    { title: "Reliable", description: "Count on consistent service.", imageSrc: "/images/feature-reliable.jpg" },
-    { title: "Secure", description: "Your data is safe.", imageSrc: "/images/feature-secure.jpg" },
-    { title: "Innovative", description: "Cutting-edge solutions.", imageSrc: "/images/feature-innovative.jpg" },
-    { title: "Scalable", description: "Grow without limitations.", imageSrc: "/images/feature-scalable.jpg" },
-  ];
+  const { slug } = useParams<{ slug: string }>();
+  console.log("Slug from URL:", slug);
+  
+  // Get service data based on URL slug
+  const service = slug ? getServiceBySlug(slug) : undefined;
+
+  // If no service found, redirect to 404
+  if (!service) {
+    return <Navigate to="/404" replace />;
+  }
 
   return (
     <ServicePageLayout>
@@ -22,22 +26,31 @@ const SubServicePage = () => {
       <PageHero
         title={
           <>
-            Our <span className="text-cyan">Services</span> Tailored,<br />
-            Crafted, And <span className="text-cyan">Optimized</span>.
+            {service.title.split(service.highlightedTitle)[0]}
+            <span className="text-cyan">{service.highlightedTitle}</span>
+            {service.title.split(service.highlightedTitle)[1] || ""} Services<br />
+            Tailored For <span className="text-cyan">Your Success</span>.
           </>
         }
-        subtitle="Delivering excellence, one service at a time."
-        ctaText="Explore Services"
+        subtitle={service.subtitle}
+        ctaText={service.ctaText}
       />
 
-      {/* What Is Section */}
-      <WhatIsSection />
+      {/* What Is Section - Dynamic */}
+      <WhatIsSection
+        title={service.whatIs.title}
+        highlightedWord={service.whatIs.highlightedWord}
+        description={service.whatIs.description}
+        bulletPoints={service.whatIs.bulletPoints}
+        imageSrc={service.whatIs.imageSrc}
+        imageAlt={service.whatIs.imageAlt}
+      />
 
-      {/* Features Carousel */}
+      {/* Features Carousel - Dynamic */}
       <FeaturesCarousel
-        sectionTitle="Our Amazing Features"
-        highlightedWord="Features"
-        features={featureList}
+        sectionTitle={`Our ${service.highlightedTitle} Features`}
+        highlightedWord={service.highlightedTitle}
+        features={service.features}
       />
 
       {/* Why Us Section */}
@@ -48,9 +61,9 @@ const SubServicePage = () => {
 
       {/* Call To Action */}
       <CTASection
-        title="Let's Elevate Your"
-        highlight="Brand"
-        subtitle="Partner with us to achieve your goals with precision and creativity."
+        title="Ready to Transform Your"
+        highlight={service.highlightedTitle}
+        subtitle={`Partner with us to achieve ${service.title.toLowerCase()} excellence with precision and creativity.`}
       />
     </ServicePageLayout>
   );
