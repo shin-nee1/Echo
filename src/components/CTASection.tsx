@@ -17,7 +17,7 @@ const CTASection = ({
 }: CTASectionProps) => {
   return (
     // Changed py to match the spacing you requested to move the section down
-    <section className="relative pt-32 pb-24 px-6 bg-transparent">
+    <section className="relative pt-25 pb-24 px-6 bg-transparent">
       <div className="container mx-auto max-w-6xl relative">
         
         {/* MAIN CARD: Matches image_d6c520.jpg */}

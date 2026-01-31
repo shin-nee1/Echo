@@ -34,7 +34,7 @@ const WhatWeDo = () => {
         {/* FIXED HEADER PLACEMENT */}
         <div className="flex flex-col md:flex-row md:items-start lg:items-center gap-6 md:gap-12 mb-20">
           <div className="relative shrink-0">
-            <h2 className="text-white text-5xl md:text-7xl font-extrabold tracking-tighter leading-none uppercase">
+            <h2 className="text-white text-5xl md:text-7xl font-extrabold tracking-tighter leading-none">
               What We <span className="text-[#00d8ff]">Do</span>
             </h2>
             {/* BRAND ACCENT BAR */}

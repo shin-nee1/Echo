@@ -42,28 +42,28 @@ const TestimonialCarousel = ({ testimonials }: TestimonialCarouselProps) => {
   const current = testimonials[currentIndex];
 
   return (
-    <section className="relative py-32 overflow-hidden bg-transparent">
+    <section className="relative py-24 md:py-32 overflow-hidden bg-[#010a0f]">
       {/* Background Atmosphere */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(0,216,255,0.06)_0%,_transparent_70%)]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(0,216,255,0.08)_0%,_transparent_70%)]" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* BRANDED ASYMMETRIC HEADER */}
-        <div className="flex flex-col md:flex-row md:items-start lg:items-center gap-6 md:gap-12 mb-24 relative">
-          <div className="relative shrink-0">
-            <h2 className="text-white text-5xl md:text-7xl font-extrabold tracking-tighter leading-none uppercase">
+        {/* CENTERED BRAND HEADER */}
+        <div className="flex flex-col items-center text-center mb-24 relative">
+          <div className="relative inline-block mb-8">
+            <h2 className="text-white text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
               Client <span className="text-[#00d8ff]">Echoes</span>
             </h2>
-            {/* SIGNATURE GLOW BAR */}
-            <div className="absolute -bottom-6 left-0 w-24 h-1.5 bg-[#00d8ff] rounded-full shadow-[0_0_20px_rgba(0,216,255,0.6)]" />
+            {/* CENTERED SIGNATURE GLOW BAR */}
+            <div className="mt-8 w-24 h-[4px] bg-[#00d8ff] rounded-full shadow-[0_0_20px_rgba(0,216,255,0.8)] mx-auto" />
           </div>
 
-          {/* RHYTHM TEXT */}
-          <p className="text-slate-400 text-lg md:text-xl font-normal max-w-sm leading-snug pt-1 md:pt-2 border-l border-white/10 md:pl-8">
+          {/* BRAND RHYTHM TEXT */}
+          <p className="text-white/50 text-lg md:text-xl font-light max-w-xl leading-relaxed">
             Real impact measured by <br className="hidden md:block" />
-            the voices of our partners.
+            <span className="text-white/80 font-normal">the voices of our partners.</span>
           </p>
         </div>
 
@@ -78,7 +78,7 @@ const TestimonialCarousel = ({ testimonials }: TestimonialCarouselProps) => {
           >
             <div className="absolute w-[450px] md:w-[650px] aspect-square border border-white/5 rounded-full animate-[spin_60s_linear_infinite]" />
             <div 
-              className="absolute w-[550px] md:w-[850px] aspect-square border border-cyan/5 rounded-full animate-[spin_100s_linear_infinite_reverse]"
+              className="absolute w-[550px] md:w-[850px] aspect-square border border-[#00d8ff]/5 rounded-full animate-[spin_100s_linear_infinite_reverse]"
               style={{ transform: `translate(${mousePos.x * -0.3}px, ${mousePos.y * -0.3}px)` }}
             />
           </div>
@@ -111,8 +111,8 @@ const TestimonialCarousel = ({ testimonials }: TestimonialCarouselProps) => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-white font-black tracking-[0.4em] uppercase text-xs">{current.name}</p>
-                  <p className="text-[#00d8ff] text-[10px] font-black tracking-[0.5em] uppercase opacity-70">{current.role}</p>
+                  <p className="text-white font-bold tracking-[0.2em] uppercase text-xs">{current.name}</p>
+                  <p className="text-[#00d8ff] text-[10px] font-bold tracking-[0.3em] uppercase opacity-70">{current.role}</p>
                 </div>
               </div>
             </div>
