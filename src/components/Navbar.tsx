@@ -3,17 +3,18 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { serviceTitleToSlug } from "@/data/servicesData";
 
 const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
   const sections = [
     {
       title: "Design",
       items: [
-        "Brand Identity",
+        "Brand Identity & Guidelines",
         "UI/UX Design",
         "Creative Direction",
         "Photography & Videography",
-        "Brand Identity",
+        "Motion & Graphic Design",
       ],
     },
     {
@@ -39,6 +40,11 @@ const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
     },
   ];
 
+  const getServiceLink = (itemText: string): string => {
+    const slug = serviceTitleToSlug[itemText];
+    return slug ? `/services/${slug}` : "/services";
+  };
+
   return (
     <div className="grid grid-cols-3 gap-8 text-sm max-h-[60vh] overflow-y-auto">
       {sections.map((section) => (
@@ -48,12 +54,14 @@ const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
           </h4>
           <ul className="space-y-3">
             {section.items.map((item) => (
-              <li
-                key={item}
-                className="cursor-pointer rounded-lg px-3 py-2 text-muted-foreground hover:bg-cyan/20 hover:text-cyan transition"
-                onClick={onClose}
-              >
-                {item}
+              <li key={item}>
+                <Link
+                  to={getServiceLink(item)}
+                  className="block cursor-pointer rounded-lg px-3 py-2 text-muted-foreground hover:bg-cyan/20 hover:text-cyan transition"
+                  onClick={onClose}
+                >
+                  {item}
+                </Link>
               </li>
             ))}
           </ul>
@@ -113,50 +121,48 @@ const Navbar = () => {
             </Link>
 
             {/* SERVICES DROPDOWN */}
-<div
-  ref={servicesRef}
-  className="relative"
-  onMouseEnter={() => setServicesOpen(true)}
-  onMouseLeave={() => setServicesOpen(false)}
->
-  <button
-    className={`flex items-center gap-1 text-sm font-medium transition-colors ${
-      servicesOpen ? "text-cyan" : "text-muted-foreground hover:text-cyan"
-    }`}
-  >
-    Services
-    <ChevronDown className="w-4 h-4" />
-  </button>
+            <div
+              ref={servicesRef}
+              className="relative"
+              onMouseEnter={() => setServicesOpen(true)}
+              onMouseLeave={() => setServicesOpen(false)}
+            >
+              <button
+                className={`flex items-center gap-1 text-sm font-medium transition-colors ${
+                  servicesOpen ? "text-cyan" : "text-muted-foreground hover:text-cyan"
+                }`}
+              >
+                Services
+                <ChevronDown className="w-4 h-4" />
+              </button>
 
-  <AnimatePresence>
-    {servicesOpen && (
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 8 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
-        className="
-  absolute
-  top-full
-  left-1/2
-  -translate-x-1/2
-  mt-4
-  w-[720px]
-  rounded-2xl
-  border border-cyan/40
-  bg-background
-  shadow-[0_20px_60px_rgba(0,0,0,0.45)]
-  p-6
-  z-[9999]
-"
-
-      >
-        <ServicesDropdown onClose={() => setServicesOpen(false)} />
-      </motion.div>
-    )}
-  </AnimatePresence>
-</div>
-
+              <AnimatePresence>
+                {servicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="
+                      absolute
+                      top-full
+                      left-1/2
+                      -translate-x-1/2
+                      mt-4
+                      w-[720px]
+                      rounded-2xl
+                      border border-cyan/40
+                      bg-background
+                      shadow-[0_20px_60px_rgba(0,0,0,0.45)]
+                      p-6
+                      z-[9999]
+                    "
+                  >
+                    <ServicesDropdown onClose={() => setServicesOpen(false)} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             <Link
               to="/work"
@@ -168,18 +174,18 @@ const Navbar = () => {
             </Link>
 
             <Link
-              to="/About"
+              to="/about"
               className={`text-sm font-medium transition-colors hover:text-cyan ${
-                isActive("/About") ? "text-cyan" : "text-muted-foreground"
+                isActive("/about") ? "text-cyan" : "text-muted-foreground"
               }`}
             >
               About
             </Link>
 
             <Link
-              to="/Contact"
+              to="/contact"
               className={`text-sm font-medium transition-colors hover:text-cyan ${
-                isActive("/Contact") ? "text-cyan" : "text-muted-foreground"
+                isActive("/contact") ? "text-cyan" : "text-muted-foreground"
               }`}
             >
               Contact
@@ -192,8 +198,9 @@ const Navbar = () => {
               variant="outline"
               size="sm"
               className="border-cyan/50 text-cyan hover:bg-cyan/10"
+              asChild
             >
-              Contact Us
+              <Link to="/contact">Contact Us</Link>
             </Button>
             <Button
               size="sm"
@@ -224,7 +231,6 @@ const Navbar = () => {
             >
               {[
                 { name: "Home", path: "/" },
-                { name: "Services", path: "/services" },
                 { name: "Work", path: "/work" },
                 { name: "About", path: "/about" },
                 { name: "Contact", path: "/contact" },
@@ -243,8 +249,30 @@ const Navbar = () => {
                 </Link>
               ))}
 
-              <Button className="w-full bg-cyan text-background hover:bg-cyan/90">
-                Get Started
+              {/* Mobile Services Section */}
+              <div className="pt-4 border-t border-border/50">
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3">Services</p>
+                <div className="grid grid-cols-1 gap-2">
+                  {Object.entries(serviceTitleToSlug).slice(0, 6).map(([title, slug]) => (
+                    <Link
+                      key={slug}
+                      to={`/services/${slug}`}
+                      onClick={() => setMobileOpen(false)}
+                      className="text-sm text-muted-foreground hover:text-cyan transition-colors"
+                    >
+                      {title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <Button 
+                className="w-full bg-cyan text-background hover:bg-cyan/90"
+                asChild
+              >
+                <Link to="/contact" onClick={() => setMobileOpen(false)}>
+                  Get Started
+                </Link>
               </Button>
             </motion.div>
           )}

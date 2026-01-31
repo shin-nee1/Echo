@@ -171,7 +171,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <Footer />
+  
     </div>
   );
 };

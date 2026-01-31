@@ -5,7 +5,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import ScrollToTop from "@/components/ScrollToTop";
+import Footer from "@/components/Footer";
 
+// Pages
+import SubServicePage from "./pages/SubServicePage";
 import Index from "./pages/Index";
 import Design from "./pages/Design";
 import Develop from "./pages/Develop";
@@ -24,7 +27,6 @@ const App = () => (
       <Sonner />
 
       <BrowserRouter>
-        {/* 🔑 THIS FIXES THE SCROLL ISSUE */}
         <ScrollToTop />
 
         <Routes>
@@ -35,10 +37,15 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          
+          {/* Dynamic Route for Services */}
+          <Route path="/services/:slug" element={<SubServicePage />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
 
+        <Footer />
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
