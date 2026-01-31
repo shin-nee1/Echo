@@ -38,42 +38,42 @@ const faqs: FAQProps[] = [
 
 const FAQ: React.FC = () => {
   return (
-    <section className="py-32 relative bg-transparent overflow-hidden">
+    <section className="py-24 md:py-25 relative bg-[#010a0f] overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* MATCHING BRAND HEADER */}
-        <div className="flex flex-col md:flex-row md:items-start lg:items-center gap-6 md:gap-12 mb-20 relative">
-          <div className="relative shrink-0">
-            <h2 className="text-white text-5xl md:text-7xl font-extrabold tracking-tighter leading-none uppercase">
+        {/* CENTERED BRAND HEADER */}
+        <div className="flex flex-col items-center text-center mb-20 relative">
+          <div className="relative inline-block mb-8">
+            <h2 className="text-white text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
               Common <span className="text-[#00d8ff]">Questions</span>
             </h2>
             
-            {/* SIGNATURE GLOW BAR */}
-            <div className="absolute -bottom-6 left-0 w-24 h-1.5 bg-[#00d8ff] rounded-full shadow-[0_0_20px_rgba(0,216,255,0.6)]" />
+            {/* CENTERED SIGNATURE GLOW BAR */}
+            <div className="mt-8 w-24 h-[4px] bg-[#00d8ff] rounded-full shadow-[0_0_20px_rgba(0,216,255,0.8)] mx-auto" />
           </div>
 
           {/* BRAND RHYTHM TEXT */}
-          <p className="text-slate-400 text-lg md:text-xl font-normal max-w-sm leading-snug pt-1 md:pt-2 border-l border-white/10 md:pl-8">
+          <p className="text-white/50 text-lg md:text-xl font-light max-w-xl leading-relaxed">
             Transparent answers for <br className="hidden md:block" />
-            seamless partnerships.
+            <span className="text-white/80 font-normal">seamless partnerships.</span>
           </p>
         </div>
 
-        {/* FAQ ACCORDION */}
-        <div className="max-w-4xl">
-          <div className="bg-white/[0.02] border border-white/10 rounded-[2.5rem] overflow-hidden backdrop-blur-xl">
+        {/* CENTERED FAQ ACCORDION */}
+        <div className="max-w-4xl mx-auto flex flex-col items-center">
+          <div className="w-full bg-white/[0.02] border border-white/10 rounded-[2.5rem] overflow-hidden backdrop-blur-xl">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem
                   key={index}
                   value={`faq-${index}`}
-                  className="border-b border-white/5 last:border-0 px-8 transition-all duration-300 hover:bg-white/[0.02]"
+                  className="border-b border-white/5 last:border-0 px-8 transition-all duration-300 hover:bg-white/[0.01]"
                 >
                   <AccordionTrigger className="text-xl md:text-2xl font-bold text-white text-left hover:text-[#00d8ff] hover:no-underline transition py-8 tracking-tight">
                     {faq.question}
                   </AccordionTrigger>
 
-                  <AccordionContent className="text-slate-400 text-lg md:text-xl font-normal leading-relaxed pb-8 opacity-80">
+                  <AccordionContent className="text-white/60 text-lg md:text-xl font-light leading-relaxed pb-8">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -81,11 +81,11 @@ const FAQ: React.FC = () => {
             </Accordion>
           </div>
 
-          {/* UPDATED CTA BUTTON */}
-          <div className="mt-12">
+          {/* CENTERED CTA BUTTON */}
+          <div className="mt-16">
             <Button 
               size="lg" 
-              className="bg-[#00d8ff] text-black hover:bg-[#00d8ff]/90 px-10 py-7 rounded-xl text-lg font-black uppercase tracking-tight shadow-[0_0_25px_rgba(0,216,255,0.3)] transition-all hover:scale-105"
+              className="bg-[#00d8ff] text-[#010a0f] hover:bg-white hover:text-black px-12 py-7 rounded-2xl text-lg font-bold tracking-tight shadow-[0_0_30px_rgba(0,216,255,0.2)] transition-all hover:scale-105 active:scale-95"
               asChild
             >
               <Link to="/faq">View All FAQs</Link>

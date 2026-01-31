@@ -49,7 +49,7 @@ const PortfolioSection = () => {
   <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
     <div className="relative">
       {/* MATCHING THE HEADING STYLE */}
-      <h2 className="text-white text-5xl md:text-6xl font-extrabold tracking-tighter leading-tight uppercase">
+      <h2 className="text-white text-5xl md:text-6xl font-extrabold tracking-tighter leading-tight">
         Explore <span className="text-[#00d8ff]">Our Portfolio</span>
       </h2>
       

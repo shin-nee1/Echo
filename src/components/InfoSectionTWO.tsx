@@ -29,7 +29,7 @@ const InfoSectionTWO = ({
           {/* TEXT CONTENT */}
           <div className="w-full lg:w-[550px] pt-12 lg:pt-16">
             <div className="relative inline-block mb-12">
-              <h2 className="text-white text-5xl md:text-6xl font-extrabold tracking-tighter leading-tight uppercase">
+              <h2 className="text-white text-5xl md:text-6xl font-extrabold tracking-tighter leading-tight">
                 {title} <span className="text-[#00d8ff]">{highlight}</span>
               </h2>
               {/* Cyan Accent Bar */}

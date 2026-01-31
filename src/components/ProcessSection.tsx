@@ -26,7 +26,7 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
         
         {/* HEADER */}
         <div className="mb-20 lg:mb-32">
-          <h2 className="text-white text-4xl md:text-6xl font-extrabold tracking-tighter leading-tight uppercase">
+          <h2 className="text-white text-4xl md:text-6xl font-extrabold tracking-tighter leading-tight">
             {title} <span className="text-[#00d8ff]">{highlight}</span>
           </h2>
           <div className="w-16 lg:w-20 h-1.5 bg-[#00d8ff] rounded-full mt-6 shadow-[0_0_20px_rgba(0,216,255,0.6)]" />

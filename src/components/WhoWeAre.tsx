@@ -23,7 +23,7 @@ const WhoWeAre = () => {
           <div className="order-1 lg:order-2">
             {/* UPDATED HEADING: Matching font-weight and accent bar */}
             <div className="relative inline-block mb-12">
-              <h2 className="text-white text-5xl md:text-6xl font-extrabold tracking-tighter leading-tight uppercase">
+              <h2 className="text-white text-5xl md:text-6xl font-extrabold tracking-tighter leading-tight">
                 Who We <span className="text-[#00d8ff]">Are</span>
               </h2>
               {/* BRAND ACCENT BAR: Matching specific cyan and glow */}
