@@ -1,45 +1,40 @@
 import { Button } from "@/components/ui/button";
+import aboutImage from "../assets/image-removebg-preview (12).png";
 
 const AboutUs = () => {
   return (
-    <section className="relative py-32 bg-transparent">
+    <section className="relative py-32 bg-transparent overflow-hidden">
       
-      {/* BACKGROUND GLOW - Consistent with design language */}
+      {/* BACKGROUND GLOW */}
       <div className="absolute inset-0 -z-20 pointer-events-none">
-        <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#00d8ff]/5 blur-[120px]" />
+        <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#00d8ff]/5 blur-[120px]" />
       </div>
 
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           
-          {/* IMAGE SIDE - Refined Glassmorphism */}
-          <div className="relative order-2 lg:order-1">
-            <div className="relative group">
-              <div className="aspect-[4/3] rounded-[2.5rem] border border-white/10 bg-white/[0.02] backdrop-blur-2xl flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:border-[#00d8ff]/30 shadow-2xl">
-                {/* Texture Overlay */}
-                <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
-                
-                <span className="text-slate-500 font-bold text-sm tracking-[0.5em] uppercase opacity-40 group-hover:opacity-60 transition-opacity">
-                  Our Identity
-                </span>
-              </div>
-              
-              {/* Subtle hover glow behind the card */}
-              <div className="absolute -inset-4 bg-[#00d8ff]/5 blur-3xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          {/* IMAGE SIDE - Maximized size, no frame, no animation */}
+          <div className="relative order-2 lg:order-1 flex justify-center lg:justify-start items-center">
+            <div className="relative w-full max-w-[900px] group">
+              <img 
+                src={aboutImage} 
+                alt="Echo & Impact Identity"
+                className="w-full h-auto object-contain transition-transform duration-700 
+                           group-hover:scale-105 drop-shadow-[0_0_40px_rgba(0,216,255,0.2)]"
+              />
+              {/* Subtle background glow layer */}
+              <div className="absolute inset-0 bg-[#00d8ff]/5 blur-[120px] -z-10 opacity-50" />
             </div>
           </div>
 
           {/* CONTENT SIDE */}
           <div className="order-1 lg:order-2">
             
-            {/* MATCHING BRAND HEADER */}
-            <div className="relative inline-block mb-16">
+            {/* BRAND HEADER - No underline, original font */}
+            <div className="relative inline-block mb-12">
               <h2 className="text-white text-5xl md:text-7xl font-extrabold tracking-tighter leading-none uppercase">
                 About <span className="text-[#00d8ff]">Us</span>
               </h2>
-              
-              {/* SIGNATURE GLOW BAR */}
-              <div className="absolute -bottom-6 left-0 w-24 h-1.5 bg-[#00d8ff] rounded-full shadow-[0_0_20px_rgba(0,216,255,0.6)]" />
             </div>
 
             <div className="space-y-6">

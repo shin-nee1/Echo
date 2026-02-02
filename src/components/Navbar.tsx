@@ -5,6 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { serviceTitleToSlug } from "@/data/servicesData";
 
+// IMPORT YOUR LOCAL LOGO
+import navLogo from "../assets/image-removebg-preview (13).png";
+
 const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
   const sections = [
     {
@@ -77,7 +80,6 @@ const Navbar = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -94,23 +96,21 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/50">
-      <div className="container mx-auto px-6 py-4">
+    <nav className="fixed top-0 left-0 right-0 z-[100] bg-background/90 backdrop-blur-md border-b border-border/50">
+      <div className="container mx-auto px-6 py-2"> {/* Reduced padding for larger logo balance */}
         <div className="flex items-center justify-between">
 
-          {/* LOGO */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan to-primary flex items-center justify-center">
-              <span className="text-background font-bold text-sm">E&I</span>
-            </div>
-            <span className="font-display font-bold text-xl">
-              echo<span className="text-cyan">&</span>impact
-            </span>
+          {/* LOGO: Increased size (h-16 mobile / h-20 desktop) */}
+          <Link to="/" className="flex items-center group">
+            <img 
+              src={navLogo} 
+              alt="Echo & Impact" 
+              className="h-16 md:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_15px_rgba(0,216,255,0.25)]"
+            />
           </Link>
 
           {/* DESKTOP NAV */}
           <div className="hidden md:flex items-center gap-8">
-
             <Link
               to="/"
               className={`text-sm font-medium transition-colors hover:text-cyan ${
@@ -120,7 +120,6 @@ const Navbar = () => {
               Home
             </Link>
 
-            {/* SERVICES DROPDOWN */}
             <div
               ref={servicesRef}
               className="relative"
@@ -148,12 +147,12 @@ const Navbar = () => {
                       top-full
                       left-1/2
                       -translate-x-1/2
-                      mt-4
+                      mt-6
                       w-[720px]
                       rounded-2xl
                       border border-cyan/40
                       bg-background
-                      shadow-[0_20px_60px_rgba(0,0,0,0.45)]
+                      shadow-[0_20px_60px_rgba(0,0,0,0.5)]
                       p-6
                       z-[9999]
                     "
@@ -212,10 +211,10 @@ const Navbar = () => {
 
           {/* MOBILE TOGGLE */}
           <button
-            className="md:hidden text-foreground"
+            className="md:hidden text-foreground p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
@@ -227,7 +226,7 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden mt-4 border-t border-border/50 pt-4 space-y-4"
+              className="md:hidden mt-2 border-t border-border/50 pt-4 space-y-4 bg-background pb-8"
             >
               {[
                 { name: "Home", path: "/" },
@@ -239,7 +238,7 @@ const Navbar = () => {
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileOpen(false)}
-                  className={`block text-sm font-medium transition-colors hover:text-cyan ${
+                  className={`block text-base font-semibold transition-colors hover:text-cyan ${
                     isActive(link.path)
                       ? "text-cyan"
                       : "text-muted-foreground"
@@ -249,11 +248,10 @@ const Navbar = () => {
                 </Link>
               ))}
 
-              {/* Mobile Services Section */}
               <div className="pt-4 border-t border-border/50">
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3">Services</p>
-                <div className="grid grid-cols-1 gap-2">
-                  {Object.entries(serviceTitleToSlug).slice(0, 6).map(([title, slug]) => (
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3">Our Services</p>
+                <div className="grid grid-cols-1 gap-3">
+                  {Object.entries(serviceTitleToSlug).slice(0, 8).map(([title, slug]) => (
                     <Link
                       key={slug}
                       to={`/services/${slug}`}
@@ -267,7 +265,7 @@ const Navbar = () => {
               </div>
 
               <Button 
-                className="w-full bg-cyan text-background hover:bg-cyan/90"
+                className="w-full bg-cyan text-background hover:bg-cyan/90 py-6 text-lg font-bold"
                 asChild
               >
                 <Link to="/contact" onClick={() => setMobileOpen(false)}>

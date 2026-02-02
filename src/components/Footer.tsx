@@ -1,6 +1,8 @@
 import { Facebook, Linkedin, Twitter, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { serviceTitleToSlug } from "@/data/servicesData";
+// Import your local image
+import footerLogo from "../assets/image-removebg-preview (13).png";
 
 const Footer = () => {
   const footerSections = [
@@ -62,16 +64,15 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Logo */}
+          {/* Logo Section: Increased size and removed tagline */}
           <div className="w-full md:w-1/2 flex flex-col items-center">
-            <div className="flex items-center gap-1 mb-1">
-              <h2 className="text-4xl font-bold tracking-tight text-white">echo</h2>
-              <div className="flex flex-col h-9 w-[3px] bg-cyan shadow-[0_0_10px_rgba(0,229,255,0.5)] mx-2" />
-              <h2 className="text-4xl font-bold tracking-tight text-white">impact</h2>
-            </div>
-            <p className="text-[11px] tracking-[0.5em] text-cyan/60 font-bold uppercase mt-2">
-              Design | Develop | Market
-            </p>
+            <Link to="/" className="block">
+              <img 
+                src={footerLogo} 
+                alt="Echo & Impact Logo" 
+                className="h-24 md:h-32 w-auto object-contain drop-shadow-[0_0_20px_rgba(0,216,255,0.3)] hover:scale-105 transition-transform duration-300"
+              />
+            </Link>
           </div>
 
           {/* Socials */}
@@ -106,7 +107,6 @@ const Footer = () => {
               </div>
               <ul className="space-y-5">
                 {section.links.map((link) => {
-                  // Handle Company section with explicit hrefs
                   if (typeof link === "object" && "href" in link) {
                     return (
                       <li key={link.text} className="flex items-center gap-3 group cursor-pointer">
@@ -121,7 +121,6 @@ const Footer = () => {
                     );
                   }
                   
-                  // Handle service links
                   const linkText = link as string;
                   return (
                     <li key={linkText} className="flex items-center gap-3 group cursor-pointer">

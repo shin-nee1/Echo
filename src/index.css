@@ -1,4 +1,4 @@
-/* 1️⃣ Import Google Fonts first */
+/* 1️⃣ Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 /* 2️⃣ Tailwind directives */
@@ -38,40 +38,41 @@
     --gradient-blue: linear-gradient(180deg, hsl(210, 80%, 30%) 0%, hsl(210, 50%, 4%) 100%);
   }
 
-  .dark {
-    --background: 210 50% 4%;
-    --foreground: 0 0% 98%;
+  /* FORCE GENERAL SANS (Inter) ON EVERYTHING */
+  *, *::before, *::after, body, button, input, optgroup, select, textarea {
+    font-family: 'Inter', sans-serif !important;
+    border-color: hsl(var(--border));
   }
 
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
+  /* EXCEPTIONS FOR HEADINGS */
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: 'Space Grotesk', sans-serif !important;
   }
 
-  *, ::before, ::after {
-  border-color: hsl(var(--border));
-}
+  .dark {
+    --background: 210 50% 4%;
+    --foreground: 0 0% 98%;
+  }
 }
 
 /* 4️⃣ Custom utilities */
 @layer utilities {
-  /* Gradient text */
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan to-primary;
   }
 
-  /* Glow effect */
   .glow-cyan {
     box-shadow: 0 0 20px hsl(var(--cyan) / 0.3), 0 0 40px hsl(var(--cyan) / 0.1);
   }
 
-  /* Glass-style card */
   .card-glass {
     background-color: hsl(var(--card) / 0.5);
     backdrop-blur: blur(0.25rem);
@@ -79,7 +80,6 @@
     border: 1px solid hsl(var(--border) / 0.5);
   }
 
-  /* Gradient border example */
   .gradient-border {
     position: relative;
     background: linear-gradient(180deg, hsl(210, 40%, 10%) 0%, hsl(210, 50%, 6%) 100%);
@@ -98,7 +98,6 @@
     mask-composite: exclude;
   }
 
-  /* Hover glow effect */
   .hover-glow {
     @apply transition-all duration-300;
   }
@@ -108,10 +107,7 @@
 }
 
 /* ===== PROTOTYPE BACKGROUND UTILITIES ===== */
-
-/* Grid overlay */
 .bg-grid {
-  /* Use a slightly brighter white-cyan tint for the lines */
   background-image:
     linear-gradient(to right, rgba(0, 229, 255, 0.15) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 229, 255, 0.15) 1px, transparent 1px);
@@ -119,7 +115,6 @@
 }
 
 .vignette {
-  /* Softens the edges so the grid doesn't hit the screen borders harshly */
   background: radial-gradient(
     circle at center,
     transparent 20%,
@@ -128,7 +123,6 @@
   );
 }
 
-/* Slow floating halo */
 @keyframes float-slow {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-30px); }
@@ -138,4 +132,3 @@
 .animate-halo {
   animation: float-slow 18s ease-in-out infinite;
 }
-

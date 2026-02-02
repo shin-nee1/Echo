@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+// IMPORT THE FOURTH IMAGE
+import WhoWeAreImg from "@/assets/image-removebg-preview (4).png";
 
 const WhoWeAre = () => {
   return (
@@ -6,32 +8,31 @@ const WhoWeAre = () => {
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
-          {/* IMAGE SIDE */}
-          <div className="relative order-2 lg:order-1">
-            <div className="relative group">
-              <div className="aspect-[4/3] rounded-[2.5rem] border border-white/10 bg-white/[0.02] backdrop-blur-xl flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:border-cyan-500/30 shadow-2xl">
-                <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
-                <span className="text-slate-500 font-display text-sm tracking-widest uppercase opacity-60">
-                  Our Studio
-                </span>
-              </div>
-              <div className="absolute -inset-4 bg-cyan-500/5 blur-3xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          {/* IMAGE SIDE - Now floating directly on the page */}
+          <div className="relative order-2 lg:order-1 flex justify-center items-center">
+            <div className="relative w-full max-w-[500px] group">
+              {/* IMAGE (4) */}
+              <img 
+                src={WhoWeAreImg} 
+                alt="Who We Are" 
+                className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105 filter drop-shadow-[0_20px_50px_rgba(0,216,255,0.15)]"
+              />
+              
+              {/* Subtle Ambient Glow behind the image to make it pop */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#00d8ff]/10 blur-[100px] -z-10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </div>
           </div>
 
           {/* CONTENT SIDE */}
           <div className="order-1 lg:order-2">
-            {/* UPDATED HEADING: Matching font-weight and accent bar */}
             <div className="relative inline-block mb-12">
               <h2 className="text-white text-5xl md:text-6xl font-extrabold tracking-tighter leading-tight">
                 Who We <span className="text-[#00d8ff]">Are</span>
               </h2>
-              {/* BRAND ACCENT BAR: Matching specific cyan and glow */}
-              <div className="absolute -bottom-4 left-0 w-20 h-1.5 bg-[#00d8ff] rounded-full shadow-[0_0_20px_rgba(0,216,255,0.6)]" />
+              {/* BRAND ACCENT BAR REMOVED FROM HERE */}
             </div>
 
             <div className="space-y-6">
-              {/* FONT STYLE: Matching light/regular slate typography */}
               <p className="text-slate-400 text-lg md:text-xl leading-relaxed font-normal opacity-85">
                 Echo & Impact is built by creators, strategists, and engineers who take
                 brands from idea to execution, and from presence to performance.
@@ -49,10 +50,9 @@ const WhoWeAre = () => {
             </div>
 
             <div className="mt-12">
-              {/* BUTTON STYLE: High contrast bold typography */}
               <Button 
                 size="lg"
-                className="bg-[#00d8ff] text-black hover:bg-[#00d8ff]/90 px-10 py-7 rounded-xl text-lg font-black uppercase tracking-tight shadow-[0_0_25px_rgba(0,216,255,0.3)] transition-all hover:scale-105 active:scale-95"
+                className="bg-[#00d8ff] text-black hover:bg-[#00d8ff]/90 px-10 py-7 rounded-xl text-lg font-bold uppercase tracking-tight shadow-[0_0_25px_rgba(0,216,255,0.3)] transition-all hover:scale-105 active:scale-95"
               >
                 Read More
               </Button>
