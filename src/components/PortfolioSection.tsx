@@ -2,130 +2,108 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-const portfolioItems = [
-  { 
-    title: "Uber", 
-    subtitle: "Uber SuperApp Concept", 
-    category: "2024 • CASE STUDY", 
-    color: "bg-[#141414]", 
-    image: "/uber-mockup.png" 
-  },
-  { 
-    title: "Barclays", 
-    subtitle: "Mobile app Concept", 
-    category: "2023 • UI/UX DESIGN", 
-    color: "bg-[#00AEEF]", 
-    image: "/barclays-mockup.png" 
-  },
-  { 
-    title: "FINKOFF.", 
-    subtitle: "Finance manager", 
-    category: "2024 • MOBILE APP", 
-    color: "bg-white", 
-    textColor: "text-black",
-    image: "/finkoff-mockup.png" 
-  },
-];
+// ASSET IMPORTS
+import PortImg9 from "@/assets/image-removebg-preview (9).png";
+import PortImg10 from "@/assets/image-removebg-preview (10).png";
+import PortImg11 from "@/assets/image-removebg-preview (11).png";
 
 const PortfolioSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const totalItems = 3;
+
+  // Measurement Constants
+  const desktopWidth = 1200;
+  const desktopOverlap = 150;
+  const mobileWidth = 90; // vw
+  const mobileOverlap = 10; // vw
 
   const nextSlide = () => {
-    if (currentIndex < portfolioItems.length - 1) {
-      setCurrentIndex(prev => prev + 1);
-    }
+    if (currentIndex < totalItems - 1) setCurrentIndex((prev) => prev + 1);
   };
 
   const prevSlide = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(prev => prev - 1);
-    }
+    if (currentIndex > 0) setCurrentIndex((prev) => prev - 1);
   };
 
   return (
-    <section className="relative py-32 bg-transparent overflow-hidden">
-      {/* Header Container */}
-<div className="container mx-auto px-6 mb-16 lg:mb-24">
-  <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
-    <div className="relative">
-      {/* MATCHING THE HEADING STYLE */}
-      <h2 className="text-white text-5xl md:text-6xl font-extrabold tracking-tighter leading-tight">
-        Explore <span className="text-[#00d8ff]">Our Portfolio</span>
-      </h2>
-      
-      {/* MATCHING THE CYAN ACCENT BAR */}
-      <div className="absolute -bottom-4 left-0 w-20 h-1.5 bg-[#00d8ff] rounded-full shadow-[0_0_20px_rgba(0,216,255,0.6)]" />
-    </div>
+    <section className="relative py-20 md:py-32 bg-transparent overflow-hidden">
+      {/* Header Container - Standard Alignment */}
+      <div className="container mx-auto px-6 mb-12 md:mb-20">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="relative">
+            <h2 className="text-white text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tighter leading-tight">
+              Explore <span className="text-[#00d8ff]">Our Portfolio</span>
+            </h2>
+          </div>
 
-    {/* Navigation Controls */}
-    <div className="flex items-center gap-6">
-      <div className="flex gap-3">
-        <button 
-          onClick={prevSlide}
-          disabled={currentIndex === 0}
-          className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all disabled:opacity-20 disabled:cursor-not-allowed group"
-        >
-          <ArrowLeft className="w-6 h-6 text-white group-hover:text-[#00d8ff] transition-colors" />
-        </button>
-        <button 
-          onClick={nextSlide}
-          disabled={currentIndex === portfolioItems.length - 1}
-          className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all disabled:opacity-20 disabled:cursor-not-allowed group"
-        >
-          <ArrowRight className="w-6 h-6 text-white group-hover:text-[#00d8ff] transition-colors" />
-        </button>
+          {/* Navigation Controls */}
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className="flex gap-2 md:gap-3">
+              <button 
+                onClick={prevSlide}
+                disabled={currentIndex === 0}
+                className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all disabled:opacity-20 disabled:cursor-not-allowed group"
+              >
+                <ArrowLeft className="w-6 h-6 md:w-7 md:h-7 text-white group-hover:text-[#00d8ff] transition-colors" />
+              </button>
+              <button 
+                onClick={nextSlide}
+                disabled={currentIndex === totalItems - 1}
+                className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all disabled:opacity-20 disabled:cursor-not-allowed group"
+              >
+                <ArrowRight className="w-6 h-6 md:w-7 md:h-7 text-white group-hover:text-[#00d8ff] transition-colors" />
+              </button>
+            </div>
+            
+            <Button 
+              variant="outline" 
+              className="hidden sm:flex rounded-full border-white/10 bg-white/5 hover:bg-[#00d8ff] hover:text-black px-10 py-8 transition-all font-black uppercase tracking-widest text-xs"
+            >
+              View All
+            </Button>
+          </div>
+        </div>
       </div>
-      
-      <Button 
-        variant="outline" 
-        className="hidden md:flex rounded-full border-white/10 bg-white/5 hover:bg-[#00d8ff] hover:text-black px-10 py-7 transition-all font-black uppercase tracking-widest text-xs"
-      >
-        View All
-      </Button>
-    </div>
-  </div>
-</div>
 
-      {/* Sliding Track */}
+      {/* Track - Aligned to Container Edge, Transparent Frames */}
       <div className="relative">
         <div 
-          className="flex gap-8 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] pl-6 md:pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))]"
-          style={{ transform: `translateX(-${currentIndex * (540 + 32)}px)` }} 
+          // Uses container padding to align with heading
+          className="flex -space-x-10 md:-space-x-[150px] transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] px-6 md:px-[calc((100vw-1280px)/2+1.5rem)]"
+          style={{ 
+            // Step calculation: Width minus the overlap
+            transform: `translateX(calc(-${currentIndex} * (min(${mobileWidth - mobileOverlap}vw, ${desktopWidth - desktopOverlap}px))))` 
+          }} 
         >
-          {portfolioItems.map((item, index) => (
-            <div
-              key={index}
-              className={`group relative flex-shrink-0 w-[85vw] md:w-[540px] aspect-[4/5] md:aspect-[1.1/1] rounded-[2.5rem] overflow-hidden transition-all duration-500 ${item.color}`}
-            >
-              {/* Content Layer */}
-              <div className="absolute inset-0 p-8 md:p-12 flex flex-col z-20">
-                <span className={`text-[10px] font-black tracking-[0.3em] uppercase opacity-40 ${item.textColor || 'text-white'}`}>
-                  {item.category}
-                </span>
-                
-                <h3 className={`mt-6 text-4xl md:text-5xl font-bold leading-tight ${item.textColor || 'text-white'}`}>
-                  {item.title}
-                </h3>
-                
-                <p className={`mt-4 text-lg font-medium opacity-70 max-w-[200px] ${item.textColor || 'text-white'}`}>
-                  {item.subtitle}
-                </p>
+          {/* IMAGE 1 */}
+          <div className="flex-shrink-0 w-[90vw] md:w-[1200px] aspect-[16/10] group overflow-hidden rounded-[4rem] md:rounded-[9rem] relative z-[1]">
+            <img 
+              src={PortImg9} 
+              alt="Uber"
+              // bg-white/[0.01] removed
+              className="w-full h-full object-contain filter drop-shadow-[0_40px_100px_rgba(0,216,255,0.15)]" 
+            />
+          </div>
 
-                <div className="mt-auto flex justify-end">
-                   <div className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/10 group-hover:border-cyan/50 transition-colors">
-                      <ArrowRight className={`w-6 h-6 ${item.textColor || 'text-white'}`} />
-                   </div>
-                </div>
-              </div>
+          {/* IMAGE 2 */}
+          <div className="flex-shrink-0 w-[90vw] md:w-[1200px] aspect-[16/10] group overflow-hidden rounded-[4rem] md:rounded-[9rem] relative z-[2]">
+            <img 
+              src={PortImg10} 
+              alt="Barclays"
+              // bg-white/[0.01] removed
+              className="w-full h-full object-contain filter drop-shadow-[0_40px_100px_rgba(0,0,0,0.5)]" 
+            />
+          </div>
 
-              {/* Visual Asset Layer */}
-              <div className="absolute inset-0 z-10 pointer-events-none">
-                 <div className="absolute right-0 bottom-0 w-3/4 h-3/4 translate-x-12 translate-y-12 rotate-[-5deg] group-hover:rotate-0 transition-transform duration-700">
-                    <div className="w-full h-full bg-black/20 rounded-[2.5rem] border border-white/20 shadow-2xl" />
-                 </div>
-              </div>
-            </div>
-          ))}
+          {/* IMAGE 3 */}
+          <div className="flex-shrink-0 w-[90vw] md:w-[1200px] aspect-[16/10] group overflow-hidden rounded-[4rem] md:rounded-[9rem] relative z-[3]">
+            <img 
+              src={PortImg11} 
+              alt="Finkoff"
+              // bg-white/[0.01] removed
+              className="w-full h-full object-contain filter drop-shadow-[0_40px_100px_rgba(255,255,255,0.06)]" 
+            />
+          </div>
         </div>
       </div>
     </section>
