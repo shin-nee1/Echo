@@ -4,7 +4,10 @@ import SectionHeader from "./SectionHeader";
 
 const AboutHero = () => {
   return (
-    <section className="relative pt-24 pb-20 lg:pt-32 lg:pb-32 overflow-hidden bg-[#010a0f]">
+    // Removed bg-[#010a0f] to allow global background to show
+    <section className="relative pt-24 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
+      
+      {/* Local Ambient Glow (kept for depth, remove if it clashes with global halo) */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_0%,_rgba(0,216,255,0.1)_0%,_transparent_50%)] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">

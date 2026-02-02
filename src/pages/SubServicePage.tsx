@@ -10,7 +10,6 @@ import { getServiceBySlug } from "@/data/servicesData";
 
 const SubServicePage = () => {
   const { slug } = useParams<{ slug: string }>();
-  console.log("Slug from URL:", slug);
   
   // Get service data based on URL slug
   const service = slug ? getServiceBySlug(slug) : undefined;
@@ -21,6 +20,9 @@ const SubServicePage = () => {
   }
 
   return (
+    /* ServicePageLayout should not have a solid background color 
+       if you want the App.tsx halo to persist.
+    */
     <ServicePageLayout>
       {/* Page Hero */}
       <PageHero
@@ -36,7 +38,7 @@ const SubServicePage = () => {
         ctaText={service.ctaText}
       />
 
-      {/* What Is Section - Dynamic */}
+      {/* What Is Section - Transparent Background */}
       <WhatIsSection
         title={service.whatIs.title}
         highlightedWord={service.whatIs.highlightedWord}
@@ -46,14 +48,14 @@ const SubServicePage = () => {
         imageAlt={service.whatIs.imageAlt}
       />
 
-      {/* Features Carousel - Dynamic */}
+      {/* Features Carousel - Transparent Background */}
       <FeaturesCarousel
         sectionTitle={`Our ${service.highlightedTitle} Features`}
         highlightedWord={service.highlightedTitle}
         features={service.features}
       />
 
-      {/* Why Us Section */}
+      {/* Why Us Section - Ensure this is also transparent */}
       <WhyUsSection />
 
       {/* FAQ Section */}

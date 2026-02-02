@@ -21,26 +21,18 @@ const WhatIsSection = ({
   const titleParts = title.split(highlightedWord);
 
   return (
-    // Updated background to the brand Slate color
-    <section className="py-24 lg:py-32 relative overflow-hidden bg-[#010a0f]">
-      
-      {/* BRAND CYAN AMBIENT GLOW */}
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-[#00d8ff]/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-
+    <section className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Background glow removed to prevent collision with global halo */}
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
-          {/* 1. Content Section (Left Aligned) */}
           <div className="order-2 lg:order-1">
-            
-            {/* BRAND HEADING STYLE */}
             <div className="mb-10">
               <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
                 {titleParts[0]}
                 <span className="text-[#00d8ff]">{highlightedWord}</span>
                 {titleParts[1] || ""}
               </h2>
-              {/* Left-Aligned Cyan Accent Bar */}
               <div className="mt-6 w-24 h-[4px] bg-[#00d8ff] rounded-full shadow-[0_0_15px_rgba(0,216,255,0.8)]" />
             </div>
             
@@ -52,7 +44,6 @@ const WhatIsSection = ({
               <ul className="space-y-5">
                 {bulletPoints.map((point, index) => (
                   <li key={index} className="flex items-center gap-4 group">
-                    {/* Bullet Icon Container - Cyan Theme */}
                     <div className="w-8 h-8 rounded-full bg-[#00d8ff]/10 flex items-center justify-center text-[#00d8ff] group-hover:bg-[#00d8ff] group-hover:text-[#010a0f] transition-all duration-300">
                       <Check size={16} strokeWidth={3} />
                     </div>
@@ -63,11 +54,8 @@ const WhatIsSection = ({
             )}
           </div>
 
-          {/* 2. Image Section */}
           <div className="order-1 lg:order-2 relative">
             <div className="relative z-10 p-3 md:p-5 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl">
-              
-              {/* Tech Corner Accents in Cyan */}
               <div className="absolute -top-1 -left-1 w-8 h-8 border-t-2 border-l-2 border-[#00d8ff]/30 rounded-tl-2xl" />
               <div className="absolute -bottom-1 -right-1 w-8 h-8 border-b-2 border-r-2 border-[#00d8ff]/30 rounded-br-2xl" />
 
@@ -77,15 +65,11 @@ const WhatIsSection = ({
                   alt={imageAlt}
                   className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-105"
                 />
-                
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#010a0f]/40 to-transparent pointer-events-none" />
               </div>
             </div>
-
-            {/* Background Glow behind the frame */}
             <div className="absolute inset-0 bg-[#00d8ff]/10 blur-3xl rounded-full -z-10 transform scale-90 translate-y-4" />
           </div>
-
         </div>
       </div>
     </section>
