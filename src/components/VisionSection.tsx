@@ -4,8 +4,10 @@ import SectionHeader from "./SectionHeader";
 
 const VisionSection = () => {
   return (
-    <section className="pt-20 lg:pt-20 pb-15 lg:pb-24 relative overflow-hidden bg-[#010a0f]">
-      {/* BACKGROUND ATMOSPHERE */}
+    /* Removed bg-[#010a0f] - Now transparent */
+    <section className="pt-20 lg:pt-20 pb-15 lg:pb-24 relative overflow-hidden">
+      
+      {/* BACKGROUND ATMOSPHERE - Kept for depth, but reduced opacity */}
       <div className="absolute top-1/2 left-[-10%] -translate-y-1/2 w-[500px] h-[500px] bg-[#00d8ff]/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
@@ -19,14 +21,13 @@ const VisionSection = () => {
             transition={{ duration: 0.8 }}
             className="order-2 lg:order-1 flex flex-col"
           >
-            {/* 1. Header is now isolated */}
             <SectionHeader 
               title="Our" 
               highlight="Vision" 
               centered={false} 
             />
             
-            {/* 2. WRAPPER: This pulls the text UP and kills the gap from the white line */}
+            {/* WRAPPER: Pulls text up to align with the header line */}
             <div className="relative -mt-12 md:-mt-16 lg:-mt-20"> 
               <div className="space-y-6 text-white/50 text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-xl">
                 <p>
@@ -46,7 +47,7 @@ const VisionSection = () => {
             </div>
           </motion.div>
 
-          {/* RIGHT: INCREASED IMAGE PLACEHOLDER */}
+          {/* RIGHT: IMAGE COMPONENT */}
           <div className="relative order-1 lg:order-2 flex justify-center items-start pt-8 lg:pt-8">
             <motion.div
               animate={{ 
@@ -59,8 +60,8 @@ const VisionSection = () => {
               }}
               className="relative w-full aspect-video md:aspect-[4/3] max-w-2xl lg:ml-auto flex items-center justify-center z-10"
             >
-              {/* Massive Glass Placeholder */}
-              <div className="w-full h-full rounded-2xl bg-gradient-to-br from-white/[0.05] via-white/[0.02] to-transparent border border-white/10 backdrop-blur-md flex items-center justify-center overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+              {/* Massive Glass Placeholder - Inherits background through transparency */}
+              <div className="w-full h-full rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md flex items-center justify-center overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.3)]">
                 <div className="absolute inset-0 bg-[radial-gradient(#00d8ff08_1px,transparent_1px)] bg-[size:32px_32px]" />
                 <span className="text-white/20 font-medium tracking-[0.4em] uppercase text-[10px] md:text-xs px-10 text-center">
                   Vision Narrative Visual Component
@@ -68,7 +69,7 @@ const VisionSection = () => {
               </div>
 
               {/* AMBIENT FLOOR REFLECTION */}
-              <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[85%] h-12 bg-[#00d8ff]/20 blur-[60px] rounded-full -z-10" />
+              <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[85%] h-12 bg-[#00d8ff]/10 blur-[60px] rounded-full -z-10" />
             </motion.div>
           </div>
 

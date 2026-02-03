@@ -1,242 +1,177 @@
+import React from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { faqCategories, type FAQCategory as FAQCategoryType } from "@/data/faqdata";
+import HeroImage from "@/assets/image-removebg-preview (14).png";
 
-const FAQ = () => {
-  const faqCategories = [
-    {
-      title: "Working With",
-      highlight: "Echo & Impact",
-      faqs: [
-        {
-          question: "How do I get started working with your team?",
-          answer: "Getting started is simple! Fill out our contact form with your project details, and we'll schedule a discovery call within 48 hours to discuss your needs and determine if we're a good fit."
-        },
-        {
-          question: "What types of businesses do you work with?",
-          answer: "We specialize in working with growth-stage startups, established SMBs, and enterprise companies looking to improve their digital presence. Our sweet spot is ambitious teams who value quality and collaboration."
-        },
-        {
-          question: "Do you work with clients internationally?",
-          answer: "Yes! We work with clients globally and have experience collaborating across time zones. We use async communication tools and flexible scheduling to make remote partnerships seamless."
-        },
-        {
-          question: "What makes your approach different from other agencies?",
-          answer: "We combine senior talent, strategic thinking, and hands-on execution in a boutique setting. You won't be handed off to junior staff—the people you meet are the people who do the work."
-        },
-      ]
-    },
-    {
-      title: "Scope, Pricing, And",
-      highlight: "Contracts",
-      faqs: [
-        {
-          question: "How do you price your projects?",
-          answer: "We offer both project-based pricing and retainer arrangements depending on your needs. Project pricing is based on scope, complexity, and timeline. We're always transparent about costs upfront."
-        },
-        {
-          question: "What's the typical project budget range?",
-          answer: "Our projects typically range from $10,000 to $150,000+, depending on scope. We have solutions for various budgets and can help you prioritize features to match your investment level."
-        },
-        {
-          question: "Do you require long-term contracts?",
-          answer: "Not necessarily. While we love building long-term partnerships, we also take on single projects. Our retainer clients enjoy priority scheduling and discounted rates."
-        },
-        {
-          question: "What's included in your proposals?",
-          answer: "Our proposals include detailed scope, timeline, deliverables, payment schedule, and terms. You'll know exactly what you're getting and when to expect it."
-        },
-      ]
-    },
-    {
-      title: "Process &",
-      highlight: "Delivery",
-      faqs: [
-        {
-          question: "What does your typical project process look like?",
-          answer: "We follow a proven process: Discovery → Strategy → Design → Development → Testing → Launch → Support. Each phase has clear milestones and checkpoints for your feedback."
-        },
-        {
-          question: "How long do projects typically take?",
-          answer: "Timeline varies by scope. A brand identity might take 4-6 weeks, while a full website redesign could be 8-12 weeks. We'll provide realistic timelines during our discovery call."
-        },
-        {
-          question: "How do you handle revisions and feedback?",
-          answer: "We build revision rounds into every project phase. You'll have ample opportunity to provide feedback, and we use collaborative tools to make the review process smooth and efficient."
-        },
-        {
-          question: "What happens if the project scope changes?",
-          answer: "Scope changes happen—we get it. We'll discuss the impact on timeline and budget, provide a change order for approval, and adjust accordingly. No surprises."
-        },
-      ]
-    },
-    {
-      title: "Ownership,",
-      highlight: "Rights & Data",
-      faqs: [
-        {
-          question: "Who owns the final deliverables?",
-          answer: "You do! Upon final payment, all deliverables and intellectual property rights transfer to you completely. You'll have full ownership of everything we create."
-        },
-        {
-          question: "Will I receive source files?",
-          answer: "Absolutely. We provide all source files, assets, and documentation. You'll never be locked into working with us—though we hope you'll want to continue!"
-        },
-        {
-          question: "How do you handle confidential information?",
-          answer: "We take confidentiality seriously. We're happy to sign NDAs and follow strict data handling protocols. Your business information stays secure."
-        },
-        {
-          question: "Can I use the work in my portfolio?",
-          answer: "Yes, and we'd love to feature the work in our portfolio too (with your permission). Great work deserves to be showcased!"
-        },
-      ]
-    },
-    {
-      title: "Remote Work &",
-      highlight: "Global Clients",
-      faqs: [
-        {
-          question: "How do you collaborate with remote teams?",
-          answer: "We use a combination of Slack, Zoom, Figma, and project management tools to stay connected. Regular check-ins ensure everyone stays aligned regardless of location."
-        },
-        {
-          question: "What time zones do you work in?",
-          answer: "Our core team is primarily in US time zones, but we have experience working with clients globally. We're flexible and will find meeting times that work for everyone."
-        },
-        {
-          question: "Do you ever meet in person?",
-          answer: "While we work remotely, we're open to in-person meetings for major milestones or kickoffs when it makes sense. Some of our best work has started with face-to-face workshops."
-        },
-        {
-          question: "How do you maintain quality remotely?",
-          answer: "Remote work is in our DNA. We have refined processes, clear documentation, and regular touchpoints that ensure quality never suffers regardless of where we're working from."
-        },
-      ]
-    },
-    {
-      title: "Long-Term",
-      highlight: "Support",
-      faqs: [
-        {
-          question: "Do you offer ongoing support after launch?",
-          answer: "Yes! We offer maintenance retainers, training sessions, and ongoing optimization services. We're committed to your long-term success, not just the launch."
-        },
-        {
-          question: "What kind of post-launch services do you provide?",
-          answer: "We offer hosting management, security updates, performance optimization, content updates, analytics reporting, and strategic consulting to help you grow."
-        },
-        {
-          question: "How quickly can you respond to urgent issues?",
-          answer: "Retainer clients receive priority support with guaranteed response times. For critical issues, we offer same-day response and resolution whenever possible."
-        },
-        {
-          question: "Can you train our team on the new systems?",
-          answer: "Absolutely. We provide comprehensive training and documentation so your team feels confident managing and updating your new digital assets."
-        },
-      ]
-    },
-    {
-      title: "Fit &",
-      highlight: "Expectations",
-      faqs: [
-        {
-          question: "How do I know if we're a good fit?",
-          answer: "We look for clients who value quality, communicate openly, and are ready to collaborate. Our discovery call helps both parties determine if the partnership will thrive."
-        },
-        {
-          question: "What do you expect from clients?",
-          answer: "Timely feedback, clear communication, and trust in our expertise. The best results come from true collaboration where both parties are invested in success."
-        },
-        {
-          question: "What if we're not happy with the work?",
-          answer: "Your satisfaction is our priority. We have built-in revision rounds and maintain open communication to address concerns early. We'll work together until it's right."
-        },
-        {
-          question: "Can we start with a small project first?",
-          answer: "Absolutely! Many of our long-term clients started with a smaller project to test the waters. It's a great way to experience our process and build trust."
-        },
-      ]
-    },
-  ];
-
-  const FAQCategory = ({ title, highlight, faqs }: { title: string; highlight: string; faqs: { question: string; answer: string }[] }) => (
-    <div className="mb-16">
-      <h3 className="section-title text-2xl md:text-3xl font-bold mb-8">
-        {title} <span className="text-cyan glow-text">{highlight}</span>
-      </h3>
-      <Accordion type="single" collapsible className="space-y-4">
-        {faqs.map((faq, index) => (
-          <AccordionItem 
-            key={index} 
-            value={`item-${index}`} 
-            className="card-glass border-border/50 px-6 hover-glow"
-          >
-            <AccordionTrigger className="text-left font-display hover:text-cyan hover:no-underline">
-              {faq.question}
-            </AccordionTrigger>
-            <AccordionContent className="text-muted-foreground">
-              {faq.answer}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    </div>
+/**
+ * HighlightedText logic preserved:
+ * Colors the delimiter (& or ,) AND the text following it teal.
+ */
+const HighlightedText = ({ text }: { text: string }) => {
+  const parts = text.split(/([,&])/g);
+  
+  return (
+    <>
+      {parts.map((part, i) => {
+        const isDelimiter = part === "&" || part === ",";
+        const followsDelimiter = i > 0 && (parts[i - 1] === "&" || parts[i - 1] === ",");
+        
+        return (
+          <span key={i} className={isDelimiter || followsDelimiter ? "text-[#4fb3c4]" : ""}>
+            {part}
+          </span>
+        );
+      })}
+    </>
   );
+};
+
+const FAQCategory = ({ title, highlight, faqs }: FAQCategoryType) => {
+  const sectionId = (title + highlight).toLowerCase().replace(/\s+/g, "-");
+  const fullTitle = `${title} ${highlight}`;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="mb-16 md:mb-32 scroll-mt-24 md:scroll-mt-32" id={sectionId}>
+      {/* CATEGORY HEADING: Changed from font-bold to font-medium */}
+      <div className="text-center mb-10 md:mb-16">
+        <h3 className="text-white text-3xl md:text-5xl lg:text-6xl tracking-tight font-medium font-sans">
+          <HighlightedText text={fullTitle} />
+        </h3>
+      </div>
+
+      <div className="w-full rounded-[1.5rem] md:rounded-[3rem] border border-[#0c7a7f]/30 bg-black/40 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <Accordion type="single" collapsible className="w-full">
+          {faqs.map((faq, index) => (
+            <AccordionItem
+              key={index}
+              value={`faq-${title}-${index}`}
+              className="px-6 md:px-12 relative border-none first:pt-6 md:first:pt-10 last:pb-6 md:last:pb-10"
+            >
+              {/* QUESTION TRIGGER: Changed from font-bold to font-medium */}
+              <AccordionTrigger className="text-white hover:text-[#00d8ff] transition-colors text-left py-6 md:py-10 text-lg md:text-2xl lg:text-3xl font-medium font-sans leading-snug">
+                {faq.question}
+              </AccordionTrigger>
+
+              <AccordionContent className="text-white/70 text-base md:text-xl font-normal leading-relaxed font-sans">
+                <div className="pb-8 md:pb-12 max-w-4xl opacity-80">
+                  {faq.answer}
+                </div>
+              </AccordionContent>
+
+              {index !== faqs.length - 1 && (
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1.5px] w-[90%] md:w-[94%] bg-[#0c7a7f]/20" />
+              )}
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </div>
+  );
+};
+
+const FAQ = () => {
+  return (
+    <div className="font-sans text-white selection:bg-[#4fb3c4]/30 overflow-x-hidden">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-cyan/5 via-transparent to-transparent" />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-cyan/10 rounded-full blur-[150px] opacity-20" />
-        
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Frequently Asked <span className="text-cyan">Questions</span>
-          </h1>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
-            Find answers to common questions about our services, process, and how we can help your business grow.
-          </p>
+      <section className="relative pt-32 sm:pt-40 md:pt-52 pb-16 md:pb-24 overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-8">
+            
+            <div className="lg:col-span-7 text-center lg:text-left z-10 order-2 lg:order-1">
+              {/* FAQ'S HERO: Changed from font-black to font-medium */}
+              <h2 className="text-5xl md:text-7xl lg:text-8xl font-medium mb-6 tracking-tighter opacity-90 font-sans">
+                FAQ's
+              </h2>
+              
+              <div className="inline-block bg-[#0bb7d6] px-8 py-3 rounded-full mb-8">
+                <span className="text-black text-xs md:text-base font-bold tracking-[0.15em] uppercase font-sans">
+                  Frequently Asked Questions
+                </span>
+              </div>
+
+              {/* TAGLINE: Changed from font-bold to font-medium */}
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-medium mb-10 tracking-tight lg:whitespace-nowrap font-sans">
+                Clear <span className="text-[#4fb3c4]">Answers</span>. No <span className="text-[#4fb3c4]">Ambiguity</span>
+              </h1>
+
+              <ul className="space-y-4 md:space-y-6 flex flex-col items-center lg:items-start">
+                {faqCategories.map((cat, i) => (
+                  <li key={i} className="group w-fit">
+                    <a 
+                      href={`#${(cat.title + cat.highlight).toLowerCase().replace(/\s+/g, "-")}`}
+                      className="flex items-center gap-4 text-white/50 group-hover:text-[#00d8ff] transition-all duration-300 transform group-hover:translate-x-2"
+                    >
+                      <span className="text-[#4fb3c4] text-2xl font-light">→</span>
+                      <span className="text-lg md:text-2xl font-light tracking-wide text-white group-hover:text-[#00d8ff] transition-all font-sans">
+                        <HighlightedText text={`${cat.title} ${cat.highlight}`} />
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="lg:col-span-5 relative flex justify-center lg:justify-end order-1 lg:order-2">
+              <div className="relative w-full max-w-[300px] sm:max-w-[450px] lg:max-w-[550px] animate-float">
+                <img 
+                  src={HeroImage} 
+                  alt="FAQ Illustration" 
+                  className="w-full h-auto object-contain drop-shadow-[0_0_40px_rgba(12,122,127,0.4)]"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* FAQ Categories */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
+      {/* FAQ Categories Mapping */}
+      <section className="relative py-16 md:py-32 z-10">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="max-w-5xl mx-auto">
             {faqCategories.map((category, idx) => (
-              <FAQCategory key={idx} title={category.title} highlight={category.highlight} faqs={category.faqs} />
+              <FAQCategory key={idx} {...category} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-card/30">
+      {/* CTA SECTION: Changed from font-bold to font-medium */}
+      <section className="relative py-20 md:py-40 z-10">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-            Still Have <span className="text-cyan">Questions?</span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto mb-8">
-            Can't find what you're looking for? Our team is here to help. Reach out and we'll get back to you within 24 hours.
-          </p>
-          <a 
-            href="/contact" 
-            className="inline-flex items-center justify-center gap-2 bg-cyan text-background hover:bg-cyan/90 glow-cyan px-8 h-11 rounded-md font-medium transition-colors"
-          >
-            Contact Us
-          </a>
+          <div className="max-w-5xl mx-auto p-10 md:p-24 rounded-[2.5rem] md:rounded-[4rem] border border-white/5 bg-white/[0.02] backdrop-blur-md">
+            <h2 className="text-white text-3xl sm:text-5xl md:text-7xl font-medium mb-8 tracking-tighter font-sans leading-tight">
+              Still Have <span className="text-[#4fb3c4]">Questions?</span>
+            </h2>
+            <p className="text-white/50 text-lg md:text-2xl max-w-2xl mx-auto mb-12 font-sans font-normal">
+              Can’t find what you’re looking for? Let’s talk — our team usually responds within 24 hours.
+            </p>
+
+            <a
+              href="/contact"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-[#3b879c] to-[#4fb3c4] text-white rounded-full px-12 md:px-20 py-5 md:py-8 text-xl md:text-2xl font-medium tracking-tight transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(79,179,196,0.5)] active:scale-95 font-sans"
+            >
+              Contact Us
+            </a>
+          </div>
         </div>
       </section>
 
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 };
