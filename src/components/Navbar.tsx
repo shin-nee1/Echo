@@ -5,9 +5,11 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { serviceTitleToSlug } from "@/data/servicesData";
 
-// IMPORT YOUR LOCAL LOGO
 import navLogo from "../assets/image-removebg-preview (13).png";
 
+/* =======================
+   SERVICES DROPDOWN (DESKTOP)
+======================= */
 const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
   const sections = [
     {
@@ -43,25 +45,26 @@ const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
     },
   ];
 
-  const getServiceLink = (itemText: string): string => {
+  const getServiceLink = (itemText: string) => {
     const slug = serviceTitleToSlug[itemText];
     return slug ? `/services/${slug}` : "/services";
   };
 
   return (
-    <div className="grid grid-cols-3 gap-8 text-sm max-h-[60vh] overflow-y-auto">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
       {sections.map((section) => (
         <div key={section.title}>
-          <h4 className="mb-4 text-lg font-semibold text-foreground">
+          <h4 className="mb-4 text-lg font-semibold text-foreground border-b border-border pb-2 md:border-none">
             {section.title}
           </h4>
-          <ul className="space-y-3">
+
+          <ul className="space-y-2">
             {section.items.map((item) => (
               <li key={item}>
                 <Link
                   to={getServiceLink(item)}
-                  className="block cursor-pointer rounded-lg px-3 py-2 text-muted-foreground hover:bg-cyan/20 hover:text-cyan transition"
                   onClick={onClose}
+                  className="block rounded-lg px-3 py-2 text-muted-foreground hover:bg-cyan/20 hover:text-cyan transition-all"
                 >
                   {item}
                 </Link>
@@ -74,21 +77,25 @@ const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
   );
 };
 
+/* =======================
+   NAVBAR
+======================= */
 const Navbar = () => {
   const location = useLocation();
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+
   const servicesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (
-        servicesRef.current &&
-        !servicesRef.current.contains(e.target as Node)
-      ) {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
         setServicesOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -97,102 +104,83 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-[100] bg-background/90 backdrop-blur-md border-b border-border/50">
-      <div className="container mx-auto px-6 py-2"> {/* Reduced padding for larger logo balance */}
-        <div className="flex items-center justify-between">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex items-center justify-between h-20 md:h-24">
 
-          {/* LOGO: Increased size (h-16 mobile / h-20 desktop) */}
+          {/* LOGO */}
           <Link to="/" className="flex items-center group">
-            <img 
-              src={navLogo} 
-              alt="Echo & Impact" 
-              className="h-16 md:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_15px_rgba(0,216,255,0.25)]"
+            <img
+              src={navLogo}
+              alt="Echo & Impact"
+              className="h-12 md:h-16 lg:h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_15px_rgba(0,216,255,0.25)]"
             />
           </Link>
 
           {/* DESKTOP NAV */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link
-              to="/"
-              className={`text-sm font-medium transition-colors hover:text-cyan ${
-                isActive("/") ? "text-cyan" : "text-muted-foreground"
-              }`}
-            >
-              Home
-            </Link>
+          <div className="hidden xl:flex flex-1 justify-center">
+            <div className="flex items-center gap-x-8">
 
-            <div
-              ref={servicesRef}
-              className="relative"
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
-            >
-              <button
-                className={`flex items-center gap-1 text-sm font-medium transition-colors ${
-                  servicesOpen ? "text-cyan" : "text-muted-foreground hover:text-cyan"
+              <Link
+                to="/"
+                className={`text-sm font-medium hover:text-cyan transition-colors ${
+                  isActive("/") ? "text-cyan" : "text-muted-foreground"
                 }`}
               >
-                Services
-                <ChevronDown className="w-4 h-4" />
-              </button>
+                Home
+              </Link>
 
-              <AnimatePresence>
-                {servicesOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="
-                      absolute
-                      top-full
-                      left-1/2
-                      -translate-x-1/2
-                      mt-6
-                      w-[720px]
-                      rounded-2xl
-                      border border-cyan/40
-                      bg-background
-                      shadow-[0_20px_60px_rgba(0,0,0,0.5)]
-                      p-6
-                      z-[9999]
-                    "
-                  >
-                    <ServicesDropdown onClose={() => setServicesOpen(false)} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* SERVICES (DESKTOP) */}
+              <div
+                ref={servicesRef}
+                className="relative"
+                onMouseEnter={() => setServicesOpen(true)}
+                onMouseLeave={() => setServicesOpen(false)}
+              >
+                <button
+                  className={`flex items-center gap-1 text-sm font-medium transition-colors ${
+                    servicesOpen
+                      ? "text-cyan"
+                      : "text-muted-foreground hover:text-cyan"
+                  }`}
+                >
+                  Services
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      servicesOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {servicesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[800px] rounded-2xl border border-cyan/40 bg-background shadow-2xl p-8 z-[9999]"
+                    >
+                      <ServicesDropdown onClose={() => setServicesOpen(false)} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {["/work", "/about", "/contact"].map((path) => (
+                <Link
+                  key={path}
+                  to={path}
+                  className={`text-sm font-medium hover:text-cyan transition-colors ${
+                    isActive(path) ? "text-cyan" : "text-muted-foreground"
+                  }`}
+                >
+                  {path.replace("/", "").replace(/^./, (c) => c.toUpperCase())}
+                </Link>
+              ))}
             </div>
-
-            <Link
-              to="/work"
-              className={`text-sm font-medium transition-colors hover:text-cyan ${
-                isActive("/work") ? "text-cyan" : "text-muted-foreground"
-              }`}
-            >
-              Work
-            </Link>
-
-            <Link
-              to="/about"
-              className={`text-sm font-medium transition-colors hover:text-cyan ${
-                isActive("/about") ? "text-cyan" : "text-muted-foreground"
-              }`}
-            >
-              About
-            </Link>
-
-            <Link
-              to="/contact"
-              className={`text-sm font-medium transition-colors hover:text-cyan ${
-                isActive("/contact") ? "text-cyan" : "text-muted-foreground"
-              }`}
-            >
-              Contact
-            </Link>
           </div>
 
-          {/* CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* DESKTOP CTA */}
+          <div className="hidden xl:flex items-center gap-3">
             <Button
               variant="outline"
               size="sm"
@@ -201,9 +189,10 @@ const Navbar = () => {
             >
               <Link to="/contact">Contact Us</Link>
             </Button>
+
             <Button
               size="sm"
-              className="bg-cyan text-background hover:bg-cyan/90 glow-cyan"
+              className="bg-cyan text-background hover:bg-cyan/90 glow-cyan px-6 font-bold"
             >
               Get Started
             </Button>
@@ -211,67 +200,97 @@ const Navbar = () => {
 
           {/* MOBILE TOGGLE */}
           <button
-            className="md:hidden text-foreground p-2"
+            className="xl:hidden p-2 rounded-lg hover:bg-foreground/5"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+            {mobileOpen ? <X size={28} className="text-cyan" /> : <Menu size={28} />}
           </button>
         </div>
 
-        {/* MOBILE NAV */}
+        {/* MOBILE MENU - NOW FULLY SCROLLABLE */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden mt-2 border-t border-border/50 pt-4 space-y-4 bg-background pb-8"
+              exit={{ opacity: 0, y: -20 }}
+              className="xl:hidden border-t border-border/50 bg-background touch-pan-y overflow-y-auto max-h-[85vh]"
             >
-              {[
-                { name: "Home", path: "/" },
-                { name: "Work", path: "/work" },
-                { name: "About", path: "/about" },
-                { name: "Contact", path: "/contact" },
-              ].map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setMobileOpen(false)}
-                  className={`block text-base font-semibold transition-colors hover:text-cyan ${
-                    isActive(link.path)
-                      ? "text-cyan"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
+              <div className="py-6 space-y-4 px-2">
 
-              <div className="pt-4 border-t border-border/50">
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3">Our Services</p>
-                <div className="grid grid-cols-1 gap-3">
-                  {Object.entries(serviceTitleToSlug).slice(0, 8).map(([title, slug]) => (
+                {["Home", "Work", "About", "Contact"].map((item) => {
+                  const path = item === "Home" ? "/" : `/${item.toLowerCase()}`;
+                  return (
                     <Link
-                      key={slug}
-                      to={`/services/${slug}`}
+                      key={item}
+                      to={path}
                       onClick={() => setMobileOpen(false)}
-                      className="text-sm text-muted-foreground hover:text-cyan transition-colors"
+                      className={`block text-lg font-semibold p-2 rounded-lg ${
+                        isActive(path)
+                          ? "text-cyan bg-cyan/5"
+                          : "text-muted-foreground"
+                      }`}
                     >
-                      {title}
+                      {item}
                     </Link>
-                  ))}
-                </div>
-              </div>
+                  );
+                })}
 
-              <Button 
-                className="w-full bg-cyan text-background hover:bg-cyan/90 py-6 text-lg font-bold"
-                asChild
-              >
-                <Link to="/contact" onClick={() => setMobileOpen(false)}>
-                  Get Started
-                </Link>
-              </Button>
+                {/* MOBILE SERVICES */}
+                <div className="pt-4 border-t border-border/50">
+                  <button
+                    onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                    className="w-full flex items-center justify-between px-2 py-3 text-lg font-semibold text-muted-foreground hover:text-cyan"
+                  >
+                    Services
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform ${
+                        mobileServicesOpen ? "rotate-180 text-cyan" : ""
+                      }`}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {mobileServicesOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="grid grid-cols-2 gap-2 px-2 pb-4">
+                          {Object.entries(serviceTitleToSlug).map(([title, slug]) => (
+                            <Link
+                              key={slug}
+                              to={`/services/${slug}`}
+                              onClick={() => {
+                                setMobileServicesOpen(false);
+                                setMobileOpen(false);
+                              }}
+                              className="text-sm py-2 text-muted-foreground hover:text-cyan"
+                            >
+                              {title}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* CTA */}
+                <div className="pt-4 flex justify-center pb-6">
+                  <Button
+                    className="bg-cyan text-background px-8 py-3 text-base font-semibold shadow-lg hover:bg-cyan/90"
+                    asChild
+                  >
+                    <Link to="/contact" onClick={() => setMobileOpen(false)}>
+                      Get Started
+                    </Link>
+                  </Button>
+                </div>
+
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

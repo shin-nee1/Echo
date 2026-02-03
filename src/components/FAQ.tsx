@@ -33,7 +33,6 @@ const faqs = [
 
 const FAQ: React.FC = () => {
   return (
-    /* CHANGED: Removed bg-[#010a0f], added bg-transparent and z-10 */
     <section className="relative py-24 md:py-28 bg-transparent overflow-hidden font-sans z-10">
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center text-center mb-20">
@@ -43,16 +42,18 @@ const FAQ: React.FC = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          {/* CHANGED: bg-black/40 changed to white/[0.03] with heavy blur for glass effect over halos */}
-          <div className="w-full rounded-[2.5rem] border border-[#0c7a7f]/60 bg-white/[0.03] backdrop-blur-xl overflow-hidden shadow-2xl">
+          <div className="w-full rounded-[2.5rem] border border-[#0c7a7f]/30 bg-black/40 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem
                   key={index}
                   value={`faq-${index}`}
-                  className="px-8 relative"
+                  // UPDATED: Added first:pt-8 and last:pb-8
+                  // This pads the question away from the top/bottom container edges 
+                  // without changing the gap between the questions themselves.
+                  className="px-8 relative border-b-0 first:pt-8 last:pb-8" 
                 >
-                  <AccordionTrigger className="text-white hover:text-[#00d8ff] transition-colors">
+                  <AccordionTrigger className="text-white hover:text-[#00d8ff] transition-colors py-6 text-left text-lg md:text-xl font-medium">
                     {faq.question}
                   </AccordionTrigger>
                   
@@ -62,10 +63,9 @@ const FAQ: React.FC = () => {
                     </div>
                   </AccordionContent>
 
-                  {/* FLOATING LINE */}
                   {index !== faqs.length - 1 && (
                     <div 
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1.5px] w-[92%] bg-[#0c7a7f]/30" 
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1.5px] w-[92%] bg-[#0c7a7f]/20" 
                     />
                   )}
                 </AccordionItem>
@@ -73,7 +73,6 @@ const FAQ: React.FC = () => {
             </Accordion>
           </div>
 
-          {/* CTA BUTTON - UI Preserved */}
           <div className="mt-16 flex justify-center">
             <Button
               size="lg"

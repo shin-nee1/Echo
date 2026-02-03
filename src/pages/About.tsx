@@ -2,16 +2,16 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import AboutHero from "@/components/AboutHero";
 import VisionSection from "@/components/VisionSection";
-import HowWeWork from "@/components/HowWeWork"; // 1. IMPORT THE NEW SECTION
+import HowWeWork from "@/components/HowWeWork"; 
 import WhoWeAreAbout from "@/components/WhoWeAreAbout";
 import WhatWeBelieve from "@/components/WhatWeBelieve";
 import FAQ from "@/components/FAQ";
 import CTASection from "@/components/CTASection";
 
 const About = () => {
-
   return (
-    <div className="min-h-screen bg-[#010a0f] text-white selection:bg-[#00d8ff]/30">
+    /* Removed bg-[#010a0f] - now inherits from App.tsx/layout */
+    <div className="min-h-screen text-white selection:bg-[#00d8ff]/30">
       <Navbar />
       <AboutHero />
       <VisionSection />
