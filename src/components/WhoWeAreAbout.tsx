@@ -8,69 +8,85 @@ const WhoWeAreAbout = () => {
       title: "STRATEGISTS WHO UNDERSTAND WHAT YOU'RE TRYING TO BUILD",
       description:
         "We look beyond deliverables and into the bigger picture, making sure every output supports your business model, positioning, and long-term direction.",
-      rounded: "rounded-tl-[2rem] rounded-tr-[2rem] rounded-bl-[2rem] md:rounded-br-[10rem]",
+      rounded: "rounded-[2rem] md:rounded-br-[8rem]",
+      textAlign: "text-left",
+      justifyContent: "justify-start",
+      alignItems: "items-start",
     },
     {
       title: "DESIGNERS WHO TREAT IDENTITY AS A SYSTEM",
       description:
         "To us, design is not decoration. It's the architecture of how your brand is understood. Our designers build systems that hold up across content, campaigns, UI, and marketing.",
-      rounded: "rounded-tl-[2rem] rounded-tr-[2rem] rounded-br-[2rem] md:rounded-bl-[10rem]",
+      rounded: "rounded-[2rem] md:rounded-bl-[8rem]",
+      textAlign: "text-left md:text-right",
+      justifyContent: "justify-start md:justify-end",
+      alignItems: "items-start md:items-end",
     },
     {
       title: "MARKETERS WHO OPERATE WITH DISCIPLINE AND DATA",
       description:
         "Marketing is not about noise. It's about structured testing, insight-driven refinement, and creative systems that scale. Every decision ties back to performance and user behavior.",
-      rounded: "rounded-bl-[2rem] rounded-br-[2rem] rounded-tl-[2rem] md:rounded-tr-[10rem]",
+      rounded: "rounded-[2rem] md:rounded-tr-[8rem]",
+      textAlign: "text-left",
+      justifyContent: "justify-start",
+      alignItems: "items-start",
     },
     {
       title: "ENGINEERS WHO BUILD WITH STABILITY AND PRECISION",
       description:
         "Functionality means nothing without reliability. Our developers focus on performance, usability, scalability, and clean builds that save you time and cost down the road.",
-      rounded: "rounded-bl-[2rem] rounded-br-[2rem] rounded-tr-[2rem] md:rounded-tl-[10rem]",
+      rounded: "rounded-[2rem] md:rounded-tl-[8rem]",
+      textAlign: "text-left md:text-right",
+      justifyContent: "justify-start md:justify-end",
+      alignItems: "items-start md:items-end",
     },
   ];
 
   return (
-    // Removed bg-black here
-    <section className="relative py-20 overflow-hidden flex flex-col justify-center min-h-screen">
-      <div className="container mx-auto px-6 max-w-[1100px] relative z-20">
-        
-        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-3 lg:gap-4 max-w-6xl mx-auto">
-          
+    <section className="relative py-20 lg:py-24 overflow-hidden flex flex-col justify-center min-h-screen">
+      <div className="container mx-auto px-6 max-w-[1200px] relative z-20">
+        {/* HEADING */}
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tighter md:tracking-tight leading-[0.9] md:leading-tight">
+            Who We <span className="text-[#00d8ff]">Are</span>
+          </h2>
+          <div className="w-16 md:w-24 h-1 bg-[#00d8ff] mx-auto mt-4 rounded-full shadow-[0_0_15px_rgba(0,216,255,0.6)]" />
+        </div>
+
+        {/* GRID WITH CENTRAL IMAGE */}
+        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 lg:gap-6 max-w-5xl mx-auto">
           {pillars.map((pillar, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              className={`relative p-10 md:p-14 lg:p-16 bg-[#0a0f12] border border-white/10 flex flex-col justify-center transition-all duration-500 ${pillar.rounded} group hover:border-[#00d8ff]/40`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className={`relative p-8 md:p-12 lg:p-14 bg-gradient-to-br from-white/[0.05] to-transparent border border-white/10 backdrop-blur-md flex flex-col ${pillar.justifyContent} ${pillar.alignItems} group min-h-[auto] md:min-h-[340px] ${pillar.rounded} hover:border-[#00d8ff]/30 transition-all duration-500`}
             >
-              <div className={`w-full max-w-[340px] ${index % 2 !== 0 ? 'md:ml-auto' : ''}`}>
-                <h3 className="text-white font-bold text-lg md:text-xl tracking-widest mb-4 uppercase leading-tight">
+              <div className={`w-full md:max-w-[320px] ${pillar.textAlign}`}>
+                <h3 className="text-white font-bold text-lg md:text-xl tracking-wider mb-4 md:mb-5 uppercase leading-tight">
                   {pillar.title}
                 </h3>
-                
-                <div className="h-[1px] bg-[#00d8ff] w-1/4 mb-6 group-hover:w-full transition-all duration-700 opacity-70" />
-                
-                <p className="text-white/60 text-sm md:text-base leading-relaxed font-light">
+                <div
+                  className={`h-[2px] bg-[#00d8ff]/60 mb-6 w-12 group-hover:w-full transition-all duration-700 ${
+                    pillar.textAlign.includes("text-right") ? "md:ml-auto" : ""
+                  }`}
+                />
+                <p className="text-white/40 text-sm md:text-base leading-relaxed font-light group-hover:text-white/80 transition-colors duration-500">
                   {pillar.description}
                 </p>
               </div>
             </motion.div>
           ))}
 
-          {/* CENTRAL STATIC ORB */}
-          <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] lg:w-[400px] lg:h-[400px] z-30 pointer-events-none">
-            <div className="relative w-full h-full flex items-center justify-center">
-              {/* Optional: Removed the glow here as well for a "stripped" look, 
-                  but left the container for positioning */}
-              <img
-                src={CenterCircleImg}
-                alt="Central Orb"
-                className="w-full h-full object-contain relative z-10"
-              />
-            </div>
+          {/* CENTRAL IMAGE */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 md:w-96 md:h-96 z-10 pointer-events-none">
+            <img
+              src={CenterCircleImg}
+              alt="Central"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </div>
