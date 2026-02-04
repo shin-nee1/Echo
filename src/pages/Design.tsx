@@ -1,20 +1,53 @@
+import React from "react";
 import ServicePageLayout from "@/components/ServicePageLayout";
 import PageHero from "@/components/PageHero";
 import InfoSection from "@/components/InfoSection";
-import ProcessSection from "@/components/ProcessSection";
-import ServicesGrid from "@/components/ServicesGrid"; // Grid comes after Process now
+import ProcessSection, { type ProcessStepData } from "@/components/ProcessSection";
+import ServicesGrid from "@/components/ServicesGrid";
 import PortfolioSection from "@/components/PortfolioSection";
 import ServiceNavigationBanner from "@/components/ServiceNavigationBanner";
 import CTASection from "@/components/CTASection";
 
+// ASSETS
+import DISCOVERY from "@/assets/DiscoveryDesign.png";
+import CONCEPT from "@/assets/ConceptDesign.png";
+import CREATION from "@/assets/CreationDesign.png";
+import REFINEMENT from "@/assets/RefinementDesign.png";
+import DELIVERY from "@/assets/DeliveryDesign.png";
+
 const Design = () => {
-  // 1. Process Data
-  const designSteps = [
-    { number: "1", title: "Discovery", description: "Clarifying your brand, audience, and goals.", icon: "🔍" },
-    { number: "2", title: "Concept", description: "Defining creative direction and visual language.", icon: "💡" },
-    { number: "3", title: "Creation", description: "Designing identity and core assets.", icon: "🎨" },
-    { number: "4", title: "Refinement", description: "Polishing details upon any feedback.", icon: "💬" },
-    { number: "5", title: "Delivery", description: "Preparing final files, systems, and handover.", icon: "🚀" }
+  // 1. Process Data - Correctly passing imported assets as variables
+  const designSteps: ProcessStepData[] = [
+    { 
+      number: "1", 
+      title: "Discovery", 
+      description: "Clarifying your brand, audience, and goals.", 
+      image: DISCOVERY // Use .src for Next.js imports or just DISCOVERY depending on your config
+    },
+    { 
+      number: "2", 
+      title: "Concept", 
+      description: "Defining creative direction and visual language.", 
+      image: CONCEPT 
+    },
+    { 
+      number: "3", 
+      title: "Creation", 
+      description: "Designing identity and core assets.", 
+      image: CREATION 
+    },
+    { 
+      number: "4", 
+      title: "Refinement", 
+      description: "Polishing details upon any feedback.", 
+      image: REFINEMENT
+    },
+    { 
+      number: "5", 
+      title: "Delivery", 
+      description: "Preparing final files, systems, and handover.", 
+      image: DELIVERY
+    }
   ];
 
   // 2. Services Data
@@ -93,37 +126,37 @@ const Design = () => {
         ]}
       />
 
-      {/* STEP 1: HOW WE DO IT (Process) */}
+      {/* REUSABLE PROCESS SECTION */}
       <ProcessSection 
         title="Design" 
         highlight="Process" 
         steps={designSteps} 
       />
 
-      {/* STEP 2: WHAT WE DO (Services) */}
       <ServicesGrid 
         title="Design" 
         highlight="Services" 
         services={designServices} 
       />
-      <PortfolioSection/>
+
+      <PortfolioSection />
+
       <ServiceNavigationBanner
-      titlePrefix="Interested In"
-      highlight1="Development"
-      middleText="Or"
-      highlight2="Marketing"
-      leftBtnText="Explore Development"
-      leftBtnLink="/development"
-      rightBtnText="Explore Marketing"
-      rightBtnLink="/marketing"
+        titlePrefix="Interested In"
+        highlight1="Development"
+        middleText="Or"
+        highlight2="Marketing"
+        leftBtnText="Explore Development"
+        leftBtnLink="/development"
+        rightBtnText="Explore Marketing"
+        rightBtnLink="/marketing"
       />
+
       <CTASection
-          title="Let's Shape Your"
-          highlight="Brand"
-          subtitle="We shape how the world Sees, Understands, And Experiences Your Brand."
-        />
-
-
+        title="Let's Shape Your"
+        highlight="Brand"
+        subtitle="We shape how the world Sees, Understands, And Experiences Your Brand."
+      />
     </ServicePageLayout>
   );
 };

@@ -3,64 +3,64 @@ import aboutImage from "../assets/image-removebg-preview (12).png";
 
 const AboutUs = () => {
   return (
-    <section className="relative py-32 bg-transparent overflow-hidden">
+    <section className="relative py-20 bg-transparent overflow-hidden">
       
       {/* BACKGROUND GLOW */}
       <div className="absolute inset-0 -z-20 pointer-events-none">
-        <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#00d8ff]/5 blur-[120px]" />
+        <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#43c6e4]/5 blur-[120px]" />
       </div>
 
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
-          {/* IMAGE SIDE - Maximized size, no frame, no animation */}
+          {/* IMAGE SIDE - Matches the 3D illustration placement */}
           <div className="relative order-2 lg:order-1 flex justify-center lg:justify-start items-center">
-            <div className="relative w-full max-w-[900px] group">
+            <div className="relative w-full max-w-[650px]">
               <img 
                 src={aboutImage} 
-                alt="Echo & Impact Identity"
-                className="w-full h-auto object-contain transition-transform duration-700 
-                           group-hover:scale-105 drop-shadow-[0_0_40px_rgba(0,216,255,0.2)]"
+                alt="Echo & Impact Illustration"
+                className="w-full h-auto object-contain drop-shadow-[0_0_50px_rgba(67,198,228,0.15)]"
               />
-              {/* Subtle background glow layer */}
-              <div className="absolute inset-0 bg-[#00d8ff]/5 blur-[120px] -z-10 opacity-50" />
             </div>
           </div>
 
-          {/* CONTENT SIDE */}
+          {/* CONTENT SIDE - Matches the typography in the screenshot */}
           <div className="order-1 lg:order-2">
             
-            {/* BRAND HEADER - No underline, original font */}
-            <div className="relative inline-block mb-12">
-              <h2 className="text-white text-5xl md:text-7xl font-extrabold tracking-tighter leading-none uppercase">
-                About <span className="text-[#00d8ff]">Us</span>
+            {/* BRAND HEADER - Matched Font and Tracking */}
+            <div className="mb-8">
+              <h2 className="text-white text-5xl md:text-6xl font-bold tracking-tight leading-none uppercase">
+                ABOUT <span className="text-[#43c6e4]">US</span>
               </h2>
             </div>
 
-            <div className="space-y-6">
-              <p className="text-slate-400 text-lg md:text-xl leading-relaxed font-normal opacity-90">
-                Echo & Impact is built by creators, strategists, and engineers who take
-                brands from idea to execution, and from presence to performance.
+            <div className="space-y-8 max-w-xl">
+              <p className="text-white text-base md:text-lg leading-relaxed font-normal opacity-90">
+                Echo & Impact was built on a simple idea: brands grow when creativity, 
+                clarity, and execution move in alignment. Our team brings together 
+                specialists in design, software, and marketing who share one philosophy, 
+                build with intention and operate with discipline.
               </p>
 
-              <p className="text-slate-400 text-lg md:text-xl leading-relaxed font-normal opacity-90">
-                We unite design, development, and marketing into one intelligent system
-                that amplifies what your brand stands for and delivers measurable growth.
+              <p className="text-white text-base md:text-lg leading-relaxed font-normal opacity-90">
+                What shaped us is the belief that businesses deserve partners who stay 
+                present, set right expectations, be transparent, and support growth with 
+                honesty and commitment. We guide, educate, and collaborate at every step, 
+                ensuring you always know where your project stands and where it's going.
               </p>
 
-              <p className="text-slate-400 text-lg md:text-xl leading-relaxed font-normal opacity-90">
-                No more juggling partners. We start with you and stay with you, 
-                shaping every stage of your digital journey so you can focus on making an impact.
+              <p className="text-white text-base md:text-lg leading-relaxed font-normal opacity-90">
+                Every decision is thoughtful. Every outcome is meaningful. Every partnership 
+                is built to last.
               </p>
             </div>
 
-            {/* CTA BUTTON */}
-            <div className="mt-12">
-              <Button 
-                size="lg"
-                className="bg-[#00d8ff] text-black hover:bg-[#00d8ff]/90 px-10 py-7 rounded-xl text-lg font-black uppercase tracking-tight shadow-[0_0_25px_rgba(0,216,255,0.3)] transition-all hover:scale-105 active:scale-95"
+            {/* CTA BUTTON - Matched to "Find out more about us" style */}
+            <div className="mt-10">
+              <Button variant="cyan"
+              size="hero"
               >
-                Read More
+                Find out more about us
               </Button>
             </div>
           </div>

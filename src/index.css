@@ -1,5 +1,4 @@
-/* 1️⃣ Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 
 /* 2️⃣ Tailwind directives */
 @tailwind base;
@@ -131,4 +130,80 @@
 
 .animate-halo {
   animation: float-slow 18s ease-in-out infinite;
+}
+@layer components {
+  /* ============================= */
+  /* CONCAVE CARD SYSTEM  */
+  /* ============================= */
+
+  .concave-card {
+    /* 1. Basic Geometry */
+    position: relative;
+    border-radius: 2rem; /* The outer rounded corners */
+    min-height: 320px;
+    
+    /* 2. Define Variables */
+    --cut-radius: 130px; /* Size of the bite */
+    --border-width: 1px;
+    --cyan-color: hsl(187, 100%, 50%); 
+    --card-fill: hsl(210, 40%, 6%, 0.95); /* High opacity dark background */
+    
+    /* 3. THE MAGIC GRADIENT 
+       This creates: 
+       - Transparent Center (0 to radius)
+       - Cyan Border Line (radius to radius + border)
+       - Dark Card Background (rest)
+    */
+    background: radial-gradient(
+      circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y),
+      transparent var(--cut-radius),
+      var(--cyan-color) calc(var(--cut-radius) + var(--border-width)),
+      var(--card-fill) calc(var(--cut-radius) + var(--border-width) + 1px)
+    );
+
+    /* 4. Outer Border Logic 
+       We use a box-shadow to create the border on the rectangular sides,
+       but we mask it so it doesn't draw over the empty hole space.
+    */
+    box-shadow: inset 0 0 0 1px hsl(210, 30%, 18%); /* Subtle outer border */
+    
+    /* 5. Clean Edges */
+    /* This ensures the box-shadow doesn't bleed into the hole */
+    -webkit-mask: radial-gradient(
+      circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y),
+      transparent var(--cut-radius),
+      #000 calc(var(--cut-radius) + 0.5px)
+    );
+    mask: radial-gradient(
+      circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y),
+      transparent var(--cut-radius),
+      #000 calc(var(--cut-radius) + 0.5px)
+    );
+  }
+
+  /* POSITION MAPPING */
+  .cut-br {
+    --cut-pos-x: 100%;
+    --cut-pos-y: 100%;
+  }
+
+  .cut-bl {
+    --cut-pos-x: 0%;
+    --cut-pos-y: 100%;
+  }
+
+  .cut-tr {
+    --cut-pos-x: 100%;
+    --cut-pos-y: 0%;
+  }
+
+  .cut-tl {
+    --cut-pos-x: 0%;
+    --cut-pos-y: 0%;
+  }
+  
+  /* Helper for the cyan glow line inside the card text */
+  .box-shadow-glow {
+    box-shadow: 0 0 10px var(--cyan-color);
+  }
 }

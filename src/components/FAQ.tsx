@@ -36,8 +36,8 @@ const FAQ: React.FC = () => {
     <section className="relative py-24 md:py-28 bg-transparent overflow-hidden font-sans z-10">
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center text-center mb-20">
-          <h2 className="text-white text-4xl md:text-6xl lg:text-7xl tracking-tight leading-tight">
-            Frequently Asked <span className="text-[#0c7a7f]">Questions</span>
+          <h2 className="text-white text-5xl md:text-6xl font-bold tracking-tight leading-none text-center">
+            Frequently Asked <span className="text-[#43c6e4]">Questions</span>
           </h2>
         </div>
 
@@ -75,23 +75,8 @@ const FAQ: React.FC = () => {
 
           <div className="mt-16 flex justify-center">
             <Button
-              size="lg"
-              asChild
-              className="
-                bg-gradient-to-r from-[#3b879c] to-[#4fb3c4]
-                text-white 
-                rounded-full
-                px-14 
-                py-7 
-                text-lg 
-                font-medium
-                tracking-wide
-                transition-all 
-                duration-300
-                hover:scale-105 
-                hover:shadow-[0_0_20px_rgba(79,179,196,0.4)]
-                active:scale-95
-              "
+              size="hero"
+              variant="cyan"
             >
               <Link to="/faq">View All FAQs</Link>
             </Button>

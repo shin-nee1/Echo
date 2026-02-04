@@ -8,56 +8,62 @@ import PortImg10 from "@/assets/image-removebg-preview (10).png";
 import PortImg11 from "@/assets/image-removebg-preview (11).png";
 
 const PortfolioSection = () => {
+  const projects = [
+    { id: 1, img: PortImg9, name: "Uber", sub: "SuperApp Concept", bg: "bg-[#141414]" },
+    { id: 2, img: PortImg10, name: "Barclays", sub: "Mobile App", bg: "bg-[#00AEEF]" },
+    { id: 3, img: PortImg11, name: "FINKOFF.", sub: "Finance Manager", bg: "bg-white", text: "text-black", subText: "text-slate-600" }
+  ];
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalItems = 3;
 
-  // Measurement Constants
-  const desktopWidth = 1200;
-  const desktopOverlap = 150;
-  const mobileWidth = 90; // vw
-  const mobileOverlap = 10; // vw
-
-  const nextSlide = () => {
-    if (currentIndex < totalItems - 1) setCurrentIndex((prev) => prev + 1);
+  const handleNext = () => {
+    if (currentIndex < projects.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    }
   };
 
-  const prevSlide = () => {
-    if (currentIndex > 0) setCurrentIndex((prev) => prev - 1);
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex((prev) => prev - 1);
+    }
   };
 
   return (
-    <section className="relative py-20 md:py-32 bg-transparent overflow-hidden">
-      {/* Header Container - Standard Alignment */}
-      <div className="container mx-auto px-6 mb-12 md:mb-20">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div className="relative">
-            <h2 className="text-white text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tighter leading-tight">
-              Explore <span className="text-[#00d8ff]">Our Portfolio</span>
+    <section className="relative py-12 md:py-24 bg-transparent overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        
+        {/* HEADER */}
+        <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-10 mb-12 md:mb-16">
+          <div className="shrink-0">
+            <h2 className="text-white text-5xl md:text-6xl font-bold tracking-tight leading-none">
+              Our <span className="text-[#43c6e4]">Portfolio</span>
             </h2>
           </div>
+          <p className="text-slate-400 text-sm md:text-base font-normal max-w-[280px] leading-snug pt-2 md:pl-8 md:border-l md:border-white/10">
+            Showcasing digital excellence. <br />
+            Built to scale.
+          </p>
 
-          {/* Navigation Controls */}
-          <div className="flex items-center gap-4 md:gap-6">
-            <div className="flex gap-2 md:gap-3">
+          <div className="flex items-center gap-4 ml-auto">
+            <div className="flex gap-2">
               <button 
-                onClick={prevSlide}
+                onClick={handlePrev}
                 disabled={currentIndex === 0}
-                className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all disabled:opacity-20 disabled:cursor-not-allowed group"
+                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 active:scale-90 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
               >
-                <ArrowLeft className="w-6 h-6 md:w-7 md:h-7 text-white group-hover:text-[#00d8ff] transition-colors" />
+                <ArrowLeft className={`w-5 h-5 ${currentIndex === 0 ? 'text-gray-500' : 'text-white'}`} />
               </button>
               <button 
-                onClick={nextSlide}
-                disabled={currentIndex === totalItems - 1}
-                className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all disabled:opacity-20 disabled:cursor-not-allowed group"
+                onClick={handleNext}
+                disabled={currentIndex === projects.length - 1}
+                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 active:scale-90 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
               >
-                <ArrowRight className="w-6 h-6 md:w-7 md:h-7 text-white group-hover:text-[#00d8ff] transition-colors" />
+                <ArrowRight className={`w-5 h-5 ${currentIndex === projects.length - 1 ? 'text-gray-500' : 'text-white'}`} />
               </button>
             </div>
-            
             <Button 
-              variant="outline" 
-              className="hidden sm:flex rounded-full border-white/10 bg-white/5 hover:bg-[#00d8ff] hover:text-black px-10 py-8 transition-all font-black uppercase tracking-widest text-xs"
+              variant="cyan"
+              size="lg"
             >
               View All
             </Button>
@@ -65,45 +71,38 @@ const PortfolioSection = () => {
         </div>
       </div>
 
-      {/* Track - Aligned to Container Edge, Transparent Frames */}
-      <div className="relative">
-        <div 
-          // Uses container padding to align with heading
-          className="flex -space-x-10 md:-space-x-[150px] transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] px-6 md:px-[calc((100vw-1280px)/2+1.5rem)]"
-          style={{ 
-            // Step calculation: Width minus the overlap
-            transform: `translateX(calc(-${currentIndex} * (min(${mobileWidth - mobileOverlap}vw, ${desktopWidth - desktopOverlap}px))))` 
-          }} 
-        >
-          {/* IMAGE 1 */}
-          <div className="flex-shrink-0 w-[90vw] md:w-[1200px] aspect-[16/10] group overflow-hidden rounded-[4rem] md:rounded-[9rem] relative z-[1]">
-            <img 
-              src={PortImg9} 
-              alt="Uber"
-              // bg-white/[0.01] removed
-              className="w-full h-full object-contain filter drop-shadow-[0_40px_100px_rgba(0,216,255,0.15)]" 
-            />
-          </div>
+      {/* TRACK */}
+      <div className="relative w-full overflow-visible">
+        <style dangerouslySetInnerHTML={{ __html: `
+          .portfolio-track {
+            transform: translateX(calc(-${currentIndex} * (85vw + 1.5rem)));
+          }
+          @media (min-width: 640px) {
+            .portfolio-track {
+              transform: translateX(calc(-${currentIndex} * (500px + 2.5rem)));
+            }
+          }
+        `}} />
 
-          {/* IMAGE 2 */}
-          <div className="flex-shrink-0 w-[90vw] md:w-[1200px] aspect-[16/10] group overflow-hidden rounded-[4rem] md:rounded-[9rem] relative z-[2]">
-            <img 
-              src={PortImg10} 
-              alt="Barclays"
-              // bg-white/[0.01] removed
-              className="w-full h-full object-contain filter drop-shadow-[0_40px_100px_rgba(0,0,0,0.5)]" 
-            />
-          </div>
-
-          {/* IMAGE 3 */}
-          <div className="flex-shrink-0 w-[90vw] md:w-[1200px] aspect-[16/10] group overflow-hidden rounded-[4rem] md:rounded-[9rem] relative z-[3]">
-            <img 
-              src={PortImg11} 
-              alt="Finkoff"
-              // bg-white/[0.01] removed
-              className="w-full h-full object-contain filter drop-shadow-[0_40px_100px_rgba(255,255,255,0.06)]" 
-            />
-          </div>
+        <div className="portfolio-track flex gap-6 md:gap-10 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] px-6 md:pl-[calc((100vw-1280px)/2+1.5rem)]">
+          {projects.map((project) => (
+            <div 
+              key={project.id}
+              className={`flex-shrink-0 w-[85vw] sm:w-[500px] aspect-square rounded-[2.5rem] overflow-hidden ${project.bg} border border-white/5 relative group transition-all duration-500`}
+            >
+              <img 
+                src={project.img} 
+                alt={project.name}
+                // Removed opacity-90 to keep it 100% vibrant
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              {/* Removed the black gradient overlay. Text now sits directly on image. */}
+              <div className="absolute inset-0 p-10 flex flex-col justify-end">
+                <h3 className={`text-3xl font-black mb-1 ${project.text || 'text-white'}`}>{project.name}</h3>
+                <p className={`text-[11px] font-bold uppercase tracking-[0.3em] ${project.subText || 'text-[#43c6e4]'}`}>{project.sub}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

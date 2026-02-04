@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-// IMPORT ALL ARCHITECTURAL ASSETS
+// ASSETS
 import DesignImg5 from "@/assets/image-removebg-preview (5).png";
 import DesignImg6 from "@/assets/image-removebg-preview (6).png";
 import DevImg7 from "@/assets/image-removebg-preview (7).png";
@@ -12,95 +12,90 @@ const services = [
   {
     title: "DESIGN",
     highlight: "Shape how the world sees you.",
-    description: "We design every visual layer of your brand. From brand and product design to campaign creative and content direction.",
+    description: "We design every visual layer of your brand. From brand and product design to campaign creative and content direction, we create visual systems built for recognition.",
     href: "/design"
   },
   {
     title: "DEVELOPMENT",
     highlight: "Build what brings brands to life.",
-    description: "Websites and online stores to full-scale mobile and web apps, we develop digital experiences that perform flawlessly.",
+    description: "Websites and online stores to full-scale mobile and web apps, we develop digital experiences that perform flawlessly, scale easily, and move as fast as your ideas.",
     href: "/develop"
   },
   {
     title: "MARKETING",
     highlight: "Grow what matters most.",
-    description: "We market with a focus on performance. From organic SEO and content to paid media and growth strategy.",
+    description: "We market with a focus on performance. From organic SEO, content, and paid media to social and growth strategy, we drive measurable impact.",
     href: "/market"
   }
 ];
 
 const WhatWeDo = () => {
   return (
-    /* CHANGED: bg-[#010a0f] removed, bg-transparent added to let Index halos show through */
-    <section className="relative py-32 bg-transparent overflow-hidden z-10">
+    <section className="relative py-16 md:py-24 bg-transparent overflow-hidden z-10">
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* HEADER - UI preserved exactly */}
-        <div className="flex flex-col md:flex-row md:items-start lg:items-center gap-6 md:gap-12 mb-20">
-          <div className="relative shrink-0">
-            <h2 className="text-white text-5xl md:text-7xl font-extrabold tracking-tighter leading-none">
-              What We <span className="text-[#00d8ff]">Do</span>
+        {/* HEADER - Responsive alignment and sizing */}
+        <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-10 mb-16 md:mb-20">
+          <div className="shrink-0">
+            <h2 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-none">
+              What We <span className="text-[#43c6e4]">Do</span>
             </h2>
           </div>
-          <p className="text-slate-400 text-lg md:text-xl font-normal max-w-sm leading-snug pt-1 md:pt-2 border-l border-white/10 md:pl-8">
-            Every brand we build follows a rhythm. Designed to create presence.
+          <p className="text-slate-400 text-sm md:text-base font-normal max-w-[280px] leading-snug pt-2 md:pl-8 md:border-l md:border-white/10">
+            Every brand we build follows a rhythm. <br className="hidden md:block" />
+            Designed to create presence.
           </p>
         </div>
 
-        {/* SERVICE CARDS GRID - UI preserved exactly */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* SERVICE CARDS GRID - 1 col on mobile, 3 on desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {services.map((service, i) => (
             <Link key={i} to={service.href} className="group block h-full">
               <motion.div 
-                whileHover={{ y: -12 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="relative h-full p-10 rounded-[2.5rem] bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10 backdrop-blur-2xl transition-all duration-500 
-                group-hover:border-cyan-500/40 group-hover:bg-[#00d8ff]/[0.08] group-hover:shadow-[0_0_50px_rgba(0,216,255,0.15)] overflow-hidden"
+                whileHover={{ y: -10 }}
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                className="relative h-full p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-white/[0.01] border border-white/[0.12] backdrop-blur-[32px] transition-all duration-300 
+                group-hover:border-[#43c6e4]/40 group-hover:bg-white/[0.05] overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00d8ff]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                {/* GLASS TEXTURE */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] via-transparent to-black/[0.2] pointer-events-none" />
                 
-                {/* 3D IMAGE ASSETS */}
-                <div className="relative w-full aspect-video mb-6 pointer-events-none">
+                {/* 3D IMAGE ASSETS - Responsive Positioning */}
+                <div className="relative w-full h-32 sm:h-40 md:h-44 mb-4 md:mb-2 pointer-events-none">
+                  
+                  {/* DESIGN CARD */}
                   {service.title === "DESIGN" && (
                     <>
-                      <img 
-                        src={DesignImg6} 
-                        className="absolute -top-[25%] -right-[10%] w-[65%] h-auto rotate-0 z-0
-                                   filter drop-shadow-[0_20px_40px_rgba(0,216,255,0.3)] 
-                                   group-hover:scale-110 transition-all duration-700" 
-                      />
-                      
-                      <img 
-                        src={DesignImg5} 
-                        className="absolute bottom-0 left-0 w-[45%] h-auto rotate-[-5deg] z-10
-                                   opacity-80 brightness-125 filter drop-shadow-[0_0_20px_rgba(0,216,255,0.4)]
-                                   group-hover:opacity-100 group-hover:-translate-y-2 group-hover:brightness-150 transition-all duration-700" 
-                      />
+                      <img src={DesignImg6} className="absolute -top-4 -right-2 md:-top-6 md:-right-4 w-32 md:w-40 h-auto filter drop-shadow-[0_20px_40px_rgba(67,198,228,0.3)] group-hover:scale-110 transition-transform duration-500" />
+                      <img src={DesignImg5} className="absolute bottom-0 left-0 w-20 md:w-24 h-auto filter drop-shadow-[0_15px_30px_rgba(67,198,228,0.4)] group-hover:-translate-y-3 transition-transform duration-500" />
                     </>
                   )}
 
+                  {/* DEVELOPMENT CARD */}
                   {service.title === "DEVELOPMENT" && (
                     <img 
                       src={DevImg7} 
-                      className="absolute top-[5%] -left-[10%] w-[85%] h-auto rotate-[-5deg] group-hover:scale-110 transition-all duration-700 filter drop-shadow-[0_20px_40px_rgba(0,216,255,0.3)]" 
+                      className="absolute top-0 -left-6 md:-top-0 md:-left-10 w-44 md:w-60 h-auto group-hover:scale-105 transition-transform duration-500 filter drop-shadow-[0_30px_60px_rgba(67,198,228,0.3)]" 
                     />
                   )}
 
+                  {/* MARKETING CARD */}
                   {service.title === "MARKETING" && (
                     <img 
                       src={MarketImg8} 
-                      className="absolute -top-[12%] -left-[25%] w-[85%] h-auto rotate-[-10deg] group-hover:scale-110 transition-all duration-700 filter drop-shadow-[0_20px_40px_rgba(0,216,255,0.3)]" 
+                      className="absolute -top-4 -left-6 md:-top-9 md:-left-8 w-48 md:w-64 h-auto group-hover:scale-105 transition-transform duration-500 filter drop-shadow-[0_30px_60px_rgba(67,198,228,0.35)]" 
                     />
                   )}
                 </div>
 
-                <div className="space-y-5 relative z-10">
-                  <h3 className="text-white text-2xl font-black tracking-widest uppercase">{service.title}</h3>
-                  <p className="text-[#00d8ff] font-bold text-lg leading-tight">{service.highlight}</p>
-                  <p className="text-slate-400 text-base leading-relaxed opacity-85 group-hover:opacity-100 transition-all">{service.description}</p>
-                  <div className="pt-6">
-                    <span className="text-white text-xs font-black uppercase tracking-[0.2em] border-b-2 border-white/10 pb-2 group-hover:border-[#00d8ff] group-hover:text-[#00d8ff] transition-all">
-                      Explore {service.title}
+                <div className="space-y-4 relative z-10">
+                  {/* RESPONSIVE HEADING SIZE */}
+                  <h3 className="text-white text-xl md:text-2xl font-black tracking-[0.15em] uppercase leading-none">{service.title}</h3>
+                  <p className="text-[#43c6e4] font-bold text-lg md:text-xl leading-tight">{service.highlight}</p>
+                  <p className="text-slate-300 text-sm md:text-base leading-relaxed opacity-80">{service.description}</p>
+                  <div className="pt-4 md:pt-6">
+                    <span className="text-white text-xs md:text-sm font-medium border-b border-white/20 group-hover:border-[#43c6e4] pb-1 transition-all">
+                      Explore {service.title.charAt(0) + service.title.slice(1).toLowerCase()}
                     </span>
                   </div>
                 </div>
@@ -109,34 +104,26 @@ const WhatWeDo = () => {
           ))}
         </div>
 
-        {/* TAGLINE AREA - UI preserved exactly */}
-        <div className="mt-12 text-center space-y-8 relative z-10">
-          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-slate-500 text-xs font-bold tracking-[0.3em] uppercase opacity-60">
-            <span>Design defines you</span>
-            <div className="w-1 h-1 rounded-full bg-white/20 hidden md:block" />
-            <span>Development builds you</span>
-            <div className="w-1 h-1 rounded-full bg-white/20 hidden md:block" />
-            <span>Marketing scales you</span>
+        {/* FOOTER AREA - Optimized for smaller screens */}
+        <div className="mt-20 md:mt-28 text-center space-y-8 md:space-y-10 relative z-10">
+          <div className="flex flex-wrap justify-center items-center gap-y-3 gap-x-4 md:gap-x-6 text-slate-500 text-[10px] md:text-[13px] tracking-wide uppercase font-bold px-4">
+            <span>Design defines you.</span>
+            <span className="hidden sm:inline text-white/10">|</span>
+            <span>Development builds you.</span>
+            <span className="hidden sm:inline text-white/10">|</span>
+            <span>Marketing scales you.</span>
           </div>
           
-          <h4 className="text-white text-xl md:text-2xl font-medium tracking-tight">
-            Together, They create your <span className="text-[#00d8ff] italic relative inline-block ml-1">
-              echo.
-              <svg className="absolute -bottom-3 left-0 w-full h-2" viewBox="0 0 100 20" preserveAspectRatio="none">
-                <motion.path 
-                  d="M0 10 Q 12.5 0 25 10 T 50 10 T 75 10 T 100 10" 
-                  stroke="#00d8ff" 
-                  strokeWidth="4" 
-                  fill="transparent" 
-                  strokeLinecap="round" 
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  whileInView={{ pathLength: 1, opacity: 1 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 1.2, ease: "easeInOut", delay: 0.5 }}
-                />
+          <div className="relative inline-block px-4">
+            <h4 className="text-white text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight pb-6 md:pb-8">
+              Together, They create your <span className="text-[#43c6e4] italic ml-1">echo.</span>
+            </h4>
+            <div className="absolute bottom-2 left-0 w-full overflow-hidden px-4">
+              <svg className="w-full h-3 md:h-4" viewBox="0 0 100 20" preserveAspectRatio="none">
+                <path d="M0 10 Q 12.5 0 25 10 T 50 10 T 75 10 T 100 10" stroke="#43c6e4" strokeWidth="4" fill="transparent" strokeLinecap="round" />
               </svg>
-            </span>
-          </h4>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import DesignPage from "@/assets/Designpage.png";
 
 interface InfoSectionProps {
   title?: string;
@@ -17,86 +18,52 @@ const InfoSection = ({
   ],
 }: InfoSectionProps) => {
   return (
-    <section className="relative w-full bg-[#010a0f] pt-0 pb-20 lg:pb-32 overflow-hidden">
+    <section className="relative w-full bg-transparent py-12 md:py-24 lg:py-32 overflow-hidden">
       
-      {/* BRANDING GLOW BLOBS */}
-      {/* Top-left subtle cyan glow */}
-      <div className="absolute top-[-10%] left-[-5%] w-[300px] h-[300px] bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none" />
-      {/* Right-center glow blob */}
-      <div className="absolute top-[20%] right-[-10%] w-[450px] h-[450px] bg-cyan-400/5 blur-[120px] rounded-full pointer-events-none" />
-
       <div className="container mx-auto px-6 lg:px-20 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-12 lg:gap-8">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-16 lg:gap-24">
           
-          {/* TEXT CONTENT - Aligned with the top of the mockup */}
-          <div className="w-full lg:w-[600px] pt-12 lg:pt-16">
-            <div className="relative inline-block mb-12">
-              <h2 className="text-white text-5xl md:text-6xl font-extrabold tracking-tighter leading-tight">
-                {title} <span className="text-[#00d8ff]">{highlight}</span>
+          {/* TEXT CONTENT */}
+          <div className="w-full lg:max-w-[650px]">
+            <div className="mb-10">
+              <h2 className="text-white text-4xl md:text-6xl lg:text-[5rem] font-bold tracking-tight leading-none mb-4 whitespace-nowrap">
+                {title} <span className="text-[#43c6e4]">{highlight}</span>
               </h2>
-              {/* Cyan Accent Bar under title */}
-              <div className="absolute -bottom-4 left-0 w-16 h-1.5 bg-[#00d8ff] rounded-full shadow-[0_0_20px_rgba(0,216,255,0.6)]" />
             </div>
 
-            <div className="space-y-6 mt-16">
+            <div className="space-y-8">
               {paragraphs.map((p, i) => (
-                <p key={i} className="text-slate-400 text-lg md:text-xl leading-relaxed font-normal opacity-85">
+                <p key={i} className="text-slate-400 text-lg md:text-xl leading-relaxed font-normal">
                   {p}
                 </p>
               ))}
             </div>
           </div>
 
-          {/* PHONE MOCKUP - Fixed width to prevent expanding on mobile */}
-          <div className="w-full max-w-[280px] md:max-w-[320px] flex-shrink-0 lg:pt-12">
+          {/* RIGHT SIDE IMAGE - Shifted Up/Right & Floating Animation */}
+          <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative w-full"
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              /* lg:translate-x-12 pushes it further right on desktop */
+              className="relative w-full max-w-[500px] -mt-12 lg:-mt-24 lg:translate-x-12"
             >
-              {/* Perspective Container for 3D Tilt Animation */}
-              <motion.div
-                whileHover={{ rotateY: -10, rotateX: 5, scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                style={{ perspective: 1200 }}
-                className="relative z-20"
-              >
-                {/* Physical Phone Frame */}
-                <div className="rounded-[3rem] border-[10px] border-[#181818] bg-black shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)] overflow-hidden">
-                  
-                  {/* Screen Content - */}
-                  <div className="relative aspect-[9/19.5] bg-white">
-                    {/* Notch / Dynamic Island */}
-                    <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-5 bg-black rounded-full z-30" />
-                    
-                    {/* App Content */}
-                    <div className="px-8 pt-12">
-                      <h3 className="text-[#1e3a8a] text-2xl font-black leading-tight mb-8">
-                        Launch<br/>Sale
-                      </h3>
-                      
-                      {/* Grid/Image Placeholder Box */}
-                      <div className="w-full aspect-[4/5] bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-center mb-16">
-                        {/* Inner placeholder icon detail */}
-                         <div className="w-10 h-14 border-2 border-slate-200 rounded-md opacity-40" />
-                      </div>
-
-                      {/* Shop Now Button */}
-                      <div className="w-full py-3.5 bg-[#2563eb] text-white text-[11px] font-bold rounded-full text-center shadow-lg active:scale-95 transition-all">
-                        Shop Now
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Subtle Hardware Detail (Side Button) */}
-                <div className="absolute -right-[11px] top-32 w-[3px] h-12 bg-gray-800 rounded-r-md" />
-              </motion.div>
-
-              {/* Local Cyan Glow behind phone */}
-              <div className="absolute inset-0 bg-cyan-500/15 blur-[80px] rounded-full scale-110 -z-10" />
+              <motion.img 
+                src={DesignPage} 
+                alt={highlight} 
+                /* Smooth Up & Down Animation */
+                animate={{
+                  y: [0, -15, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="w-full h-auto object-contain opacity-95"
+              />
             </motion.div>
           </div>
 
