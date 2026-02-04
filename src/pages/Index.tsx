@@ -35,40 +35,80 @@ const Index = () => {
   ];
 
   return (
-    /* General Sans is now the default via body. 'font-sans' utility inherits the Inter/General Sans stack */
-    <main className="relative z-10 font-sans">
-      {/* HERO */}
-      <section className="relative flex flex-col items-center justify-center pt-48 pb-24 bg-transparent">
-        <div className="container mx-auto px-6 text-center">
+    <main className="relative z-10 font-sans bg-transparent">
+      {/* HERO SECTION */}
+      <section className="relative flex flex-col items-center justify-center pt-32 pb-24 overflow-hidden">
+        
+        {/* ENHANCED VISIBLE GRID BACKGROUND */}
+        <div 
+          className="absolute inset-0 z-0 opacity-40 pointer-events-none" 
+          style={{ 
+            backgroundImage: `
+              linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '55px 55px',
+            backgroundPosition: 'center center',
+            maskImage: 'radial-gradient(circle at 50% 50%, black 20%, transparent 85%)',
+            WebkitMaskImage: 'radial-gradient(circle at 50% 50%, black 20%, transparent 85%)'
+          }}
+        ></div>
+
+        <div className="container relative z-10 mx-auto px-6 text-center">
           
-          {/* Header uses Space Grotesk (forced in CSS h1) */}
-          <h1 className="font-bold leading-[1.1] mb-6 text-[clamp(2.5rem,6vw,5.5rem)] tracking-tight uppercase italic text-white">
-            We Create The <span className="text-[#00d8ff]">Echo</span>, <br />
-            You Make The <span className="text-white">Impact</span>.
+          <h1 className="font-bold leading-[1.15] mb-6 text-[clamp(2.5rem,6vw,4.5rem)] tracking-tight text-white">
+            We Create The <span className="text-[#43c6e4]">Echo</span>,<br />
+            You Make The Impact.
           </h1>
 
-          {/* Subtext uses General Sans (inherited from body/main) */}
-          <p className="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-10 font-light">
-            One partner to shape your brand and drive performance.
-          </p>
+          <div className="text-slate-200 text-lg md:text-xl max-w-4xl mx-auto mb-4 font-normal leading-relaxed opacity-90">
+            <p>From strategy and storytelling to code and conversion.</p>
+            <p>One partner to shape your brand, build your digital presence, and drive performance.</p>
+          </div>
+
+          <div className="mb-8">
+            <a href="#" className="text-[#43c6e4] hover:text-[#5edcf8] transition-all text-xl font-semibold tracking-wide">
+              Access Your Free Project Guide
+            </a>
+          </div>
 
           <div className="mb-20">
-            <Button className="bg-[#00d8ff] text-black px-12 py-8 rounded-xl text-lg font-black uppercase shadow-[0_0_40px_rgba(0,216,255,0.3)]">
+            <Button variant="cyan" size="hero">
               Start Project
             </Button>
           </div>
 
-          <div className="relative max-w-5xl mx-auto h-[400px] md:h-[600px] flex items-center justify-center">
-            <AnimatePresence mode="wait">
-              <motion.img
+          {/* HERO IMAGE SLIDER: SIMULTANEOUS PASSING WITHOUT FADE */}
+          <div className="relative max-w-5xl mx-auto h-[400px] md:h-[600px] flex items-center justify-center overflow-hidden">
+            {/* Removed mode="wait" so images animate at the same time */}
+            <AnimatePresence>
+              <motion.div
                 key={currentSlide}
-                src={slides[currentSlide]}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.1 }}
-                transition={{ duration: 0.7 }}
-                className="w-full h-full object-contain drop-shadow-[0_0_50px_rgba(0,216,255,0.2)]"
-              />
+                // Incoming image: Starts below (solid) and rises
+                initial={{ y: "100%" }} 
+                animate={{ y: 0 }} 
+                // Outgoing image: Falls down (solid) simultaneously
+                exit={{ y: "100%" }} 
+                transition={{ 
+                  duration: 0.9, 
+                  ease: [0.4, 0, 0.2, 1] // Snappier cubic-bezier
+                }}
+                className="absolute inset-0 w-full h-full flex items-center justify-center"
+              >
+                <motion.img
+                  src={slides[currentSlide]}
+                  alt="Echo and Impact Hero"
+                  animate={{
+                    y: [0, -20, 0],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="w-full h-full object-contain select-none pointer-events-none"
+                />
+              </motion.div>
             </AnimatePresence>
           </div>
         </div>
@@ -81,7 +121,6 @@ const Index = () => {
       <FAQ />
       <TestimonialCarousel testimonials={testimonials} />
       <AboutUs />
-
       <CTASection title="Let's Create Your" highlight="Impact" />
     </main>
   );

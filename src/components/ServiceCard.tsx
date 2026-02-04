@@ -1,58 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-interface ServiceCardProps {
+interface ServiceData {
   title: string;
   items: string[];
 }
 
-const ServiceCard = ({ title, items }: ServiceCardProps) => {
+const ServiceCard = ({ title, items }: ServiceData) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="group h-full [perspective:1200px]">
+    <div 
+      className={`relative w-full h-full group ${isHovered ? "z-[100]" : "z-10"}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* MAIN GLASS CARD LAYER */}
       <motion.div
-        // Reduce 3D intensity for mobile to prevent accidental triggers during scroll
-        whileHover={{ 
-          rotateX: 4, 
-          rotateY: -4, 
-          y: -8,
-          scale: 1.01
-        }}
-        // Tap state for mobile users to see the effect
-        whileTap={{ scale: 0.98 }}
-        transition={{ 
-          type: "spring", 
-          stiffness: 260, 
-          damping: 25,
-          mass: 1 
-        }}
-        className="relative h-full w-full rounded-[2rem] lg:rounded-[2.5rem] transition-colors duration-500 [transform-style:preserve-3d] will-change-transform"
+        animate={{ y: isHovered ? -45 : 0 }}
+        transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+        className="relative z-30 w-full h-full rounded-[2.5rem] bg-white/[0.04] backdrop-blur-[45px] border border-white/[0.12] p-10 flex flex-col shadow-[0_40px_80px_-15px_rgba(0,0,0,0.8)] overflow-hidden"
       >
-        {/* 1. THE GLASS BASE */}
-        <div className="absolute inset-0 rounded-[2rem] lg:rounded-[2.5rem] bg-gradient-to-br from-white/[0.08] to-transparent backdrop-blur-2xl border border-white/[0.1] transition-all duration-500 group-hover:border-cyan-500/50 group-hover:bg-cyan-500/[0.07] group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]" />
-
-        {/* 2. DYNAMIC CYAN GLOW */}
-        <div className="absolute inset-0 rounded-[2rem] lg:rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none overflow-hidden">
-          <div className="absolute -top-32 -right-32 w-64 h-64 lg:w-80 lg:h-80 bg-cyan-500/20 blur-[80px] lg:blur-[100px] rounded-full" />
-          <div className="absolute -bottom-32 -left-32 w-64 h-64 lg:w-80 lg:h-80 bg-cyan-600/15 blur-[80px] lg:blur-[100px] rounded-full" />
-        </div>
-
-        {/* 3. CONTENT LAYER - Padding optimized for mobile */}
-        <div className="relative z-10 p-8 lg:p-10 flex flex-col h-full [transform:translateZ(30px)] lg:[transform:translateZ(50px)]">
-          <h3 className="text-xl lg:text-2xl font-black text-white tracking-tight uppercase mb-2 group-hover:text-cyan-400 transition-colors duration-300">
+        {/* Internal Glows */}
+        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#00d8ff]/15 blur-[110px] rounded-full pointer-events-none" />
+        
+        <div className="relative z-40 flex flex-col h-full">
+          {/* HEADER: Matched to PageHero's simple Sans-Serif font-display */}
+          <h3 className="text-[32px] font-bold text-white tracking-[-0.02em] leading-[1.1] mb-8 font-display">
             {title}
           </h3>
           
-          <p className="text-cyan-400/80 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.25em] mb-8 lg:mb-10">
-            What&apos;s included
-          </p>
+          <div className="mb-10">
+            <p className="text-[#00d8ff] text-[11px] font-black uppercase tracking-[0.35em] mb-4">
+              What&apos;s included
+            </p>
 
-          <ul className="space-y-4 lg:space-y-5">
+            {/* THE BLUR-FADE LINE (No sharp edges) */}
+            <div 
+              className="w-full h-[1.5px] bg-[#00d8ff]"
+              style={{
+                maskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%)',
+                WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%)'
+              }}
+            />
+          </div>
+
+          <ul className="space-y-6 flex-grow">
             {items.map((item, index) => (
-              <li key={index} className="flex items-start gap-3 lg:gap-4">
-                <div className="mt-1.5 relative flex-shrink-0">
-                  <span className="block w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full bg-white/30 group-hover:bg-cyan-400 transition-all duration-300 shadow-[0_0_15px_rgba(0,216,255,0.8)]" />
+              <li key={index} className="flex items-start gap-5">
+                <div className="mt-2 flex-shrink-0">
+                  <div className="relative w-[11px] h-[11px]">
+                     <span className="absolute inset-0 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]" />
+                     <span className="absolute inset-0 rounded-full bg-gradient-to-br from-transparent to-[#00d8ff]" />
+                  </div>
                 </div>
-                <span className="text-slate-400 text-sm lg:text-[15px] leading-snug font-normal group-hover:text-white transition-colors duration-300">
+                <span className="text-white/80 text-[16px] leading-snug font-medium tracking-tight">
                   {item}
                 </span>
               </li>
@@ -60,6 +62,20 @@ const ServiceCard = ({ title, items }: ServiceCardProps) => {
           </ul>
         </div>
       </motion.div>
+
+      {/* LEARN MORE DRAWER (CYAN GLASS) */}
+      <div className="absolute left-0 right-0 bottom-0 z-20 h-32 translate-y-[15%] pointer-events-none overflow-hidden rounded-b-[2.5rem]">
+        <motion.div
+          initial={{ y: "-100%" }}
+          animate={{ y: isHovered ? "0%" : "-100%" }}
+          transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+          className="w-full h-full bg-gradient-to-t from-[#00d8ff] via-[#00d8ff]/60 to-transparent backdrop-blur-2xl border-x border-b border-white/20 flex items-end justify-center pb-8"
+        >
+          <span className="text-white text-[14px] font-black uppercase tracking-[0.4em] drop-shadow-md">
+            Learn More
+          </span>
+        </motion.div>
+      </div>
     </div>
   );
 };

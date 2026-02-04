@@ -2,20 +2,67 @@ import React from "react";
 import ServicePageLayout from "@/components/ServicePageLayout";
 import PageHero from "@/components/PageHero";
 import InfoSectionTWO from "@/components/InfoSectionTWO";
-import ProcessSection from "@/components/ProcessSection";
+import ProcessSection, { type ProcessStepData } from "@/components/ProcessSection";
 import ServicesGrid from "@/components/ServicesGrid";
 import PortfolioSection from "@/components/PortfolioSection";
 import ServiceNavigationBanner from "@/components/ServiceNavigationBanner";
 import CTASection from "@/components/CTASection";
 
+// ASSETS (Ensure these files exist in your assets folder)
+import DISCOVERY from "@/assets/DiscoverDevelop.png";
+import WIREFRAMES from "@/assets/WireframeDevelop.png";
+import VISUAL from "@/assets/VisualDvelop.png";
+import BUILD from "@/assets/BuildDevelop.png";
+import QUALITY from "@/assets/QualityDevelop.png";
+import LAUNCH from "@/assets/LaunchDevelop.png";
+import WARRANTY from "@/assets/WarrantyDevelop.png";
+
+
 const Develop = () => {
-  // 1. Development Process Data
-  const developSteps = [
-    { number: "1", title: "Discovery", description: "Understanding requirements, user needs, and technical specs.", icon: "🔍" },
-    { number: "2", title: "Wireframes", description: "Creating detailed UI wireframes before development begins.", icon: "📐" },
-    { number: "3", title: "Build", description: "Expert developers bring your project to life with clean code.", icon: "💻" },
-    { number: "4", title: "QA Testing", description: "Rigorous testing ensures flawlessness across all devices.", icon: "🧪" },
-    { number: "5", title: "Launch", description: "Smooth deployment and monitoring for optimal performance.", icon: "🚀" }
+  // 1. Process Data - Matching the visual structure of the Design page
+  const developSteps: ProcessStepData[] = [
+    { 
+      number: "1", 
+      title: "Discover", 
+      description: "Understanding requirements, user needs, and technical specs.", 
+      image: DISCOVERY 
+    },
+    { 
+      number: "2", 
+      title: "Wireframes", 
+      description: "Creating detailed UI wireframes before development begins.", 
+      image: WIREFRAMES 
+    },
+    { 
+      number: "3", 
+      title: "Visual Design", 
+      description: "Expert developers bring your project to life with clean code.", 
+      image: VISUAL
+    },
+    { 
+      number: "4", 
+      title: "Build", 
+      description: "Rigorous testing ensures flawlessness across all devices.", 
+      image: BUILD
+    },
+    { 
+      number: "5", 
+      title: "Quality Assurance", 
+      description: "Smooth deployment and monitoring for optimal performance.", 
+      image: QUALITY 
+    },
+    { 
+      number: "6", 
+      title: "Launch", 
+      description: "Understanding requirements, user needs, and technical specs.", 
+      image: LAUNCH
+    },
+    { 
+      number: "7", 
+      title: "Warranty", 
+      description: "Understanding requirements, user needs, and technical specs.", 
+      image: WARRANTY
+    }
   ];
 
   // 2. Development Services Data
@@ -95,14 +142,13 @@ const Develop = () => {
         ]}
       />
 
-      {/* STEP 1: HOW WE DO IT (Process) */}
+      {/* MATCHED PROCESS SECTION */}
       <ProcessSection 
         title="Development" 
         highlight="Process" 
         steps={developSteps} 
       />
 
-      {/* STEP 2: WHAT WE DO (Services) */}
       <ServicesGrid 
         title="Development" 
         highlight="Services" 
@@ -111,7 +157,7 @@ const Develop = () => {
 
       <PortfolioSection />
 
-      {/* Cross-navigating to Design and Marketing */}
+      {/* Updated Navigation Banner to lead back to Design and Market */}
       <ServiceNavigationBanner
         titlePrefix="Interested In"
         highlight1="Design"
