@@ -16,7 +16,7 @@ const items: WhyUsItem[] = [
 ];
 
 const WhyUsSection = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
     <section className="relative py-24 md:py-32 overflow-hidden bg-transparent z-10">
