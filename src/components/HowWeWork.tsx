@@ -44,7 +44,7 @@ const HowWeWork = () => {
             How <span className="text-white">We</span>{" "}
             <span className="text-[#00d8ff]">Work</span>
           </h2>
-          <div className="w-20 h-1 bg-[#00d8ff] mx-auto mt-6 rounded-full" />
+          {/* UNDERLINE REMOVED HERE */}
         </div>
 
         {/* GRID LAYOUT */}

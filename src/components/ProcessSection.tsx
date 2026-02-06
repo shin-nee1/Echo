@@ -19,22 +19,39 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
 
   /**
    * GENERATE DYNAMIC PATH
-   * This logic extends the snake path based on the number of cards provided.
-   * Heights are calculated to match the lg:-mt-48 staggering.
+   * Removed the trailing "H" commands so the line stops exactly 
+   * at the coordinate where the last card is positioned.
    */
   const getDynamicPath = () => {
-    const base = "M 175 250 H 585 Q 625 250 625 290 V 610 Q 625 650 585 650 H 215 Q 175 650 175 690 V 1010 Q 175 1050 215 1050 H 585 Q 625 1050 625 1090 V 1410 Q 625 1450 585 1450 H 215 Q 175 1450 175 1490 V 1810 Q 175 1850 215 1850";
-    
-    // Step 6 path extension
-    const toSix = " H 585 Q 625 1850 625 1890 V 2210 Q 625 2250 585 2250 H 175";
-    
-    // Step 7 path extension
-    const toSeven = " H 585 Q 625 1850 625 1890 V 2210 Q 625 2250 585 2250 H 215 Q 175 2250 175 2290 V 2610 Q 175 2650 215 2650 H 175";
+    const toTwo = "M 175 250 H 585 Q 625 250 625 290 V 610 Q 625 650 585 650";
+    const toThree = " H 215 Q 175 650 175 690 V 1010 Q 175 1050 215 1050";
+    const toFour = " H 585 Q 625 1050 625 1090 V 1410 Q 625 1450 585 1450";
+    const toFive = " H 215 Q 175 1450 175 1490 V 1810 Q 175 1850 215 1850";
+    const toSix = " H 585 Q 625 1850 625 1890 V 2210 Q 625 2250 585 2250";
+    const toSeven = " H 215 Q 175 2250 175 2290 V 2610 Q 175 2650 215 2650";
 
-    if (stepCount >= 7) return base + toSeven;
-    if (stepCount === 6) return base + toSix;
-    return base + " H 175"; // Default for 5 steps
+    if (stepCount >= 7) return toTwo + toThree + toFour + toFive + toSix + toSeven;
+    if (stepCount === 6) return toTwo + toThree + toFour + toFive + toSix;
+    if (stepCount === 5) return toTwo + toThree + toFour + toFive;
+    if (stepCount === 4) return toTwo + toThree + toFour;
+    if (stepCount === 3) return toTwo + toThree;
+    return toTwo; // For 2 steps
   };
+
+  /**
+   * DYNAMIC SVG HEIGHT
+   * Tightened the height values to ensure the SVG container 
+   * ends shortly after the last card's connection point.
+   */
+  const getSvgDimensions = () => {
+    if (stepCount >= 7) return { h: "2800", view: "0 0 800 2800" };
+    if (stepCount === 6) return { h: "2400", view: "0 0 800 2400" };
+    if (stepCount === 5) return { h: "2000", view: "0 0 800 2000" };
+    if (stepCount === 4) return { h: "1600", view: "0 0 800 1600" };
+    return { h: "1200", view: "0 0 800 1200" }; // Perfect for 3 steps
+  };
+
+  const dimensions = getSvgDimensions();
 
   return (
     <section className="relative w-full bg-transparent py-24 lg:py-32 overflow-hidden">
@@ -52,9 +69,8 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
           <div className="absolute inset-0 z-0 hidden lg:block pointer-events-none">
             <svg 
               width="100%" 
-              // Adjust height dynamically to prevent clipping
-              height={stepCount >= 7 ? "3000" : stepCount === 6 ? "2600" : "2200"} 
-              viewBox={stepCount >= 7 ? "0 0 800 3000" : stepCount === 6 ? "0 0 800 2600" : "0 0 800 2200"} 
+              height={dimensions.h} 
+              viewBox={dimensions.view} 
               fill="none" 
               className="overflow-visible"
             >
@@ -72,7 +88,6 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
           <div className="relative z-10">
             {steps.map((step, index) => {
               const isEven = index % 2 === 0;
-              // Add index 5 and 7 to flipped logic for visual variety
               const isFlippedLayout = index === 1 || index === 3 || index === 5 || index === 7;
 
               return (

@@ -132,43 +132,38 @@
   animation: float-slow 18s ease-in-out infinite;
 }
 @layer components {
-  /* ============================= */
-  /* CONCAVE CARD SYSTEM  */
-  /* ============================= */
+  /* =========================================
+     THE STABLE GLASS CONCAVE SYSTEM
+     ========================================= */
 
   .concave-card {
-    /* 1. Basic Geometry */
     position: relative;
-    border-radius: 2rem; /* The outer rounded corners */
-    min-height: 320px;
+    border-radius: 2.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     
-    /* 2. Define Variables */
-    --cut-radius: 130px; /* Size of the bite */
-    --border-width: 1px;
-    --cyan-color: hsl(187, 100%, 50%); 
-    --card-fill: hsl(210, 40%, 6%, 0.95); /* High opacity dark background */
+    /* 1. GLASS SURFACE */
+    background: linear-gradient(
+      135deg, 
+      rgba(255, 255, 255, 0.05) 0%, 
+      transparent 100%
+    ), rgba(8, 12, 20, 0.45);
     
-    /* 3. THE MAGIC GRADIENT 
-       This creates: 
-       - Transparent Center (0 to radius)
-       - Cyan Border Line (radius to radius + border)
-       - Dark Card Background (rest)
-    */
-    background: radial-gradient(
-      circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y),
-      transparent var(--cut-radius),
-      var(--cyan-color) calc(var(--cut-radius) + var(--border-width)),
-      var(--card-fill) calc(var(--cut-radius) + var(--border-width) + 1px)
-    );
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
 
-    /* 4. Outer Border Logic 
-       We use a box-shadow to create the border on the rectangular sides,
-       but we mask it so it doesn't draw over the empty hole space.
-    */
-    box-shadow: inset 0 0 0 1px hsl(210, 30%, 18%); /* Subtle outer border */
-    
-    /* 5. Clean Edges */
-    /* This ensures the box-shadow doesn't bleed into the hole */
+    /* 2. RESPONSIVE RADIUS - Fixed for Tall Dimensions */
+    --cut-radius: 0px; 
+    @media (min-width: 768px) { --cut-radius: 80px; }
+    /* Smoother transition for mid-sized laptops and tall windows */
+    @media (min-width: 1024px) { --cut-radius: 100px; }
+    @media (min-width: 1260px) { --cut-radius: 115px; } 
+    @media (min-width: 1440px) { --cut-radius: 135px; }
+
+    /* 3. SHARP HOLE MASKING */
+    /* Using 'px' fallback to prevent anti-aliasing artifacts on tall screens */
     -webkit-mask: radial-gradient(
       circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y),
       transparent var(--cut-radius),
@@ -181,29 +176,59 @@
     );
   }
 
-  /* POSITION MAPPING */
-  .cut-br {
-    --cut-pos-x: 100%;
-    --cut-pos-y: 100%;
-  }
-
-  .cut-bl {
-    --cut-pos-x: 0%;
-    --cut-pos-y: 100%;
-  }
-
-  .cut-tr {
-    --cut-pos-x: 100%;
-    --cut-pos-y: 0%;
-  }
-
-  .cut-tl {
-    --cut-pos-x: 0%;
-    --cut-pos-y: 0%;
-  }
+  /* =========================================
+     GLASSY GRADIENT BORDER
+     ========================================= */
   
-  /* Helper for the cyan glow line inside the card text */
-  .box-shadow-glow {
-    box-shadow: 0 0 10px var(--cyan-color);
+  .concave-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 20;
+
+    /* REFINED GLASS GRADIENT
+       Fades from Specular White at the cutout to a transparent 'Glass Rim'
+    */
+    background: radial-gradient(
+      circle at var(--cut-pos-x) var(--cut-pos-y),
+      rgba(255, 255, 255, 0.9) 0%,    
+      rgba(255, 255, 255, 0.2) 35%,   
+      rgba(255, 255, 255, 0.05) 70%, 
+      rgba(0, 0, 0, 0.5) 100%        
+    );
+
+    /* BORDER PRECISION */
+    padding: 1.8px; 
+    -webkit-mask: 
+      radial-gradient(
+        circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y),
+        transparent var(--cut-radius),
+        #000 calc(var(--cut-radius) + 0.5px)
+      ) content-box, 
+      radial-gradient(
+        circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y),
+        transparent var(--cut-radius),
+        #000 calc(var(--cut-radius) + 0.5px)
+      );
+      
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* 4. ORIENTATION FIX 
+     We use 100% and 0% carefully to ensure it sticks to the 
+     absolute edges regardless of card height.
+  */
+  .cut-br { --cut-pos-x: 100%; --cut-pos-y: 100%; }
+  .cut-bl { --cut-pos-x: 0%;   --cut-pos-y: 100%; }
+  .cut-tr { --cut-pos-x: 100%; --cut-pos-y: 0%;   }
+  .cut-tl { --cut-pos-x: 0%;   --cut-pos-y: 0%;   }
+
+  /* Hover State */
+  .concave-card:hover {
+    background-color: rgba(15, 22, 35, 0.55);
+    transform: translateY(-2px);
   }
 }

@@ -116,8 +116,11 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* DESKTOP NAV */}
-          <div className="hidden xl:flex flex-1 justify-center">
+          {/* DESKTOP NAV 
+              Hidden by default. 
+              Only appears at min-[769px] (Strictly > 768px)
+          */}
+          <div className="hidden min-[769px]:flex flex-1 justify-center">
             <div className="flex items-center gap-x-8">
 
               <Link
@@ -179,8 +182,11 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* DESKTOP CTA */}
-          <div className="hidden xl:flex items-center gap-3">
+          {/* DESKTOP CTA 
+              Hidden by default. 
+              Only appears at min-[769px]
+          */}
+          <div className="hidden min-[769px]:flex items-center gap-3">
             <Button
               variant="outline"
               size="sm"
@@ -198,23 +204,29 @@ const Navbar = () => {
             </Button>
           </div>
 
-          {/* MOBILE TOGGLE */}
+          {/* MOBILE TOGGLE 
+              Visible by default.
+              Hides strictly at min-[769px]
+          */}
           <button
-            className="xl:hidden p-2 rounded-lg hover:bg-foreground/5"
+            className="min-[769px]:hidden p-2 rounded-lg hover:bg-foreground/5"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X size={28} className="text-cyan" /> : <Menu size={28} />}
           </button>
         </div>
 
-        {/* MOBILE MENU - NOW FULLY SCROLLABLE */}
+        {/* MOBILE MENU 
+            Visible by default (conditionally rendered).
+            Hides strictly at min-[769px]
+        */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="xl:hidden border-t border-border/50 bg-background touch-pan-y overflow-y-auto max-h-[85vh]"
+              className="min-[769px]:hidden border-t border-border/50 bg-background touch-pan-y overflow-y-auto max-h-[85vh]"
             >
               <div className="py-6 space-y-4 px-2">
 

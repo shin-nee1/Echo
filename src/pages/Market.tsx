@@ -8,14 +8,46 @@ import PortfolioSection from "@/components/PortfolioSection";
 import ServiceNavigationBanner from "@/components/ServiceNavigationBanner";
 import CTASection from "@/components/CTASection";
 
+// --- IMAGE IMPORTS ---
+import marketImg1 from "@/assets/image-removebg-preview (16).png";
+import marketImg2 from "@/assets/image-removebg-preview (17).png";
+import marketImg3 from "@/assets/image-removebg-preview (18).png";
+import marketImg4 from "@/assets/image-removebg-preview (19).png";
+import marketImg5 from "@/assets/image-removebg-preview (20).png";
+
 const Market = () => {
-  // 1. Marketing Process Data
+  // 1. Marketing Process Data with Images
   const marketSteps = [
-    { number: "1", title: "Discovery", description: "Clarifying your brand, audience and goals.", icon: "📊" },
-    { number: "2", title: "Setup", description: "Setting up your platforms, tracking and assets.", icon: "🎯" },
-    { number: "3", title: "Execution", description: "Launching your campaingns and content with precision.", icon: "📢" },
-    { number: "4", title: "Optimization", description: "Refining creative, targeting, and strategy based on real data.", icon: "📈" },
-    { number: "5", title: "Reporting", description: "Providing clear insights, actions and next steps for growth.", icon: "💰" }
+    { 
+      number: "01", 
+      title: "Discovery", 
+      description: "Clarifying your brand, audience and goals.", 
+      image: marketImg1 
+    },
+    { 
+      number: "02", 
+      title: "Setup", 
+      description: "Setting up your platforms, tracking and assets.", 
+      image: marketImg2 
+    },
+    { 
+      number: "03", 
+      title: "Execution", 
+      description: "Launching your campaigns and content with precision.", 
+      image: marketImg3 
+    },
+    { 
+      number: "04", 
+      title: "Optimization", 
+      description: "Refining creative, targeting, and strategy based on real data.", 
+      image: marketImg4 
+    },
+    { 
+      number: "05", 
+      title: "Reporting", 
+      description: "Providing clear insights, actions and next steps for growth.", 
+      image: marketImg5 
+    }
   ];
 
   // 2. Marketing Services Data
@@ -111,7 +143,6 @@ const Market = () => {
 
       <PortfolioSection />
 
-      {/* Cross-navigating to Design and Development */}
       <ServiceNavigationBanner
         titlePrefix="Interested In"
         highlight1="Design"
