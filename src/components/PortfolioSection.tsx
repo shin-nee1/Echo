@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 // ASSET IMPORTS
 import PortImg9 from "@/assets/image-removebg-preview (9).png";
@@ -9,99 +11,128 @@ import PortImg11 from "@/assets/image-removebg-preview (11).png";
 
 const PortfolioSection = () => {
   const projects = [
-    { id: 1, img: PortImg9, name: "Uber", sub: "SuperApp Concept", bg: "bg-[#141414]" },
-    { id: 2, img: PortImg10, name: "Barclays", sub: "Mobile App", bg: "bg-[#00AEEF]" },
-    { id: 3, img: PortImg11, name: "FINKOFF.", sub: "Finance Manager", bg: "bg-white", text: "text-black", subText: "text-slate-600" }
+    { id: 1, img: PortImg9, name: "Uber", bg: "bg-[#141414]", href: "/portfolio/uber" },
+    { id: 2, img: PortImg10, name: "Barclays", bg: "bg-[#00AEEF]", href: "/portfolio/barclays" },
+    { id: 3, img: PortImg11, name: "FINKOFF.", bg: "bg-white", href: "/portfolio/finkoff" }
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleNext = () => {
-    if (currentIndex < projects.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === "left" ? -350 : 350;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
   return (
-    <section className="relative py-12 md:py-24 bg-transparent overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
+    <section 
+      className="relative bg-transparent overflow-hidden z-10"
+      style={{ padding: "clamp(3rem, 10vh, 8rem) 0" }}
+    >
+      <div className="mx-auto px-[5vw] relative z-10" style={{ maxWidth: "1600px" }}>
         
-        {/* HEADER */}
-        <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-10 mb-12 md:mb-16">
-          <div className="shrink-0">
-            <h2 className="text-white text-5xl md:text-6xl font-bold tracking-tight leading-none">
-              Our <span className="text-[#43c6e4]">Portfolio</span>
-            </h2>
-          </div>
-          <p className="text-slate-400 text-sm md:text-base font-normal max-w-[280px] leading-snug pt-2 md:pl-8 md:border-l md:border-white/10">
-            Showcasing digital excellence. <br />
-            Built to scale.
-          </p>
-
-          <div className="flex items-center gap-4 ml-auto">
-            <div className="flex gap-2">
-              <button 
-                onClick={handlePrev}
-                disabled={currentIndex === 0}
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 active:scale-90 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+        {/* HEADER AREA - Always a Row */}
+        <div 
+          className="flex flex-row items-end justify-between gap-[1rem] md:gap-[2rem]" 
+          style={{ marginBottom: "clamp(2rem, 6vh, 4rem)" }}
+        >
+          
+          <div className="flex flex-row items-end gap-[1rem] md:gap-[2rem] flex-nowrap min-w-0">
+            {/* TITLE */}
+            <div className="shrink-0">
+              <h2 
+                className="text-white font-bold tracking-tighter leading-none"
+                style={{ fontSize: "clamp(1.5rem, 4.5vw, 4rem)" }}
               >
-                <ArrowLeft className={`w-5 h-5 ${currentIndex === 0 ? 'text-gray-500' : 'text-white'}`} />
+                Our <span className="text-[#43c6e4]">Portfolio</span>
+              </h2>
+            </div>
+            
+            {/* DESCRIPTION - Stays in row */}
+            <div className="pl-[0.75rem] md:pl-[2rem] border-l border-white/10 pb-[0.2rem] min-w-0">
+              <p 
+                className="text-slate-400 leading-tight line-clamp-2 md:line-clamp-none"
+                style={{ 
+                  fontSize: "clamp(0.65rem, 1vw, 1rem)", 
+                  maxWidth: "clamp(100px, 20vw, 350px)" 
+                }}
+              >
+                Showcasing digital excellence. Built to scale.
+              </p>
+            </div>
+          </div>
+
+          {/* ACTIONS & BUTTON - Pushed to the Right */}
+          <div className="flex flex-row items-end gap-[1rem] shrink-0">
+            {/* SCROLL BUTTONS (Hidden on Desktop 4K and Mobile/Tablet) */}
+            <div className="hidden lg:flex min-[1440px]:hidden gap-[0.75rem] pb-[0.25rem]">
+              <button 
+                onClick={() => scroll("left")}
+                className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] hover:border-[#43c6e4] hover:text-black transition-all duration-300"
+                style={{ width: "clamp(2.5rem, 3.5vw, 3.5rem)", height: "clamp(2.5rem, 3.5vw, 3.5rem)" }}
+              >
+                <ArrowLeft size="1.2rem" />
               </button>
               <button 
-                onClick={handleNext}
-                disabled={currentIndex === projects.length - 1}
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 active:scale-90 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+                onClick={() => scroll("right")}
+                className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] hover:border-[#43c6e4] hover:text-black transition-all duration-300"
+                style={{ width: "clamp(2.5rem, 3.5vw, 3.5rem)", height: "clamp(2.5rem, 3.5vw, 3.5rem)" }}
               >
-                <ArrowRight className={`w-5 h-5 ${currentIndex === projects.length - 1 ? 'text-gray-500' : 'text-white'}`} />
+                <ArrowRight size="1.2rem" />
               </button>
             </div>
+
+            {/* UNIVERSAL VIEW ALL BUTTON */}
             <Button 
               variant="cyan"
-              size="lg"
+              size="hero"
+              className="rounded-full"
+              style={{ 
+                fontSize: "clamp(0.7rem, 0.9vw, 1rem)", 
+                padding: "0 clamp(1rem, 2vw, 2.5rem)",
+                height: "clamp(2.5rem, 4vw, 3.5rem)" 
+              }}
             >
               View All
             </Button>
           </div>
         </div>
-      </div>
 
-      {/* TRACK */}
-      <div className="relative w-full overflow-visible">
-        <style dangerouslySetInnerHTML={{ __html: `
-          .portfolio-track {
-            transform: translateX(calc(-${currentIndex} * (85vw + 1.5rem)));
-          }
-          @media (min-width: 640px) {
-            .portfolio-track {
-              transform: translateX(calc(-${currentIndex} * (500px + 2.5rem)));
-            }
-          }
-        `}} />
-
-        <div className="portfolio-track flex gap-6 md:gap-10 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] px-6 md:pl-[calc((100vw-1280px)/2+1.5rem)]">
+        {/* PORTFOLIO CARDS ROW */}
+        <div 
+          ref={scrollRef}
+          className="flex gap-[1.5rem] md:gap-[2.5rem] lg:gap-[3rem] overflow-x-auto pb-[2rem] -mx-[5vw] px-[5vw] snap-x snap-mandatory lg:overflow-hidden lg:pb-0 min-[1440px]:grid min-[1440px]:grid-cols-3 min-[1440px]:gap-[4rem] min-[1440px]:overflow-visible min-[1440px]:mx-0 min-[1440px]:px-0 scrollbar-none"
+        >
           {projects.map((project) => (
-            <div 
+            <Link 
               key={project.id}
-              className={`flex-shrink-0 w-[85vw] sm:w-[500px] aspect-square rounded-[2.5rem] overflow-hidden ${project.bg} border border-white/5 relative group transition-all duration-500`}
+              to={project.href}
+              className="group block shrink-0 snap-center w-[85vw] sm:w-[50vw] md:w-[45vw] lg:w-[31vw] min-[1440px]:w-auto"
             >
-              <img 
-                src={project.img} 
-                alt={project.name}
-                // Removed opacity-90 to keep it 100% vibrant
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              {/* Removed the black gradient overlay. Text now sits directly on image. */}
-              <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                <h3 className={`text-3xl font-black mb-1 ${project.text || 'text-white'}`}>{project.name}</h3>
-                <p className={`text-[11px] font-bold uppercase tracking-[0.3em] ${project.subText || 'text-[#43c6e4]'}`}>{project.sub}</p>
-              </div>
-            </div>
+              <motion.div 
+                whileHover={{ y: -8 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="flex flex-col"
+              >
+                <div 
+                  className={`relative w-full rounded-[1.5rem] md:rounded-[2rem] overflow-hidden ${project.bg} border border-white/5 flex items-center justify-center p-[20%] transition-all duration-500`}
+                  style={{ 
+                    aspectRatio: "1/1",
+                    maxHeight: "45vh"
+                  }}
+                >
+                  <img 
+                    src={project.img} 
+                    alt={project.name}
+                    className={`max-w-[70%] max-h-[70%] w-auto h-auto object-contain transition-transform duration-700 group-hover:scale-110 ${
+                      project.id === 3 ? "object-left" : "object-center"
+                    }`}
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>

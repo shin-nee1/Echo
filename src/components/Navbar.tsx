@@ -103,7 +103,8 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[100] bg-background/90 backdrop-blur-md border-b border-border/50">
+    /* UPDATED: Changed 'fixed' to 'absolute' so it stays at the top of the page */
+    <nav className="absolute top-0 left-0 right-0 z-[100]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-20 md:h-24">
 
@@ -116,10 +117,7 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* DESKTOP NAV 
-              Hidden by default. 
-              Only appears at min-[769px] (Strictly > 768px)
-          */}
+          {/* DESKTOP NAV */}
           <div className="hidden min-[769px]:flex flex-1 justify-center">
             <div className="flex items-center gap-x-8">
 
@@ -182,32 +180,17 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* DESKTOP CTA 
-              Hidden by default. 
-              Only appears at min-[769px]
-          */}
+          {/* DESKTOP CTA */}
           <div className="hidden min-[769px]:flex items-center gap-3">
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-cyan/50 text-cyan hover:bg-cyan/10"
-              asChild
-            >
-              <Link to="/contact">Contact Us</Link>
-            </Button>
-
             <Button
               size="sm"
               className="bg-cyan text-background hover:bg-cyan/90 glow-cyan px-6 font-bold"
             >
-              Get Started
+              Start Project
             </Button>
           </div>
 
-          {/* MOBILE TOGGLE 
-              Visible by default.
-              Hides strictly at min-[769px]
-          */}
+          {/* MOBILE TOGGLE */}
           <button
             className="min-[769px]:hidden p-2 rounded-lg hover:bg-foreground/5"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -216,10 +199,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* MOBILE MENU 
-            Visible by default (conditionally rendered).
-            Hides strictly at min-[769px]
-        */}
+        {/* MOBILE MENU */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -297,7 +277,7 @@ const Navbar = () => {
                     asChild
                   >
                     <Link to="/contact" onClick={() => setMobileOpen(false)}>
-                      Get Started
+                      Start Project
                     </Link>
                   </Button>
                 </div>

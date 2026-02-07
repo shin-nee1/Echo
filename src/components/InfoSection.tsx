@@ -18,51 +18,66 @@ const InfoSection = ({
   ],
 }: InfoSectionProps) => {
   return (
-    <section className="relative w-full bg-transparent py-12 md:py-24 lg:py-32 overflow-hidden">
-      
-      <div className="container mx-auto px-6 lg:px-20 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-16 lg:gap-24">
+    <section 
+      className="relative w-full bg-transparent overflow-hidden"
+      style={{ padding: "clamp(2rem, 8vh, 5rem) 0" }}
+    >
+      <div className="mx-auto px-[6vw] max-w-[1500px] relative z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-[clamp(2.5rem, 8vw, 12rem)]">
           
           {/* TEXT CONTENT */}
-          <div className="w-full lg:max-w-[650px]">
-            <div className="mb-10">
-              <h2 className="text-white text-4xl md:text-6xl lg:text-[5rem] font-bold tracking-tight leading-none mb-4 whitespace-nowrap">
+          <div className="w-full lg:w-[55%]">
+            <div style={{ marginBottom: "clamp(1.5rem, 4vh, 2.5rem)" }}>
+              <h2 
+                className="text-white font-bold tracking-tight leading-[1.1]"
+                style={{ fontSize: "clamp(1.8rem, 4.5vw, 3.8rem)" }}
+              >
                 {title} <span className="text-[#43c6e4]">{highlight}</span>
               </h2>
             </div>
 
-            <div className="space-y-8">
+            <div className="flex flex-col" style={{ gap: "clamp(1rem, 1.5vh, 1.5rem)" }}>
               {paragraphs.map((p, i) => (
-                <p key={i} className="text-slate-400 text-lg md:text-xl leading-relaxed font-normal">
+                <p 
+                  key={i} 
+                  className="text-slate-400/70 font-light leading-relaxed"
+                  style={{ fontSize: "clamp(0.9rem, 1vw, 1.05rem)" }}
+                >
                   {p}
                 </p>
               ))}
             </div>
           </div>
 
-          {/* RIGHT SIDE IMAGE - Shifted Up/Right & Floating Animation */}
-          <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+          {/* IMAGE CONTAINER - Scaled down further for smaller screens */}
+          <div 
+            className="w-full lg:w-[30%] flex justify-center lg:justify-end"
+            /* Increased spacing for mobile stack: 4rem gap on small screens */
+            style={{ marginTop: "clamp(4rem, 10vh, 0rem)" }} 
+          >
             <motion.div 
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              /* lg:translate-x-12 pushes it further right on desktop */
-              className="relative w-full max-w-[500px] -mt-12 lg:-mt-24 lg:translate-x-12"
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full"
+              /* Floor reduced to 160px for mobile.
+                 Ceiling reduced to 340px for desktop.
+              */
+              style={{ maxWidth: "clamp(160px, 22vw, 340px)" }} 
             >
               <motion.img 
                 src={DesignPage} 
                 alt={highlight} 
-                /* Smooth Up & Down Animation */
                 animate={{
-                  y: [0, -15, 0],
+                  y: [0, -8, 0],
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 6,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="w-full h-auto object-contain opacity-95"
+                className="w-full h-auto object-contain opacity-75 drop-shadow-[0_8px_30px_rgba(67,198,228,0.08)]"
               />
             </motion.div>
           </div>

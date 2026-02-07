@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 // ASSETS
 import DesignImg5 from "@/assets/image-removebg-preview (5).png";
@@ -30,79 +31,143 @@ const services = [
 ];
 
 const WhatWeDo = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === "left" ? -300 : 300;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="relative py-16 md:py-24 bg-transparent overflow-hidden z-10">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 relative z-10">
+    <section 
+      className="relative bg-transparent overflow-hidden z-10"
+      style={{ padding: "clamp(2.5rem, 7vh, 5rem) 0" }}
+    >
+      <div className="mx-auto relative z-10">
         
-        {/* HEADER */}
-        <div className="flex flex-col lg:flex-row lg:items-end gap-6 mb-16">
-          <div className="shrink-0">
-            <h2 className="text-white text-5xl md:text-7xl font-bold tracking-tighter leading-none">
-              What We <span className="text-[#43c6e4]">Do</span>
-            </h2>
+        {/* HEADER AREA */}
+        <div 
+          className="flex flex-col lg:flex-row lg:items-end justify-between gap-[1rem]"
+          style={{ marginBottom: "clamp(1.5rem, 4vh, 3rem)" }}
+        >
+          <div className="flex flex-row items-end gap-[0.75rem] md:gap-[2rem]">
+            <div className="shrink-0">
+              <h2 
+                className="text-white font-bold tracking-tighter leading-none"
+                style={{ fontSize: "clamp(1.5rem, 4vw, 3.5rem)" }}
+              >
+                What We <span className="text-[#43c6e4]">Do</span>
+              </h2>
+            </div>
+            
+            <div className="pl-[0.75rem] md:pl-[2rem] border-l border-white/10 pb-[0.15rem]">
+              <p 
+                className="text-slate-400 leading-tight"
+                style={{ 
+                  fontSize: "clamp(0.65rem, 0.9vw, 0.9rem)",
+                  maxWidth: "220px" 
+                }}
+              >
+                Every brand we build follows a rhythm.
+              </p>
+            </div>
           </div>
-          <div className="lg:pl-10 lg:ml-10 lg:border-l lg:border-white/10">
-            <p className="text-slate-400 text-base md:text-lg max-w-md">
-              Every brand we build follows a rhythm. Designed to create presence.
-            </p>
+
+          {/* SCROLL BUTTONS (DESKTOP) */}
+          <div className="hidden lg:flex min-[1440px]:hidden gap-[0.75rem]">
+            <button onClick={() => scroll("left")} className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] transition-all w-10 h-10">
+              <ArrowLeft size="1rem" />
+            </button>
+            <button onClick={() => scroll("right")} className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] transition-all w-10 h-10">
+              <ArrowRight size="1rem" />
+            </button>
           </div>
         </div>
 
-        {/* SERVICE CARDS GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* SERVICE CARDS ROW */}
+        <div 
+          ref={scrollRef}
+          className="flex gap-[1rem] md:gap-[2rem] overflow-x-auto pb-[1.5rem] -mx-[5vw] px-[5vw] snap-x snap-mandatory lg:overflow-hidden min-[1440px]:grid min-[1440px]:grid-cols-3 min-[1440px]:gap-[2rem] scrollbar-none"
+        >
           {services.map((service, i) => (
-            <Link key={i} to={service.href} className="group block">
+            <Link 
+              key={i} 
+              to={service.href} 
+              className="group block shrink-0 snap-center w-[65vw] sm:w-[45vw] md:w-[40vw] lg:w-[31vw] min-[1440px]:w-auto"
+            >
               <motion.div 
                 whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className="relative flex flex-col justify-between p-8 px-10 min-h-[400px] rounded-[2rem] 
-                           bg-transparent border border-white/10 overflow-hidden transition-all duration-700
-                           group-hover:border-[#43c6e4]/40 
-                           group-hover:shadow-[inset_0_0_60px_rgba(67,198,228,0.15)]"
+                className="relative flex flex-col rounded-[1.25rem] md:rounded-[2rem] bg-black/20 border border-white/10 overflow-hidden transition-all duration-500 group-hover:border-[#43c6e4]/30"
+                style={{ 
+                  padding: "clamp(1rem, 3vw, 2rem)",
+                  minHeight: "clamp(15rem, 25vw, 26rem)",
+                  height: "100%"
+                }}
               >
-                {/* SLIGHTLY INCREASED CORNER GLOW */}
+                {/* DYNAMIC IMAGES AREA */}
                 <div 
-                  className="absolute -bottom-12 -right-12 w-48 h-48 bg-[#43c6e4]/15 blur-[60px] rounded-full 
-                             pointer-events-none transition-all duration-1000 ease-out
-                             group-hover:w-96 group-hover:h-96 group-hover:bg-[#43c6e4]/25 group-hover:blur-[80px]" 
-                />
-
-                {/* IMAGE AREA */}
-                <div className="relative w-full h-32 mb-6 pointer-events-none">
+                  className="relative w-full mb-[0.75rem] pointer-events-none flex-shrink-0"
+                  style={{ height: "clamp(4rem, 8vw, 8rem)" }}
+                >
                   {service.title === "DESIGN" && (
                     <>
-                      <img src={DesignImg6} alt="Design" className="absolute -top-4 -right-4 w-40 h-auto group-hover:scale-110 transition-all duration-700" />
-                      <img src={DesignImg5} alt="Sphere" className="absolute -bottom-2 -left-2 w-20 h-auto group-hover:-translate-y-2 transition-transform duration-700" />
+                      <img 
+                        src={DesignImg6} 
+                        className="absolute -top-2 -right-2 h-auto group-hover:scale-105 transition-transform" 
+                        style={{ width: "clamp(5rem, 10vw, 9rem)" }}
+                      />
+                      <img 
+                        src={DesignImg5} 
+                        className="absolute -bottom-2 -left-2 h-auto" 
+                        style={{ width: "clamp(2.5rem, 5vw, 4.5rem)" }}
+                      />
                     </>
                   )}
 
                   {service.title === "DEVELOPMENT" && (
-                    <img src={DevImg7} alt="Dev" className="absolute top-0 -left-10 w-64 max-w-none h-auto group-hover:scale-105 transition-transform duration-700" />
+                    <img 
+                      src={DevImg7} 
+                      className="absolute top-0 -left-2 max-w-none h-auto" 
+                      style={{ width: "clamp(7.5rem, 15vw, 13rem)" }}
+                    />
                   )}
 
                   {service.title === "MARKETING" && (
-                    <img src={MarketImg8} alt="Market" className="absolute -top-10 -left-10 w-64 max-w-none h-auto group-hover:scale-105 transition-transform duration-700" />
+                    <img 
+                      src={MarketImg8} 
+                      className="absolute -top-2 -left-2 max-w-none h-auto" 
+                      style={{ width: "clamp(7.5rem, 15vw, 13rem)" }}
+                    />
                   )}
                 </div>
 
                 {/* CONTENT AREA */}
-                <div className="relative z-10">
-                  <h3 className="text-white/40 text-[10px] font-black tracking-[0.5em] uppercase mb-2">
+                <div className="relative z-10 flex flex-col h-full">
+                  <h3 className="text-white/30 font-black tracking-widest uppercase mb-1" style={{ fontSize: "9px" }}>
                     {service.title}
                   </h3>
-                  <p className="text-[#43c6e4] font-bold text-2xl mb-3 tracking-tight">
+                  <p 
+                    className="text-[#43c6e4] font-bold mb-2 tracking-tight leading-tight"
+                    style={{ fontSize: "clamp(1rem, 1.4vw, 1.5rem)" }}
+                  >
                     {service.highlight}
                   </p>
-                  <p className="text-slate-400 text-sm leading-relaxed mb-8 line-clamp-2">
+                  <p 
+                    className="text-slate-400 leading-snug mb-4 line-clamp-3"
+                    style={{ fontSize: "clamp(0.75rem, 0.85vw, 0.9rem)" }}
+                  >
                     {service.description}
                   </p>
 
                   <div className="mt-auto">
-                    <span className="inline-flex items-center gap-3 text-white text-xs font-bold uppercase tracking-widest border-b border-white/20 group-hover:border-[#43c6e4] pb-1 transition-all duration-300">
-                      Explore {service.title.toLowerCase()}
-                      <svg className="w-4 h-4 transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
+                    <span 
+                      className="inline-flex items-center gap-2 text-white/80 font-bold uppercase tracking-wider border-b border-white/10 group-hover:border-[#43c6e4] pb-1 transition-all"
+                      style={{ fontSize: "10px" }}
+                    >
+                      Explore
+                      <ArrowRight size="0.75rem" className="group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
                 </div>
