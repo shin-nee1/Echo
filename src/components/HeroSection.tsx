@@ -10,7 +10,10 @@ interface HeroSectionProps {
 
 const HeroSection = ({ titleStart, titleHighlight, titleEnd, subtitle }: HeroSectionProps) => {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-20 overflow-hidden bg-[#010a0f]">
+    <section 
+      className="relative flex flex-col items-center justify-center overflow-hidden bg-[#010a0f]"
+      style={{ minHeight: "100vh", paddingTop: "clamp(5rem, 12vh, 8rem)" }}
+    >
       
       {/* 1. PRIMARY BACKGROUND GRADIENT */}
       <div 
@@ -18,57 +21,102 @@ const HeroSection = ({ titleStart, titleHighlight, titleEnd, subtitle }: HeroSec
         style={{ background: "radial-gradient(circle at 50% 50%, #051923 0%, #010a0f 100%)" }} 
       />
 
-      {/* 2. THE GRID (This was missing) */}
+      {/* 2. THE FLUID GRID */}
       <div 
-        className="absolute inset-0 z-10 pointer-events-none opacity-[0.25]" 
+        className="absolute inset-0 z-10 pointer-events-none opacity-[0.2]" 
         style={{ 
           backgroundImage: `
-            linear-gradient(to right, rgba(0, 229, 255, 0.2) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 229, 255, 0.2) 1px, transparent 1px)
+            linear-gradient(to right, rgba(0, 229, 255, 0.15) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 229, 255, 0.15) 1px, transparent 1px)
           `,
-          backgroundSize: '45px 45px',
-          WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 80%)',
-          maskImage: 'radial-gradient(circle at center, black 40%, transparent 80%)'
+          backgroundSize: 'clamp(30px, 4vw, 50px) clamp(30px, 4vw, 50px)',
+          WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 90%)',
+          maskImage: 'radial-gradient(circle at center, black 30%, transparent 90%)'
         }} 
       />
 
-      {/* 3. BACKGROUND GLOWS */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan/10 rounded-full blur-[150px] opacity-30 z-10" />
+      {/* 3. FLUID BACKGROUND GLOW */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#00e5ff]/10 rounded-full blur-[clamp(80px,15vw,180px)] opacity-20 z-10" 
+        style={{ width: "clamp(300px, 60vw, 800px)", height: "clamp(300px, 60vw, 800px)" }}
+      />
 
       {/* CONTENT LAYER */}
-      <div className="container mx-auto px-6 text-center relative z-20">
-        <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-bold mb-8 leading-[1.1] tracking-tight text-white">
+      <div className="mx-auto px-[5vw] text-center relative z-20 w-full max-w-[1600px]">
+        <h1 
+          className="font-display font-bold tracking-tight text-white leading-[1.1]"
+          style={{ 
+            fontSize: "clamp(2.2rem, 6.5vw, 5.5rem)",
+            marginBottom: "clamp(1.5rem, 4vh, 2.5rem)" 
+          }}
+        >
           {titleStart}{" "}
-          <span className="text-cyan drop-shadow-[0_0_15px_rgba(0,229,255,0.4)]">{titleHighlight}</span>
+          <span className="text-[#00e5ff] drop-shadow-[0_0_15px_rgba(0,229,255,0.3)]">{titleHighlight}</span>
           {titleEnd && ` ${titleEnd}`}
         </h1>
         
-        <p className="text-slate-400 text-[clamp(1rem,2.5vw,1.25rem)] max-w-2xl mx-auto mb-12 leading-relaxed">
+        <p 
+          className="text-slate-400 mx-auto leading-relaxed"
+          style={{ 
+            fontSize: "clamp(0.95rem, 1.2vw, 1.2rem)",
+            maxWidth: "clamp(300px, 60vw, 700px)",
+            marginBottom: "clamp(2rem, 6vh, 4rem)" 
+          }}
+        >
           {subtitle}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-5 justify-center mb-20">
-          <Button size="lg" className="bg-cyan text-black hover:bg-cyan/90 px-10 py-7 rounded-xl text-lg font-bold shadow-[0_0_20px_rgba(0,229,255,0.3)]">
+        {/* BUTTONS - Scalable size */}
+        <div className="flex flex-col sm:flex-row gap-[clamp(1rem, 2vw, 1.5rem)] justify-center mb-[clamp(4rem, 10vh, 6rem)]">
+          <Button 
+            className="bg-[#00e5ff] text-black hover:bg-[#00e5ff]/90 font-bold shadow-[0_0_20px_rgba(0,229,255,0.2)]"
+            style={{ 
+              padding: "clamp(1.2rem, 3vh, 1.8rem) clamp(2rem, 4vw, 3rem)", 
+              fontSize: "clamp(0.9rem, 1.1vw, 1.1rem)",
+              borderRadius: "0.75rem"
+            }}
+          >
             Get Started
           </Button>
-          <Button variant="outline" size="lg" className="border-white/10 bg-white/5 text-white hover:bg-white/10 px-10 py-7 rounded-xl text-lg font-bold backdrop-blur-sm">
+          <Button 
+            variant="outline" 
+            className="border-white/10 bg-white/5 text-white hover:bg-white/10 font-bold backdrop-blur-sm"
+            style={{ 
+              padding: "clamp(1.2rem, 3vh, 1.8rem) clamp(2rem, 4vw, 3rem)", 
+              fontSize: "clamp(0.9rem, 1.1vw, 1.1rem)",
+              borderRadius: "0.75rem"
+            }}
+          >
             View Our Work
           </Button>
         </div>
 
-        {/* Hero Visual Stack */}
-        <div className="relative max-w-5xl mx-auto">
+        {/* HERO VISUAL STACK */}
+        <div className="relative mx-auto" style={{ maxWidth: "clamp(600px, 70vw, 1100px)" }}>
           <div className="animate-float relative z-30">
-            <div className="aspect-video w-full rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-center justify-center overflow-hidden">
-               {/* Grid inside the showcase card */}
-               <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
-               <span className="text-slate-500 font-display tracking-widest uppercase text-xs">Project Showcase</span>
+            <div 
+              className="aspect-video w-full border border-white/10 bg-white/5 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-center justify-center overflow-hidden"
+              style={{ borderRadius: "clamp(1rem, 3vw, 2.5rem)" }}
+            >
+               <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
+               <span className="text-slate-500 font-display tracking-widest uppercase" style={{ fontSize: "clamp(0.6rem, 0.8vw, 0.75rem)" }}>
+                 Project Showcase
+               </span>
             </div>
           </div>
 
-          {/* Floating Smartphone Element */}
-          <div className="absolute -left-4 md:-left-12 top-1/4 w-20 h-32 md:w-28 md:h-44 rounded-2xl border border-cyan/30 bg-black/40 backdrop-blur-xl flex items-center justify-center animate-float-slow shadow-2xl hidden sm:flex z-40">
-             <Smartphone className="w-8 h-8 text-cyan drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" />
+          {/* FLOATING SMARTPHONE - Positioned with percentage/vh */}
+          <div 
+            className="absolute -left-[5%] top-1/4 rounded-2xl border border-[#00e5ff]/30 bg-black/40 backdrop-blur-xl hidden sm:flex items-center justify-center animate-float-slow shadow-2xl z-40"
+            style={{ 
+              width: "clamp(80px, 8vw, 120px)", 
+              height: "clamp(130px, 12vw, 180px)" 
+            }}
+          >
+             <Smartphone 
+               className="text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" 
+               style={{ width: "clamp(1.5rem, 2vw, 2.5rem)", height: "clamp(1.5rem, 2vw, 2.5rem)" }}
+             />
           </div>
         </div>
       </div>

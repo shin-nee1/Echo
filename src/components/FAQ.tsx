@@ -33,39 +33,68 @@ const faqs = [
 
 const FAQ: React.FC = () => {
   return (
-    <section className="relative py-24 md:py-28 bg-transparent overflow-hidden font-sans z-10">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col items-center text-center mb-20">
-          <h2 className="text-white text-5xl md:text-6xl font-bold tracking-tight leading-none text-center">
+    <section className="relative bg-transparent overflow-hidden font-sans z-10" style={{ padding: "clamp(3rem, 8vh, 6rem) 0" }}>
+      <div className="mx-auto relative z-10 w-full">
+        
+        {/* HEADER */}
+        <div className="flex flex-col items-center text-center" style={{ marginBottom: "clamp(2rem, 5vh, 4rem)" }}>
+          <h2 
+            className="text-white font-bold tracking-tight leading-[1.1]"
+            style={{ fontSize: "clamp(1.75rem, 3.5vw, 3rem)" }}
+          >
             Frequently Asked <span className="text-[#43c6e4]">Questions</span>
           </h2>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="w-full rounded-[2.5rem] border border-[#0c7a7f]/30 bg-black/40 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        {/* ACCORDION CONTAINER - Adjusted for global 15% padding */}
+        <div className="mx-auto w-full" style={{ maxWidth: "850px" }}>
+          <div 
+            className="w-full border border-[#0c7a7f]/30 bg-black/40 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+            style={{ borderRadius: "1rem" }}
+          >
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem
                   key={index}
                   value={`faq-${index}`}
-                  // UPDATED: Added first:pt-8 and last:pb-8
-                  // This pads the question away from the top/bottom container edges 
-                  // without changing the gap between the questions themselves.
-                  className="px-8 relative border-b-0 first:pt-8 last:pb-8" 
+                  className="relative border-b-0"
+                  style={{ 
+                    paddingLeft: "clamp(1.25rem, 3vw, 2.5rem)", 
+                    paddingRight: "clamp(1.25rem, 3vw, 2.5rem)",
+                    paddingTop: index === 0 ? "0.75rem" : "0px",
+                    paddingBottom: index === faqs.length - 1 ? "0.75rem" : "0px"
+                  }}
                 >
-                  <AccordionTrigger className="text-white hover:text-[#00d8ff] transition-colors py-6 text-left text-lg md:text-xl font-medium">
+                  <AccordionTrigger 
+                    className="text-white hover:text-[#43c6e4] transition-colors text-left font-medium border-none outline-none focus:outline-none py-0"
+                    style={{ 
+                      fontSize: "clamp(0.95rem, 1.2vw, 1.2rem)", 
+                      paddingTop: "clamp(1.25rem, 2vh, 1.75rem)", 
+                      paddingBottom: "clamp(1.25rem, 2vh, 1.75rem)",
+                      lineHeight: "1.4" 
+                    }}
+                  >
                     {faq.question}
                   </AccordionTrigger>
                   
-                  <AccordionContent className="text-white/70 text-base md:text-lg leading-relaxed">
-                    <div className="pb-8">
+                  <AccordionContent className="text-white/70 overflow-hidden">
+                    <div 
+                      className="leading-relaxed"
+                      style={{ 
+                        fontSize: "clamp(0.875rem, 1vw, 1rem)", 
+                        paddingBottom: "1.5rem",
+                        lineHeight: "1.6"
+                      }}
+                    >
                       {faq.answer}
                     </div>
                   </AccordionContent>
 
+                  {/* CUSTOM DIVIDER */}
                   {index !== faqs.length - 1 && (
                     <div 
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1.5px] w-[92%] bg-[#0c7a7f]/20" 
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-[#0c7a7f]/20" 
+                      style={{ height: "1px", width: "95%" }}
                     />
                   )}
                 </AccordionItem>
@@ -73,10 +102,18 @@ const FAQ: React.FC = () => {
             </Accordion>
           </div>
 
-          <div className="mt-16 flex justify-center">
+          {/* VIEW ALL BUTTON */}
+          <div className="flex justify-center" style={{ marginTop: "3rem" }}>
             <Button
-              size="hero"
+              asChild
               variant="cyan"
+              className="rounded-full flex items-center justify-center transition-transform hover:scale-105"
+              style={{ 
+                fontSize: "0.95rem",
+                padding: "0 2.5rem",
+                height: "3.25rem",
+                width: "fit-content"
+              }}
             >
               <Link to="/faq">View All FAQs</Link>
             </Button>

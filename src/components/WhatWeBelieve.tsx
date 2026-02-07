@@ -32,63 +32,93 @@ const WhatWeBelieve = () => {
   ];
 
   return (
-    <section className="py-20 lg:py-32 bg-transparent relative overflow-hidden">
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+    <section 
+      className="bg-transparent relative overflow-hidden" 
+      style={{ padding: "clamp(30px, 4vw, 70px) 0" }}
+    >
+      <div 
+        className="mx-auto relative z-10" 
+        style={{ 
+          padding: "0 5vw", 
+          maxWidth: "clamp(300px, 72vw, 1050px)" 
+        }}
+      >
         
         {/* SECTION HEADER */}
-        <div className="mb-16 md:mb-24 flex flex-col items-center text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight">
+        <div className="flex flex-col items-center text-center" style={{ marginBottom: "clamp(25px, 3.5vw, 45px)" }}>
+          <h2 
+            className="font-bold text-white tracking-tight leading-tight uppercase"
+            style={{ fontSize: "clamp(24px, 3vw, 44px)" }} 
+          >
             What We <span className="text-[#00d8ff]">Believe</span>
           </h2>
         </div>
 
         {/* GRID CONTAINER */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div 
+          className="grid grid-cols-1 md:grid-cols-2" 
+          style={{ gap: "clamp(14px, 1.5vw, 24px)" }}
+        >
           {beliefs.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              /* Added 'rounded-3xl' for slightly rounded corners */
-              className="group relative p-8 lg:p-12 bg-white/[0.03] backdrop-blur-sm border border-white/10 flex flex-col items-start transition-all duration-500 hover:bg-white/[0.06] hover:border-[#00d8ff]/30 overflow-hidden min-h-[450px] rounded-3xl"
+              className="group relative bg-white/[0.03] backdrop-blur-sm border border-white/10 flex flex-col items-start transition-all duration-500 hover:bg-white/[0.06] hover:border-[#00d8ff]/30 overflow-hidden"
+              style={{ 
+                padding: "clamp(20px, 2.5vw, 36px)", 
+                minHeight: "clamp(280px, 22vw, 360px)", 
+                borderRadius: "clamp(12px, 1.8vw, 26px)" 
+              }}
             >
               
-              {/* Top-Left Turquoise Glow */}
-              <div className="absolute -top-12 -left-12 w-40 h-40 bg-[#00d8ff] rounded-full blur-[80px] opacity-15 pointer-events-none" />
-
-              {/* Bottom-Right Turquoise Glow */}
-              <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-[#00d8ff] rounded-full blur-[80px] opacity-15 pointer-events-none" />
-
-              {/* Corner Accent */}
-              <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-transparent group-hover:border-[#00d8ff]/40 transition-all duration-500 rounded-tr-3xl" />
-
-              {/* --- IMAGE SECTION --- */}
-              <div className="mb-8 relative w-full flex justify-start">
+              {/* IMAGE SECTION - INCREASED SIZE */}
+              <div className="relative w-full flex justify-start" style={{ marginBottom: "clamp(18px, 2.5vw, 32px)" }}>
                 <div className="relative">
-                  {/* Glowing backdrop for the image */}
-                  <div className="absolute inset-0 bg-[#00d8ff]/20 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  
+                   {/* Subtle glow for image prominence */}
+                  <div 
+                    className="absolute inset-0 bg-[#00d8ff]/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" 
+                  />
                   <img 
                     src={item.image} 
                     alt="Belief Illustration"
-                    className="h-36 lg:h-40 w-auto object-contain relative z-10 drop-shadow-[0_0_15px_rgba(0,216,255,0.1)] group-hover:scale-105 transition-transform duration-500"
+                    className="w-auto object-contain relative z-10 transition-transform duration-500 group-hover:scale-110"
+                    style={{ 
+                      // INCREASED: from 6vw/90px to 9vw/130px
+                      height: "clamp(75px, 9vw, 130px)", 
+                      filter: "drop-shadow(0 0.5vw 1vw rgba(0,216,255,0.15))"
+                    }}
                   />
                 </div>
               </div>
 
-              {/* --- TEXT CONTENT --- */}
+              {/* TEXT CONTENT - STILL COMPACT */}
               <div className="w-full mt-auto">
-                <h3 className="text-white font-bold text-xl lg:text-2xl leading-snug uppercase tracking-wide mb-6">
+                <h3 
+                  className="text-white font-bold leading-tight uppercase tracking-wide"
+                  style={{ 
+                    fontSize: "clamp(16px, 1.15vw, 22px)", 
+                    marginBottom: "clamp(8px, 1vw, 14px)" 
+                  }}
+                >
                   {item.subtitle}
                 </h3>
 
                 {/* Separator Line */}
-                <div className="w-12 h-[1px] bg-white/20 group-hover:w-full group-hover:bg-[#00d8ff]/30 transition-all duration-700 mb-6" />
+                <div 
+                  className="h-[1px] bg-white/20 group-hover:w-full group-hover:bg-[#00d8ff]/30 transition-all duration-700" 
+                  style={{ 
+                    width: "clamp(20px, 2.5vw, 50px)", 
+                    marginBottom: "clamp(8px, 1vw, 14px)" 
+                  }}
+                />
 
-                {/* Description */}
-                <p className="text-white/50 text-sm md:text-base leading-relaxed font-light group-hover:text-white/80 transition-colors duration-500">
+                <p 
+                  className="text-white/50 leading-relaxed font-light group-hover:text-white/80 transition-colors duration-500"
+                  style={{ fontSize: "clamp(12px, 0.8vw, 15px)" }}
+                >
                   {item.description}
                 </p>
               </div>

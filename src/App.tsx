@@ -26,23 +26,18 @@ const App = () => (
 
       <BrowserRouter>
         {/* ================= GLOBAL BACKGROUND SYSTEM ================= */}
+        {/* Background stays fixed and full-screen */}
         <div className="fixed inset-0 z-0 pointer-events-none bg-[#010a0f]">
-          
-          {/* --- LEFT SIDE HALOS --- */}
           <div className="absolute top-[-5%] left-[-15%] w-[45%] h-[40%] rounded-full bg-cyan/10 blur-[120px] animate-pulse" />
           <div 
             className="absolute bottom-[20%] left-[-10%] w-[35%] h-[35%] rounded-full bg-cyan/5 blur-[100px] animate-pulse" 
             style={{ animationDuration: '7s' }} 
           />
-
-          {/* --- RIGHT SIDE HALOS --- */}
           <div className="absolute top-[15%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[110px]" />
           <div 
             className="absolute bottom-[-10%] right-[-15%] w-[50%] h-[45%] rounded-full bg-cyan/8 blur-[130px] animate-pulse" 
             style={{ animationDuration: '12s' }} 
           />
-          
-          {/* --- GLOBAL TECHNOLOGY GRID --- */}
           <div 
             className="absolute inset-0 z-[1] opacity-10" 
             style={{ 
@@ -53,7 +48,8 @@ const App = () => (
         </div>
 
         {/* ================= CONTENT LAYER ================= */}
-        <div className="relative z-10 flex flex-col min-h-screen">
+        {/* The 15% padding is applied here to the outer wrapper */}
+        <div className="relative z-10 flex flex-col min-h-screen px-[15%]">
           <ScrollToTop />
           <Navbar />
           

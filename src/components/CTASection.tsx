@@ -18,63 +18,89 @@ const CTASection = ({
   primaryButtonAction,
 }: CTASectionProps) => {
   return (
-    <section className="relative py-12 px-4 md:px-6 bg-transparent overflow-hidden">
-      <div className="container mx-auto max-w-7xl relative">
+    <section className="relative bg-transparent overflow-hidden" style={{ padding: "clamp(2rem, 6vh, 4rem) 1rem" }}>
+      <div className="container mx-auto relative max-w-[1200px]">
         
-        {/* MAIN BANNER */}
-        <div className="relative overflow-hidden rounded-[2rem] bg-white/[0.03] backdrop-blur-md border border-white/10 flex flex-col lg:block shadow-2xl">
+        {/* MAIN BANNER CONTAINER */}
+        <div 
+          className="relative overflow-hidden bg-white/[0.03] backdrop-blur-md border border-white/10 flex flex-col lg:flex-row shadow-2xl"
+          style={{ borderRadius: "clamp(1rem, 2vw, 2rem)" }}
+        >
           
-          {/* BACKGROUND DECORATIVE RINGS */}
-          <div className="absolute -left-10 -top-20 w-[300px] h-[300px] border-[30px] border-[#43c6e4]/5 rounded-full pointer-events-none" />
-          <div className="absolute right-[20%] -bottom-32 w-[400px] h-[400px] border-[20px] border-[#43c6e4]/5 rounded-full pointer-events-none" />
+          {/* DECORATIVE RINGS - Hidden on mobile to keep it clean */}
+          <div 
+            className="absolute border-[#43c6e4]/5 rounded-full pointer-events-none hidden md:block" 
+            style={{ 
+              width: "20rem", 
+              height: "20rem", 
+              left: "-5rem", 
+              top: "-8rem", 
+              borderWidth: "2rem" 
+            }} 
+          />
+          <div 
+            className="absolute border-[#43c6e4]/5 rounded-full pointer-events-none hidden md:block" 
+            style={{ 
+              width: "25rem", 
+              height: "25rem", 
+              right: "10%", 
+              bottom: "-12rem", 
+              borderWidth: "1.5rem" 
+            }} 
+          />
 
-          {/* CONTENT CONTAINER */}
-          {/* lg:min-h... sets height only on desktop. On mobile, it grows naturally with content */}
-          <div className="relative w-full h-full z-20 flex flex-col lg:block lg:min-h-[420px]">
+          {/* CONTENT AREA */}
+          <div className="relative w-full z-20 flex flex-col lg:flex-row min-h-fit lg:min-h-[400px]">
             
-            {/* LEFT CONTENT: Text Area */}
-            {/* Mobile: Full Width. Desktop: 60% Width */}
-            <div className="w-full lg:w-7/12 pl-6 md:pl-12 lg:pl-16 pr-6 pt-10 md:pt-12 lg:py-12 space-y-5 relative z-20">
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight text-white tracking-tight">
+            {/* TEXT CONTENT */}
+            <div 
+              className="w-full lg:w-7/12 flex flex-col justify-center items-center lg:items-start text-center lg:text-left" 
+              style={{ 
+                padding: "clamp(2rem, 5vw, 4rem)",
+                gap: "1.5rem"
+              }}
+            >
+              <h2 
+                className="text-white font-bold tracking-tight leading-[1.1]"
+                style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+              >
                 {title} <span className="text-[#43c6e4]">{highlight}</span>
               </h2>
 
-              <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-lg opacity-80">
+              <p 
+                className="text-slate-300 leading-relaxed opacity-80 max-w-[500px]"
+                style={{ fontSize: "clamp(0.95rem, 1.1vw, 1.125rem)" }}
+              >
                 {subtitle}
               </p>
 
               <div className="pt-4">
                 <Button
                   onClick={primaryButtonAction}
-                  className="bg-gradient-to-r from-[#43c6e4]/90 to-[#43c6e4] text-slate-900 rounded-xl px-8 md:px-10 py-6 text-base font-bold transition-all hover:scale-105 shadow-lg shadow-[#43c6e4]/20"
+                  className="bg-gradient-to-r from-[#43c6e4]/90 to-[#43c6e4] text-slate-900 transition-all hover:scale-105 shadow-lg shadow-[#43c6e4]/20 border-none"
+                  style={{ 
+                    borderRadius: "0.5rem",
+                    padding: "0 2.5rem",
+                    height: "clamp(3rem, 4vw, 3.5rem)",
+                    fontSize: "clamp(0.9rem, 1vw, 1.05rem)",
+                    fontWeight: "bold"
+                  }}
                 >
                   {primaryButtonText}
                 </Button>
               </div>
             </div>
 
-            {/* RIGHT VISUAL: The Smart Positioning */}
-            {/* 1. relative + mt-auto: On Mobile/Tablet, it sits NATURALLY below text and pushes to bottom.
-               2. lg:absolute: On Desktop, it snaps out of flow to the bottom-right corner.
-            */}
-            <div className="
-              relative mt-8 flex justify-end pointer-events-none
-              lg:absolute lg:bottom-0 lg:right-0 lg:mt-0
-            ">
+            {/* FLOATING IMAGE AREA */}
+            <div className="relative lg:absolute lg:bottom-0 lg:right-0 w-full lg:w-1/2 flex justify-center lg:justify-end items-end overflow-hidden lg:overflow-visible">
               <img 
                 src={BannerCTA} 
                 alt="Interface Preview" 
-                className="
-                  object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.5)]
-                  /* Mobile/Tablet alignment adjustments */
-                  translate-x-4 translate-y-2
-                  /* Responsive Widths */
-                  w-[260px]      /* Mobile */
-                  sm:w-[320px]   /* Large Phone */
-                  md:w-[400px]   /* Tablet */
-                  lg:w-[500px]   /* Laptop */
-                  xl:w-[600px]   /* Desktop */
-                "
+                className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+                style={{ 
+                  width: "clamp(280px, 40vw, 550px)",
+                  transform: "translateY(10%)" // Slightly pulls the image into the bottom edge
+                }}
               />
             </div>
 
