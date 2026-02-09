@@ -8,7 +8,11 @@ const ContactHeroMobile = () => {
   return (
     <div className="w-full h-auto relative overflow-y-auto bg-transparent scrollbar-hide">
       
-      <section className="relative w-full flex flex-col items-center pt-[20vh] pb-[5vh] px-[5%]">
+      {/* SAFE ZONE UPDATE: 
+          Using pt-[clamp(6rem,25vh,12rem)] ensures that even on short screens, 
+          the content starts at least 6rem (96px) from the top.
+      */}
+      <section className="relative w-full flex flex-col items-center pt-[clamp(6rem,25vh,12rem)] pb-[5vh] px-[5%]">
         
         {/* ================= MASTER WRAPPER ================= */}
         <div className="relative w-full max-w-[28rem] flex flex-col items-center">
@@ -22,27 +26,21 @@ const ContactHeroMobile = () => {
             />
           </div>
 
-          {/* 2. SEMI-CIRCLESWith Faded Corners) */}
+          {/* 2. SEMI-CIRCLES (The Crown) */}
           <div className="absolute top-[-15%] w-full h-[30%] z-20 pointer-events-none flex items-end justify-center overflow-visible">
             <svg 
               viewBox="0 0 400 200" 
               className="w-[115%] h-auto overflow-visible"
             >
-              {/* NEW: Define the fade gradient */}
               <defs>
                 <linearGradient id="arcFade" x1="0%" y1="0%" x2="100%" y2="0%">
-                  {/* Start transparent */}
                   <stop offset="0%" stopColor="#00d2ff" stopOpacity="0" />
-                  {/* Fade in to solid color by 15% */}
                   <stop offset="5%" stopColor="#00d2ff" stopOpacity="1" />
-                  {/* Stay solid until 85% */}
                   <stop offset="95%" stopColor="#00d2ff" stopOpacity="1" />
-                  {/* Fade out to transparent at the end */}
                   <stop offset="100%" stopColor="#00d2ff" stopOpacity="0" />
                 </linearGradient>
               </defs>
 
-              {/* Paths now use stroke="url(#arcFade)" instead of a solid color */}
               <path 
                 d="M 100,200 A 100,100 0 0 1 300,200" 
                 fill="none" 
