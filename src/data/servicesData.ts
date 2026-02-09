@@ -119,7 +119,7 @@ export const servicesData: ServiceData[] = [
   {
     slug: "photography-videography",
     category: "design",
-    title: "Photography & Videography",
+    title: "Photography & Videography ",
     highlightedTitle: "Visual",
     subtitle: "Stunning visuals that tell your brand's story.",
     ctaText: "Capture Your Vision",
