@@ -18,30 +18,24 @@ const InfoSection = ({
   ],
 }: InfoSectionProps) => {
   return (
-    <section 
-      className="relative w-full bg-transparent overflow-hidden"
-      style={{ padding: "clamp(2rem, 8vh, 5rem) 0" }}
-    >
-      <div className="mx-auto px-[6vw] max-w-[1500px] relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-[clamp(2.5rem, 8vw, 12rem)]">
+    <section className="relative w-full bg-transparent overflow-hidden info-section-wrapper">
+      <div className="container mx-auto relative z-10 info-container">
+        
+        <div className="flex flex-col lg:flex-row items-center justify-between info-flex-wrapper">
           
           {/* TEXT CONTENT */}
-          <div className="w-full lg:w-[55%]">
-            <div style={{ marginBottom: "clamp(1.5rem, 4vh, 2.5rem)" }}>
-              <h2 
-                className="text-white font-bold tracking-tight leading-[1.1]"
-                style={{ fontSize: "clamp(1.8rem, 4.5vw, 3.8rem)" }}
-              >
+          <div className="info-text-side">
+            <div className="info-header-wrapper">
+              <h2 className="text-white font-bold tracking-tight leading-[1.1] info-title">
                 {title} <span className="text-[#43c6e4]">{highlight}</span>
               </h2>
             </div>
 
-            <div className="flex flex-col" style={{ gap: "clamp(1rem, 1.5vh, 1.5rem)" }}>
+            <div className="flex flex-col info-paragraphs-gap">
               {paragraphs.map((p, i) => (
                 <p 
                   key={i} 
-                  className="text-slate-400/70 font-light leading-relaxed"
-                  style={{ fontSize: "clamp(0.9rem, 1vw, 1.05rem)" }}
+                  className="text-slate-400/70 font-light leading-relaxed info-p-text"
                 >
                   {p}
                 </p>
@@ -49,41 +43,99 @@ const InfoSection = ({
             </div>
           </div>
 
-          {/* IMAGE CONTAINER - Scaled down further for smaller screens */}
-          <div 
-            className="w-full lg:w-[30%] flex justify-center lg:justify-end"
-            /* Increased spacing for mobile stack: 4rem gap on small screens */
-            style={{ marginTop: "clamp(4rem, 10vh, 0rem)" }} 
-          >
+          {/* IMAGE CONTAINER */}
+          <div className="info-image-side">
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full"
-              /* Floor reduced to 160px for mobile.
-                 Ceiling reduced to 340px for desktop.
-              */
-              style={{ maxWidth: "clamp(160px, 22vw, 340px)" }} 
+              className="relative w-full info-image-inner"
             >
               <motion.img 
                 src={DesignPage} 
                 alt={highlight} 
                 animate={{
-                  y: [0, -8, 0],
+                  y: [0, -12, 0],
                 }}
                 transition={{
                   duration: 6,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="w-full h-auto object-contain opacity-75 drop-shadow-[0_8px_30px_rgba(67,198,228,0.08)]"
+                className="w-full h-auto object-contain opacity-80 drop-shadow-[0_8px_30px_rgba(67,198,228,0.12)]"
               />
             </motion.div>
           </div>
 
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* 1. MOBILE (< 768px) */
+        .info-section-wrapper { padding: 0rem 1rem; }
+        .info-text-side { width: 100%; text-align: center; margin-bottom: 4rem; }
+        .info-title { font-size: 1.95rem; margin-bottom: 1.2rem; }
+        .info-paragraphs-gap { gap: 0.5rem; }
+        .info-p-text { font-size: 0.9rem; }
+        .info-image-side { width: 55%; display: flex; justify-content: center; }
+        .info-image-inner { max-width: 160px; }
+
+        /* 2. TABLET (768px - 1023px) */
+@media (min-width: 768px) {
+  .info-section-wrapper { 
+    padding: 0rem 1rem; 
+  }
+  .info-title { 
+    font-size: 2.2rem; 
+  }
+  .info-p-text { 
+    font-size: 1rem; 
+  }
+  .info-image-side { 
+    width: 40%; /* Keep it full width to allow centering on tablet if stacked */
+    display: flex; 
+    justify-content: center; 
+    margin-top: 0rem; /* Add some space since it's likely still stacked here */
+  }
+  .info-image-inner { 
+    /* REDUCED SIZE HERE */
+    max-width: 140px; 
+  }
+}
+
+        /* 3. LAPTOP (1024px - 1439px) */
+        @media (min-width: 1024px) {
+          .info-container { max-width: 100% !important; padding: 0 0rem !important; }
+          .info-flex-wrapper { flex-direction: row; gap: 5vw; align-items: flex-start; }
+          .info-text-side { width: 55%; text-align: left; margin-bottom: 0; }
+          .info-title { font-size: 2.5rem; margin-bottom: 2rem; }
+          .info-p-text { font-size: 1.05rem; max-width: 600px; }
+          .info-image-side { width: 30%; justify-content: flex-end; padding-top: 0.3rem; }
+          .info-image-inner { max-width: 250px; }
+        }
+
+        /* 4. LARGE DESKTOP (1440px - 2559px) */
+        @media (min-width: 1440px) {
+          .info-container { padding: 0 0vw !important; }
+          .info-flex-wrapper { gap: 4vw; }
+          .info-text-side { width: 60%; }
+          .info-title { font-size: 2.75rem; }
+          .info-p-text { font-size: 1.2rem; max-width: 700px; }
+          .info-image-side { width: 50%; justify-content: flex-end; padding-top: 0.3rem; }}
+          .info-image-inner { max-width: 300px; }
+        }
+
+        /* 5. 4K MONITORS (2560px+) */
+        @media (min-width: 2560px) {
+          .info-container { padding: 0 12vw !important; }
+          .info-section-wrapper { padding: 12rem 0; }
+          .info-title { font-size: 7rem; margin-bottom: 4rem; }
+          .info-p-text { font-size: 2rem; max-width: 1100px; }
+          .info-paragraphs-gap { gap: 2.5rem; }
+          .info-image-inner { max-width: 800px; }
+        }
+      `}} />
     </section>
   );
 };

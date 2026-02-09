@@ -110,16 +110,17 @@ const Design = () => {
       */}
       <div className="flex flex-col gap-[clamp(4rem, 12vh, 10rem)]">
         
-        <PageHero
-          title={
-            <span style={{ fontSize: "clamp(1.8rem, 5vw, 4.2rem)", display: "block", lineHeight: "1.1" }}>
-              We Shape How The <span className="text-[#00d8ff]">World</span> Sees,<br className="hidden md:block" />
-              Understands, And <span className="text-[#00d8ff]">Experiences</span> Your Brand.
-            </span>
-          }
-          subtitle="Great Design Isn't Decoration. It's Direction."
-          ctaText="Shape your Next Move"
-        />
+       <PageHero
+  title={
+    <>
+      We Shape How The <span className="text-[#00d8ff]">World</span> Sees,
+      <br className="hidden md:block" />
+      Understands, And <span className="text-[#00d8ff]">Experiences</span> Your Brand.
+    </>
+  }
+  subtitle="Great Design Isn't Decoration. It's Direction."
+  ctaText="Shape your Next Move"
+/>
 
         <InfoSection
           title="What is"

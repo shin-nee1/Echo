@@ -49,7 +49,7 @@ const App = () => (
 
         {/* ================= CONTENT LAYER ================= */}
         {/* The 15% padding is applied here to the outer wrapper */}
-        <div className="relative z-10 flex flex-col min-h-screen px-[15%]">
+        <div className="relative z-10 flex flex-col min-h-screen px-[12%]">
           <ScrollToTop />
           <Navbar />
           
