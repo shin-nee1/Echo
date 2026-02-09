@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, useMemo, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight, X, MousePointerClick } from "lucide-react";
+import { ChevronLeft, ChevronRight, MousePointerClick } from "lucide-react";
 import type { EmblaCarouselType } from "embla-carousel";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -29,7 +29,7 @@ const FeaturesCarousel = ({
   const extendedFeatures = useMemo(() => {
     if (!features || features.length === 0) return [];
     let repeated = [...features];
-    while (repeated.length < 30) {
+    while (repeated.length < 50) {
       repeated = [...repeated, ...features];
     }
     return repeated.map((f, i) => ({ ...f, uniqueId: `feature-${i}` }));
@@ -39,9 +39,9 @@ const FeaturesCarousel = ({
     loop: true,
     align: "center",
     dragFree: false,
-    containScroll: false,
-    startIndex: features.length,
-    watchDrag: () => !expandedId,
+    startIndex: Math.floor(extendedFeatures.length / 2),
+    // Changed: Always watch drag so we can detect the "Rotate to Close" intent
+    watchDrag: true, 
   });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -49,6 +49,15 @@ const FeaturesCarousel = ({
   const [isClosing, setIsClosing] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const animationFrameRef = useRef<number>(0);
+
+  // Helper function to close the expanded card
+  const closeCard = useCallback(() => {
+    if (expandedId) {
+      setIsClosing(true);
+      setExpandedId(null);
+      setTimeout(() => setIsClosing(false), 500);
+    }
+  }, [expandedId]);
 
   const applyWheelEffect = useCallback((emblaApi: EmblaCarouselType) => {
     const container = emblaApi.rootNode();
@@ -58,56 +67,36 @@ const FeaturesCarousel = ({
 
     slideNodes.forEach((slideNode) => {
       const slideInner = slideNode.querySelector(".slide-inner") as HTMLElement;
-      const contentLayer = slideNode.querySelector(".content-layer") as HTMLElement;
-      
       if (!slideInner) return;
 
       const slideId = slideInner.getAttribute('data-id');
       const isExpanded = expandedId === slideId;
-      const isAnyExpanded = !!expandedId;
 
       const slideRect = slideNode.getBoundingClientRect();
       const slideCenter = slideRect.left - containerRect.left + slideRect.width / 2;
       const dist = slideCenter - center;
-      const ratio = dist / (containerRect.width / 3.5); 
+      
+      const ratio = dist / (containerRect.width / 2.5); 
       const absRatio = Math.abs(ratio);
 
-      // --- MATH CONSTANTS ---
-      const baseTranslateY = Math.pow(absRatio, 2) * 45; // Arch depth
-      const rotate = ratio * 12; // Subtle tilt
-      const translateX = ratio * -60; // Tight spacing
-      const baseScale = 1 - Math.min(absRatio * 0.1, 0.2);
+      const baseTranslateY = Math.pow(absRatio, 2) * (window.innerHeight * 0.045); 
+      const spacingCorrection = ratio * (absRatio * -18); 
 
-      // Transition handling: instant for wheel, smooth for expansion/closing
-      if (isExpanded || isClosing) {
-        slideInner.style.transition = "transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.5s ease, opacity 0.5s ease";
-      } else {
-        slideInner.style.transition = "transform 0s, height 0.5s ease, opacity 0.5s ease";
-      }
+      const rotate = ratio * 12; 
+      const baseScale = 1 - Math.min(absRatio * 0.12, 0.25);
+
+      slideInner.style.transition = (isExpanded || isClosing) 
+        ? "transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)" 
+        : "transform 0s";
+
+      slideInner.style.opacity = "1";
 
       if (isExpanded) {
-        slideInner.style.transform = `translate3d(0, -40px, 0) rotate(0deg) scale(1.05)`;
-        slideInner.style.opacity = "1";
+        slideInner.style.transform = `translate3d(0, 3vh, 0) rotate(0deg) scale(1.05)`;
         slideInner.style.zIndex = "100";
-        slideInner.style.filter = "brightness(1.1)";
-        slideInner.style.pointerEvents = "auto";
-        if (contentLayer) contentLayer.style.opacity = "1";
-      } else if (isAnyExpanded) {
-        // BACKGROUND CARDS: Stay in place, just fade. No vertical drop.
-        slideInner.style.transform = `translate3d(${translateX}px, ${baseTranslateY}px, 0) rotate(${rotate}deg) scale(${baseScale})`;
-        slideInner.style.opacity = "0.3"; 
-        slideInner.style.zIndex = Math.round(50 - absRatio * 10).toString();
-        slideInner.style.filter = "none"; 
-        slideInner.style.pointerEvents = "none";
-        if (contentLayer) contentLayer.style.opacity = "0";
       } else {
-        // DEFAULT WHEEL
-        slideInner.style.transform = `translate3d(${translateX}px, ${baseTranslateY}px, 0) rotate(${rotate}deg) scale(${baseScale})`;
-        slideInner.style.opacity = Math.max(1 - Math.pow(absRatio, 1.5), 0.3).toString();
+        slideInner.style.transform = `translate3d(${spacingCorrection}px, ${baseTranslateY + 40}px, 0) rotate(${rotate}deg) scale(${baseScale})`;
         slideInner.style.zIndex = Math.round(100 - absRatio * 100).toString();
-        slideInner.style.filter = "none";
-        slideInner.style.pointerEvents = "auto";
-        if (contentLayer) contentLayer.style.opacity = Math.max(1 - absRatio * 2.5, 0).toString();
       }
     });
 
@@ -116,104 +105,126 @@ const FeaturesCarousel = ({
 
   useEffect(() => {
     if (!emblaApi) return;
+
     const animate = () => {
       applyWheelEffect(emblaApi);
       animationFrameRef.current = requestAnimationFrame(animate);
     };
+
     animationFrameRef.current = requestAnimationFrame(animate);
-    emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedScrollSnap() % features.length));
-    return () => cancelAnimationFrame(animationFrameRef.current);
-  }, [emblaApi, applyWheelEffect, features.length]);
+
+    // Close card when user starts dragging
+    emblaApi.on("pointerDown", closeCard);
+    
+    // Track selected index
+    emblaApi.on("select", () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap() % (features.length || 1));
+    });
+
+    return () => {
+      cancelAnimationFrame(animationFrameRef.current);
+      emblaApi.off("pointerDown", closeCard);
+    };
+  }, [emblaApi, applyWheelEffect, features.length, closeCard]);
 
   const handleCardClick = (id: string, index: number) => {
     if (expandedId === id) {
-      setIsClosing(true);
-      setExpandedId(null);
-      setTimeout(() => setIsClosing(false), 500); 
+      closeCard();
     } else {
+      // If another card is open, close it first then scroll/open new one
+      setExpandedId(null);
       emblaApi?.scrollTo(index);
-      setExpandedId(id);
+      // Small delay to ensure the scroll starts before expanding
+      setTimeout(() => setExpandedId(id), 50);
     }
   };
 
-  if (!features || features.length === 0) return null;
-
   return (
-    <section className="py-32 relative overflow-hidden z-10 font-sans">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col items-center text-center mb-16">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-tight font-display italic">
-              {titleParts[0]}
-              <span className="text-[#00d8ff]">{highlightedWord}</span>
-              {titleParts[1]}
-            </h2>
-            <div className="mt-8 w-24 h-1 bg-[#00d8ff] rounded-full shadow-[0_0_20px_#00d8ff] mx-auto" />
-            <p className="max-w-xl mt-8 text-slate-400 text-lg font-light leading-relaxed">
-              {subheadline}
-            </p>
-          </motion.div>
+    <section className="py-[4vh] relative overflow-hidden z-10 w-full flex flex-col items-center">
+      <div className="w-full px-[2vw] relative z-10">
+        
+        <div className="flex flex-col items-center text-center mb-[3vh]">
+          <h2 className="text-[clamp(2.2rem,4.5vw,3.8rem)] font-bold tracking-tight text-white leading-[1.1]">
+            {titleParts[0]}
+            <span className="text-[#00d8ff]">{highlightedWord}</span>
+            {titleParts[1]}
+          </h2>
+          <p className="max-w-[32rem] mx-auto mt-[1.5vh] text-white/40 text-[clamp(0.85rem,1.1vw,1rem)] font-light">
+            {subheadline}
+          </p>
         </div>
 
-        <div className="relative min-h-[850px]"> 
+        <div className="relative min-h-[35vh] flex items-center justify-center"> 
           <AnimatePresence>
             {!expandedId && (
-              <>
-                <button onClick={() => emblaApi?.scrollPrev()} className="absolute left-2 md:left-10 top-[40%] z-40 p-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-[#00d8ff] hover:text-black transition-all backdrop-blur-md">
-                  <ChevronLeft size={28} />
+              <div className="hidden lg:block">
+                <button 
+                  onClick={() => emblaApi?.scrollPrev()} 
+                  className="absolute left-[5vw] top-[45%] z-40 p-3 rounded-full bg-white/5 border border-white/10 text-white hover:bg-[#00d8ff] hover:text-black transition-all"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft size="1.2rem" />
                 </button>
-                <button onClick={() => emblaApi?.scrollNext()} className="absolute right-2 md:right-10 top-[40%] z-40 p-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-[#00d8ff] hover:text-black transition-all backdrop-blur-md">
-                  <ChevronRight size={28} />
+                <button 
+                  onClick={() => emblaApi?.scrollNext()} 
+                  className="absolute right-[5vw] top-[45%] z-40 p-3 rounded-full bg-white/5 border border-white/10 text-white hover:bg-[#00d8ff] hover:text-black transition-all"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight size="1.2rem" />
                 </button>
-              </>
+              </div>
             )}
           </AnimatePresence>
 
-          <div className={`overflow-visible px-[10%] md:px-[20%] transition-opacity duration-500 ${isReady ? 'opacity-100' : 'opacity-0'}`} ref={emblaRef}>
-            <div className="flex touch-pan-y items-start h-[900px]"> 
+          <div className={`w-full overflow-visible transition-opacity duration-500 ${isReady ? 'opacity-100' : 'opacity-0'}`} ref={emblaRef}>
+            <div className="flex touch-pan-y items-start h-[40vh]"> 
               {extendedFeatures.map((feature, index) => {
                 const isExpanded = expandedId === feature.uniqueId;
                 return (
-                  <div key={index} className="flex-shrink-0 w-[280px] md:w-[420px] px-0"> 
+                  <div 
+                    key={feature.uniqueId} 
+                    className="flex-shrink-0 w-[11rem] lg:w-[12rem] xl:w-[13.5rem] 2xl:w-[16rem] px-1"
+                  > 
                     <motion.div 
                       layout
                       data-id={feature.uniqueId}
-                      onClick={() => handleCardClick(feature.uniqueId, index)}
-                      className={`slide-inner relative cursor-pointer rounded-[2.5rem] border overflow-hidden flex flex-col items-center
-                        ${isExpanded ? "border-[#00d8ff]/50 shadow-[0_0_80px_rgba(0,216,255,0.15)]" : "border-white/10 hover:border-white/30"}
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent embla pointerDown from firing immediately
+                        handleCardClick(feature.uniqueId, index);
+                      }}
+                      className={`slide-inner relative cursor-pointer rounded-[0.75rem] border overflow-hidden flex flex-col items-center
+                        ${isExpanded ? "border-[#00d8ff]/40 shadow-xl" : "border-white/5 hover:border-white/20"}
                       `}
                       style={{
-                        background: "linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)",
-                        backdropFilter: "blur(12px)",
-                        height: isExpanded ? "auto" : "550px",
-                        minHeight: "550px",
+                        background: "rgba(255,255,255,0.02)",
+                        backdropFilter: "blur(8px)",
+                        height: isExpanded ? "auto" : "22vh",
+                        minHeight: "18vh",
                         transformOrigin: "center bottom"
                       }}
                     >
-                      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                      <div className={`w-full flex items-center justify-center p-[6%] ${isExpanded ? "h-[10vh]" : "h-[12vh]"}`}>
+                        <img src={feature.imageSrc} alt={feature.title} className="w-full h-full object-contain" />
+                      </div>
 
-                      <motion.div layout className={`w-full flex items-center justify-center p-8 transition-all duration-500 ${isExpanded ? "h-[250px]" : "h-[350px]"}`}>
-                        <img src={feature.imageSrc} alt={feature.title} className="w-full h-full object-contain filter drop-shadow-[0_10px_30px_rgba(0,216,255,0.1)]" />
-                      </motion.div>
-
-                      <div className="content-layer w-full p-8 pt-0 text-center flex flex-col items-center">
-                        <motion.h3 layout className="text-2xl font-bold text-white mb-3 tracking-tight uppercase italic font-display">
+                      <div className="w-full p-[6%] pt-0 text-center flex flex-col items-center">
+                        <h3 className="text-[0.8rem] font-bold text-white mb-[0.2vh] tracking-tight uppercase">
                           {feature.title}
-                        </motion.h3>
-                        <motion.div layout className="w-12 h-0.5 bg-[#00d8ff] mb-4" />
+                        </h3>
+                        <div className="w-[1rem] h-[1px] bg-[#00d8ff]/40 mb-[0.6vh]" />
                         
                         <AnimatePresence>
                           {isExpanded && (
-                            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-                              <p className="text-slate-400 text-sm leading-relaxed font-light mb-8">{feature.description}</p>
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pb-2">
+                              <p className="text-white/40 text-[0.65rem] leading-relaxed font-light">{feature.description}</p>
                             </motion.div>
                           )}
                         </AnimatePresence>
 
                         {!isExpanded && (
-                          <div className="mt-4 flex items-center gap-2 text-[#00d8ff] text-xs uppercase tracking-widest opacity-60">
-                            <MousePointerClick size={14} />
-                            <span>Expand</span>
+                          <div className="mt-auto flex items-center gap-1 text-[#00d8ff] text-[0.45rem] uppercase tracking-tighter">
+                            <MousePointerClick size="0.6rem" />
+                            <span>View</span>
                           </div>
                         )}
                       </div>
@@ -225,17 +236,15 @@ const FeaturesCarousel = ({
           </div>
         </div>
 
-        <AnimatePresence>
-          {!expandedId && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex justify-center gap-2 mt-[-60px] relative z-20">
-              {features.map((_, index) => (
-                <button key={index} onClick={() => emblaApi?.scrollTo(extendedFeatures.length / 2 - features.length / 2 + index)}
-                  className={`h-1.5 rounded-full transition-all duration-500 ${index === selectedIndex ? "w-12 bg-[#00d8ff]" : "w-2 bg-white/10"}`}
-                />
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {!expandedId && (
+          <div className="flex justify-center gap-[0.2rem] mt-[-5vh] relative z-20">
+            {features.map((_, index) => (
+              <div key={index} 
+                className={`h-[2px] rounded-full transition-all duration-500 ${index === selectedIndex ? "w-[1.2rem] bg-[#00d8ff]" : "w-[0.3rem] bg-white/10"}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

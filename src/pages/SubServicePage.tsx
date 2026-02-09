@@ -1,6 +1,5 @@
 import { useParams, Navigate } from "react-router-dom";
-import ServicePageLayout from "@/components/ServicePageLayout";
-import PageHero from "@/components/PageHero";
+import HeroSubService from "@/components/HeroSubService";
 import CTASection from "@/components/CTASection";
 import WhyUsSection from "@/components/WhyUsSection";
 import FAQ from "@/components/FAQ";
@@ -10,22 +9,16 @@ import { getServiceBySlug } from "@/data/servicesData";
 
 const SubServicePage = () => {
   const { slug } = useParams<{ slug: string }>();
-  
-  // Get service data based on URL slug
   const service = slug ? getServiceBySlug(slug) : undefined;
 
-  // If no service found, redirect to 404
   if (!service) {
     return <Navigate to="/404" replace />;
   }
 
   return (
-    /* ServicePageLayout should not have a solid background color 
-       if you want the App.tsx halo to persist.
-    */
-    <ServicePageLayout>
-      {/* Page Hero */}
-      <PageHero
+    <div className="flex flex-col w-full items-center overflow-x-hidden text-center">
+      
+      <HeroSubService
         title={
           <>
             {service.title.split(service.highlightedTitle)[0]}
@@ -38,36 +31,42 @@ const SubServicePage = () => {
         ctaText={service.ctaText}
       />
 
-      {/* What Is Section - Transparent Background */}
-      <WhatIsSection
-        title={service.whatIs.title}
-        highlightedWord={service.whatIs.highlightedWord}
-        description={service.whatIs.description}
-        bulletPoints={service.whatIs.bulletPoints}
-        imageSrc={service.whatIs.imageSrc}
-        imageAlt={service.whatIs.imageAlt}
-      />
+      <div className="w-full flex flex-col items-center space-y-[6vh] md:space-y-[8vh] lg:space-y-[10vh] pb-[10vh]">
+        <section className="w-full flex justify-center">
+          <WhatIsSection
+            title={service.whatIs.title}
+            highlightedWord={service.whatIs.highlightedWord}
+            description={service.whatIs.description}
+            imageSrc={service.whatIs.imageSrc}
+            imageAlt={service.whatIs.imageAlt}
+          />
+        </section>
 
-      {/* Features Carousel - Transparent Background */}
-      <FeaturesCarousel
-        sectionTitle={`Our ${service.highlightedTitle} Features`}
-        highlightedWord={service.highlightedTitle}
-        features={service.features}
-      />
+        <section className="w-full flex justify-center">
+          <FeaturesCarousel
+            sectionTitle={`Our ${service.highlightedTitle} Features`}
+            highlightedWord={service.highlightedTitle}
+            features={service.features}
+          />
+        </section>
 
-      {/* Why Us Section - Ensure this is also transparent */}
-      <WhyUsSection />
+        <section className="w-full flex justify-center">
+          <WhyUsSection />
+        </section>
 
-      {/* FAQ Section */}
-      <FAQ />
+        <section className="w-full flex justify-center">
+          <FAQ />
+        </section>
 
-      {/* Call To Action */}
-      <CTASection
-        title="Ready to Transform Your"
-        highlight={service.highlightedTitle}
-        subtitle={`Partner with us to achieve ${service.title.toLowerCase()} excellence with precision and creativity.`}
-      />
-    </ServicePageLayout>
+        <section className="w-full flex justify-center py-[4vh]">
+          <CTASection
+            title="Ready to Transform Your"
+            highlight={service.highlightedTitle}
+            subtitle={`Partner with us to achieve ${service.title.toLowerCase()} excellence with precision and creativity.`}
+          />
+        </section>
+      </div>
+    </div>
   );
 };
 
