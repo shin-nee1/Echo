@@ -16,6 +16,7 @@ const SubServicePage = () => {
   }
 
   return (
+    <div>
     <div className="flex flex-col w-full items-center overflow-x-hidden text-center">
       
       <HeroSubService
@@ -54,18 +55,17 @@ const SubServicePage = () => {
           <WhyUsSection />
         </section>
 
-        <section className="w-full flex justify-center">
-          <FAQ />
-        </section>
-
-        <section className="w-full flex justify-center py-[4vh]">
+        
+         
+      </div>
+    </div>
+ <FAQ />
           <CTASection
             title="Ready to Transform Your"
             highlight={service.highlightedTitle}
             subtitle={`Partner with us to achieve ${service.title.toLowerCase()} excellence with precision and creativity.`}
           />
-        </section>
-      </div>
+        
     </div>
   );
 };
