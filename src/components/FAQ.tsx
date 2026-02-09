@@ -33,59 +33,34 @@ const faqs = [
 
 const FAQ: React.FC = () => {
   return (
-    <section className="relative bg-transparent overflow-hidden font-sans z-10" style={{ padding: "clamp(3rem, 8vh, 6rem) 0" }}>
-      <div className="mx-auto relative z-10 w-full">
+    <section className="relative bg-transparent overflow-hidden font-sans z-10 faq-section">
+      <div className="mx-auto relative z-10 w-full px-[5vw]">
         
         {/* HEADER */}
-        <div className="flex flex-col items-center text-center" style={{ marginBottom: "clamp(2rem, 5vh, 4rem)" }}>
-          <h2 
-            className="text-white font-bold tracking-tight leading-[1.1]"
-            style={{ fontSize: "clamp(1.75rem, 3.5vw, 3rem)" }}
-          >
+        <div className="flex flex-col items-center text-center faq-header-wrapper">
+          <h2 className="text-white font-bold tracking-tight leading-[1.1] faq-main-title">
             Frequently Asked <span className="text-[#43c6e4]">Questions</span>
           </h2>
         </div>
 
-        {/* ACCORDION CONTAINER - Adjusted for global 15% padding */}
-        <div className="mx-auto w-full" style={{ maxWidth: "850px" }}>
-          <div 
-            className="w-full border border-[#0c7a7f]/30 bg-black/40 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-            style={{ borderRadius: "1rem" }}
-          >
+        {/* ACCORDION CONTAINER */}
+        <div className="mx-auto w-full faq-card-container">
+          <div className="w-full border border-[#0c7a7f]/30 bg-black/40 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] faq-glass-card">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem
                   key={index}
                   value={`faq-${index}`}
-                  className="relative border-b-0"
-                  style={{ 
-                    paddingLeft: "clamp(1.25rem, 3vw, 2.5rem)", 
-                    paddingRight: "clamp(1.25rem, 3vw, 2.5rem)",
-                    paddingTop: index === 0 ? "0.75rem" : "0px",
-                    paddingBottom: index === faqs.length - 1 ? "0.75rem" : "0px"
-                  }}
+                  className="relative border-b-0 faq-item"
                 >
                   <AccordionTrigger 
-                    className="text-white hover:text-[#43c6e4] transition-colors text-left font-medium border-none outline-none focus:outline-none py-0"
-                    style={{ 
-                      fontSize: "clamp(0.95rem, 1.2vw, 1.2rem)", 
-                      paddingTop: "clamp(1.25rem, 2vh, 1.75rem)", 
-                      paddingBottom: "clamp(1.25rem, 2vh, 1.75rem)",
-                      lineHeight: "1.4" 
-                    }}
+                    className="text-white hover:text-[#43c6e4] transition-colors text-left font-medium border-none outline-none focus:outline-none faq-trigger"
                   >
                     {faq.question}
                   </AccordionTrigger>
                   
                   <AccordionContent className="text-white/70 overflow-hidden">
-                    <div 
-                      className="leading-relaxed"
-                      style={{ 
-                        fontSize: "clamp(0.875rem, 1vw, 1rem)", 
-                        paddingBottom: "1.5rem",
-                        lineHeight: "1.6"
-                      }}
-                    >
+                    <div className="leading-relaxed faq-content-text">
                       {faq.answer}
                     </div>
                   </AccordionContent>
@@ -93,8 +68,7 @@ const FAQ: React.FC = () => {
                   {/* CUSTOM DIVIDER */}
                   {index !== faqs.length - 1 && (
                     <div 
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-[#0c7a7f]/20" 
-                      style={{ height: "1px", width: "95%" }}
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-[#0c7a7f]/20 faq-divider" 
                     />
                   )}
                 </AccordionItem>
@@ -103,23 +77,81 @@ const FAQ: React.FC = () => {
           </div>
 
           {/* VIEW ALL BUTTON */}
-          <div className="flex justify-center" style={{ marginTop: "3rem" }}>
+          <div className="flex justify-center faq-button-wrapper">
             <Button
               asChild
               variant="cyan"
-              className="rounded-full flex items-center justify-center transition-transform hover:scale-105"
-              style={{ 
-                fontSize: "0.95rem",
-                padding: "0 2.5rem",
-                height: "3.25rem",
-                width: "fit-content"
-              }}
+              className="rounded-full flex items-center justify-center transition-transform hover:scale-105 faq-all-btn"
             >
               <Link to="/faq">View All FAQs</Link>
             </Button>
           </div>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* 1. MOBILE (< 768px) */
+        .faq-section { padding: 0rem 0; }
+        .faq-header-wrapper { margin-bottom: 2rem; }
+        .faq-main-title { font-size: 26.5px; }
+        .faq-card-container { max-width: 100%; }
+        .faq-glass-card { border-radius: 1rem; min-height: 200px; } /* Added min-height */
+        .faq-item { padding: 0 1.25rem; }
+        .faq-trigger { font-size: 12px; padding: 1.25rem 0; line-height: 1.4; }
+        .faq-content-text { font-size: 11px; padding-bottom: 1.25rem; line-height: 1.6; }
+        .faq-divider { height: 1px; width: 90%; }
+        .faq-button-wrapper { margin-top: 1.5rem; }
+        .faq-all-btn { height: 2.5rem; padding: 0 1.5rem; font-size: 0.75rem; }
+
+        /* 2. TABLET (768px - 1023px) */
+        @media (min-width: 768px) {
+          .faq-section { padding: 0rem 0; }
+          .faq-main-title { font-size: 38px; }
+          .faq-card-container { max-width: 550px; }
+          .faq-glass-card { min-height: 300px; } /* Added min-height */
+          .faq-item { padding: 0 2rem; }
+          .faq-trigger { font-size: 13px; padding: 1.5rem 0; }
+          .faq-content-text { font-size: 12px; padding-bottom: 1.5rem; }
+        }
+
+        /* 3. STANDARD LAPTOP (1024px - 1439px) */
+        @media (min-width: 1024px) {
+          .faq-section { padding: 0rem 0; }
+          .faq-header-wrapper { margin-bottom: 3rem; }
+          .faq-main-title { font-size: 45px; }
+          .faq-card-container { max-width: 750px; }
+          .faq-glass-card { min-height: 250px; } /* Added min-height */
+          .faq-item { padding: 0 2.5rem; }
+          .faq-trigger { font-size: 14px; padding: 1.75rem 0; }
+          .faq-content-text { font-size: 13px; }
+          .faq-button-wrapper { margin-top: 1.5rem; }
+        }
+
+        /* 4. LARGE DESKTOP / 1440p (1440px - 2559px) */
+        @media (min-width: 1440px) {
+          .faq-main-title { font-size: 48px; }
+          .faq-card-container { max-width: 950px; }
+          .faq-glass-card { min-height: 400px; } /* Added min-height */
+          .faq-trigger { font-size: 15px; }
+          .faq-content-text { font-size: 14px; }
+          .faq-all-btn { height: 3rem; padding: 0 2rem; font-size: 0.85rem; }
+        }
+
+        /* 5. 4K MONITORS (2560px+) */
+        @media (min-width: 2560px) {
+          .faq-section { padding: 2rem 0; }
+          .faq-header-wrapper { margin-bottom: 5rem; }
+          .faq-main-title { font-size: 85px; }
+          .faq-card-container { max-width: 1650px; }
+          .faq-glass-card { border-radius: 2rem; min-height: 500px; } /* Scaled min-height */
+          .faq-item { padding: 0 4rem; }
+          .faq-trigger { font-size: 28px; padding: 3.5rem 0; }
+          .faq-content-text { font-size: 27px; padding-bottom: 3.5rem; }
+          .faq-button-wrapper { margin-top: 6rem; }
+          .faq-all-btn { height: 5rem; padding: 0 5.5rem; font-size: 1.6rem; }
+          .faq-button-wrapper { margin-top: 2.5rem; }
+        }
+      `}} />
     </section>
   );
 };

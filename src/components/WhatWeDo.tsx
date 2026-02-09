@@ -41,46 +41,37 @@ const WhatWeDo = () => {
   };
 
   return (
-    <section 
-      className="relative bg-transparent overflow-hidden z-10"
-      style={{ padding: "clamp(2.5rem, 7vh, 5rem) 0" }}
-    >
-      <div className="mx-auto relative z-10">
+    <section className="whatwedo-wrapper relative bg-transparent overflow-hidden z-10">
+      <div className="container mx-auto relative z-10 px-[5vw]">
         
         {/* HEADER AREA */}
-        <div 
-          className="flex flex-col lg:flex-row lg:items-end justify-between gap-[1rem]"
-          style={{ marginBottom: "clamp(1.5rem, 4vh, 3rem)" }}
-        >
+        <div className="whatwedo-header flex flex-col lg:flex-row lg:items-end justify-between gap-[1rem]">
           <div className="flex flex-row items-end gap-[0.75rem] md:gap-[2rem]">
             <div className="shrink-0">
-              <h2 
-                className="text-white font-bold tracking-tighter leading-none"
-                style={{ fontSize: "clamp(1.5rem, 4vw, 3.5rem)" }}
-              >
+              <h2 className="whatwedo-title text-white font-bold tracking-tighter leading-none">
                 What We <span className="text-[#43c6e4]">Do</span>
               </h2>
             </div>
             
-            <div className="pl-[0.75rem] md:pl-[2rem] border-l border-white/10 pb-[0.15rem]">
-              <p 
-                className="text-slate-400 leading-tight"
-                style={{ 
-                  fontSize: "clamp(0.65rem, 0.9vw, 0.9rem)",
-                  maxWidth: "220px" 
-                }}
-              >
+            <div className="whatwedo-divider pl-[0.75rem] md:pl-[2rem] border-l border-white/10 pb-[0.15rem]">
+              <p className="whatwedo-subtitle text-slate-400 leading-tight">
                 Every brand we build follows a rhythm.
               </p>
             </div>
           </div>
 
-          {/* SCROLL BUTTONS (DESKTOP) */}
-          <div className="hidden lg:flex min-[1440px]:hidden gap-[0.75rem]">
-            <button onClick={() => scroll("left")} className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] transition-all w-10 h-10">
+          {/* SCROLL BUTTONS: Managed by Media Queries */}
+          <div className="whatwedo-nav hidden lg:flex gap-[0.75rem]">
+            <button 
+              onClick={() => scroll("left")} 
+              className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] hover:border-[#43c6e4] transition-all w-10 h-10"
+            >
               <ArrowLeft size="1rem" />
             </button>
-            <button onClick={() => scroll("right")} className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] transition-all w-10 h-10">
+            <button 
+              onClick={() => scroll("right")} 
+              className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] hover:border-[#43c6e4] transition-all w-10 h-10"
+            >
               <ArrowRight size="1rem" />
             </button>
           </div>
@@ -89,83 +80,50 @@ const WhatWeDo = () => {
         {/* SERVICE CARDS ROW */}
         <div 
           ref={scrollRef}
-          className="flex gap-[1rem] md:gap-[2rem] overflow-x-auto pb-[1.5rem] -mx-[5vw] px-[5vw] snap-x snap-mandatory lg:overflow-hidden min-[1440px]:grid min-[1440px]:grid-cols-3 min-[1440px]:gap-[2rem] scrollbar-none"
+          className="whatwedo-scroll-container flex gap-[1rem] md:gap-[2rem] overflow-x-auto pb-[1.5rem] -mx-[5vw] px-[5vw] snap-x snap-mandatory scrollbar-none"
         >
           {services.map((service, i) => (
             <Link 
               key={i} 
               to={service.href} 
-              className="group block shrink-0 snap-center w-[65vw] sm:w-[45vw] md:w-[40vw] lg:w-[31vw] min-[1440px]:w-auto"
+              className="whatwedo-card-link group block shrink-0 snap-center"
             >
               <motion.div 
                 whileHover={{ y: -5 }}
-                className="relative flex flex-col rounded-[1.25rem] md:rounded-[2rem] bg-black/20 border border-white/10 overflow-hidden transition-all duration-500 group-hover:border-[#43c6e4]/30"
-                style={{ 
-                  padding: "clamp(1rem, 3vw, 2rem)",
-                  minHeight: "clamp(15rem, 25vw, 26rem)",
-                  height: "100%"
-                }}
+                className="whatwedo-card relative flex flex-col rounded-[1.25rem] md:rounded-[2rem] bg-black/20 border border-white/10 overflow-hidden transition-all duration-500 group-hover:border-[#43c6e4]/30"
               >
                 {/* DYNAMIC IMAGES AREA */}
-                <div 
-                  className="relative w-full mb-[0.75rem] pointer-events-none flex-shrink-0"
-                  style={{ height: "clamp(4rem, 8vw, 8rem)" }}
-                >
+                <div className="whatwedo-img-area relative w-full mb-[0.75rem] pointer-events-none flex-shrink-0">
                   {service.title === "DESIGN" && (
                     <>
-                      <img 
-                        src={DesignImg6} 
-                        className="absolute -top-2 -right-2 h-auto group-hover:scale-105 transition-transform" 
-                        style={{ width: "clamp(5rem, 10vw, 9rem)" }}
-                      />
-                      <img 
-                        src={DesignImg5} 
-                        className="absolute -bottom-2 -left-2 h-auto" 
-                        style={{ width: "clamp(2.5rem, 5vw, 4.5rem)" }}
-                      />
+                      <img src={DesignImg6} alt="" className="whatwedo-img-primary absolute -top-2 -right-2 h-auto group-hover:scale-105 transition-transform" />
+                      <img src={DesignImg5} alt="" className="whatwedo-img-secondary absolute -bottom-2 -left-2 h-auto" />
                     </>
                   )}
 
                   {service.title === "DEVELOPMENT" && (
-                    <img 
-                      src={DevImg7} 
-                      className="absolute top-0 -left-2 max-w-none h-auto" 
-                      style={{ width: "clamp(7.5rem, 15vw, 13rem)" }}
-                    />
+                    <img src={DevImg7} alt="" className="whatwedo-img-full absolute top-0 -left-2 max-w-none h-auto" />
                   )}
 
                   {service.title === "MARKETING" && (
-                    <img 
-                      src={MarketImg8} 
-                      className="absolute -top-2 -left-2 max-w-none h-auto" 
-                      style={{ width: "clamp(7.5rem, 15vw, 13rem)" }}
-                    />
+                    <img src={MarketImg8} alt="" className="whatwedo-img-full absolute -top-2 -left-2 max-w-none h-auto" />
                   )}
                 </div>
 
                 {/* CONTENT AREA */}
                 <div className="relative z-10 flex flex-col h-full">
-                  <h3 className="text-white/30 font-black tracking-widest uppercase mb-1" style={{ fontSize: "9px" }}>
+                  <h3 className="whatwedo-tag text-white/30 font-black tracking-widest uppercase mb-1">
                     {service.title}
                   </h3>
-                  <p 
-                    className="text-[#43c6e4] font-bold mb-2 tracking-tight leading-tight"
-                    style={{ fontSize: "clamp(1rem, 1.4vw, 1.5rem)" }}
-                  >
+                  <p className="whatwedo-highlight text-[#43c6e4] font-bold mb-2 tracking-tight leading-tight">
                     {service.highlight}
                   </p>
-                  <p 
-                    className="text-slate-400 leading-snug mb-4 line-clamp-3"
-                    style={{ fontSize: "clamp(0.75rem, 0.85vw, 0.9rem)" }}
-                  >
+                  <p className="whatwedo-desc text-slate-400 leading-snug mb-4 line-clamp-3">
                     {service.description}
                   </p>
 
                   <div className="mt-auto">
-                    <span 
-                      className="inline-flex items-center gap-2 text-white/80 font-bold uppercase tracking-wider border-b border-white/10 group-hover:border-[#43c6e4] pb-1 transition-all"
-                      style={{ fontSize: "10px" }}
-                    >
+                    <span className="whatwedo-explore inline-flex items-center gap-2 text-white/80 font-bold uppercase tracking-wider border-b border-white/10 group-hover:border-[#43c6e4] pb-1 transition-all">
                       Explore
                       <ArrowRight size="0.75rem" className="group-hover:translate-x-1 transition-transform" />
                     </span>
@@ -176,6 +134,87 @@ const WhatWeDo = () => {
           ))}
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* REMOVE SCROLLBAR BUT KEEP SWIPE */
+        .whatwedo-scroll-container {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;     /* Firefox */
+          -webkit-overflow-scrolling: touch; /* Smooth momentum scroll for iOS */
+        }
+        .whatwedo-scroll-container::-webkit-scrollbar {
+          display: none; /* Chrome, Safari and Opera */
+        }
+
+        /* 1. BASE / MOBILE FIRST */
+        .whatwedo-wrapper { padding: 2rem 0; }
+        .whatwedo-header { margin-bottom: 2rem; }
+        .whatwedo-title { font-size: 1.85rem; }
+        .whatwedo-subtitle { font-size: 0.7rem; max-width: 140px; }
+        
+        .whatwedo-card-link { width: 65vw; }
+        .whatwedo-card { padding: 1.3rem; min-height: 16rem; }
+        .whatwedo-img-area { height: 6rem; }
+        .whatwedo-img-primary { width: 6rem; }
+        .whatwedo-img-secondary { width: 4rem; }
+        .whatwedo-img-full { width: 9rem; }
+        
+        .whatwedo-tag { font-size: 10px; }
+        .whatwedo-highlight { font-size: 0.85rem; }
+        .whatwedo-desc { font-size: 0.75rem; }
+        .whatwedo-explore { font-size: 9px; }
+
+        /* 2. TABLET (768px) */
+        @media (min-width: 768px) {
+          .whatwedo-title { font-size: 2.5rem; }
+          .whatwedo-subtitle { font-size: 0.85rem; max-width: 200px; }
+          .whatwedo-card-link { width: 45vw; }
+          .whatwedo-card { padding: 1.75rem; min-height: 15rem; }
+          .whatwedo-img-area { height: 7rem; }
+          .whatwedo-img-primary { width: 7rem; }
+          .whatwedo-img-full { width: 10rem; }
+        }
+
+        /* 3. LAPTOP (1024px) */
+        @media (min-width: 1024px) {
+          .whatwedo-wrapper { padding: 3rem 0; }
+          .whatwedo-title { font-size: 2.8rem; }
+          .whatwedo-card-link { width: 30vw; }
+          .whatwedo-card { padding: 2rem; min-height: 22rem; }
+          .whatwedo-highlight { font-size: 1.4rem; }
+        }
+
+        /* 4. LARGE DESKTOP (1440px) */
+        @media (min-width: 1440px) {
+          .whatwedo-title { font-size: 2.5rem; }
+          .whatwedo-card-link { width: 25vw; }
+          .whatwedo-img-area { height: 7rem; }
+          .whatwedo-img-primary { width: 8rem; }
+          .whatwedo-img-full { width: 10rem; }
+          .whatwedo-highlight { font-size: 1.5rem; }
+          .whatwedo-desc { font-size: 0.85rem; }
+        }
+
+        /* 5. 4K MONITORS (2560px) */
+        @media (min-width: 2560px) {
+          .whatwedo-wrapper { padding: 5vh 0; }
+          .whatwedo-title { font-size: 4.8rem; }
+          .whatwedo-subtitle { font-size: 1.5rem; max-width: 400px; }
+          .whatwedo-card-link { width: 28vw; }
+          .whatwedo-card { padding: 2rem; min-height: 35rem; border-radius: 4rem; }
+          .whatwedo-img-area { height: 15rem; margin-bottom: 3rem; }
+          .whatwedo-img-primary { width: 15rem; }
+          .whatwedo-img-secondary { width: 8rem; }
+          .whatwedo-img-full { width: 19rem; }
+          .whatwedo-tag { font-size: 1.6rem; margin-bottom: 1.5rem; }
+          .whatwedo-highlight { font-size: 2rem; margin-bottom: 1rem; }
+          .whatwedo-desc { font-size: 1.6rem; line-height: 1.6; margin-bottom: 3rem; }
+          .whatwedo-explore { font-size: 1.2rem; padding-bottom: 1rem; gap: 1.5rem; }
+          .whatwedo-nav { gap: 2rem; }
+          .whatwedo-nav button { width: 5rem; height: 5rem; }
+          .whatwedo-nav svg { width: 2rem; height: 2rem; }
+        }
+      `}} />
     </section>
   );
 };

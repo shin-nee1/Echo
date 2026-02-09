@@ -21,22 +21,19 @@ const WhyUsSection = () => {
   return (
     <section 
       className="relative overflow-hidden bg-transparent"
-      style={{ padding: "clamp(4rem, 10vw, 8rem) 0" }}
+      style={{ padding: "clamp(3rem, 8vw, 8rem) 0" }}
     >
       <div className="mx-auto w-full px-[5vw]">
         
-        {/* HEADER */}
-        <div className="text-center" style={{ paddingBottom: "4rem" }}>
-          <h2 
-            className="text-white font-bold leading-tight"
-            style={{ fontSize: "clamp(32px, 5vw, 64px)" }}
-          >
+        {/* MAIN HEADER - Reduced padding for mobile */}
+        <div className="text-center" style={{ paddingBottom: "clamp(1.5rem, 5vw, 4rem)" }}>
+          <h2 className="text-white font-bold leading-tight why-us-main-title">
             Why Echo & <span className="text-[#43c6e4]">Impact?</span>
           </h2>
         </div>
 
-        {/* FLEX CONTAINER */}
-        <div className="flex flex-col lg:flex-row justify-center items-stretch gap-0 lg:h-[30vw] min-h-[140vw] lg:min-h-0">
+        {/* FLEX CONTAINER - Reduced min-height for mobile/tablet */}
+        <div className="why-us-container flex flex-col lg:flex-row justify-center items-stretch gap-0 lg:h-[35vw] min-h-[80vh] lg:min-h-0">
           {items.map((item, index) => {
             const isActive = activeIndex === index;
             const isLineActive = isActive || activeIndex === index + 1;
@@ -46,16 +43,12 @@ const WhyUsSection = () => {
               <div
                 key={index}
                 onClick={() => setActiveIndex(isActive ? null : index)}
-                style={{
-                  zIndex: isActive ? 20 : 10,
-                  flex: isActive ? "3 0 auto" : "1 1 auto",
-                  height: isActive ? "70vw" : "16vw",
-                }}
-                className={`relative cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] overflow-visible lg:!h-full ${
+                style={{ zIndex: isActive ? 20 : 10 }}
+                className={`relative cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] overflow-visible lg:!h-full why-us-item ${
                   isActive ? "why-us-item-active" : "why-us-item-inactive"
                 }`}
               >
-                {/* BACKGROUND HIGHLIGHT - Notched logic */}
+                {/* BACKGROUND HIGHLIGHT */}
                 <div
                   className={`absolute inset-0 transition-opacity duration-500 pointer-events-none ${
                     isActive ? "opacity-100" : "opacity-0"
@@ -68,14 +61,21 @@ const WhyUsSection = () => {
                 {/* CONTENT LAYER */}
                 <div className="absolute inset-0 overflow-hidden lg:overflow-visible flex items-center justify-center">
                   
-                  {/* COLLAPSED TITLE */}
+                  {/* COLLAPSED TITLES */}
                   <div
                     className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
                       isActive ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
                     }`}
                   >
-                    <h3 className="hidden lg:block font-bold tracking-[0.3em] uppercase text-white whitespace-nowrap -rotate-90 origin-center" style={{ fontSize: "clamp(12px, 1vw, 16px)" }}>{item.title}</h3>
-                    <h3 className="lg:hidden font-bold tracking-[0.2em] uppercase text-white text-center w-full px-[5vw]" style={{ fontSize: "clamp(14px, 3.8vw, 20px)" }}>{item.title}</h3>
+                    {/* DESKTOP (Rotated) */}
+                    <h3 className="hidden lg:block font-bold uppercase text-white whitespace-nowrap -rotate-90 origin-center why-us-collapsed-text">
+                      {item.title}
+                    </h3>
+
+                    {/* MOBILE/TABLET (Horizontal) */}
+                    <h3 className="lg:hidden font-bold uppercase text-white text-center w-full px-[5vw] why-us-collapsed-text">
+                      {item.title}
+                    </h3>
                   </div>
 
                   {/* EXPANDED CONTENT */}
@@ -85,37 +85,43 @@ const WhyUsSection = () => {
                     }`}
                   >
                     <Sparkles className="text-[#00d8ff]" style={{ width: "clamp(24px, 2.2vw, 40px)", height: "clamp(24px, 2.2vw, 40px)", marginBottom: "2vw" }} />
-                    <h3 className="font-bold text-white uppercase tracking-tight" style={{ fontSize: "clamp(16px, 1.8vw, 28px)", marginBottom: "2vw" }}>{item.title}</h3>
-                    <p className="text-gray-300 leading-relaxed mx-auto" style={{ fontSize: "clamp(13px, 0.95vw, 16px)", maxWidth: "300px" }}>{item.description}</p>
+                    <h3 className="font-bold text-white uppercase tracking-tight why-us-expanded-title">{item.title}</h3>
+                    <p className="text-gray-300 leading-relaxed mx-auto why-us-description">{item.description}</p>
                   </div>
                 </div>
 
-                {/* SVG SEPARATORS (DESKTOP) */}
+                {/* --- SVG SEPARATORS --- */}
+
+                {/* 1. TOP SEPARATOR (Desktop) - Re-added for first item */}
                 {index === 0 && (
-                  <div className="hidden lg:block absolute top-0 left-[-0.1vw] w-[2.5vw] h-full z-30 pointer-events-none">
+                  <div className="hidden lg:block absolute top-0 left-[-1.25vw] w-[2.5vw] h-full z-30 pointer-events-none">
                     <svg viewBox="0 0 40 100" preserveAspectRatio="none" className="h-full w-full">
                       <path d="M 2 0 L 2 45 L 18 50 L 2 55 L 2 100" fill="none" stroke={isFirstLineActive ? "#43c6e4" : "rgba(255,255,255,0.2)"} strokeWidth={isFirstLineActive ? "2" : "1"} className="transition-all duration-500" />
                     </svg>
                   </div>
                 )}
+
+                {/* 2. RIGHT SEPARATOR (Desktop) */}
                 <div className="hidden lg:block absolute top-0 right-[-1.25vw] w-[2.5vw] h-full z-30 pointer-events-none">
                   <svg viewBox="0 0 40 100" preserveAspectRatio="none" className="h-full w-full">
                     <path d="M 2 0 L 2 45 L 18 50 L 2 55 L 2 100" fill="none" stroke={isLineActive ? "#43c6e4" : "rgba(255,255,255,0.2)"} strokeWidth={isLineActive ? "2" : "1"} className="transition-all duration-500" />
                   </svg>
                 </div>
 
-                {/* SVG SEPARATORS (MOBILE) */}
+                {/* 3. TOP SEPARATOR (Mobile/Tablet) - Fixed the disappearance */}
                 {index === 0 && (
-                  <div className="lg:hidden absolute top-[-0.1vw] left-0 w-full h-[3vw] z-30 pointer-events-none">
+                  <div className="lg:hidden absolute top-[-1.5vw] left-0 w-full h-[3vw] z-30 pointer-events-none">
                     <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="w-full h-full">
                       <path d="M 0 2 L 45 2 L 50 18 L 55 2 L 100 2" fill="none" stroke={isFirstLineActive ? "#43c6e4" : "rgba(255,255,255,0.2)"} strokeWidth={isFirstLineActive ? "2" : "1"} className="transition-all duration-500" />
                     </svg>
                   </div>
                 )}
+
+                {/* 4. BOTTOM SEPARATOR (Mobile/Tablet) */}
                 <div className="lg:hidden absolute bottom-[-1.5vw] left-0 w-full h-[3vw] z-30 pointer-events-none">
                   <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="w-full h-full">
                     <path d="M 0 2 L 45 2 L 50 18 L 55 2 L 100 2" fill="none" stroke={isLineActive ? "#43c6e4" : "rgba(255,255,255,0.2)"} strokeWidth={isLineActive ? "2" : "1"} className="transition-all duration-500" />
-                    </svg>
+                  </svg>
                 </div>
               </div>
             );
@@ -123,18 +129,61 @@ const WhyUsSection = () => {
         </div>
       </div>
 
-      <style>{`
-        @media (min-width: 1024px) {
-          .why-us-item-inactive { 
-            width: clamp(80px, 11vw, 150px) !important; 
-            flex: 0 0 auto !important;
-          }
-          .why-us-item-active {
-            width: clamp(300px, 30vw, 500px) !important;
-            flex: 0 0 auto !important;
-          }
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* 1. MOBILE (Base Style - Below 764px) */
+        .why-us-collapsed-text { font-size: 11px; letter-spacing: 0.2em; }
+        .why-us-expanded-title { font-size: 15px; }
+        .why-us-description { font-size: 12px; max-width: 280px; }
+        .why-us-main-title { font-size: 28px !important; }
+
+        @media (max-width: 763px) { 
+          .why-us-item-inactive { height: 11vh !important; }
+          .why-us-item-active { height: 30vh !important; }
         }
-      `}</style>
+
+        /* 2. TABLET (764px to 1023px) */
+        @media (min-width: 764px) {
+          .why-us-collapsed-text { font-size: 13.5px; letter-spacing: 0.25em; }
+          .why-us-expanded-title { font-size: 22px; }
+          .why-us-description { font-size: 14px; }
+          .why-us-main-title { font-size: 42px !important; }
+          .why-us-item-inactive { height: 12vh !important; }
+          .why-us-item-active { height: 32vh !important; }
+        }
+
+        /* 3. STANDARD LAPTOP (1024px to 1439px) */
+        @media (min-width: 1024px) {
+          .why-us-collapsed-text { font-size: 14px; letter-spacing: 0.3em; }
+          .why-us-expanded-title { font-size: 24px; }
+          .why-us-description { font-size: 15px; max-width: 320px; }
+          .why-us-main-title { font-size: 48px !important; }
+          .why-us-item-inactive { width: 120px !important; height: 100% !important; }
+          .why-us-item-active { width: 500px !important; height: 100% !important; }
+          .why-us-container { height: 38vw !important; }
+        }
+
+        /* 4. LARGE LAPTOP / MACBOOK (1440px to 2559px) */
+        @media (min-width: 1440px) {
+          .why-us-collapsed-text { font-size: 15px; letter-spacing: 0.4em; }
+          .why-us-expanded-title { font-size: 28px; }
+          .why-us-description { font-size: 17px; max-width: 380px; }
+          .why-us-main-title { font-size: 45px !important; }
+          .why-us-item-inactive { width: 150px !important; }
+          .why-us-item-active { width: 620px !important; }
+          .why-us-container { height: 32vw !important; }
+        }
+
+        /* 5. 4K MONITORS (2560px+) */
+        @media (min-width: 2560px) {
+          .why-us-collapsed-text { font-size: 25px; letter-spacing: 0.5em; }
+          .why-us-expanded-title { font-size: 36px; }
+          .why-us-description { font-size: 20px; max-width: 500px; }
+          .why-us-main-title { font-size: 85px !important; }
+          .why-us-item-inactive { width: 200px !important; }
+          .why-us-item-active { width: 900px !important; }
+          .why-us-container { height: 28vw !important; max-width: 2600px; margin: 0 auto; }
+        }
+      `}} />
     </section>
   );
 };

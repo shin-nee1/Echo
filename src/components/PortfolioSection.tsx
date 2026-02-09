@@ -20,116 +20,139 @@ const PortfolioSection = () => {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = direction === "left" ? -350 : 350;
+      const scrollAmount = direction === "left" ? -400 : 400;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
   return (
-    <section 
-      className="relative bg-transparent overflow-hidden z-10"
-      style={{ padding: "clamp(3rem, 10vh, 8rem) 0" }}
-    >
-      <div className="mx-auto px-[5vw] relative z-10" style={{ maxWidth: "1600px" }}>
+    <section className="portfolio-section relative bg-transparent overflow-hidden z-10">
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* REMOVE SCROLLBAR BUT KEEP SWIPE */
+        .portfolio-scroll-container {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          -webkit-overflow-scrolling: touch;
+        }
+        .portfolio-scroll-container::-webkit-scrollbar { display: none; }
+
+        /* 1. BASE / MOBILE FIRST */
+        .portfolio-wrapper { padding: 3rem 0; }
+        .portfolio-header { margin-bottom: 2rem; display: flex; align-items: flex-end; justify-content: space-between; }
+        .portfolio-title { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.06em; line-height: 1; color: white; }
+        .portfolio-card-link { width: 55vw; flex-shrink: 0; scroll-snap-align: center; margin-right: 1.4rem; }
+        .portfolio-card-box { aspect-ratio: 1.1 / 1; border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+        .portfolio-nav { display: none; } 
         
-        {/* HEADER AREA - Always a Row */}
-        <div 
-          className="flex flex-row items-end justify-between gap-[1rem] md:gap-[2rem]" 
-          style={{ marginBottom: "clamp(2rem, 6vh, 4rem)" }}
-        >
+        /* VIEW ALL BUTTON - REMOVED GLOW */
+        .portfolio-view-all { 
+          font-size: 0.75rem; 
+          height: 2.2rem; 
+          padding: 0 1.2rem; 
+          box-shadow: none !important; 
+          filter: none !important; 
+        }
+
+        /* 2. TABLET (768px) */
+        @media (min-width: 768px) {
+          .portfolio-title { font-size: 2.65rem; }
+          .portfolio-card-link { width: 45vw; margin-right: 2rem; }
+          .portfolio-card-box { border-radius: 2.5rem; }
+          .portfolio-view-all { font-size: 0.85rem; height: 2.5rem; padding: 0 1.8rem; }
+        }
+
+        /* 3. LAPTOP (1024px) */
+        @media (min-width: 1024px) {
+          .portfolio-wrapper { padding: 4rem 0; }
+          .portfolio-title { font-size: 3.2rem; }
+          .portfolio-card-link { width: 31vw; margin-right: 1.5rem; }
+          .portfolio-nav { display: flex; gap: 0.75rem; padding-bottom: 0rem; }
+          .portfolio-nav button { 
+            width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
+            color: white; display: flex; align-items: center; justify-content: center; transition: all 0.3s;
+          }
+          .portfolio-nav button:hover { background: #43c6e4; border-color: #43c6e4; color: black; }
+          .portfolio-view-all { font-size: 0.9rem; height: 2.5rem; padding: 0 1.5rem; }
+        }
+
+        /* 4. LARGE DESKTOP (1440px) - UPDATED TO HORIZONTAL FLOW */
+        @media (min-width: 1440px) {
+        .portfolio-title { font-size: 3rem; }
+          .portfolio-scroll-container { 
+            display: flex; /* Changed from grid */
+            gap: 2rem; 
+            overflow-x: auto; 
+          }
+          .portfolio-card-link { 
+            width: 60vh; 
+            flex-shrink: 0; 
+            scroll-snap-align: start; 
+            margin-right: 0; 
+          }
+          .portfolio-nav { display: flex; gap: 0.75rem; padding-bottom: 0.5rem; } 
+          .portfolio-view-all { font-size: 1rem; height: 3rem; padding: 0 2.2rem; }
+        }
+
+        /* 5. 4K MONITORS (2560px) */
+        @media (min-width: 2560px) {
+          .portfolio-wrapper { padding: 8vh 0; }
+          .portfolio-title { font-size: 5.2rem; }
+          .portfolio-subtitle { font-size: 1.4rem; margin-left: 4rem; padding-left: 4rem; }
+          .portfolio-card-link { width: 60vh; }
+          .portfolio-card-box { border-radius: 4rem; }
+          .portfolio-header { margin-bottom: 5vh; }
           
-          <div className="flex flex-row items-end gap-[1rem] md:gap-[2rem] flex-nowrap min-w-0">
-            {/* TITLE */}
-            <div className="shrink-0">
-              <h2 
-                className="text-white font-bold tracking-tighter leading-none"
-                style={{ fontSize: "clamp(1.5rem, 4.5vw, 4rem)" }}
-              >
-                Our <span className="text-[#43c6e4]">Portfolio</span>
-              </h2>
-            </div>
-            
-            {/* DESCRIPTION - Stays in row */}
-            <div className="pl-[0.75rem] md:pl-[2rem] border-l border-white/10 pb-[0.2rem] min-w-0">
-              <p 
-                className="text-slate-400 leading-tight line-clamp-2 md:line-clamp-none"
-                style={{ 
-                  fontSize: "clamp(0.65rem, 1vw, 1rem)", 
-                  maxWidth: "clamp(100px, 20vw, 350px)" 
-                }}
-              >
-                Showcasing digital excellence. Built to scale.
-              </p>
-            </div>
+          /* 4K NAV BUTTON SCALE */
+          .portfolio-nav { gap: 1.5rem; }
+          .portfolio-nav button { width: 5.5rem; height: 5.5rem; }
+          .portfolio-nav svg { width: 2rem; height: 2rem; }
+          
+          .portfolio-view-all { font-size: 1.5rem; height: 5.5rem; padding: 0 4.5rem; border-radius: 6rem; }
+        }
+      `}} />
+
+      <div className="mx-auto px-[5vw] relative z-10" style={{ maxWidth: "2200px" }}>
+        
+        {/* HEADER AREA */}
+        <div className="portfolio-header">
+          <div className="shrink-0">
+            <h2 className="portfolio-title">
+              Our <span className="text-[#43c6e4]">Portfolio</span>
+            </h2>
           </div>
 
-          {/* ACTIONS & BUTTON - Pushed to the Right */}
-          <div className="flex flex-row items-end gap-[1rem] shrink-0">
-            {/* SCROLL BUTTONS (Hidden on Desktop 4K and Mobile/Tablet) */}
-            <div className="hidden lg:flex min-[1440px]:hidden gap-[0.75rem] pb-[0.25rem]">
-              <button 
-                onClick={() => scroll("left")}
-                className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] hover:border-[#43c6e4] hover:text-black transition-all duration-300"
-                style={{ width: "clamp(2.5rem, 3.5vw, 3.5rem)", height: "clamp(2.5rem, 3.5vw, 3.5rem)" }}
-              >
-                <ArrowLeft size="1.2rem" />
-              </button>
-              <button 
-                onClick={() => scroll("right")}
-                className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] hover:border-[#43c6e4] hover:text-black transition-all duration-300"
-                style={{ width: "clamp(2.5rem, 3.5vw, 3.5rem)", height: "clamp(2.5rem, 3.5vw, 3.5rem)" }}
-              >
-                <ArrowRight size="1.2rem" />
-              </button>
+          <div className="flex flex-row items-end gap-[1.5rem] shrink-0">
+            {/* BUTTONS (Visible 1024px - 1439px) */}
+            <div className="portfolio-nav">
+              <button onClick={() => scroll("left")}><ArrowLeft size="1.2rem" /></button>
+              <button onClick={() => scroll("right")}><ArrowRight size="1.2rem" /></button>
             </div>
 
-            {/* UNIVERSAL VIEW ALL BUTTON */}
-            <Button 
-              variant="cyan"
-              size="hero"
-              className="rounded-full"
-              style={{ 
-                fontSize: "clamp(0.7rem, 0.9vw, 1rem)", 
-                padding: "0 clamp(1rem, 2vw, 2.5rem)",
-                height: "clamp(2.5rem, 4vw, 3.5rem)" 
-              }}
-            >
+            <Button variant="cyan" size="hero" className="portfolio-view-all rounded-full">
               View All
             </Button>
           </div>
         </div>
 
         {/* PORTFOLIO CARDS ROW */}
-        <div 
-          ref={scrollRef}
-          className="flex gap-[1.5rem] md:gap-[2.5rem] lg:gap-[3rem] overflow-x-auto pb-[2rem] -mx-[5vw] px-[5vw] snap-x snap-mandatory lg:overflow-hidden lg:pb-0 min-[1440px]:grid min-[1440px]:grid-cols-3 min-[1440px]:gap-[4rem] min-[1440px]:overflow-visible min-[1440px]:mx-0 min-[1440px]:px-0 scrollbar-none"
-        >
+        <div ref={scrollRef} className="portfolio-scroll-container -mx-[5vw] px-[5vw] lg:mx-0 lg:px-0">
           {projects.map((project) => (
-            <Link 
-              key={project.id}
-              to={project.href}
-              className="group block shrink-0 snap-center w-[85vw] sm:w-[50vw] md:w-[45vw] lg:w-[31vw] min-[1440px]:w-auto"
-            >
+            <Link key={project.id} to={project.href} className="portfolio-card-link group">
               <motion.div 
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -10 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 className="flex flex-col"
               >
-                <div 
-                  className={`relative w-full rounded-[1.5rem] md:rounded-[2rem] overflow-hidden ${project.bg} border border-white/5 flex items-center justify-center p-[20%] transition-all duration-500`}
-                  style={{ 
-                    aspectRatio: "1/1",
-                    maxHeight: "45vh"
-                  }}
-                >
+                <div className={`portfolio-card-box relative w-full ${project.bg} flex items-center justify-center transition-all duration-500`}>
                   <img 
                     src={project.img} 
                     alt={project.name}
-                    className={`max-w-[70%] max-h-[70%] w-auto h-auto object-contain transition-transform duration-700 group-hover:scale-110 ${
-                      project.id === 3 ? "object-left" : "object-center"
-                    }`}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-500" />
                 </div>
               </motion.div>
             </Link>
