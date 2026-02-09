@@ -32,9 +32,9 @@ const FAQCategory = ({ title, highlight, faqs }: FAQCategoryType) => {
 
   return (
     <div 
-      className="scroll-mt-[clamp(5rem,10vh,8rem)]" 
+      /* UPDATED: Increased scroll-margin-top to account for taller Navbar buffer */
+      className="scroll-mt-[clamp(6rem,12vh,10rem)]" 
       id={sectionId}
-      /* Preserving the enhanced vertical spacing from the previous step */
       style={{ marginBottom: "clamp(4.5rem, 9vw, 7rem)" }}
     >
       <div className="text-center" style={{ marginBottom: "clamp(2rem, 4vh, 3rem)" }}>
@@ -44,7 +44,7 @@ const FAQCategory = ({ title, highlight, faqs }: FAQCategoryType) => {
       </div>
 
       <div className="w-full border border-[#0c7a7f]/20 bg-black/40 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-           style={{ borderRadius: "clamp(1.2rem, 3vw, 2.5rem)" }}>
+           style={{ borderRadius: "clamp(0.5rem, 3vw, 1.3rem)" }}>
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (
             <AccordionItem
@@ -58,7 +58,6 @@ const FAQCategory = ({ title, highlight, faqs }: FAQCategoryType) => {
               }}
             >
               <AccordionTrigger 
-                /* UPDATED: Changed from font-bold to font-semibold */
                 style={{ fontSize: "0.9rem" }}
                 className="text-white hover:text-[#00d8ff] transition-colors text-left font-semibold font-sans leading-snug py-[clamp(1rem,2vh,1.6rem)] text-[clamp(0.8rem,1vw,0.9rem)]"
               >
@@ -84,13 +83,15 @@ const FAQCategory = ({ title, highlight, faqs }: FAQCategoryType) => {
 
 const FAQ = () => {
   return (
-    <div className="font-sans text-white selection:bg-[#4fb3c4]/30 overflow-x-hidden min-h-screen">
+    /* Added global padding-bottom to ensure breathing room from components below */
+    <div className="font-sans text-white selection:bg-[#4fb3c4]/30 overflow-x-hidden min-h-screen pb-[5vh]">
       <Navbar />
 
       <section 
         className="relative overflow-hidden w-full flex justify-center" 
         style={{ 
-          paddingTop: "clamp(4.5rem, 12vh, 8.5rem)", 
+          /* UPDATED: Increased paddingTop (from 4.5rem to 7.5rem) to clear fixed Navbar */
+          paddingTop: "clamp(7.5rem, 15vh, 10rem)", 
           paddingBottom: "clamp(2rem, 6vh, 4rem)" 
         }}
       >
@@ -98,7 +99,8 @@ const FAQ = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-[clamp(2rem,5vw,6rem)]">
             
             <div className="z-10 order-2 lg:order-1 flex flex-col">
-              <h2 className="text-left font-medium tracking-tighter opacity-90 font-sans leading-none mb-[clamp(0.2rem,0.8vh,0.5rem)] text-[clamp(2.2rem,5.5vw,4.2rem)]">
+              {/* UPDATED: Changed leading-tight to leading-[1.2] to prevent top clipping of FAQ's */}
+              <h2 className="text-left font-medium tracking-tighter opacity-90 font-sans leading-[1.2] mb-[clamp(0.2rem,0.8vh,0.5rem)] text-[clamp(2.2rem,5.5vw,4.2rem)]">
                 FAQ's
               </h2>
               
@@ -147,6 +149,7 @@ const FAQ = () => {
         </div>
       </section>
 
+      {/* Accordion Section */}
       <section className="relative z-10" style={{ paddingTop: "clamp(1.5rem, 4vh, 2.5rem)", paddingBottom: "clamp(3rem, 10vh, 7rem)" }}>
         <div className="container mx-auto px-[2vw] max-w-[1300px]">
           <div className="mx-auto max-w-[clamp(50rem,60vw,58rem)]">
@@ -157,7 +160,10 @@ const FAQ = () => {
         </div>
       </section>
 
-      <section className="relative z-10" style={{ paddingBottom: "clamp(4rem, 10vh, 8rem)" }}>
+      {/* CTA Section */}
+      <section className="relative z-10" 
+               /* UPDATED: Ensured bottom padding (clamp(5rem, 12vh, 10rem)) is robust */
+               style={{ paddingBottom: "clamp(5rem, 12vh, 10rem)" }}>
         <div className="container mx-auto px-[6vw] text-center max-w-[1300px]">
           <div className="mx-auto border border-white/5 bg-white/[0.02] backdrop-blur-md max-w-[clamp(35rem,65vw,65rem)]"
                style={{ 

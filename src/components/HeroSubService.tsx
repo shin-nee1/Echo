@@ -17,7 +17,7 @@ const HeroSubService = ({ title, subtitle, ctaText }: HeroSubServiceProps) => {
         */}
         <h1 className="font-bold text-white tracking-tight leading-[1.1] mb-6 font-display text-center max-w-5xl
                        text-[clamp(1.75rem,4vw,2.8rem)] 
-                       2xl:text-[clamp(3rem,5vw,4.5rem)]">
+                       2xl:text-[clamp(1.75rem,4vw,2.8rem)]">
           {title}
         </h1>
         

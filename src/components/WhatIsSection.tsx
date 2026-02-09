@@ -38,7 +38,7 @@ const WhatIsSection = ({
                              text-[clamp(1.8rem,7vw,2.2rem)] 
                              md:text-[clamp(2.2rem,5vw,2.6rem)] 
                              lg:text-[clamp(2.4rem,3.5vw,2.8rem)] 
-                             2xl:text-[clamp(3rem,5vw,4.2rem)]">
+                             2xl:text-[clamp(2.4rem,3.5vw,2.8rem)]">
                 {titleParts[0]}
                 <span className="text-[#00d8ff]">{highlightedWord}</span>
                 {titleParts[1] || ""}
@@ -47,7 +47,7 @@ const WhatIsSection = ({
             
             <p className="text-white/60 leading-relaxed font-light max-w-xl xl:max-w-2xl
                           text-[clamp(0.9rem,1.3vw,1.05rem)]
-                          2xl:text-[1.25rem]">
+                          2xl:text-[0.9rem,1.3vw,1.05rem]">
               {description}
             </p>
           </div>
