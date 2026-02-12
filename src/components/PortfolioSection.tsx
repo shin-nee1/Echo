@@ -64,6 +64,13 @@ const PortfolioSection = () => {
           .portfolio-view-all { font-size: 0.85rem; height: 2.5rem; padding: 0 1.8rem; }
         }
 
+        /* 3. SMALL LAPTOPS (800px - 1024px) */
+        @media (min-width: 800px) and (max-width: 1023px) {
+          .portfolio-title { font-size: 2.8rem; }
+          .portfolio-card-link { width: 38vw; margin-right: 1.5rem; } 
+          .portfolio-card-box { border-radius: 2rem; }
+        }
+
         /* 3. LAPTOP (1024px) */
         @media (min-width: 1024px) {
           .portfolio-wrapper { padding: 4rem 0; }
