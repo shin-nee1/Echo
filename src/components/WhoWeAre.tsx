@@ -99,7 +99,7 @@ const WhoWeAre = () => {
         @media (min-width: 1280px) {
           .whoweare-grid { gap: 4rem; }
           .whoweare-img-container { max-width: 550px; }
-          .whoweare-title { font-size: 2.15rem; }
+          .whoweare-title { font-size: 2.4rem; }
           .whoweare-p { font-size: 1rem; max-width: 600px; }
         }
 

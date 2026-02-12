@@ -42,7 +42,8 @@ const WhatWeDo = () => {
 
   return (
     <section className="whatwedo-wrapper relative bg-transparent overflow-hidden z-10">
-      <div className="container mx-auto relative z-10 px-[5vw]">
+      {/* ALIGNMENT FIX: Matched exactly to Portfolio section structure */}
+      <div className="mx-auto px-[5vw] relative z-10" style={{ maxWidth: "2200px" }}>
         
         {/* HEADER AREA */}
         <div className="whatwedo-header flex flex-col lg:flex-row lg:items-end justify-between gap-[1rem]">
@@ -92,12 +93,9 @@ const WhatWeDo = () => {
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 className="whatwedo-card relative flex flex-col rounded-[1.25rem] md:rounded-[2rem] overflow-hidden transition-all duration-500"
               >
-                {/* 1. THE GLASS LAYER */}
                 <div className="whatwedo-glass-layer absolute inset-0 z-0 transition-all duration-500" />
 
-                {/* 2. CONTENT LAYER */}
                 <div className="relative z-10 flex flex-col h-full">
-                  {/* DYNAMIC IMAGES AREA */}
                   <div className="whatwedo-img-area relative w-full mb-[0.75rem] pointer-events-none flex-shrink-0">
                     {service.title === "DESIGN" && (
                       <>
@@ -115,7 +113,6 @@ const WhatWeDo = () => {
                     )}
                   </div>
 
-                  {/* TEXT CONTENT - HEADINGS ARE NOW WHITE */}
                   <h3 className="whatwedo-tag text-white font-black tracking-widest uppercase mb-1">
                     {service.title}
                   </h3>
@@ -147,12 +144,10 @@ const WhatWeDo = () => {
         }
         .whatwedo-scroll-container::-webkit-scrollbar { display: none; }
 
-        /* --- CARD STRUCTURE --- */
         .whatwedo-card {
           border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* --- THE GLASS LAYER --- */
         .whatwedo-glass-layer {
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
@@ -164,23 +159,22 @@ const WhatWeDo = () => {
           box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
         }
 
-        /* --- HOVER STATE --- */
         .whatwedo-card-link:hover .whatwedo-card {
           border-color: rgba(67, 198, 228, 0.4);
         }
 
+        /* UPDATED HOVER GLOW TO MATCH REFERENCE SCREENSHOT */
         .whatwedo-card-link:hover .whatwedo-glass-layer {
           background: radial-gradient(
-            circle at 50% -20%, 
-            rgba(67, 198, 228, 0.15) 0%, 
-            transparent 80%
+            circle at 100% 100%, 
+            rgba(67, 198, 228, 0.22) 0%, 
+            transparent 75%
           );
           box-shadow: 
-            inset 0 0 20px rgba(67, 198, 228, 0.05),
-            0 20px 40px rgba(0, 0, 0, 0.4);
+            inset -20px -20px 60px rgba(67, 198, 228, 0.2),
+            0 25px 50px rgba(0, 0, 0, 0.4);
         }
 
-        /* Responsive Styles */
         .whatwedo-wrapper { padding: 2rem 0; }
         .whatwedo-header { margin-bottom: 2rem; }
         .whatwedo-title { font-size: 1.85rem; }
@@ -218,7 +212,7 @@ const WhatWeDo = () => {
         }
 
         @media (min-width: 1440px) {
-          .whatwedo-title { font-size: 2.5rem; }
+          .whatwedo-title { font-size: 2.7rem; }
           .whatwedo-card-link { width: 30vw; }
           .whatwedo-img-area { height: 7rem; }
           .whatwedo-img-primary { width: 8rem; }
@@ -228,19 +222,20 @@ const WhatWeDo = () => {
           .whatwedo-desc { font-size: 0.85rem; }
         }
 
+        /* 4K MONITOR ADJUSTMENTS */
         @media (min-width: 2560px) {
-          .whatwedo-wrapper { padding: 5vh 0; }
+          .whatwedo-wrapper { padding: 8vh 0 15vh 0; }
           .whatwedo-title { font-size: 4.8rem; }
-          .whatwedo-subtitle { font-size: 1.5rem; max-width: 400px; }
+          .whatwedo-subtitle { font-size: 1.55rem; max-width: 400px; }
           .whatwedo-card-link { width: 35vw; }
-          .whatwedo-card { padding: 2.5rem; min-height: 35rem; border-radius: 4rem; }
+          .whatwedo-card { padding: 2.55rem; min-height: 35rem; border-radius: 4rem; }
           .whatwedo-img-area { height: 15rem; margin-bottom: 3rem; }
           .whatwedo-img-primary { width: 15rem; }
           .whatwedo-img-secondary { width: 8rem; }
-          .whatwedo-img-full { width: 19rem; }
-          .whatwedo-tag { font-size: 2rem; margin-bottom: 1.5rem; }
-          .whatwedo-highlight { font-size: 1.6rem; margin-bottom: 1rem; }
-          .whatwedo-desc { font-size: 1.6rem; line-height: 1.6; margin-bottom: 3rem; }
+          .whatwedo-img-full { width: 24rem; }
+          .whatwedo-tag { font-size: 2.2rem; margin-bottom: 1.5rem; }
+          .whatwedo-highlight { font-size: 1.75rem; margin-bottom: 1rem; }
+          .whatwedo-desc { font-size: 1.65rem; line-height: 1.6; margin-bottom: 3rem; }
           .whatwedo-explore { font-size: 1.2rem; padding-bottom: 1rem; gap: 1.5rem; }
           .whatwedo-nav { gap: 2rem; }
           .whatwedo-nav button { width: 5rem; height: 5rem; }

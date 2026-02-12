@@ -115,7 +115,7 @@ const IndexHero: React.FC = () => {
 
         /* 2. TABLET (768px) */
         @media (min-width: 768px) {
-          .hero-title { font-size: clamp(1.85rem, 5vw, 2.25rem); }
+          .hero-title { font-size: clamp(2rem, 5vw, 2.35rem); }
           .hero-subtitle {
           font-size: clamp(0.65rem, 2.5vw, 0.85rem);
           line-height: 1.5;
