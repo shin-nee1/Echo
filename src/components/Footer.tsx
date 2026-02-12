@@ -1,7 +1,47 @@
 import { Facebook, Linkedin, Twitter, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { serviceTitleToSlug } from "@/data/servicesData";
-import footerLogo from "../assets/image-removebg-preview (13).png";
+// IMPORTING LOGO FROM ASSETS
+import logo from "@/assets/image-removebg-preview (13).png";
+
+type FooterSection = {
+  title: string;
+  links: (string | { text: string; href: string })[];
+};
+
+const SectionBlock = ({
+  section,
+  getServiceLink,
+}: {
+  section: FooterSection;
+  getServiceLink: (s: string) => string;
+}) => {
+  const isObj = (link: any): link is { text: string; href: string } =>
+    typeof link === "object" && "href" in link;
+
+  return (
+    <div>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-1.5 h-1.5 rounded-full bg-[#43c6e4] shadow-[0_0_10px_#43c6e4]" />
+        <h4 className="text-lg font-bold tracking-tight text-white">{section.title}</h4>
+      </div>
+      <ul className="space-y-4">
+        {section.links.map((link, lIdx) => {
+          const text = isObj(link) ? link.text : link;
+          const to = isObj(link) ? link.href : getServiceLink(link);
+          return (
+            <li key={lIdx} className="flex items-center gap-2 group cursor-pointer">
+              <ArrowRight className="w-3 h-3 text-[#43c6e4] opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0" />
+              <Link to={to} className="text-slate-400 font-medium group-hover:text-white transition-colors" style={{ fontSize: "clamp(0.8rem, 0.9vw, 0.9rem)" }}>
+                {text}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
 
 const Footer = () => {
   const footerSections = [
@@ -53,33 +93,44 @@ const Footer = () => {
   };
 
   return (
-    // Changed bg-gradient to bg-transparent
-    <footer className="relative bg-transparent text-white border-t border-white/10" style={{ paddingTop: "clamp(3rem, 8vh, 6rem)", paddingBottom: "3rem" }}>
-      <div className="container mx-auto">
-        
+    <footer
+      className="relative bg-transparent text-white"
+      style={{ paddingTop: "clamp(3rem, 8vh, 6rem)", paddingBottom: "3rem" }}
+    >
+      <style>
+        {`
+          @media (min-width: 1024px) and (max-width: 1280px) {
+            .laptop-fix { padding-left: 2.5rem !important; padding-right: 1rem !important; }
+            .laptop-first-col-fix { padding-left: 1.5rem !important; }
+          }
+        `}
+      </style>
+
+      <div className="container mx-auto px-6">
+        {/* TOPMOST LINE - More Prominent White */}
+        <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-white/40 to-transparent mb-16" />
+
         {/* TOP TIER */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
           <div className="hidden md:block w-1/4">
-            <p className="text-slate-300 leading-relaxed font-medium opacity-70" style={{ fontSize: "clamp(0.75rem, 0.8vw, 0.875rem)", maxWidth: "200px" }}>
+            <p
+              className="text-slate-300 leading-relaxed font-medium opacity-70"
+              style={{ fontSize: "clamp(0.75rem, 0.8vw, 0.875rem)", maxWidth: "200px" }}
+            >
               Shaping brands with clarity, precision, and purpose.
             </p>
           </div>
 
-          {/* Logo Section */}
           <div className="w-full md:w-1/2 flex flex-col items-center">
             <Link to="/" className="block">
-              <img 
-                src={footerLogo} 
-                alt="Echo & Impact Logo" 
-                className="w-auto object-contain drop-shadow-[0_0_20px_rgba(67,198,228,0.25)] hover:scale-105 transition-transform duration-300"
-                style={{ height: "clamp(5rem, 10vh, 8rem)" }}
-              />
+              <img src={logo} alt="Echo & Impact Logo" className="w-[180px] h-auto object-contain" />
             </Link>
           </div>
 
-          {/* Socials */}
           <div className="w-full md:w-1/4 flex flex-col items-center md:items-end gap-3">
-            <span className="font-bold text-slate-400 uppercase tracking-widest" style={{ fontSize: "10px" }}>Social links</span>
+            <span className="font-bold text-slate-400 uppercase tracking-widest" style={{ fontSize: "10px" }}>
+              Social links
+            </span>
             <div className="flex gap-3">
               {[Facebook, Linkedin, Twitter].map((Icon, i) => (
                 <a
@@ -94,60 +145,77 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-16" />
+        {/* HORIZONTAL LINE - More Prominent White */}
+        <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-white/40 to-transparent mb-16" />
 
-        {/* MIDDLE TIER */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-20">
+        {/* MIDDLE TIER - Desktop */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-x-0 mb-20">
           {footerSections.map((section, idx) => (
-            <div
-              key={section.title}
-              className={`relative ${idx !== 0 ? "lg:pl-8 lg:border-l border-white/5" : ""}`}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#43c6e4] shadow-[0_0_10px_#43c6e4]" />
-                <h4 className="text-lg font-bold tracking-tight text-white">{section.title}</h4>
+            <div key={section.title} className="relative">
+              {idx !== 0 && (
+                <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/30 to-transparent" />
+              )}
+              <div className={`${idx === 0 ? "laptop-first-col-fix" : "pl-8 laptop-fix"}`}>
+                <SectionBlock section={section} getServiceLink={getServiceLink} />
               </div>
-              <ul className="space-y-4">
-                {section.links.map((link, lIdx) => {
-                  const isObj = typeof link === "object" && "href" in link;
-                  const text = isObj ? link.text : (link as string);
-                  const to = isObj ? link.href : getServiceLink(link as string);
-
-                  return (
-                    <li key={lIdx} className="flex items-center gap-2 group cursor-pointer">
-                      <ArrowRight className="w-3 h-3 text-[#43c6e4] opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      <Link
-                        to={to}
-                        className="text-slate-400 font-medium group-hover:text-white transition-colors"
-                        style={{ fontSize: "clamp(0.8rem, 0.9vw, 0.9rem)" }}
-                      >
-                        {text}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
             </div>
           ))}
         </div>
 
+        {/* MIDDLE TIER - Mobile/Tablet */}
+        <div className="lg:hidden mb-20 relative">
+          <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-white/40 to-transparent -translate-x-px" />
+          <div className="grid grid-cols-2">
+            <div className="pr-6 flex flex-col">
+              <div className="pb-8">
+                <SectionBlock section={footerSections[0]} getServiceLink={getServiceLink} />
+              </div>
+              <div className="w-full h-[2px] bg-gradient-to-r from-transparent to-white/40" />
+              <div className="pt-8">
+                <SectionBlock section={footerSections[1]} getServiceLink={getServiceLink} />
+              </div>
+            </div>
+            <div className="pl-6 flex flex-col">
+              <div className="pb-8">
+                <SectionBlock section={footerSections[2]} getServiceLink={getServiceLink} />
+              </div>
+              <div className="w-full h-[2px] bg-gradient-to-l from-transparent to-white/40" />
+              <div className="pt-8">
+                <SectionBlock section={footerSections[3]} getServiceLink={getServiceLink} />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* BOTTOM TIER: Contact */}
-        <div className="pt-10 border-t border-white/5 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-white/40 to-transparent mb-16" />
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-left items-start mb-12">
           {[
             { icon: Phone, label: "Phone", val: "+44 7548 479 791" },
             { icon: Mail, label: "Email", val: "info@echoandimpact.com" },
-            { icon: MapPin, label: "Location", val: "NY, USA, SERVING GLOBALLY" }
+            { icon: MapPin, label: "Location", val: "NY, USA, SERVING GLOBALLY" },
           ].map((item, i) => (
-            <div key={i} className="flex items-center gap-4">
-              <div className="p-2.5 rounded-full bg-white/5">
+            <div key={i} className="flex items-center gap-4 justify-start">
+              <div className="p-2.5 rounded-full bg-white/5 shrink-0">
                 <item.icon className="w-4 h-4 text-[#43c6e4]" />
               </div>
-              <div>
-                <p className="uppercase tracking-widest text-[#43c6e4] font-bold mb-0.5" style={{ fontSize: "9px" }}>{item.label}</p>
-                <p className="text-white font-semibold tracking-tight" style={{ fontSize: "clamp(0.85rem, 0.9vw, 1rem)" }}>{item.val}</p>
+              <div className="min-w-0">
+                <p className="uppercase tracking-widest text-[#43c6e4] font-bold mb-0.5" style={{ fontSize: "9px" }}>
+                  {item.label}
+                </p>
+                <p className="text-white font-semibold tracking-tight break-words" style={{ fontSize: "clamp(0.85rem, 0.9vw, 1rem)" }}>
+                  {item.val}
+                </p>
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 text-center border-t border-white/10 pt-8">
+          <p className="text-slate-500 text-xs">
+            Echo & Impact. All rights reserved. 2026 Terms & Conditions | Privacy Policy
+          </p>
         </div>
       </div>
     </footer>

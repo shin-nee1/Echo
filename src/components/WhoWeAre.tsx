@@ -84,25 +84,23 @@ const WhoWeAre = () => {
           .whoweare-btn { height: 2.5rem !important; font-size: clamp(0.75rem, 2vw, 0.85rem) !important;}
         }
 
-        /* 2. LAPTOP (1024px) - NOW STACKED LIKE TABLET */
-        @media (min-width: 1024px) and (max-width: 1279px) {
-          .whoweare-grid { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
-          .whoweare-img-side { order: 2; } 
-          .whoweare-content { order: 1; }  
-          .whoweare-img-container { max-width: 400px; margin: 0 auto; }
+        /* 2. LAPTOP (1024px+) - NOW SIDE BY SIDE */
+        @media (min-width: 1024px) {
+          .whoweare-grid { grid-template-columns: repeat(2, 1fr); text-align: left; gap: 3rem; }
+          .whoweare-img-side { order: 1; } 
+          .whoweare-content { order: 2; }  
+          .whoweare-img-container { max-width: 450px; margin: 0 auto; }
           .whoweare-title { font-size: 2.75rem; }
-          .whoweare-p { font-size: 1.10rem; max-width: 90%; margin-left: auto; margin-right: auto; }
-          .whoweare-btn { height: 2.6rem !important; font-size: clamp(0.75rem, 2vw, 1rem) !important;}
+          .whoweare-p { font-size: 0.85rem; max-width: 100%; text-align: left; }
+          .whoweare-btn { height: 2.6rem !important; font-size: 1rem !important;}
         }
 
-        /* 3. LARGE DESKTOP (1280px+) - SIDE BY SIDE STARTING HERE */
+        /* 3. LARGE DESKTOP (1280px+) */
         @media (min-width: 1280px) {
-          .whoweare-grid { grid-template-columns: repeat(2, 1fr); text-align: left; gap: 4rem; }
-          .whoweare-img-side { order: 1; }
-          .whoweare-content { order: 2; }
+          .whoweare-grid { gap: 4rem; }
           .whoweare-img-container { max-width: 550px; }
           .whoweare-title { font-size: 2.15rem; }
-          .whoweare-p { font-size: 1rem; max-width: 600px; text-align: left; }
+          .whoweare-p { font-size: 1rem; max-width: 600px; }
         }
 
         /* 4. 4K MONITORS (2560px) */

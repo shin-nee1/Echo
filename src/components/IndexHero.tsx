@@ -74,13 +74,13 @@ const IndexHero: React.FC = () => {
       <style dangerouslySetInnerHTML={{ __html: `
         /* 1. GLOBAL FLUID VARIABLES (Mobile First) */
         .hero-wrapper {
-          padding-top: clamp(6rem, 10vh, 8rem); 
+          padding-top: clamp(6.5rem, 10vh, 8rem); 
           padding-bottom: clamp(1.5rem, 5vh, 3rem);
           min-height: 80vh;
         }
 
         .hero-title {
-          font-size: clamp(1.5rem, 8vw, 1.75rem); 
+          font-size: clamp(1.75rem, 8vw, 1.95rem); 
           line-height: 1.2;
           margin-bottom: clamp(1rem, 3vh, 1.5rem);
           max-width: 100vw; 
@@ -115,7 +115,7 @@ const IndexHero: React.FC = () => {
 
         /* 2. TABLET (768px) */
         @media (min-width: 768px) {
-          .hero-title { font-size: clamp(1.65rem, 5vw, 2rem); }
+          .hero-title { font-size: clamp(1.85rem, 5vw, 2.25rem); }
           .hero-subtitle {
           font-size: clamp(0.65rem, 2.5vw, 0.85rem);
           line-height: 1.5;
@@ -133,7 +133,7 @@ const IndexHero: React.FC = () => {
         /* 3. LAPTOP (1024px) */
         @media (min-width: 1024px) {
           .hero-wrapper { padding-top: 18vh; }
-          .hero-title { font-size: 2.8rem; max-width: 600px; }
+          .hero-title { font-size: 2.95rem; max-width: 600px; }
           .hero-subtitle { font-size: 0.9rem; max-width: 650px; }
           .hero-link-container { margin-bottom: clamp(1.2rem, 1vh, 2rem); }
           .hero-link { font-size: clamp(0.75rem, 2vw, 1rem); }
@@ -145,7 +145,7 @@ const IndexHero: React.FC = () => {
 
         /* 4. LARGE LAPTOP (1440px) */
         @media (min-width: 1440px) {
-          .hero-title { font-size: 3rem; max-width: 900px; }
+          .hero-title { font-size: 3.35rem; max-width: 900px; }
           .hero-subtitle { font-size: 1rem; max-width: 750px; }
           .hero-link { font-size: clamp(0.75rem, 2vw, 1rem); }
           .hero-slider-container { height: 45vh; max-width: 900px; }
@@ -156,7 +156,7 @@ const IndexHero: React.FC = () => {
         /* 5. 4K MONITORS (2560px) */
         @media (min-width: 2560px) {
           .hero-wrapper { padding-top: 15vh; }
-          .hero-title { font-size: 4rem; max-width: 1500px; }
+          .hero-title { font-size: 5rem; max-width: 1500px; }
           .hero-subtitle { font-size: 2rem; max-width: 1100px; }
           .hero-link-container { margin-bottom: clamp(1.7rem, 1vh, 2rem); }
           .hero-btn { 
