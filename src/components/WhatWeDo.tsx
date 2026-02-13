@@ -42,7 +42,6 @@ const WhatWeDo = () => {
 
   return (
     <section className="whatwedo-wrapper relative bg-transparent overflow-hidden z-10">
-      {/* ALIGNMENT FIX: Matched exactly to Portfolio section structure */}
       <div className="mx-auto px-[5vw] relative z-10" style={{ maxWidth: "2200px" }}>
         
         {/* HEADER AREA */}
@@ -134,6 +133,30 @@ const WhatWeDo = () => {
             </Link>
           ))}
         </div>
+
+        {/* ECHO RIBBON TEXT */}
+        <div className="whatwedo-ribbon flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-12 text-center">
+          <p className="text-white font-medium text-xs md:text-sm uppercase tracking-[0.2em] opacity-80">
+            Design defines you. <span className="mx-4 opacity-20">|</span> Development builds you. <span className="mx-4 opacity-20">|</span> Marketing scales you.
+          </p>
+          <div className="w-full mt-3">
+            <p className="text-white font-bold text-base md:text-lg tracking-tight">
+              Together, They create your <span className="text-[#43c6e4]">echo.</span>
+            </p>
+            {/* ANIMATED WAVE SVG UNDERLINE */}
+            <div className="flex justify-center mt-1 overflow-hidden">
+              <svg width="220" height="10" viewBox="0 0 220 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-60">
+                <path 
+                  className="wave-path"
+                  d="M-100 8C-80 8 -70 2 -50 2C-30 2 -20 8 0 8C20 8 30 2 50 2C70 2 80 8 100 8C120 8 130 2 150 2C170 2 180 8 200 8C220 8 230 2 250 2C270 2 280 8 300 8" 
+                  stroke="#43c6e4" 
+                  strokeWidth="2.5" 
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
@@ -163,7 +186,6 @@ const WhatWeDo = () => {
           border-color: rgba(67, 198, 228, 0.4);
         }
 
-        /* UPDATED HOVER GLOW TO MATCH REFERENCE SCREENSHOT */
         .whatwedo-card-link:hover .whatwedo-glass-layer {
           background: radial-gradient(
             circle at 100% 100%, 
@@ -175,10 +197,19 @@ const WhatWeDo = () => {
             0 25px 50px rgba(0, 0, 0, 0.4);
         }
 
-        .whatwedo-wrapper { padding: 2rem 0; }
-        .whatwedo-header { margin-bottom: 2rem; }
+        .wave-path {
+          animation: waveFlow 4s linear infinite;
+        }
+
+        @keyframes waveFlow {
+          from { transform: translateX(0); }
+          to { transform: translateX(100px); }
+        }
+
+        .whatwedo-wrapper { padding-top: 2rem; padding-bottom: 5rem; }
+        .whatwedo-header { margin-bottom: 1rem; }
         .whatwedo-title { font-size: 1.85rem; }
-        .whatwedo-subtitle { font-size: 0.7rem; max-width: 140px; }
+        .whatwedo-subtitle { font-size: 0.7rem; max-width: 150px; }
         .whatwedo-card-link { width: 65vw; }
         .whatwedo-card { padding: 1.3rem; min-height: 16rem; }
         .whatwedo-img-area { height: 6rem; }
@@ -189,8 +220,44 @@ const WhatWeDo = () => {
         .whatwedo-highlight { font-size: 0.85rem; }
         .whatwedo-desc { font-size: 0.75rem; }
         .whatwedo-explore { font-size: 9px; }
+        .whatwedo-scroll-container { padding-bottom: 0rem; }
+        
+        /* 4K RIBBON FIX */
+        .whatwedo-ribbon p { font-size: 1rem; }
+        .whatwedo-ribbon .uppercase { 
+            font-size: 0.75rem; 
+            margin-bottom: 0.4rem; 
+            text-align: center; 
+            width: 100%;
+        }
+        .whatwedo-ribbon svg { width: 230px; height: 25px; }
+
+        /* MOBILE & TABLET STACKING LOGIC */
+        @media (max-width: 1023px) {
+          .whatwedo-ribbon p.uppercase {
+             display: flex;
+             flex-direction: column;
+             gap: 0.5rem;
+             align-items: center;
+          }
+          .whatwedo-ribbon p.uppercase span {
+             display: none; /* Hides the | separator */
+          }
+        }
+
+        /* INCREASED HORIZONTAL WIDTH FOR TABLET/SMALL LAPTOP */
+        @media (max-width: 1440px) {
+           .whatwedo-ribbon {
+              width: calc(100% + 10vw);
+              margin-left: -5vw;
+              margin-right: -5vw;
+              padding-left: 1rem;
+              padding-right: 1rem;
+           }
+        }
 
         @media (min-width: 768px) {
+          .whatwedo-wrapper { padding-bottom: 8rem; }
           .whatwedo-title { font-size: 2.5rem; }
           .whatwedo-subtitle { font-size: 0.85rem; max-width: 200px; }
           .whatwedo-card-link { width: 45vw; }
@@ -198,10 +265,19 @@ const WhatWeDo = () => {
           .whatwedo-img-area { height: 7rem; }
           .whatwedo-img-primary { width: 7rem; }
           .whatwedo-img-full { width: 10rem; }
+           /* 4K RIBBON FIX */
+        .whatwedo-ribbon p { font-size: 1.15rem; }
+        .whatwedo-ribbon .uppercase { 
+            font-size: 0.75rem; 
+            margin-bottom: 0.4rem; 
+            text-align: center; 
+            width: 100%;
+        }
+        .whatwedo-ribbon svg { width: 280px; height: 25px; }
         }
 
         @media (min-width: 1024px) {
-          .whatwedo-wrapper { padding: 3rem 0; }
+          .whatwedo-wrapper { padding-top: 3rem; padding-bottom: 10rem; }
           .whatwedo-title { font-size: 2.8rem; }
           .whatwedo-card-link { width: 40vw; }
           .whatwedo-card { padding: 2rem; min-height: 20rem; }
@@ -212,7 +288,9 @@ const WhatWeDo = () => {
         }
 
         @media (min-width: 1440px) {
-          .whatwedo-title { font-size: 2.7rem; }
+          .whatwedo-wrapper { padding-bottom: 18vh; }
+        .whatwedo-title { 
+          font-size: 2.7rem; }
           .whatwedo-card-link { width: 30vw; }
           .whatwedo-img-area { height: 7rem; }
           .whatwedo-img-primary { width: 8rem; }
@@ -220,11 +298,19 @@ const WhatWeDo = () => {
           .whatwedo-tag { font-size: 17px; }
           .whatwedo-highlight { font-size: 0.95rem; }
           .whatwedo-desc { font-size: 0.85rem; }
+          /* 4K RIBBON FIX */
+        .whatwedo-ribbon p { font-size: 1.2rem; }
+        .whatwedo-ribbon .uppercase { 
+            font-size: 0.75rem; 
+            margin-bottom: 0.4rem; 
+            text-align: center; 
+            width: 100%;
+        }
+        .whatwedo-ribbon svg { width: 300px; height: 25px; }
         }
 
-        /* 4K MONITOR ADJUSTMENTS */
         @media (min-width: 2560px) {
-          .whatwedo-wrapper { padding: 8vh 0 15vh 0; }
+          .whatwedo-wrapper { padding-top: 5vh; padding-bottom: 20vh; }
           .whatwedo-title { font-size: 4.8rem; }
           .whatwedo-subtitle { font-size: 1.55rem; max-width: 400px; }
           .whatwedo-card-link { width: 35vw; }
@@ -240,6 +326,12 @@ const WhatWeDo = () => {
           .whatwedo-nav { gap: 2rem; }
           .whatwedo-nav button { width: 5rem; height: 5rem; }
           .whatwedo-nav svg { width: 2rem; height: 2rem; }
+          .whatwedo-scroll-container { padding-bottom: 5rem; }
+          
+          /* 4K RIBBON FIX */
+          .whatwedo-ribbon p { font-size: 2.2rem; }
+          .whatwedo-ribbon .uppercase { font-size: 1.4rem; margin-bottom: 2.5rem; }
+          .whatwedo-ribbon svg { width: 500px; height: 55px; }
         }
 
         @media (max-width: 425px) {

@@ -20,7 +20,22 @@ const IndexHero: React.FC = () => {
 
   return (
     <section className="hero-wrapper relative flex flex-col items-center justify-center overflow-hidden">
-      <div className="hero-grid-bg absolute inset-0 z-0 opacity-30 pointer-events-none" />
+      
+      {/* IMPROVED VISIBLE GRID */}
+      <div 
+        className="hero-grid-bg absolute inset-0 pointer-events-none" 
+        style={{
+          zIndex: 1, // Higher z-index to stay above the App.tsx background
+          backgroundImage: `
+            linear-gradient(rgba(67, 198, 228, 0.15) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(67, 198, 228, 0.15) 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px',
+          backgroundPosition: 'center center',
+          maskImage: 'radial-gradient(circle at center, black 20%, transparent 70%)',
+          WebkitMaskImage: 'radial-gradient(circle at center, black 20%, transparent 70%)'
+        }}
+      />
 
       <div className="container relative z-10 mx-auto px-[5vw] text-center">
         {/* TITLE: Fluid scaling across all screens */}

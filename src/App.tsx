@@ -16,6 +16,9 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
+// ASSETS
+import CubeImg from "@/assets/cube.png";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -25,8 +28,7 @@ const App = () => (
       <Sonner />
 
       <BrowserRouter>
-        {/* ================= GLOBAL BACKGROUND SYSTEM ================= */}
-        {/* Background stays fixed and full-screen */}
+        {/* ================= GLOBAL BACKGROUND SYSTEM (FIXED) ================= */}
         <div className="fixed inset-0 z-0 pointer-events-none bg-[#010a0f]">
           <div className="absolute top-[-5%] left-[-15%] w-[45%] h-[40%] rounded-full bg-cyan/10 blur-[120px] animate-pulse" />
           <div 
@@ -47,9 +49,35 @@ const App = () => (
           />
         </div>
 
-        {/* ================= CONTENT LAYER ================= */}
-        {/* The 15% padding is applied here to the outer wrapper */}
-        <div className="relative z-10 flex flex-col min-h-screen px-[12%]">
+        {/* ================= CONTENT LAYER (SCROLLING) ================= */}
+        <div className="relative z-10 flex flex-col min-h-screen px-[12%] overflow-x-hidden">
+          
+          {/* BACKGROUND CUBE SYSTEM - MODERATED SIZES */}
+          <div className="absolute inset-0 z-[-1] pointer-events-none">
+            
+            {/* SECTION 1: TOP */}
+            <img src={CubeImg} alt="" className="absolute top-[3%] left-[-8%] w-[22vw] opacity-[0.7] -rotate-12" /> 
+            <img src={CubeImg} alt="" className="absolute top-[12%] right-[-5%] w-[18vw] opacity-[0.5] rotate-45" />
+
+            {/* SECTION 2: TRANSITION (Increased from tiny to moderate) */}
+            <img src={CubeImg} alt="" className="absolute top-[25%] right-[-2%] w-[16vw] opacity-[0.4] rotate-[15deg]" />
+
+            {/* SECTION 3: MIDDLE (Reduced the 'huge' 35vw to a moderate 24vw) */}
+            <img src={CubeImg} alt="" className="absolute top-[40%] left-[-4%] w-[19vw] opacity-[0.65] rotate-[30deg]" />
+            <img src={CubeImg} alt="" className="absolute top-[48%] right-[-8%] w-[24vw] opacity-[0.8] -rotate-45" />
+
+            {/* SECTION 4: TRANSITION (Increased from tiny to moderate) */}
+            <img src={CubeImg} alt="" className="absolute top-[62%] left-[-2%] w-[15vw] opacity-[0.45] -rotate-[20deg]" />
+
+            {/* SECTION 5: LOWER */}
+            <img src={CubeImg} alt="" className="absolute top-[75%] left-[-10%] w-[23vw] opacity-[0.75] rotate-12" />
+            <img src={CubeImg} alt="" className="absolute top-[82%] right-[1%] w-[18vw] opacity-[0.55] -rotate-12" />
+
+            {/* SECTION 6: FOOTER AREA */}
+            <img src={CubeImg} alt="" className="absolute bottom-[2%] right-[-6%] w-[20vw] opacity-[0.7] rotate-90" />
+            <img src={CubeImg} alt="" className="absolute bottom-[5%] left-[-4%] w-[16vw] opacity-[0.3] rotate-45" />
+          </div>
+
           <ScrollToTop />
           <Navbar />
           
