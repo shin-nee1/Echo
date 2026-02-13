@@ -41,41 +41,43 @@ const PortfolioSection = () => {
 
         /* 1. BASE / MOBILE FIRST */
         .portfolio-wrapper { padding: 3rem 0; }
-        .portfolio-header { margin-bottom: 2rem; display: flex; align-items: flex-end; justify-content: space-between; }
-        .portfolio-title { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.06em; line-height: 1; color: white; }
+        .portfolio-header { margin-bottom: 2rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+        .portfolio-title { font-size: 1.85rem; font-weight: 700; letter-spacing: -0.06em; line-height: 1; color: white; }
         .portfolio-card-link { width: 55vw; flex-shrink: 0; scroll-snap-align: center; margin-right: 1.4rem; }
         .portfolio-card-box { aspect-ratio: 1.1 / 1; border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
         .portfolio-nav { display: none; } 
         
-        /* VIEW ALL BUTTON - REMOVED GLOW */
         .portfolio-view-all { 
           font-size: 0.75rem; 
           height: 2.2rem; 
-          padding: 0 1.2rem; 
+          padding: 0 1.5rem; 
           box-shadow: none !important; 
           filter: none !important; 
         }
 
+        /* NEW: LARGE MOBILE / PHABLETS (600px - 767px) */@media (min-width: 600px) and (max-width: 767px) {
+        .portfolio-card-link { width: 38vw; } /* Prevents cards from looking huge at 750px */
+}
         /* 2. TABLET (768px) */
         @media (min-width: 768px) {
-          .portfolio-title { font-size: 2.65rem; }
-          .portfolio-card-link { width: 45vw; margin-right: 2rem; }
+          .portfolio-title { font-size: 2.3rem; } /* Adjusted to give View All button room */
+          .portfolio-card-link { width: 38vw; margin-right: 2rem; }
           .portfolio-card-box { border-radius: 2.5rem; }
           .portfolio-view-all { font-size: 0.85rem; height: 2.5rem; padding: 0 1.8rem; }
         }
 
-        /* 3. SMALL LAPTOPS (800px - 1024px) */
+        /* 3. SMALL LAPTOPS (800px - 1023px) */
         @media (min-width: 800px) and (max-width: 1023px) {
-          .portfolio-title { font-size: 2.8rem; }
-          .portfolio-card-link { width: 38vw; margin-right: 1.5rem; } 
+          .portfolio-title { font-size: 2.5rem; } /* Adjusted for breathing room */
+          .portfolio-card-link { width: 34vw; margin-right: 1.5rem; } 
           .portfolio-card-box { border-radius: 2rem; }
         }
 
         /* 3. LAPTOP (1024px) */
         @media (min-width: 1024px) {
           .portfolio-wrapper { padding: 4rem 0; }
-          .portfolio-title { font-size: 3.2rem; }
-          .portfolio-card-link { width: 31vw; margin-right: 1.5rem; }
+          .portfolio-title { font-size: 2.8rem; } /* Adjusted to stop crowding nav buttons */
+          .portfolio-card-link { width: 28vw; margin-right: 1.5rem; }
           .portfolio-nav { display: flex; gap: 0.75rem; padding-bottom: 0rem; }
           .portfolio-nav button { 
             width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
@@ -85,14 +87,15 @@ const PortfolioSection = () => {
           .portfolio-view-all { font-size: 0.9rem; height: 2.5rem; padding: 0 1.5rem; }
         }
 
-        /* 4. LARGE DESKTOP (1440px) - UPDATED TO HORIZONTAL FLOW */
+        /* NEW: LARGE LAPTOPS (1200px - 1439px) */
+        @media (min-width: 1200px) and (max-width: 1439px) {
+          .portfolio-card-link { width: 25vw; }
+        }
+
+        /* 6. LARGE DESKTOP (1440px) */
         @media (min-width: 1440px) {
-        .portfolio-title { font-size: 3rem; }
-          .portfolio-scroll-container { 
-            display: flex; /* Changed from grid */
-            gap: 2rem; 
-            overflow-x: auto; 
-          }
+          .portfolio-title { font-size: 2.75rem; }
+          .portfolio-scroll-container { display: flex; gap: 2rem; overflow-x: auto; }
           .portfolio-card-link { 
             width: 60vh; 
             flex-shrink: 0; 
@@ -100,23 +103,19 @@ const PortfolioSection = () => {
             margin-right: 0; 
           }
           .portfolio-nav { display: flex; gap: 0.75rem; padding-bottom: 0.5rem; } 
-          .portfolio-view-all { font-size: 1rem; height: 3rem; padding: 0 2.2rem; }
+          .portfolio-view-all { font-size: 0.95rem; height: 2.8rem; padding: 0 2.2rem; }
         }
 
         /* 5. 4K MONITORS (2560px) */
         @media (min-width: 2560px) {
           .portfolio-wrapper { padding: 8vh 0; }
           .portfolio-title { font-size: 5.2rem; }
-          .portfolio-subtitle { font-size: 1.4rem; margin-left: 4rem; padding-left: 4rem; }
           .portfolio-card-link { width: 60vh; }
           .portfolio-card-box { border-radius: 4rem; }
           .portfolio-header { margin-bottom: 5vh; }
-          
-          /* 4K NAV BUTTON SCALE */
           .portfolio-nav { gap: 1.5rem; }
           .portfolio-nav button { width: 5.5rem; height: 5.5rem; }
           .portfolio-nav svg { width: 2rem; height: 2rem; }
-          
           .portfolio-view-all { font-size: 1.5rem; height: 5.5rem; padding: 0 4.5rem; border-radius: 6rem; }
         }
       `}} />
@@ -125,14 +124,13 @@ const PortfolioSection = () => {
         
         {/* HEADER AREA */}
         <div className="portfolio-header">
-          <div className="shrink-0">
+          <div className="shrink">
             <h2 className="portfolio-title">
-              Our <span className="text-[#43c6e4]">Portfolio</span>
+              Explore <span className="text-[#43c6e4]">Our Portfolio</span>
             </h2>
           </div>
 
           <div className="flex flex-row items-end gap-[1.5rem] shrink-0">
-            {/* BUTTONS (Visible 1024px - 1439px) */}
             <div className="portfolio-nav">
               <button onClick={() => scroll("left")}><ArrowLeft size="1.2rem" /></button>
               <button onClick={() => scroll("right")}><ArrowRight size="1.2rem" /></button>
