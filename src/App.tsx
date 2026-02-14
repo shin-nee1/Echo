@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";  
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -29,19 +29,49 @@ const App = () => (
 
       <BrowserRouter>
         {/* ================= GLOBAL BACKGROUND SYSTEM (FIXED) ================= */}
-        <div className="fixed inset-0 z-0 pointer-events-none bg-[#010a0f]">
-          <div className="absolute top-[-5%] left-[-15%] w-[45%] h-[40%] rounded-full bg-cyan/10 blur-[120px] animate-pulse" />
+        <div className="fixed inset-0 z-0 pointer-events-none bg-[#010a0f] overflow-hidden">
+          
+          {/* AMBIENT BORDER LIGHTING
+              Strictly positioned on Left/Right borders to mimic the reference.
+              Alternating pattern: Top-Left -> Middle-Right -> Bottom-Left.
+          */}
+
+          {/* 1. TOP LEFT BORDER GLOW 
+             - Anchored to the top-left edge.
+             - Washes over the header/hero section from the side.
+          */}
           <div 
-            className="absolute bottom-[20%] left-[-10%] w-[35%] h-[35%] rounded-full bg-cyan/5 blur-[100px] animate-pulse" 
-            style={{ animationDuration: '7s' }} 
+            className="absolute top-[-10%] left-[-25%] w-[60vw] h-[60vh] rounded-full blur-[120px] opacity-40"
+            style={{ 
+              background: 'radial-gradient(circle, rgba(67, 198, 228, 0.15) 0%, rgba(67, 198, 228, 0.05) 50%, transparent 70%)' 
+            }}
           />
-          <div className="absolute top-[15%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[110px]" />
+          
+          {/* 2. MIDDLE RIGHT BORDER GLOW
+             - Anchored to the center-right edge.
+             - Provides backlight for the middle content from the right side.
+          */}
           <div 
-            className="absolute bottom-[-10%] right-[-15%] w-[50%] h-[45%] rounded-full bg-cyan/8 blur-[130px] animate-pulse" 
-            style={{ animationDuration: '12s' }} 
+            className="absolute top-[35%] right-[-25%] w-[60vw] h-[70vh] rounded-full blur-[130px] opacity-35"
+            style={{ 
+              background: 'radial-gradient(circle, rgba(67, 198, 228, 0.12) 0%, rgba(67, 198, 228, 0.04) 50%, transparent 70%)' 
+            }}
           />
+
+          {/* 3. BOTTOM LEFT BORDER GLOW
+             - Anchored to the bottom-left edge.
+             - Washes over the footer/FAQ section from the left side.
+          */}
           <div 
-            className="absolute inset-0 z-[1] opacity-10" 
+            className="absolute bottom-[-10%] left-[-25%] w-[70vw] h-[60vh] rounded-full blur-[120px] opacity-40"
+            style={{ 
+              background: 'radial-gradient(circle, rgba(67, 198, 228, 0.15) 0%, rgba(67, 198, 228, 0.05) 50%, transparent 70%)' 
+            }}
+          />
+
+          {/* GRID OVERLAY */}
+          <div 
+            className="absolute inset-0 z-[1] opacity-[0.03]" 
             style={{ 
               backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
               backgroundSize: '80px 80px',
@@ -52,30 +82,23 @@ const App = () => (
         {/* ================= CONTENT LAYER (SCROLLING) ================= */}
         <div className="relative z-10 flex flex-col min-h-screen px-[12%] overflow-x-hidden">
           
-          {/* BACKGROUND CUBE SYSTEM - MODERATED SIZES */}
+          {/* BACKGROUND CUBE SYSTEM */}
           <div className="absolute inset-0 z-[-1] pointer-events-none">
             
-            {/* SECTION 1: TOP */}
+            {/* TOP SECTION */}
             <img src={CubeImg} alt="" className="absolute top-[3%] left-[-8%] w-[22vw] opacity-[0.7] -rotate-12" /> 
             <img src={CubeImg} alt="" className="absolute top-[12%] right-[-5%] w-[18vw] opacity-[0.5] rotate-45" />
 
-            {/* SECTION 2: TRANSITION (Increased from tiny to moderate) */}
-            <img src={CubeImg} alt="" className="absolute top-[25%] right-[-2%] w-[16vw] opacity-[0.4] rotate-[15deg]" />
 
-            {/* SECTION 3: MIDDLE (Reduced the 'huge' 35vw to a moderate 24vw) */}
+            {/* MIDDLE SECTION */}
             <img src={CubeImg} alt="" className="absolute top-[40%] left-[-4%] w-[19vw] opacity-[0.65] rotate-[30deg]" />
             <img src={CubeImg} alt="" className="absolute top-[48%] right-[-8%] w-[24vw] opacity-[0.8] -rotate-45" />
 
-            {/* SECTION 4: TRANSITION (Increased from tiny to moderate) */}
-            <img src={CubeImg} alt="" className="absolute top-[62%] left-[-2%] w-[15vw] opacity-[0.45] -rotate-[20deg]" />
-
-            {/* SECTION 5: LOWER */}
             <img src={CubeImg} alt="" className="absolute top-[75%] left-[-10%] w-[23vw] opacity-[0.75] rotate-12" />
-            <img src={CubeImg} alt="" className="absolute top-[82%] right-[1%] w-[18vw] opacity-[0.55] -rotate-12" />
-
-            {/* SECTION 6: FOOTER AREA */}
+      
+            {/* FOOTER AREA */}
             <img src={CubeImg} alt="" className="absolute bottom-[2%] right-[-6%] w-[20vw] opacity-[0.7] rotate-90" />
-            <img src={CubeImg} alt="" className="absolute bottom-[5%] left-[-4%] w-[16vw] opacity-[0.3] rotate-45" />
+           
           </div>
 
           <ScrollToTop />

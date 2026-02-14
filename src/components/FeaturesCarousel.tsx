@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState, useMemo, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight, MousePointerClick } from "lucide-react";
+import { MousePointerClick, ChevronLeft, ChevronRight } from "lucide-react";
 import type { EmblaCarouselType } from "embla-carousel";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -38,40 +38,52 @@ const FeaturesCarousel = ({
   const extendedFeatures = useMemo(() => {
     if (!features || features.length === 0) return [];
     let repeated = [...features];
-    while (repeated.length < 50) {
+    while (repeated.length < 20) { 
       repeated = [...repeated, ...features];
     }
     return repeated.map((f, i) => ({ ...f, uniqueId: `feature-${i}` }));
   }, [features]);
 
+  // CHANGED: dragFree set to false to ensure it always snaps to center
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
-    dragFree: false,
+    dragFree: false, 
     startIndex: Math.floor(extendedFeatures.length / 2),
     watchDrag: true,
+    skipSnaps: false,
   });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [isClosing, setIsClosing] = useState(false);
-  const [isReady, setIsReady] = useState(false);
-  const animationFrameRef = useRef<number>(0);
   const isMoving = useRef(false);
+  const animationFrameRef = useRef<number>(0);
 
-  const closeCard = useCallback(() => {
-    if (expandedId) {
-      setIsClosing(true);
-      setExpandedId(null);
-      setTimeout(() => setIsClosing(false), 500);
-    }
-  }, [expandedId]);
+  // --------------------------------------------------------------------------
+  // NAVIGATION HANDLERS
+  // --------------------------------------------------------------------------
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
 
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  // --------------------------------------------------------------------------
+  // PHYSICS ENGINE
+  // --------------------------------------------------------------------------
   const applyWheelEffect = useCallback((emblaApi: EmblaCarouselType) => {
+    if (!emblaApi) return;
+    
     const container = emblaApi.rootNode();
     const containerRect = container.getBoundingClientRect();
     const center = containerRect.width / 2;
     const slideNodes = emblaApi.slideNodes();
+    
+    const engine = (emblaApi as any).internalEngine();
+    const isDragging = engine.dragHandler.pointerDown();
+    const isSettling = emblaApi.scrollProgress() !== emblaApi.scrollSnapList()[emblaApi.selectedScrollSnap()];
 
     slideNodes.forEach((slideNode) => {
       const slideInner = slideNode.querySelector(".slide-inner") as HTMLElement;
@@ -79,55 +91,77 @@ const FeaturesCarousel = ({
 
       const slideId = slideInner.getAttribute('data-id');
       const isExpanded = expandedId === slideId;
-
-      if (isExpanded) {
-        slideInner.style.zIndex = "100";
-        slideInner.style.transform = `translate3d(0, 20px, 0) rotate(0deg) scale(1.05)`;
-        slideInner.style.opacity = "1";
-        return;
-      }
+      const isAnyExpanded = !!expandedId;
 
       const slideRect = slideNode.getBoundingClientRect();
       const slideCenter = slideRect.left - containerRect.left + slideRect.width / 2;
       const dist = slideCenter - center;
       
-      const ratioDenominator = isCompact ? 1.1 : 2.1;
-      const ratio = dist / (containerRect.width / ratioDenominator); 
+      const ratioDenominator = isCompact ? containerRect.width * 0.55 : containerRect.width * 0.45;
+      const ratio = dist / ratioDenominator; 
       const absRatio = Math.abs(ratio);
 
-      const verticalIntensity = isCompact ? 35 : 100;
-      const baseTranslateY = Math.pow(absRatio, 2) * verticalIntensity; 
-      
-      const opacity = isCompact ? Math.max(0, 1 - absRatio * 1.5) : 1;
+      // --- LOGIC ---
 
-      const spacingMultiplier = isCompact ? -130 : -65;
-      const spacingCorrection = ratio * (absRatio * spacingMultiplier); 
-      const rotate = ratio * 15; 
-      const baseScale = 1 - Math.min(absRatio * 0.25, 0.4);
+      let transition = "transform 0.1s linear, opacity 0.2s ease"; 
+      if (isAnyExpanded || (!isDragging && !isSettling)) {
+        transition = "transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease"; 
+      }
+      slideInner.style.transition = transition;
 
-      slideInner.style.transition = isClosing ? "transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)" : "none";
-      slideInner.style.transform = `translate3d(${spacingCorrection}px, ${baseTranslateY + 60}px, 0) rotate(${rotate}deg) scale(${baseScale})`;
-      slideInner.style.opacity = opacity.toString();
-      slideInner.style.zIndex = Math.round(100 - absRatio * 100).toString();
+      let transform = "";
+      let opacity = "1";
+      let zIndex = "10";
+      let grayscale = "0%";
+
+      if (isExpanded) {
+        transform = `translate3d(0, 10px, 0) rotate(0deg) scale(1.05)`;
+        opacity = "1";
+        zIndex = "100";
+        grayscale = "0%";
+
+      } else if (isAnyExpanded) {
+        const clampedRatio = Math.min(absRatio, 2.0);
+        const verticalIntensity = isCompact ? 50 : 120;
+        const translateY = Math.pow(clampedRatio, 2) * verticalIntensity; 
+        const rotate = ratio * 15; 
+        const scale = 1 - Math.min(absRatio * 0.2, 0.3);
+
+        transform = `translate3d(0, ${translateY + 40}px, 0) rotate(${rotate}deg) scale(${scale})`;
+        opacity = "0.1"; 
+        zIndex = "1";
+        grayscale = "100%";
+
+      } else {
+        const clampedRatio = Math.min(absRatio, 2.2);
+        const verticalIntensity = isCompact ? 40 : 100;
+        const translateY = Math.pow(clampedRatio, 2) * verticalIntensity; 
+        const rotate = ratio * 14; 
+        const scale = 1 - Math.min(absRatio * 0.15, 0.4);
+
+        opacity = (1 - absRatio * 0.6).toString();
+        if (parseFloat(opacity) < 0) opacity = "0";
+
+        transform = `translate3d(0, ${translateY + 40}px, 0) rotate(${rotate}deg) scale(${scale})`;
+        zIndex = Math.round(50 - absRatio * 50).toString();
+      }
+
+      slideInner.style.transform = transform;
+      slideInner.style.opacity = opacity;
+      slideInner.style.zIndex = zIndex;
+      slideInner.style.filter = `grayscale(${grayscale})`;
     });
 
-    if (!isReady) setIsReady(true);
-  }, [expandedId, isClosing, isReady, isCompact]);
+  }, [expandedId, isCompact]);
 
   useEffect(() => {
     if (!emblaApi) return;
+
     const animate = () => {
       applyWheelEffect(emblaApi);
       animationFrameRef.current = requestAnimationFrame(animate);
     };
     animationFrameRef.current = requestAnimationFrame(animate);
-
-    emblaApi.on("pointerDown", (api) => {
-      api.on("pointerUp", () => {
-        const engine = (api as any).internalEngine();
-        if (engine.clickAllowed && !engine.clickAllowed()) { closeCard(); }
-      });
-    });
 
     emblaApi.on("scroll", () => { isMoving.current = true; });
     emblaApi.on("settle", () => { isMoving.current = false; });
@@ -136,28 +170,22 @@ const FeaturesCarousel = ({
     });
 
     return () => cancelAnimationFrame(animationFrameRef.current);
-  }, [emblaApi, applyWheelEffect, features.length, closeCard]);
+  }, [emblaApi, applyWheelEffect, features.length]);
 
-  const handleCardClick = (id: string, index: number) => {
-    const internalApi = emblaApi as any;
-    if (internalApi && internalApi.internalEngine().clickAllowed) {
-        if (!internalApi.internalEngine().clickAllowed()) return;
-    }
+
+  const handleCardClick = useCallback((id: string, index: number) => {
+    if (!emblaApi) return;
+    const engine = (emblaApi as any).internalEngine();
+    
+    if (engine.dragHandler.pointerDown()) return;
 
     if (expandedId === id) {
-      closeCard();
-    } else {
       setExpandedId(null);
-      emblaApi?.scrollTo(index);
-      const checkSettle = setInterval(() => {
-        if (!isMoving.current) {
-          setExpandedId(id);
-          clearInterval(checkSettle);
-        }
-      }, 50);
-      setTimeout(() => clearInterval(checkSettle), 1000);
+    } else {
+      emblaApi.scrollTo(index);
+      setExpandedId(id);
     }
-  };
+  }, [emblaApi, expandedId]);
 
   return (
     <section className={`relative overflow-hidden z-10 w-full flex flex-col items-center ${isCompact ? "py-10" : "py-[10vh]"}`}>
@@ -174,67 +202,105 @@ const FeaturesCarousel = ({
           </p>
         </div>
 
+        {/* NAVIGATION BUTTONS (Desktop Only) */}
+        {!isCompact && !expandedId && (
+          <>
+            <button 
+              onClick={scrollPrev}
+              className="absolute left-[5%] top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#00d8ff]/30 text-white/70 hover:text-white transition-all duration-300 backdrop-blur-md group"
+            >
+              <ChevronLeft className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" />
+            </button>
+            <button 
+              onClick={scrollNext}
+              className="absolute right-[5%] top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#00d8ff]/30 text-white/70 hover:text-white transition-all duration-300 backdrop-blur-md group"
+            >
+              <ChevronRight className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
+            </button>
+          </>
+        )}
+
+        {/* MASK CONTAINER */}
         <div className={`relative flex items-center justify-center 
-          ${isCompact ? "min-h-[400px] [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]" : "min-h-[550px]"}`}> 
+          ${isCompact ? "min-h-[400px] [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]" : "min-h-[600px]"}`}> 
           
-          <div className={`w-full overflow-visible transition-opacity duration-500 ${isReady ? 'opacity-100' : 'opacity-0'}`} ref={emblaRef}>
+          <div className="w-full overflow-visible" ref={emblaRef}>
             <div className={`flex touch-pan-y items-start ${isCompact ? "h-[360px]" : "h-[500px]"}`}> 
               {extendedFeatures.map((feature, index) => {
                 const isExpanded = expandedId === feature.uniqueId;
+                
                 return (
                   <div 
                     key={feature.uniqueId} 
-                    /* SLIGHTLY REDUCED WIDTH: 14.5rem for a tighter look < 1000px */
-                    className={`flex-shrink-0 px-0 ${isCompact ? "w-[14.5rem]" : "w-[13rem] lg:w-[15rem] xl:w-[17.5rem] 2xl:w-[21.7rem]"}`}
+                    className={`flex-shrink-0 px-0 relative ${isCompact ? "w-[14rem]" : "w-[12rem] lg:w-[14rem] xl:w-[16rem] 2xl:w-[20rem]"}`}
+                    style={{ perspective: "1000px" }}
                   > 
-                    <motion.div 
-                      layout
-                      transition={{ layout: { duration: 1.1, type: "spring", stiffness: 60, damping: 25 } }}
+                    <div 
                       data-id={feature.uniqueId}
-                      onClick={(e) => {
-                        e.stopPropagation(); 
-                        handleCardClick(feature.uniqueId, index);
-                      }}
+                      onClick={() => handleCardClick(feature.uniqueId, index)}
                       className={`slide-inner relative cursor-pointer rounded-[1.6rem] border overflow-hidden flex flex-col justify-between items-center
-                        ${isExpanded ? "border-[#00d8ff]/40 shadow-2xl bg-white/[0.08]" : "border-white/5 bg-white/[0.02] hover:border-white/20"}
+                        ${isExpanded ? "border-[#00d8ff]/60 shadow-[0_0_50px_rgba(0,216,255,0.15)] bg-[#0a0a0a]" : "border-white/10 bg-white/[0.03] hover:border-white/30"}
                       `}
                       style={{
-                        backdropFilter: "blur(12px)",
-                        willChange: "transform, height, opacity",
-                        transition: "height 1.1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.1s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.3s ease, opacity 0.5s ease",
-                        height: isExpanded ? "auto" : (isCompact ? "280px" : "340px"),
-                        minHeight: isCompact ? "280px" : "340px",
-                        transformOrigin: "center bottom"
+                        height: isExpanded ? "auto" : (isCompact ? "280px" : "360px"),
+                        minHeight: isCompact ? "280px" : "360px",
+                        transformOrigin: "center center",
+                        willChange: "transform, opacity",
                       }}
                     >
-                      <div className={`flex-grow flex items-center justify-center w-full ${isCompact ? "p-5" : "p-8"}`}>
+                      {/* IMAGE */}
+                      <div className={`flex-grow flex items-center justify-center w-full transition-all duration-700 ${isExpanded ? "p-0 h-[220px]" : (isCompact ? "p-5" : "p-8")}`}>
                         <img 
                           src={feature.imageSrc} 
                           alt={feature.title} 
-                          className={`w-full h-full object-contain pointer-events-none ${isCompact ? "max-h-[110px]" : "max-h-[140px]"}`} 
+                          className={`w-full h-full object-contain pointer-events-none transition-all duration-700 
+                            ${isExpanded ? "scale-110 object-cover" : ""}
+                            ${isCompact ? "max-h-[110px]" : "max-h-[160px]"}`} 
                         />
                       </div>
 
-                      <div className="w-full p-6 pt-0 text-center flex flex-col items-center bg-gradient-to-t from-black/20 to-transparent">
-                        <h3 className={`${isCompact ? "text-[0.75rem]" : "text-[0.85rem]"} font-bold text-white mb-2 tracking-widest uppercase`}>{feature.title}</h3>
-                        <div className="w-6 h-[2px] bg-[#00d8ff]/40 mb-3" />
+                      {/* TEXT */}
+                      <div className={`w-full text-center flex flex-col items-center bg-gradient-to-t from-black/80 to-transparent transition-all duration-500 ${isExpanded ? "pt-4 pb-6" : "p-6 pt-0"}`}>
+                        <h3 className={`${isCompact ? "text-[0.75rem]" : "text-[0.85rem]"} font-bold text-white mb-2 tracking-widest uppercase`}>
+                          {feature.title}
+                        </h3>
                         
-                        <AnimatePresence mode="wait">
+                        <div className={`h-[2px] bg-[#00d8ff]/40 mb-3 transition-all duration-500 ${isExpanded ? "w-12" : "w-6"}`} />
+                        
+                        <AnimatePresence>
                           {isExpanded && (
-                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ duration: 0.6 }} className="pb-6">
-                              <p className="text-white/60 text-[0.7rem] leading-relaxed font-light px-4">{feature.description}</p>
+                            <motion.div 
+                              initial={{ opacity: 0, height: 0 }} 
+                              animate={{ opacity: 1, height: "auto" }} 
+                              exit={{ opacity: 0, height: 0 }} 
+                              transition={{ duration: 0.4 }}
+                              className="overflow-hidden"
+                            >
+                              <p className="text-white/70 text-[0.8rem] leading-relaxed font-light px-6 pb-2">
+                                {feature.description}
+                              </p>
+                              
+                              <button 
+                                className="mt-4 text-[0.7rem] bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full transition-colors"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setExpandedId(null);
+                                }}
+                              >
+                                Close
+                              </button>
                             </motion.div>
                           )}
                         </AnimatePresence>
                         
                         {!isExpanded && (
-                          <div className="mt-auto flex items-center gap-2 text-[#00d8ff] text-[0.6rem] uppercase font-bold tracking-widest">
+                          <div className="mt-auto flex items-center gap-2 text-[#00d8ff] text-[0.6rem] uppercase font-bold tracking-widest opacity-80">
                             <MousePointerClick size="0.75rem" />
                             <span>Details</span>
                           </div>
                         )}
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
                 );
               })}
@@ -242,8 +308,9 @@ const FeaturesCarousel = ({
           </div>
         </div>
 
+        {/* PAGINATION */}
         {!expandedId && (
-          <div className={`flex justify-center gap-[0.35rem] relative z-20 ${isCompact ? "mt-4" : "mt-4"}`}>
+          <div className={`flex justify-center gap-[0.35rem] relative z-20 ${isCompact ? "mt-4" : "mt-8"}`}>
             {features.map((_, index) => (
               <div key={index} className={`h-[3px] rounded-full transition-all duration-500 ${index === selectedIndex ? "w-8 bg-[#00d8ff]" : "w-2 bg-white/10"}`} />
             ))}

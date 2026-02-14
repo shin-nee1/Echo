@@ -20,24 +20,27 @@ const WhyUsSection = () => {
 
   return (
     <section 
-      className="relative overflow-hidden bg-transparent"
+      /* Updated: Removed 'overflow-hidden' to allow the child container to break out visually */
+      className="relative bg-transparent"
       style={{ padding: "clamp(3rem, 8vw, 8rem) 0" }}
     >
       <div className="mx-auto w-full px-[5vw]">
         
-        {/* MAIN HEADER - Reduced padding for mobile */}
+        {/* MAIN HEADER */}
         <div className="text-center" style={{ paddingBottom: "clamp(1.5rem, 5vw, 4rem)" }}>
           <h2 className="text-white font-bold leading-tight why-us-main-title">
             Why Echo & <span className="text-[#43c6e4]">Impact?</span>
           </h2>
         </div>
 
-        {/* FLEX CONTAINER - Reduced min-height for mobile/tablet */}
-        <div className="why-us-container flex flex-col lg:flex-row justify-center items-stretch gap-0 lg:h-[35vw] min-h-[80vh] lg:min-h-0">
+        {/* FLEX CONTAINER 
+            Updated: w-[100vw] forces full viewport width.
+            relative left-1/2 -translate-x-1/2 centers it relative to the viewport, 
+            effectively ignoring parent padding/constraints.
+        */}
+        <div className="why-us-container w-[100vw] relative left-1/2 -translate-x-1/2 flex flex-col lg:flex-row justify-center items-stretch gap-0 lg:h-[35vw] min-h-[80vh] lg:min-h-0 my-10 lg:my-20">
           {items.map((item, index) => {
             const isActive = activeIndex === index;
-            const isLineActive = isActive || activeIndex === index + 1;
-            const isFirstLineActive = index === 0 && isActive;
 
             return (
               <div
@@ -48,14 +51,17 @@ const WhyUsSection = () => {
                   isActive ? "why-us-item-active" : "why-us-item-inactive"
                 }`}
               >
-                {/* BACKGROUND HIGHLIGHT */}
+                {/* BACKGROUND HIGHLIGHT & INNER GLOW */}
                 <div
-                  className={`absolute inset-0 transition-opacity duration-500 pointer-events-none ${
+                  className={`absolute inset-0 transition-all duration-500 pointer-events-none ${
                     isActive ? "opacity-100" : "opacity-0"
                   } 
-                  lg:[clip-path:polygon(0%_0%,100%_0%,100%_45%,calc(100%+1.25vw)_50%,100%_55%,100%_100%,0%_100%,0%_55%,1.25vw_50%,0%_45%)]
-                  max-lg:[clip-path:polygon(0%_0%,100%_0%,100%_100%,55%_100%,50%_calc(100%+1.5vw),45%_100%,0%_100%,0%_0%)]`}
-                  style={{ backgroundColor: "rgba(67, 198, 228, 0.1)" }}
+                  lg:[clip-path:polygon(0%_0%,100%_0%,100%_45%,calc(100%+1vw)_50%,100%_55%,100%_100%,0%_100%,0%_55%,1vw_50%,0%_45%)]
+                  max-lg:[clip-path:polygon(0%_0%,45%_0%,50%_1.5vw,55%_0%,100%_0%,100%_100%,55%_100%,50%_calc(100%+1.5vw),45%_100%,0%_100%)]`}
+                  style={{ 
+                    backgroundColor: "rgba(67, 198, 228, 0.1)",
+                    boxShadow: isActive ? "inset 0 0 35px 5px rgba(67, 198, 228, 0.9)" : "none",
+                  }}
                 />
 
                 {/* CONTENT LAYER */}
@@ -67,52 +73,77 @@ const WhyUsSection = () => {
                       isActive ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
                     }`}
                   >
-                    {/* DESKTOP (Rotated) */}
                     <h3 className="hidden lg:block font-bold uppercase text-white whitespace-nowrap -rotate-90 origin-center why-us-collapsed-text">
                       {item.title}
                     </h3>
-
-                    {/* MOBILE/TABLET (Horizontal) */}
                     <h3 className="lg:hidden font-bold uppercase text-white text-center w-full px-[5vw] why-us-collapsed-text">
                       {item.title}
                     </h3>
                   </div>
 
-                  {/* EXPANDED CONTENT */}
+                  {/* EXPANDED CONTENT - Left aligned on Desktop with padding */}
                   <div
-                    className={`absolute inset-0 flex flex-col items-center justify-center px-[8%] text-center transition-all duration-700 ${
+                    className={`absolute inset-0 flex flex-col items-center justify-center px-[8%] text-center lg:items-start lg:justify-start lg:text-left lg:px-0 lg:pl-[3vw] lg:pt-[3vw] transition-all duration-700 ${
                       isActive ? "opacity-100 scale-100 delay-200" : "opacity-0 scale-95 pointer-events-none"
                     }`}
                   >
-                    <Sparkles className="text-[#00d8ff]" style={{ width: "clamp(24px, 2.2vw, 40px)", height: "clamp(24px, 2.2vw, 40px)", marginBottom: "2vw" }} />
-                    <h3 className="font-bold text-white uppercase tracking-tight why-us-expanded-title">{item.title}</h3>
-                    <p className="text-gray-300 leading-relaxed mx-auto why-us-description">{item.description}</p>
+                    <Sparkles 
+                      className="text-[#00d8ff]" 
+                      style={{ 
+                        width: "clamp(20px, 1.8vw, 28px)", 
+                        height: "clamp(20px, 1.8vw, 28px)", 
+                        marginBottom: "1.5vw" 
+                      }} 
+                    />
+                    <h3 className="font-bold text-white uppercase tracking-wider why-us-expanded-title mb-[1vw]">{item.title}</h3>
+                    <p className="text-gray-300 leading-relaxed mx-auto lg:mx-0 why-us-description">{item.description}</p>
                   </div>
                 </div>
 
                 {/* --- SVG SEPARATORS --- */}
 
-                {/* 1. TOP SEPARATOR (Desktop) - Re-added for first item */}
+                {/* 1. TOP SEPARATOR (Desktop) */}
                 {index === 0 && (
-                  <div className="hidden lg:block absolute top-0 left-[-1.25vw] w-[2.5vw] h-full z-30 pointer-events-none">
+                  <div className="hidden lg:block absolute top-0 left-0 w-[2.5vw] h-full z-30 pointer-events-none">
                     <svg viewBox="0 0 40 100" preserveAspectRatio="none" className="h-full w-full">
-                      <path d="M 2 0 L 2 45 L 18 50 L 2 55 L 2 100" fill="none" stroke={isFirstLineActive ? "#43c6e4" : "rgba(255,255,255,0.2)"} strokeWidth={isFirstLineActive ? "2" : "1"} className="transition-all duration-500" />
+                      <defs>
+                        <linearGradient id="vertical-fade" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="white" stopOpacity="0.1" />
+                          <stop offset="50%" stopColor="white" stopOpacity="1" />
+                          <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M 2 0 L 2 45 L 18 50 L 2 55 L 2 100" fill="none" stroke="url(#vertical-fade)" strokeWidth="1" className="transition-all duration-500" />
                     </svg>
                   </div>
                 )}
 
                 {/* 2. RIGHT SEPARATOR (Desktop) */}
-                <div className="hidden lg:block absolute top-0 right-[-1.25vw] w-[2.5vw] h-full z-30 pointer-events-none">
+                <div className="hidden lg:block absolute top-0 right-[-2.5vw] w-[2.5vw] h-full z-30 pointer-events-none">
                   <svg viewBox="0 0 40 100" preserveAspectRatio="none" className="h-full w-full">
-                    <path d="M 2 0 L 2 45 L 18 50 L 2 55 L 2 100" fill="none" stroke={isLineActive ? "#43c6e4" : "rgba(255,255,255,0.2)"} strokeWidth={isLineActive ? "2" : "1"} className="transition-all duration-500" />
+                      <defs>
+                        <linearGradient id="vertical-fade-right" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="white" stopOpacity="0.1" />
+                          <stop offset="50%" stopColor="white" stopOpacity="1" />
+                          <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+                        </linearGradient>
+                      </defs>
+                    <path d="M 2 0 L 2 45 L 18 50 L 2 55 L 2 100" fill="none" stroke="url(#vertical-fade-right)" strokeWidth="1" className="transition-all duration-500" />
                   </svg>
                 </div>
 
-                {/* 3. TOP SEPARATOR (Mobile/Tablet) - Fixed the disappearance */}
+                {/* 3. TOP SEPARATOR (Mobile/Tablet) */}
                 {index === 0 && (
                   <div className="lg:hidden absolute top-[-1.5vw] left-0 w-full h-[3vw] z-30 pointer-events-none">
                     <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="w-full h-full">
-                      <path d="M 0 2 L 45 2 L 50 18 L 55 2 L 100 2" fill="none" stroke={isFirstLineActive ? "#43c6e4" : "rgba(255,255,255,0.2)"} strokeWidth={isFirstLineActive ? "2" : "1"} className="transition-all duration-500" />
+                      <defs>
+                        <linearGradient id="horizontal-fade" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="white" stopOpacity="0.1" />
+                          <stop offset="50%" stopColor="white" stopOpacity="1" />
+                          <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M 0 2 L 45 2 L 50 18 L 55 2 L 100 2" fill="none" stroke="url(#horizontal-fade)" strokeWidth="1" className="transition-all duration-500" />
                     </svg>
                   </div>
                 )}
@@ -120,7 +151,14 @@ const WhyUsSection = () => {
                 {/* 4. BOTTOM SEPARATOR (Mobile/Tablet) */}
                 <div className="lg:hidden absolute bottom-[-1.5vw] left-0 w-full h-[3vw] z-30 pointer-events-none">
                   <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="w-full h-full">
-                    <path d="M 0 2 L 45 2 L 50 18 L 55 2 L 100 2" fill="none" stroke={isLineActive ? "#43c6e4" : "rgba(255,255,255,0.2)"} strokeWidth={isLineActive ? "2" : "1"} className="transition-all duration-500" />
+                      <defs>
+                        <linearGradient id="horizontal-fade-bottom" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="white" stopOpacity="0.1" />
+                          <stop offset="50%" stopColor="white" stopOpacity="1" />
+                          <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+                        </linearGradient>
+                      </defs>
+                    <path d="M 0 2 L 45 2 L 50 18 L 55 2 L 100 2" fill="none" stroke="url(#horizontal-fade-bottom)" strokeWidth="1" className="transition-all duration-500" />
                   </svg>
                 </div>
               </div>
@@ -132,7 +170,7 @@ const WhyUsSection = () => {
       <style dangerouslySetInnerHTML={{ __html: `
         /* 1. MOBILE (Base Style - Below 764px) */
         .why-us-collapsed-text { font-size: 11px; letter-spacing: 0.2em; }
-        .why-us-expanded-title { font-size: 15px; }
+        .why-us-expanded-title { font-size: 14px; letter-spacing: 0.05em; }
         .why-us-description { font-size: 12px; max-width: 280px; }
         .why-us-main-title { font-size: 28px !important; }
 
@@ -144,8 +182,8 @@ const WhyUsSection = () => {
         /* 2. TABLET (764px to 1023px) */
         @media (min-width: 764px) {
           .why-us-collapsed-text { font-size: 13.5px; letter-spacing: 0.25em; }
-          .why-us-expanded-title { font-size: 22px; }
-          .why-us-description { font-size: 14px; }
+          .why-us-expanded-title { font-size: 16px; letter-spacing: 0.08em; }
+          .why-us-description { font-size: 13px; max-width: 300px; }
           .why-us-main-title { font-size: 42px !important; }
           .why-us-item-inactive { height: 12vh !important; }
           .why-us-item-active { height: 32vh !important; }
@@ -153,35 +191,35 @@ const WhyUsSection = () => {
 
         /* 3. STANDARD LAPTOP (1024px to 1439px) */
         @media (min-width: 1024px) {
-          .why-us-collapsed-text { font-size: 14px; letter-spacing: 0.3em; }
-          .why-us-expanded-title { font-size: 24px; }
-          .why-us-description { font-size: 15px; max-width: 320px; }
+          .why-us-collapsed-text { font-size: 15px; letter-spacing: 0.3em; }
+          .why-us-expanded-title { font-size: 18px; letter-spacing: 0.1em; }
+          .why-us-description { font-size: 14px; max-width: 320px; line-height: 1.6; }
           .why-us-main-title { font-size: 48px !important; }
           .why-us-item-inactive { width: 120px !important; height: 100% !important; }
           .why-us-item-active { width: 500px !important; height: 100% !important; }
-          .why-us-container { height: 38vw !important; }
+          .why-us-container { height: 30vw; !important; }
         }
 
         /* 4. LARGE LAPTOP / MACBOOK (1440px to 2559px) */
         @media (min-width: 1440px) {
-          .why-us-collapsed-text { font-size: 15px; letter-spacing: 0.4em; }
-          .why-us-expanded-title { font-size: 28px; }
-          .why-us-description { font-size: 17px; max-width: 380px; }
+          .why-us-collapsed-text { font-size: 19px; letter-spacing: 0.4em; }
+          .why-us-expanded-title { font-size: 20px; letter-spacing: 0.12em; }
+          .why-us-description { font-size: 15px; max-width: 380px; line-height: 1.7; }
           .why-us-main-title { font-size: 45px !important; }
           .why-us-item-inactive { width: 150px !important; }
           .why-us-item-active { width: 620px !important; }
-          .why-us-container { height: 32vw !important; }
+          .why-us-container { height: 26vw !important; }
         }
 
         /* 5. 4K MONITORS (2560px+) */
         @media (min-width: 2560px) {
           .why-us-collapsed-text { font-size: 25px; letter-spacing: 0.5em; }
-          .why-us-expanded-title { font-size: 36px; }
+          .why-us-expanded-title { font-size: 30px; }
           .why-us-description { font-size: 20px; max-width: 500px; }
           .why-us-main-title { font-size: 85px !important; }
           .why-us-item-inactive { width: 200px !important; }
           .why-us-item-active { width: 900px !important; }
-          .why-us-container { height: 28vw !important; max-width: 2600px; margin: 0 auto; }
+          .why-us-container { height: 22vw !important; max-width: 2600px; margin: 0 auto; }
         }
       `}} />
     </section>
