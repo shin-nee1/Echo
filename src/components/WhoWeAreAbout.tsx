@@ -103,14 +103,14 @@ const WhoWeAreAbout = () => {
             ))}
           </div>
 
-          {/* CENTER ORB - Slightly Increased */}
+          {/* CENTER ORB - Reduced Size */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none hidden md:block">
             <div 
               className="relative animate-pulse-slow"
               style={{ 
-                /* Balanced at 28vw / 460px max */
-                width: "clamp(200px, 28vw, 460px)", 
-                height: "clamp(200px, 28vw, 460px)" 
+                /* Reduced from 28vw/460px to 24vw/380px */
+                width: "clamp(180px, 24vw, 420px)", 
+                height: "clamp(180px, 24vw, 420px)" 
               }}
             >
               <div 

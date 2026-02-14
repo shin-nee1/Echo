@@ -28,7 +28,7 @@ const VisionSection = () => {
                                 text-[clamp(2rem,8vw,2.5rem)] 
                                 md:text-[clamp(2.5rem,6vw,3rem)] 
                                 lg:text-[clamp(1.8rem,3vw,2.4rem)] 
-                                xl:text-[3rem] 2xl:text-[4.5rem]">
+                                xl:text-[3rem] 2xl:text-[3.4rem]">
                     Our <span className="text-[#00d8ff]">Vision</span>
                  </h2>
               </div>

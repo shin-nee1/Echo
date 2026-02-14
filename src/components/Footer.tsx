@@ -31,8 +31,8 @@ const SectionBlock = ({
           const to = isObj(link) ? link.href : getServiceLink(link);
           return (
             <li key={lIdx} className="flex items-center gap-2 group cursor-pointer">
-              <ArrowRight className="w-3 h-3 text-[#43c6e4] opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0" />
-              <Link to={to} className="text-slate-400 font-medium group-hover:text-white transition-colors" style={{ fontSize: "clamp(0.8rem, 0.9vw, 0.9rem)" }}>
+              <ArrowRight className="w-3 h-3 text-[#43c6e4] opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0" />
+              <Link to={to} className="text-white font-medium group-hover:text-[#43c6e4] transition-colors" style={{ fontSize: "clamp(0.8rem, 0.9vw, 0.9rem)" }}>
                 {text}
               </Link>
             </li>
@@ -114,7 +114,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
           <div className="hidden md:block w-1/4">
             <p
-              className="text-slate-300 leading-relaxed font-medium opacity-70"
+              className="text-white leading-relaxed font-medium opacity-90"
               style={{ fontSize: "clamp(0.75rem, 0.8vw, 0.875rem)", maxWidth: "200px" }}
             >
               Shaping brands with clarity, precision, and purpose.
@@ -128,7 +128,7 @@ const Footer = () => {
           </div>
 
           <div className="w-full md:w-1/4 flex flex-col items-center md:items-end gap-3">
-            <span className="font-bold text-slate-400 uppercase tracking-widest" style={{ fontSize: "10px" }}>
+            <span className="font-bold text-white uppercase tracking-widest" style={{ fontSize: "10px" }}>
               Social links
             </span>
             <div className="flex gap-3">
@@ -197,8 +197,10 @@ const Footer = () => {
             { icon: MapPin, label: "Location", val: "NY, USA, SERVING GLOBALLY" },
           ].map((item, i) => (
             <div key={i} className="flex items-center gap-4 justify-start">
-              <div className="p-2.5 rounded-full bg-white/5 shrink-0">
-                <item.icon className="w-4 h-4 text-[#43c6e4]" />
+              {/* Removed background container, kept shrink-0 */}
+              <div className="shrink-0">
+                {/* Increased size from w-4 h-4 to w-6 h-6 */}
+                <item.icon className="w-6 h-6 text-[#43c6e4]" />
               </div>
               <div className="min-w-0">
                 <p className="uppercase tracking-widest text-[#43c6e4] font-bold mb-0.5" style={{ fontSize: "9px" }}>
@@ -213,7 +215,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 text-center border-t border-white/10 pt-8">
-          <p className="text-slate-500 text-xs">
+          <p className="text-white text-xs opacity-80">
             Echo & Impact. All rights reserved. 2026 Terms & Conditions | Privacy Policy
           </p>
         </div>
