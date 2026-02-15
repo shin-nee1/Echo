@@ -44,7 +44,7 @@ const HowWeWork = () => {
           style={{ marginBottom: "clamp(2.5rem, 6vh, 4.5rem)" }}
         >
           <h2 
-            className="text-white font-bold tracking-tight leading-[1.1] uppercase 2xl:text-[clamp(3rem,4.5vw,4.2rem)]"
+            className="text-white font-bold tracking-tight leading-[1.1]  2xl:text-[clamp(3rem,4.5vw,4.2rem)]"
             style={{ fontSize: "clamp(1.8rem, 5vw, 2.8rem)" }} 
           >
             How <span className="text-white">We</span>{" "}

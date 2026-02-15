@@ -36,10 +36,10 @@ const WhoWeAreAbout = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-white font-bold tracking-tight leading-tight uppercase 2xl:text-[clamp(3.5rem,6vw,5rem)]"
+            className="text-white font-bold tracking-tight leading-tight 2xl:text-[clamp(3.5rem,6vw,5rem)]"
             style={{ fontSize: "clamp(2rem, 5vw, 3.2rem)" }}
           >
-            WHO WE <span className="text-[#43c6e4]">ARE</span>
+            Who We <span className="text-[#43c6e4]">Are</span>
           </motion.h2>
         </div>
 
