@@ -17,7 +17,6 @@ const WhoWeAre = () => {
                 alt="Who We Are" 
                 className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105 filter drop-shadow-[0_10px_30px_rgba(67,198,228,0.15)]"
               />
-              <div className="whoweare-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#43c6e4]/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
             </div>
           </div>
 
