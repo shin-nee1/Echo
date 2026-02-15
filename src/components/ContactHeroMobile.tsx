@@ -7,18 +7,12 @@ const ContactHeroMobile = () => {
 
   return (
     <div className="w-full h-auto relative overflow-y-auto bg-transparent scrollbar-hide">
-      
-      {/* SAFE ZONE UPDATE: 
-          Using pt-[clamp(6rem,25vh,12rem)] ensures that even on short screens, 
-          the content starts at least 6rem (96px) from the top.
-      */}
       <section className="relative w-full flex flex-col items-center pt-[clamp(6rem,25vh,12rem)] pb-[5vh] px-[5%]">
-        
         {/* ================= MASTER WRAPPER ================= */}
         <div className="relative w-full max-w-[28rem] flex flex-col items-center">
-
-          {/* 1. TELEPHONE */}
-          <div className="relative z-30 w-[55%] max-w-[15rem]">
+          
+          {/* 1. TELEPHONE - z-0 (LOWERED) */}
+          <div className="relative z-0 w-[55%] max-w-[15rem]">
             <img
               src={ContactImg}
               alt="Telephone"
@@ -26,10 +20,10 @@ const ContactHeroMobile = () => {
             />
           </div>
 
-          {/* 2. SEMI-CIRCLES (The Crown) */}
-          <div className="absolute top-[-15%] w-full h-[30%] z-20 pointer-events-none flex items-end justify-center overflow-visible">
-            <svg 
-              viewBox="0 0 400 200" 
+          {/* 2. SEMI-CIRCLES (The Crown) - z-0 */}
+          <div className="absolute top-[-15%] w-full h-[30%] z-0 pointer-events-none flex items-end justify-center overflow-visible">
+            <svg
+              viewBox="0 0 400 200"
               className="w-[115%] h-auto overflow-visible"
             >
               <defs>
@@ -41,43 +35,43 @@ const ContactHeroMobile = () => {
                 </linearGradient>
               </defs>
 
-              <path 
-                d="M 100,200 A 100,100 0 0 1 300,200" 
-                fill="none" 
-                stroke="url(#arcFade)" 
-                strokeWidth="1.5px" 
-                strokeOpacity="0.4" 
-                strokeLinecap="round" 
+              <path
+                d="M 100,200 A 100,100 0 0 1 300,200"
+                fill="none"
+                stroke="url(#arcFade)"
+                strokeWidth="1.5px"
+                strokeOpacity="0.4"
+                strokeLinecap="round"
               />
-              <path 
-                d="M 60,200 A 140,140 0 0 1 340,200" 
-                fill="none" 
-                stroke="url(#arcFade)" 
-                strokeWidth="1.5px" 
-                strokeOpacity="0.4" 
-                strokeLinecap="round" 
+              <path
+                d="M 60,200 A 140,140 0 0 1 340,200"
+                fill="none"
+                stroke="url(#arcFade)"
+                strokeWidth="1.5px"
+                strokeOpacity="0.4"
+                strokeLinecap="round"
               />
-              <path 
-                d="M 20,200 A 180,180 0 0 1 380,200" 
-                fill="none" 
-                stroke="url(#arcFade)" 
-                strokeWidth="1.5px" 
-                strokeOpacity="0.4" 
-                strokeLinecap="round" 
+              <path
+                d="M 20,200 A 180,180 0 0 1 380,200"
+                fill="none"
+                stroke="url(#arcFade)"
+                strokeWidth="1.5px"
+                strokeOpacity="0.4"
+                strokeLinecap="round"
               />
             </svg>
           </div>
 
-          {/* 3. THE FORM CARD */}
+          {/* 3. THE FORM CARD - z-20 (HIGHER than phone) */}
           <div
-            className="relative z-10 w-full -mt-[25%] border border-white/20 shadow-2xl overflow-hidden rounded-[2.5rem] backdrop-blur-xl"
+            className="relative z-20 w-full -mt-[25%] border border-white/20 shadow-2xl overflow-hidden rounded-[2.5rem] backdrop-blur-sm"
             style={{ backgroundColor: "rgba(255, 255, 255, 0.08)" }}
           >
             <div
               className="absolute inset-0 pointer-events-none z-0"
               style={{ backgroundImage: noiseTexture, opacity: 0.7 }}
             />
-            
+
             <div className="relative z-10 flex flex-col justify-center px-[6%] pb-[2rem] pt-[5.5rem]">
               <h2 className="text-white font-bold tracking-tight text-center mb-[1.5rem] text-[1.25rem] whitespace-nowrap drop-shadow-md">
                 Tell Us About Your Project
@@ -90,7 +84,7 @@ const ContactHeroMobile = () => {
                     className="rounded-xl px-[1rem] bg-zinc-900/80 border border-white/10 text-white placeholder:text-white/40 text-[0.85rem] h-[2.75rem] focus:outline-none focus:ring-1 focus:ring-[#00d2ff]/30 transition-all shadow-inner"
                   />
                 ))}
-                
+
                 <div className="col-span-2 relative">
                   <select className="w-full rounded-xl px-[1rem] bg-zinc-900/80 border border-white/10 text-white/50 text-[0.85rem] appearance-none h-[2.75rem] cursor-pointer focus:outline-none">
                     <option className="bg-[#050a0f]">Service Interest</option>
@@ -122,7 +116,7 @@ const ContactHeroMobile = () => {
             </div>
           </div>
 
-          {/* 4. INFO CARD */}
+          {/* 4. INFO CARD - z-40 */}
           <div className="relative z-40 w-full mt-[1.5rem]">
             <div
               className="relative overflow-hidden border border-white/10 backdrop-blur-2xl rounded-[1.75rem] shadow-2xl w-full p-[1.25rem]"
@@ -158,7 +152,6 @@ const ContactHeroMobile = () => {
               </div>
             </div>
           </div>
-
         </div>
       </section>
     </div>

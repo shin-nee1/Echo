@@ -51,20 +51,23 @@ const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+    // REDUCED: gap-4 -> gap-2, text-sm -> text-xs, min-w reduced
+    <div className="flex flex-col gap-2 text-xs min-w-[180px]">
       {sections.map((section) => (
         <div key={section.title}>
-          <h4 className="mb-4 text-lg font-semibold text-foreground border-b border-border pb-2 md:border-none">
+          {/* REDUCED: mb-1 -> mb-0.5, text-lg -> text-sm */}
+          <h4 className="mb-0.5 text-sm font-bold text-foreground border-b border-border pb-1 md:border-none">
             {section.title}
           </h4>
 
-          <ul className="space-y-2">
+          <ul className="space-y-0">
             {section.items.map((item) => (
               <li key={item}>
                 <Link
                   to={getServiceLink(item)}
                   onClick={onClose}
-                  className="block rounded-lg px-3 py-2 text-muted-foreground hover:bg-cyan/20 hover:text-cyan transition-all"
+                  // REDUCED: py-1 -> py-0.5
+                  className="block rounded-lg px-2 py-0.5 text-muted-foreground hover:bg-cyan/20 hover:text-cyan transition-all whitespace-normal"
                 >
                   {item}
                 </Link>
@@ -101,15 +104,26 @@ const Navbar = () => {
   }, []);
 
   const isActive = (path: string) => location.pathname === path;
+  const isServicesActive = location.pathname.startsWith("/services");
+
+  // REUSABLE ACTIVE UNDERLINE COMPONENT
+  const ActiveUnderline = () => (
+    <motion.div
+      layoutId="navbar-underline"
+      className="absolute bottom-1 left-1/4 h-[2px]  rounded-full bg-[#00d2ff]"
+      initial={{ opacity: 0, width: "0%" }}
+      animate={{ opacity: 1, width: "50%" }} 
+      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+    />
+  );
 
   return (
-    /* UPDATED: Changed 'fixed' to 'absolute' so it stays at the top of the page */
     <nav className="absolute top-0 left-0 right-0 z-[100]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-20 md:h-24">
 
           {/* LOGO */}
-          <Link to="/" className="flex items-center group">
+          <Link to="/" className="flex items-center group shrink-0">
             <img
               src={navLogo}
               alt="Echo & Impact"
@@ -117,17 +131,24 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* DESKTOP NAV */}
-          <div className="hidden min-[769px]:flex flex-1 justify-center">
+          {/* DESKTOP NAV & CTA CONTAINER */}
+          <div className="hidden min-[769px]:flex flex-1 items-center justify-end gap-8">
+            
+            {/* NAV LINKS */}
             <div className="flex items-center gap-x-8">
-
+              
+              {/* HOME LINK */}
               <Link
                 to="/"
-                className={`text-sm font-medium hover:text-cyan transition-colors ${
-                  isActive("/") ? "text-cyan" : "text-muted-foreground"
-                }`}
+                className="relative text-sm font-medium transition-colors group py-2"
               >
-                Home
+                <span className={isActive("/") 
+                  ? "bg-gradient-to-r from-[#009dff] to-[#00e5ff] bg-clip-text text-transparent font-bold"
+                  : "text-muted-foreground hover:text-cyan"
+                }>
+                  Home
+                </span>
+                {isActive("/") && <ActiveUnderline />}
               </Link>
 
               {/* SERVICES (DESKTOP) */}
@@ -138,27 +159,31 @@ const Navbar = () => {
                 onMouseLeave={() => setServicesOpen(false)}
               >
                 <button
-                  className={`flex items-center gap-1 text-sm font-medium transition-colors ${
-                    servicesOpen
-                      ? "text-cyan"
-                      : "text-muted-foreground hover:text-cyan"
-                  }`}
+                  className="relative flex items-center gap-1 text-sm font-medium transition-colors group py-2"
                 >
-                  Services
+                  <span className={isServicesActive || servicesOpen
+                    ? "bg-gradient-to-r from-[#009dff] to-[#00e5ff] bg-clip-text text-transparent font-bold"
+                    : "text-muted-foreground hover:text-cyan"
+                  }>
+                    Services
+                  </span>
                   <ChevronDown
                     className={`w-4 h-4 transition-transform ${
                       servicesOpen ? "rotate-180" : ""
-                    }`}
+                    } ${isServicesActive || servicesOpen ? "text-[#00e5ff]" : "text-muted-foreground group-hover:text-cyan"}`}
                   />
+                  {isServicesActive && <ActiveUnderline />}
                 </button>
 
+                {/* DROPDOWN MENU */}
                 <AnimatePresence>
                   {servicesOpen && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[800px] rounded-2xl border border-cyan/40 bg-background shadow-2xl p-8 z-[9999]"
+                      // REDUCED: mt-4 -> mt-2, p-6 -> p-3
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max rounded-2xl border border-cyan/40 bg-background shadow-2xl p-3 z-[9999]"
                     >
                       <ServicesDropdown onClose={() => setServicesOpen(false)} />
                     </motion.div>
@@ -166,28 +191,33 @@ const Navbar = () => {
                 </AnimatePresence>
               </div>
 
+              {/* OTHER LINKS */}
               {["/work", "/about", "/contact"].map((path) => (
                 <Link
                   key={path}
                   to={path}
-                  className={`text-sm font-medium hover:text-cyan transition-colors ${
-                    isActive(path) ? "text-cyan" : "text-muted-foreground"
-                  }`}
+                  className="relative text-sm font-medium transition-colors group py-2"
                 >
-                  {path.replace("/", "").replace(/^./, (c) => c.toUpperCase())}
+                  <span className={isActive(path)
+                    ? "bg-gradient-to-r from-[#009dff] to-[#00e5ff] bg-clip-text text-transparent font-bold"
+                    : "text-muted-foreground hover:text-cyan"
+                  }>
+                    {path.replace("/", "").replace(/^./, (c) => c.toUpperCase())}
+                  </span>
+                  {isActive(path) && <ActiveUnderline />}
                 </Link>
               ))}
             </div>
-          </div>
 
-          {/* DESKTOP CTA */}
-          <div className="hidden min-[769px]:flex items-center gap-3">
-            <Button
-              size="sm"
-              className="bg-cyan text-background hover:bg-cyan/90 glow-cyan px-6 font-bold"
-            >
-              Start Project
-            </Button>
+            {/* DESKTOP CTA */}
+            <div className="flex items-center">
+              <Button
+                size="sm"
+                className="bg-cyan text-background hover:bg-cyan/90 px-6 font-bold rounded-full"
+              >
+                Start Project
+              </Button>
+            </div>
           </div>
 
           {/* MOBILE TOGGLE */}
@@ -219,7 +249,7 @@ const Navbar = () => {
                       onClick={() => setMobileOpen(false)}
                       className={`block text-lg font-semibold p-2 rounded-lg ${
                         isActive(path)
-                          ? "text-cyan bg-cyan/5"
+                          ? "bg-gradient-to-r from-[#009dff] to-[#00e5ff] bg-clip-text text-transparent bg-cyan/5"
                           : "text-muted-foreground"
                       }`}
                     >
@@ -234,10 +264,10 @@ const Navbar = () => {
                     onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                     className="w-full flex items-center justify-between px-2 py-3 text-lg font-semibold text-muted-foreground hover:text-cyan"
                   >
-                    Services
+                    <span className={isServicesActive ? "text-[#00e5ff]" : ""}>Services</span>
                     <ChevronDown
                       className={`w-5 h-5 transition-transform ${
-                        mobileServicesOpen ? "rotate-180 text-cyan" : ""
+                        mobileServicesOpen ? "rotate-180 text-[#00e5ff]" : ""
                       }`}
                     />
                   </button>
@@ -273,7 +303,7 @@ const Navbar = () => {
                 {/* CTA */}
                 <div className="pt-4 flex justify-center pb-6">
                   <Button
-                    className="bg-cyan text-background px-8 py-3 text-base font-semibold shadow-lg hover:bg-cyan/90"
+                    className="bg-cyan text-background px-8 py-3 text-base font-semibold shadow-lg hover:bg-cyan/90 rounded-full"
                     asChild
                   >
                     <Link to="/contact" onClick={() => setMobileOpen(false)}>
