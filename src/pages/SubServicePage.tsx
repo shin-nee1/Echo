@@ -16,6 +16,11 @@ const SubServicePage = () => {
     return <Navigate to="/404" replace />;
   }
 
+  // --- LOGIC TO EXTRACT LAST WORD ---
+  const titleWords = service.title.trim().split(/\s+/);
+  const lastWord = titleWords.pop();
+  const titleWithoutLastWord = titleWords.join(" ");
+
   return (
     <div>
       <div className="flex flex-col w-full items-center overflow-x-hidden text-center">
@@ -23,12 +28,10 @@ const SubServicePage = () => {
         <HeroSubService
           title={
             <>
-              {service.title.split(service.highlightedTitle)[0]}
-              <span className="text-cyan">{service.highlightedTitle}</span>
-              {service.title.split(service.highlightedTitle)[1] || ""} Services
+              {titleWithoutLastWord}{" "}
+              <span className="text-[#00d8ff]">{lastWord}</span>
             </>
           }
-          // subtitle prop removed
           ctaText={service.ctaText}
         />
 
@@ -45,24 +48,20 @@ const SubServicePage = () => {
 
           <section className="w-full flex justify-center">
             <FeaturesCarousel
-              sectionTitle={`Our ${service.highlightedTitle} Features`}
-              highlightedWord={service.highlightedTitle}
+              sectionTitle={`Everything ${service.nonHighlightedText} `}
+              highlightedWord={service.highlightedText}
               features={service.features}
             />
           </section>
-
-          <section className="w-full flex justify-center">
-            <WhyUsSection />
-          </section>
-
         </div>
       </div>
-      
+
+      <WhyUsSection />
       <FAQ />
       
       <CTASection
         title="Ready to Transform Your"
-        highlight={service.highlightedTitle}
+        highlight={service.highlightedText}
         subtitle={`Partner with us to achieve ${service.title.toLowerCase()} excellence with precision and creativity.`}
       />
     </div>
