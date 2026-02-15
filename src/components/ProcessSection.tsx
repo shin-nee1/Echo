@@ -49,6 +49,14 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
             const isLeft = index % 2 === 0;
             const isLast = index === steps.length - 1;
             const mobileTransform = (index < 4) ? "-translate-x-[12px]" : "translate-x-[12px]";
+            
+            // GLOW LOGIC BASED ON STEP NUMBER (0-indexed)
+            // Steps 1,3,5,7 (indices 0,2,4,6) get Top Glow
+            // Steps 2,4,6 (indices 1,3,5) get Bottom Glow
+            const isTopGlow = index % 2 === 0; 
+            const glowGradient = isTopGlow 
+              ? "radial-gradient(circle at 50% 0%, rgba(67, 198, 228, 0.15) 0%, transparent 70%)"
+              : "radial-gradient(circle at 50% 100%, rgba(67, 198, 228, 0.15) 0%, transparent 70%)";
 
             return (
               <div key={index} className="w-full flex justify-center lg:grid lg:grid-cols-2 lg:h-[340px] mb-8 lg:mb-0 relative">
@@ -58,7 +66,13 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className={`relative w-full ${mobileTransform} lg:translate-x-0 mx-auto lg:mx-0 bg-white/[0.03] backdrop-blur-lg border border-white/10 flex flex-col items-start justify-between transition-all duration-500 hover:border-[#43c6e4]/40 z-20 shadow-2xl`}
-                    style={{ maxWidth: "280px", padding: "1.5rem", borderRadius: "1.2rem", height: "260px" }}
+                    style={{ 
+                        maxWidth: "280px", 
+                        padding: "1.5rem", 
+                        borderRadius: "1.2rem", 
+                        height: "260px",
+                        background: `${glowGradient}, rgba(255, 255, 255, 0.03)` 
+                    }}
                   >
                     <div className="relative self-center w-full flex justify-center items-center flex-grow">
                       <motion.img
