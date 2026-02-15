@@ -40,7 +40,7 @@ const WhatWeBelieve = () => {
         {/* HEADING */}
         <div className="text-center" style={{ marginBottom: "clamp(2rem, 5vh, 3.5rem)" }}>
           <h2 
-            className="text-white font-bold tracking-tight leading-[1.1] uppercase 2xl:text-[clamp(2.5rem,4vw,3.5rem)]"
+            className="text-white font-bold tracking-tight leading-[1.1]  2xl:text-[clamp(2.5rem,4vw,3.5rem)]"
             style={{ fontSize: "clamp(1.8rem, 5vw, 2.8rem)" }} 
           >
             What We <span className="text-[#00d8ff]">Believe</span>
