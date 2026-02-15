@@ -25,7 +25,7 @@ const IndexHero: React.FC = () => {
       <div 
         className="hero-grid-bg absolute inset-0 pointer-events-none" 
         style={{
-          zIndex: 1, // Higher z-index to stay above the App.tsx background
+          zIndex: 1,
           backgroundImage: `
             linear-gradient(rgba(67, 198, 228, 0.15) 1px, transparent 1px),
             linear-gradient(90deg, rgba(67, 198, 228, 0.15) 1px, transparent 1px)
@@ -38,42 +38,41 @@ const IndexHero: React.FC = () => {
       />
 
       <div className="container relative z-10 mx-auto px-[5vw] text-center">
-        {/* TITLE: Fluid scaling across all screens */}
         <h1 className="hero-title font-bold text-white mx-auto">
           We Create The <span className="text-[#43c6e4]">Echo</span>,
           <br className="block" />
           You Make The Impact.
         </h1>
 
-        {/* SUBTITLE: Scales from small mobile to desktop */}
         <div className="hero-subtitle text-slate-200 mx-auto font-normal opacity-90">
           <p>From strategy and storytelling to code and conversion.</p>
           <p>One partner to shape your brand and drive performance.</p>
         </div>
 
-        {/* LINK: Minor scaling for readability */}
         <div className="hero-link-container">
           <a href="#" className="hero-link text-[#43c6e4] transition-all font-semibold border-b border-transparent hover:border-[#43c6e4]">
             Access Your Free Project Guide
           </a>
         </div>
 
-        {/* BUTTON: Fully fluid padding, height, and font */}
         <div className="hero-btn-container">
           <Button variant="cyan" size="hero" className="hero-btn">
             Start Project
           </Button>
         </div>
 
-        {/* IMAGE: Height scales based on Viewport Height (vh) */}
+        {/* PASSING TRANSITION LOGIC */}
         <div className="hero-slider-container">
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false}>
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0, y: "100%" }} // New image starts fully below
+              animate={{ opacity: 1, y: 0 }}       // New image moves to center
+              exit={{ opacity: 0, y: "100%" }}    // Old image passes through to the top
+              transition={{ 
+                duration: 0.5, 
+   // A more sophisticated "passing" ease
+              }}
               className="absolute inset-0 w-full h-full flex items-center justify-center"
             >
               <motion.img
@@ -87,7 +86,6 @@ const IndexHero: React.FC = () => {
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        /* 1. GLOBAL FLUID VARIABLES (Mobile First) */
         .hero-wrapper {
           padding-top: clamp(6.5rem, 10vh, 8rem); 
           padding-bottom: clamp(1.5rem, 5vh, 3rem);
@@ -111,54 +109,45 @@ const IndexHero: React.FC = () => {
         .hero-link-container { margin-bottom: clamp(1rem, 1vh, 2.5rem); }
         .hero-link { font-size: clamp(0.85rem, 2vw, 0.95rem); }
 
-        /* BUTTON SCALING (Fixed the "Too Big" issue on mobile) */
         .hero-btn-container { margin-bottom: clamp(2rem, 5vh, 5rem); }
         .hero-btn {
           height: clamp(2.25rem, 5vw, 3rem) !important;
           padding: 0 clamp(1.75rem, 3vw, 2rem) !important;
           font-size: clamp(0.5rem, 2vw, 1rem) !important;
-          border-radius: 9999px; /* Pill shape */
+          border-radius: 9999px;
         }
 
-        /* IMAGE SCALING */
         .hero-slider-container {
           position: relative;
           width: 100%;
           height: clamp(220px, 25vh, 300px); 
           margin: 0 auto;
+          overflow: visible; /* Allows images to be seen as they pass the boundaries */
         }
 
-        /* 2. TABLET (768px) */
         @media (min-width: 768px) {
           .hero-title { font-size: clamp(2rem, 5vw, 2.35rem); }
-          .hero-subtitle {
-          font-size: clamp(0.65rem, 2.5vw, 0.85rem);
-          line-height: 1.5;
-          margin-bottom: clamp(1rem, 2vh, 2rem);
-          max-width: 85vw;
-        }
+          .hero-subtitle { font-size: clamp(0.65rem, 2.5vw, 0.85rem); }
           .hero-link { font-size: clamp(1rem, 2vw, 1.5rem); }
           .hero-slider-container { height: 40vh; }
           .hero-btn { 
-          padding: 0 clamp(1rem, 3vw, 1.75rem) !important;
-          height: 2.2rem !important; 
-          font-size: 0.85rem !important; }
+            padding: 0 clamp(1rem, 3vw, 1.75rem) !important;
+            height: 2.2rem !important; 
+            font-size: 0.85rem !important; 
+          }
         }
 
-        /* 3. LAPTOP (1024px) */
         @media (min-width: 1024px) {
           .hero-wrapper { padding-top: 18vh; }
           .hero-title { font-size: 2.95rem; max-width: 600px; }
           .hero-subtitle { font-size: 0.9rem; max-width: 650px; }
-          .hero-link-container { margin-bottom: clamp(1.2rem, 1vh, 2rem); }
+          .hero-link-container { margin-bottom: clamp(1.2rem, 1vh, 2.5rem); }
           .hero-link { font-size: clamp(0.75rem, 2vw, 1rem); }
           .hero-slider-container { height: 45vh; max-width: 70vw; }
           .hero-btn { height: 2.2rem !important; padding: 0 1.5rem !important; 
           font-size: clamp(0.85rem, 2vw, 0.95rem) !important;}
-          
         }
 
-        /* 4. LARGE LAPTOP (1440px) */
         @media (min-width: 1440px) {
           .hero-title { font-size: 3.35rem; max-width: 900px; }
           .hero-subtitle { font-size: 1rem; max-width: 750px; }
@@ -166,14 +155,13 @@ const IndexHero: React.FC = () => {
           .hero-slider-container { height: 45vh; max-width: 900px; }
           .hero-btn { height: 2.5rem !important; padding: 0 1.75rem !important; 
           font-size: clamp(0.75rem, 2vw, 1rem) !important;}
-      }
+        }
 
-        /* 5. 4K MONITORS (2560px) */
         @media (min-width: 2560px) {
           .hero-wrapper { padding-top: 15vh; }
           .hero-title { font-size: 5rem; max-width: 1500px; }
           .hero-subtitle { font-size: 2rem; max-width: 1100px; }
-          .hero-link-container { margin-bottom: clamp(1.7rem, 1vh, 2rem); }
+          .hero-link-container { margin-bottom: clamp(1.7rem, 1vh, 2.5rem); }
           .hero-btn { 
             height: 4rem !important; 
             padding: 0 4rem !important; 
@@ -181,10 +169,8 @@ const IndexHero: React.FC = () => {
           }
           .hero-slider-container { height: 60vh; max-width: 1300px; }
           .hero-link { font-size: 2rem; }
-          
         }
 
-        /* 6. SMALL MOBILE (Max 425px) - Tighter constraints */
         @media (max-width: 425px) {
           .hero-title { font-size: 1.6rem; }
           .hero-subtitle { font-size: 0.8rem; max-width: 90vw; }
