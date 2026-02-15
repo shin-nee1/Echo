@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
+import CTASection from "@/components/CTASection";
 import {
   Accordion,
   AccordionContent,
@@ -150,7 +151,7 @@ const FAQ = () => {
       </section>
 
       {/* Accordion Section */}
-      <section className="relative z-10" style={{ paddingTop: "clamp(1.5rem, 4vh, 2.5rem)", paddingBottom: "clamp(3rem, 10vh, 7rem)" }}>
+      <section className="relative z-10" style={{ paddingTop: "clamp(1.5rem, 4vh, 2.5rem)", paddingBottom: "clamp(0.75rem, 3vh, 0.85rem)" }}>
         <div className="container mx-auto px-[2vw] max-w-[1300px]">
           <div className="mx-auto max-w-[clamp(50rem,60vw,58rem)]">
             {faqCategories.map((category, idx) => (
@@ -159,37 +160,16 @@ const FAQ = () => {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="relative z-10" 
-               /* UPDATED: Ensured bottom padding (clamp(5rem, 12vh, 10rem)) is robust */
-               style={{ paddingBottom: "clamp(5rem, 12vh, 10rem)" }}>
-        <div className="container mx-auto px-[6vw] text-center max-w-[1300px]">
-          <div className="mx-auto border border-white/5 bg-white/[0.02] backdrop-blur-md max-w-[clamp(35rem,65vw,65rem)]"
-               style={{ 
-                 padding: "clamp(2rem, 6vw, 4rem) clamp(1.2rem, 4vw, 3rem)",
-                 borderRadius: "clamp(1.5rem, 3vw, 3rem)" 
-               }}>
-            <h2 className="text-white font-medium mb-5 tracking-tighter font-sans leading-tight text-[clamp(1.75rem,4.5vw,3.5rem)]">
-              Still Have <span className="text-[#4fb3c4]">Questions?</span>
-            </h2>
-            <p className="text-white/50 mx-auto mb-8 font-sans font-normal max-w-xl text-[clamp(0.95rem,1.2vw,1.15rem)]">
-              Can’t find what you’re looking for? Let’s talk — our team usually responds within 24 hours.
-            </p>
-
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center bg-gradient-to-r from-[#3b879c] to-[#4fb3c4] text-white rounded-full font-medium tracking-tight transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(79,179,196,0.5)] active:scale-95 font-sans"
-              style={{ 
-                padding: "clamp(0.8rem, 2vh, 1.2rem) clamp(2rem, 5vw, 3.5rem)",
-                fontSize: "clamp(0.85rem, 1.1vw, 1.1rem)"
-              }}
-            >
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection 
+        title="Still Have"
+        highlight="Questions?"
+        subtitle="If something isn't covered here, or you want to discuss your specific situation, we're happy to help."
+        primaryButtonText="Start A Conversation"
+        primaryButtonAction={() => {
+            // Add your navigation or contact logic here
+            console.log("Conversation started");
+        }}
+      />
 
       <style>{`
         @keyframes float {

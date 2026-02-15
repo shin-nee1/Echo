@@ -20,25 +20,21 @@ const WhyUsSection = () => {
 
   return (
     <section 
-      /* Updated: Removed 'overflow-hidden' to allow the child container to break out visually */
       className="relative bg-transparent"
-      style={{ padding: "clamp(3rem, 8vw, 8rem) 0" }}
+      style={{ padding: "clamp(3.5rem, 6vw, 8rem) 0" }}
     >
       <div className="mx-auto w-full px-[5vw]">
         
-        {/* MAIN HEADER */}
-        <div className="text-center" style={{ paddingBottom: "clamp(1.5rem, 5vw, 4rem)" }}>
+        <div className="text-center" style={{ paddingBottom: "0.5rem" }}>
           <h2 className="text-white font-bold leading-tight why-us-main-title">
             Why Echo & <span className="text-[#43c6e4]">Impact?</span>
           </h2>
         </div>
 
         {/* FLEX CONTAINER 
-            Updated: w-[100vw] forces full viewport width.
-            relative left-1/2 -translate-x-1/2 centers it relative to the viewport, 
-            effectively ignoring parent padding/constraints.
+            UPDATED: Changed lg:w-[100vw] to lg:w-[92vw] to prevent edge-touching on 1024px
         */}
-        <div className="why-us-container w-[100vw] relative left-1/2 -translate-x-1/2 flex flex-col lg:flex-row justify-center items-stretch gap-0 lg:h-[35vw] min-h-[80vh] lg:min-h-0 my-10 lg:my-20">
+        <div className="why-us-container w-[70vw] md:w-[70vw] lg:w-[92vw] relative left-1/2 -translate-x-1/2 flex flex-col lg:flex-row justify-center items-stretch gap-0 lg:h-[35vw] min-h-[80vh] lg:min-h-0 mt-2 md:mt-4 mb-10 lg:my-20">
           {items.map((item, index) => {
             const isActive = activeIndex === index;
 
@@ -53,11 +49,13 @@ const WhyUsSection = () => {
               >
                 {/* BACKGROUND HIGHLIGHT & INNER GLOW */}
                 <div
-                  className={`absolute inset-0 transition-all duration-500 pointer-events-none ${
+                  className={`absolute transition-all duration-500 pointer-events-none ${
                     isActive ? "opacity-100" : "opacity-0"
-                  } 
+                  }
+                  lg:inset-0
+                  max-lg:left-0 max-lg:right-0 max-lg:top-[-1.35vw] max-lg:bottom-[0.15vw]
                   lg:[clip-path:polygon(0%_0%,100%_0%,100%_45%,calc(100%+1vw)_50%,100%_55%,100%_100%,0%_100%,0%_55%,1vw_50%,0%_45%)]
-                  max-lg:[clip-path:polygon(0%_0%,45%_0%,50%_1.5vw,55%_0%,100%_0%,100%_100%,55%_100%,50%_calc(100%+1.5vw),45%_100%,0%_100%)]`}
+                  max-lg:[clip-path:polygon(0%_0%,45%_0%,50%_1.2vw,55%_0%,100%_0%,100%_calc(100%-1.2vw),55%_calc(100%-1.2vw),50%_100%,45%_calc(100%-1.2vw),0%_calc(100%-1.2vw))]`}
                   style={{ 
                     backgroundColor: "rgba(67, 198, 228, 0.1)",
                     boxShadow: isActive ? "inset 0 0 35px 5px rgba(67, 198, 228, 0.9)" : "none",
@@ -81,7 +79,7 @@ const WhyUsSection = () => {
                     </h3>
                   </div>
 
-                  {/* EXPANDED CONTENT - Left aligned on Desktop with padding */}
+                  {/* EXPANDED CONTENT */}
                   <div
                     className={`absolute inset-0 flex flex-col items-center justify-center px-[8%] text-center lg:items-start lg:justify-start lg:text-left lg:px-0 lg:pl-[3vw] lg:pt-[3vw] transition-all duration-700 ${
                       isActive ? "opacity-100 scale-100 delay-200" : "opacity-0 scale-95 pointer-events-none"
@@ -100,9 +98,7 @@ const WhyUsSection = () => {
                   </div>
                 </div>
 
-                {/* --- SVG SEPARATORS --- */}
-
-                {/* 1. TOP SEPARATOR (Desktop) */}
+                {/* SVG SEPARATORS */}
                 {index === 0 && (
                   <div className="hidden lg:block absolute top-0 left-0 w-[2.5vw] h-full z-30 pointer-events-none">
                     <svg viewBox="0 0 40 100" preserveAspectRatio="none" className="h-full w-full">
@@ -117,8 +113,6 @@ const WhyUsSection = () => {
                     </svg>
                   </div>
                 )}
-
-                {/* 2. RIGHT SEPARATOR (Desktop) */}
                 <div className="hidden lg:block absolute top-0 right-[-2.5vw] w-[2.5vw] h-full z-30 pointer-events-none">
                   <svg viewBox="0 0 40 100" preserveAspectRatio="none" className="h-full w-full">
                       <defs>
@@ -131,8 +125,6 @@ const WhyUsSection = () => {
                     <path d="M 2 0 L 2 45 L 18 50 L 2 55 L 2 100" fill="none" stroke="url(#vertical-fade-right)" strokeWidth="1" className="transition-all duration-500" />
                   </svg>
                 </div>
-
-                {/* 3. TOP SEPARATOR (Mobile/Tablet) */}
                 {index === 0 && (
                   <div className="lg:hidden absolute top-[-1.5vw] left-0 w-full h-[3vw] z-30 pointer-events-none">
                     <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="w-full h-full">
@@ -147,8 +139,6 @@ const WhyUsSection = () => {
                     </svg>
                   </div>
                 )}
-
-                {/* 4. BOTTOM SEPARATOR (Mobile/Tablet) */}
                 <div className="lg:hidden absolute bottom-[-1.5vw] left-0 w-full h-[3vw] z-30 pointer-events-none">
                   <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="w-full h-full">
                       <defs>
@@ -168,7 +158,6 @@ const WhyUsSection = () => {
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        /* 1. MOBILE (Base Style - Below 764px) */
         .why-us-collapsed-text { font-size: 11px; letter-spacing: 0.2em; }
         .why-us-expanded-title { font-size: 14px; letter-spacing: 0.05em; }
         .why-us-description { font-size: 12px; max-width: 280px; }
@@ -179,7 +168,6 @@ const WhyUsSection = () => {
           .why-us-item-active { height: 30vh !important; }
         }
 
-        /* 2. TABLET (764px to 1023px) */
         @media (min-width: 764px) {
           .why-us-collapsed-text { font-size: 13.5px; letter-spacing: 0.25em; }
           .why-us-expanded-title { font-size: 16px; letter-spacing: 0.08em; }
@@ -189,18 +177,16 @@ const WhyUsSection = () => {
           .why-us-item-active { height: 32vh !important; }
         }
 
-        /* 3. STANDARD LAPTOP (1024px to 1439px) */
         @media (min-width: 1024px) {
           .why-us-collapsed-text { font-size: 15px; letter-spacing: 0.3em; }
           .why-us-expanded-title { font-size: 18px; letter-spacing: 0.1em; }
           .why-us-description { font-size: 14px; max-width: 320px; line-height: 1.6; }
           .why-us-main-title { font-size: 48px !important; }
-          .why-us-item-inactive { width: 120px !important; height: 100% !important; }
-          .why-us-item-active { width: 500px !important; height: 100% !important; }
-          .why-us-container { height: 30vw; !important; }
+          .why-us-item-inactive { width: 95px !important; height: 100% !important; }
+          .why-us-item-active { width: 420px !important; height: 100% !important; }
+          .why-us-container { height: 30vw !important; }
         }
 
-        /* 4. LARGE LAPTOP / MACBOOK (1440px to 2559px) */
         @media (min-width: 1440px) {
           .why-us-collapsed-text { font-size: 19px; letter-spacing: 0.4em; }
           .why-us-expanded-title { font-size: 20px; letter-spacing: 0.12em; }
@@ -211,7 +197,6 @@ const WhyUsSection = () => {
           .why-us-container { height: 26vw !important; }
         }
 
-        /* 5. 4K MONITORS (2560px+) */
         @media (min-width: 2560px) {
           .why-us-collapsed-text { font-size: 25px; letter-spacing: 0.5em; }
           .why-us-expanded-title { font-size: 30px; }
@@ -219,7 +204,7 @@ const WhyUsSection = () => {
           .why-us-main-title { font-size: 85px !important; }
           .why-us-item-inactive { width: 200px !important; }
           .why-us-item-active { width: 900px !important; }
-          .why-us-container { height: 22vw !important; max-width: 2600px; margin: 0 auto; }
+          .why-us-container { height: 22vw !important; max-width: 2600px; margin: 6rem auto 0 auto !important; }
         }
       `}} />
     </section>
