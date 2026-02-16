@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -21,6 +21,124 @@ import CubeImg from "@/assets/cube.png";
 
 const queryClient = new QueryClient();
 
+// --- SCROLLING CUBES COMPONENT ---
+const ScrollingCubes = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+  const isDesignPage = location.pathname === "/design";
+  const isDevelopPage = location.pathname === "/develop";
+  const isMarketPage = location.pathname === "/market";
+  const isSubServicePage = location.pathname.startsWith("/services/");
+  const isAboutPage = location.pathname === "/about";
+  const isContactPage = location.pathname === "/contact"
+  const isFAQPage = location.pathname === "/faq"
+
+  if (!isHomePage && !isDesignPage && !isDevelopPage && !isMarketPage && !isSubServicePage && !isAboutPage && !isContactPage && !isFAQPage) return null;
+
+  return (
+    <div className="absolute inset-0 z-[-1] pointer-events-none overflow-hidden">
+      {/* ================= HOME PAGE CUBES ================= */}
+      {isHomePage && (
+        <>
+          <img 
+            src={CubeImg} 
+            alt="" 
+            className="absolute top-[20%] right-[1%] w-[25vw] opacity-100 rotate-45" 
+          />
+          <img 
+            src={CubeImg} 
+            alt="" 
+            className="absolute top-[36%] left-[5%] w-[19vw] opacity-100 -rotate-12" 
+          />
+          <img 
+            src={CubeImg} 
+            alt="" 
+            className="absolute top-[45%] right-[-10%] w-[35vw] opacity-100 rotate-45" 
+          />
+          <img 
+            src={CubeImg} 
+            alt="" 
+            className="absolute top-[55%] left-[-10%] w-[22vw] opacity-100 rotate-[30deg]" 
+          />
+        </>
+      )}
+
+      {isDesignPage && (
+        <>
+          <img src={CubeImg} alt="" className="absolute top-[4%] left-[-12%] w-[24vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[17%] right-[-8%] w-[28vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[33%] left-[-10%] w-[28vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[48%] right-[-7%] w-[22vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[73%] left-[-15%] w-[36vw] opacity-100 rotate-[0deg]" />
+        </>
+      )}
+
+      {isDevelopPage && (
+        <>
+          <img src={CubeImg} alt="" className="absolute top-[4%] left-[-12%] w-[24vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[17%] right-[-8%] w-[28vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[34%] left-[-10%] w-[28vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[48%] right-[-7%] w-[22vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[58%] left-[-16%] w-[35vw] opacity-100 rotate-[0deg]" />
+        </>
+      )}
+
+      {isMarketPage && (
+        <>
+          <img src={CubeImg} alt="" className="absolute top-[4%] left-[-12%] w-[24vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[17%] right-[-8%] w-[28vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[33%] left-[-10%] w-[28vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[48%] right-[-7%] w-[22vw] opacity-100 rotate-[0deg]" />
+        </>
+      )}
+
+      {isSubServicePage && (
+        <>
+          <img 
+            src={CubeImg} 
+            alt="" 
+            className="absolute top-[55%] right-[-10%] w-[30vw] opacity-100 rotate-[30deg]" 
+          />
+        </>
+      )}
+
+      {isAboutPage && (
+        <>
+          <img src={CubeImg} alt="" className="absolute top-[10%] right-[-10%] w-[24vw] opacity-100 rotate-[10deg]" />
+          <img 
+            src={CubeImg} 
+            alt="" 
+            className="absolute top-[31%] right-[-8%] w-[25vw] opacity-100 -rotate-0" 
+          />
+        </>
+      )}
+      {isContactPage && (
+        <>
+          <img 
+            src={CubeImg} 
+            alt="" 
+            className="absolute top-[64%] right-[-8%] w-[30vw] opacity-90 rotate-[25deg]" 
+          />
+        </>
+      )}
+      {isFAQPage && (
+        <>
+          <img 
+            src={CubeImg} 
+            alt="" 
+            className="absolute top-[10%] right-[-8%] w-[25vw] opacity-100 rotate-[0deg]" 
+          />
+          <img 
+            src={CubeImg} 
+            alt="" 
+            className="absolute top-[25%] left-[-11%] w-[25vw] opacity-100 rotate-[0deg]" 
+          />
+        </>
+      )}
+    </div>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -28,99 +146,84 @@ const App = () => (
       <Sonner />
 
       <BrowserRouter>
-        {/* ================= GLOBAL BACKGROUND SYSTEM (FIXED) ================= */}
-        <div className="fixed inset-0 z-0 pointer-events-none bg-[#010a0f] overflow-hidden">
+        {/* --- MAIN PAGE WRAPPER --- */}
+        <div className="relative min-h-screen w-full bg-[#010a0f] overflow-x-hidden">
           
-          {/* AMBIENT BORDER LIGHTING
-              Strictly positioned on Left/Right borders to mimic the reference.
-              Alternating pattern: Top-Left -> Middle-Right -> Bottom-Left.
-          */}
-
-          {/* 1. TOP LEFT BORDER GLOW 
-             - Anchored to the top-left edge.
-             - Washes over the header/hero section from the side.
-          */}
-          <div 
-            className="absolute top-[-10%] left-[-25%] w-[60vw] h-[60vh] rounded-full blur-[120px] opacity-40"
-            style={{ 
-              background: 'radial-gradient(circle, rgba(67, 198, 228, 0.15) 0%, rgba(67, 198, 228, 0.05) 50%, transparent 70%)' 
-            }}
-          />
-          
-          {/* 2. MIDDLE RIGHT BORDER GLOW
-             - Anchored to the center-right edge.
-             - Provides backlight for the middle content from the right side.
-          */}
-          <div 
-            className="absolute top-[35%] right-[-25%] w-[60vw] h-[70vh] rounded-full blur-[130px] opacity-35"
-            style={{ 
-              background: 'radial-gradient(circle, rgba(67, 198, 228, 0.12) 0%, rgba(67, 198, 228, 0.04) 50%, transparent 70%)' 
-            }}
-          />
-
-          {/* 3. BOTTOM LEFT BORDER GLOW
-             - Anchored to the bottom-left edge.
-             - Washes over the footer/FAQ section from the left side.
-          */}
-          <div 
-            className="absolute bottom-[-10%] left-[-25%] w-[70vw] h-[60vh] rounded-full blur-[120px] opacity-40"
-            style={{ 
-              background: 'radial-gradient(circle, rgba(67, 198, 228, 0.15) 0%, rgba(67, 198, 228, 0.05) 50%, transparent 70%)' 
-            }}
-          />
-
-          {/* GRID OVERLAY */}
-          <div 
-            className="absolute inset-0 z-[1] opacity-[0.03]" 
-            style={{ 
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
-              backgroundSize: '80px 80px',
-            }} 
-          />
-        </div>
-
-        {/* ================= CONTENT LAYER (SCROLLING) ================= */}
-        <div className="relative z-10 flex flex-col min-h-screen px-[12%] overflow-x-hidden">
-          
-          {/* BACKGROUND CUBE SYSTEM */}
-          <div className="absolute inset-0 z-[-1] pointer-events-none">
+          {/* ================= GLOBAL GLOW SYSTEM (ABSOLUTE & REPEATING) ================= */}
+          <div className="absolute inset-0 pointer-events-none z-0">
             
-            {/* TOP SECTION */}
-            <img src={CubeImg} alt="" className="absolute top-[3%] left-[-8%] w-[22vw] opacity-[0.7] -rotate-12" /> 
-            <img src={CubeImg} alt="" className="absolute top-[12%] right-[-5%] w-[18vw] opacity-[0.5] rotate-45" />
+            {/* 1. TOP LEFT BLOB */}
+            <div 
+              className="absolute top-[1%] left-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
+              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+            />
 
+            <div 
+              className="absolute top-[-2%] right-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
+              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+            />
+            <div 
+              className="absolute top-[15%] right-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
+              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+            />
 
-            {/* MIDDLE SECTION */}
-            <img src={CubeImg} alt="" className="absolute top-[40%] left-[-4%] w-[19vw] opacity-[0.65] rotate-[30deg]" />
-            <img src={CubeImg} alt="" className="absolute top-[48%] right-[-8%] w-[24vw] opacity-[0.8] -rotate-45" />
-
-            <img src={CubeImg} alt="" className="absolute top-[75%] left-[-10%] w-[23vw] opacity-[0.75] rotate-12" />
-      
-            {/* FOOTER AREA */}
-            <img src={CubeImg} alt="" className="absolute bottom-[2%] right-[-6%] w-[20vw] opacity-[0.7] rotate-90" />
-           
+            <div 
+              className="absolute top-[25%] left-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
+              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+            />
+            <div 
+              className="absolute top-[33%] right-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
+              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+            />
+            <div 
+              className="absolute top-[40%] left-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
+              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+            />
+             <div 
+              className="absolute top-[57%] right-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
+              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+            />
+            <div 
+              className="absolute top-[57%] left-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
+              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+            />
+            <div 
+              className="absolute top-[77%] left-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
+              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+            />
+            {/* GRID OVERLAY (Stretches the full height) */}
+            <div 
+              className="absolute inset-0 opacity-[0.04]" 
+              style={{ 
+                backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
+                backgroundSize: '80px 80px',
+              }} 
+            />
           </div>
 
-          <ScrollToTop />
-          <Navbar />
-          
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/design" element={<Design />} />
-              <Route path="/develop" element={<Develop />} />
-              <Route path="/market" element={<Market />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              
-              <Route path="/services/:slug" element={<SubServicePage />} />
-              
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
+          {/* ================= CONTENT LAYER ================= */}
+          <div className="relative z-10 flex flex-col min-h-screen px-[12%]">
+            
+            <ScrollingCubes />
+            <ScrollToTop />
+            <Navbar />
+            
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/design" element={<Design />} />
+                <Route path="/develop" element={<Develop />} />
+                <Route path="/market" element={<Market />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/services/:slug" element={<SubServicePage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
 
-          <Footer />
+            <Footer />
+          </div>
         </div>
       </BrowserRouter>
     </TooltipProvider>
