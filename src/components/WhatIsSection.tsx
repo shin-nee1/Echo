@@ -45,9 +45,10 @@ const WhatIsSection = ({
               </h2>
             </div>
             
-            <p className="text-white/60 leading-relaxed font-light max-w-xl xl:max-w-2xl
+            {/* ADDED: whitespace-pre-line to respect description spacing */}
+            <p className="text-white/60 leading-relaxed font-light max-w-xl xl:max-w-2xl whitespace-pre-line
                           text-[clamp(0.9rem,1.3vw,1.05rem)]
-                          2xl:text-[0.9rem,1.3vw,1.05rem]">
+                          2xl:text-[clamp(0.9rem,1.3vw,1.05rem)]">
               {description}
             </p>
           </div>

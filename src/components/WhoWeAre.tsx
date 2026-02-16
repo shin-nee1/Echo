@@ -6,16 +6,17 @@ import WhoWeAreImg from "@/assets/image-removebg-preview (4).png";
 const WhoWeAre = () => {
   return (
     <section className="whoweare-wrapper relative bg-transparent overflow-hidden">
-      <div className="container mx-auto px-[5vw]">
+      <div className="container mx-auto ">
         <div className="whoweare-grid grid items-center">
           
           {/* IMAGE SIDE (Left on Desktop) */}
           <div className="whoweare-img-side relative flex justify-center items-center">
             <div className="whoweare-img-container relative w-full group">
+              {/* REMOVED filter drop-shadow-[...] classes */}
               <img 
                 src={WhoWeAreImg} 
                 alt="Who We Are" 
-                className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105 filter drop-shadow-[0_10px_30px_rgba(67,198,228,0.15)]"
+                className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
               />
             </div>
           </div>
@@ -44,6 +45,9 @@ const WhoWeAre = () => {
                 stay with you, shaping every stage of your digital journey so you can focus on 
                 making the impact, while we turn ideas into results.
               </p>
+              <p className="whoweare-p text-slate-300 leading-relaxed font-normal">
+              We combine creative insight with technical precision to keep your brand consistent, adaptive, and ready for what’s next.
+              </p>
             </div>
 
             <div className="whoweare-btn-box">
@@ -65,13 +69,17 @@ const WhoWeAre = () => {
         .whoweare-content { order: 1; }
 
         .whoweare-img-container { max-width: clamp(280px, 85vw, 320px); }
-        .whoweare-title { font-size: clamp(1.85rem, 8vw, 2rem); margin-bottom: clamp(1.25rem, 3vh, 2rem); }
+        .whoweare-title { font-size: clamp(1.85rem, 8vw, 2rem); margin-bottom: clamp(0.75rem, 3vh, 0.75rem); }
         .whoweare-p { font-size: clamp(0.95rem, 2.5vw, 1rem); margin-bottom: 1rem; }
         .whoweare-btn-box { margin-top: clamp(1rem, 4vh, 1.5rem); }
+        
+        /* UPDATED BUTTON STYLES */
         .whoweare-btn {
           height: clamp(2.6rem, 5vw, 3rem) !important;
           padding: 0 clamp(1.8rem, 4vw, 2rem) !important;
           font-size: clamp(0.85rem, 2vw, 1rem) !important;
+          box-shadow: none !important; /* Removes the glow */
+          font-weight: 400 !important;   /* Removes the bold */
         }
 
         /* --- TABLET VIEW (768px - 1023px) --- */
@@ -85,11 +93,11 @@ const WhoWeAre = () => {
 
         /* 2. LAPTOP (1024px+) - NOW SIDE BY SIDE */
         @media (min-width: 1024px) {
-          .whoweare-grid { grid-template-columns: repeat(2, 1fr); text-align: left; gap: 3rem; }
+          .whoweare-grid { grid-template-columns: repeat(2, 1fr); text-align: left; gap: 01rem; }
           .whoweare-img-side { order: 1; } 
           .whoweare-content { order: 2; }  
           .whoweare-img-container { max-width: 450px; margin: 0 auto; }
-          .whoweare-title { font-size: 2.75rem; }
+          .whoweare-title { font-size: 2rem;text-align: left; }
           .whoweare-p { font-size: 0.85rem; max-width: 100%; text-align: left; }
           .whoweare-btn { height: 2.6rem !important; font-size: 1rem !important;}
         }

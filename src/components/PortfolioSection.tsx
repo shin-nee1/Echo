@@ -26,7 +26,8 @@ const PortfolioSection = () => {
   };
 
   return (
-    <section className="portfolio-section relative bg-transparent overflow-hidden z-10">
+    /* CHANGED: Added full-bleed logic to the section to ignore parent padding */
+    <section className="portfolio-section relative bg-transparent overflow-hidden z-10 w-screen left-1/2 right-1/2 -ml-[50vw] mr-[50vw]">
       <style dangerouslySetInnerHTML={{ __html: `
         /* REMOVE SCROLLBAR BUT KEEP SWIPE */
         .portfolio-scroll-container {
@@ -55,12 +56,14 @@ const PortfolioSection = () => {
           filter: none !important; 
         }
 
-        /* NEW: LARGE MOBILE / PHABLETS (600px - 767px) */@media (min-width: 600px) and (max-width: 767px) {
-        .portfolio-card-link { width: 38vw; } /* Prevents cards from looking huge at 750px */
-}
+        /* NEW: LARGE MOBILE / PHABLETS (600px - 767px) */
+        @media (min-width: 600px) and (max-width: 767px) {
+          .portfolio-card-link { width: 38vw; }
+        }
+
         /* 2. TABLET (768px) */
         @media (min-width: 768px) {
-          .portfolio-title { font-size: 2.3rem; } /* Adjusted to give View All button room */
+          .portfolio-title { font-size: 2.3rem; }
           .portfolio-card-link { width: 38vw; margin-right: 2rem; }
           .portfolio-card-box { border-radius: 2.5rem; }
           .portfolio-view-all { font-size: 0.85rem; height: 2.5rem; padding: 0 1.8rem; }
@@ -68,7 +71,7 @@ const PortfolioSection = () => {
 
         /* 3. SMALL LAPTOPS (800px - 1023px) */
         @media (min-width: 800px) and (max-width: 1023px) {
-          .portfolio-title { font-size: 2.5rem; } /* Adjusted for breathing room */
+          .portfolio-title { font-size: 2.5rem; }
           .portfolio-card-link { width: 34vw; margin-right: 1.5rem; } 
           .portfolio-card-box { border-radius: 2rem; }
         }
@@ -76,8 +79,8 @@ const PortfolioSection = () => {
         /* 3. LAPTOP (1024px) */
         @media (min-width: 1024px) {
           .portfolio-wrapper { padding: 4rem 0; }
-          .portfolio-title { font-size: 2.8rem; } /* Adjusted to stop crowding nav buttons */
-          .portfolio-card-link { width: 28vw; margin-right: 1.5rem; }
+          .portfolio-title { font-size: 2.8rem; }
+          .portfolio-card-link { width: 38vw; margin-right: 1.5rem; }
           .portfolio-nav { display: flex; gap: 0.75rem; padding-bottom: 0rem; }
           .portfolio-nav button { 
             width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
@@ -89,7 +92,7 @@ const PortfolioSection = () => {
 
         /* NEW: LARGE LAPTOPS (1200px - 1439px) */
         @media (min-width: 1200px) and (max-width: 1439px) {
-          .portfolio-card-link { width: 25vw; }
+          .portfolio-card-link { width: 35vw; }
         }
 
         /* 6. LARGE DESKTOP (1440px) */
@@ -97,7 +100,7 @@ const PortfolioSection = () => {
           .portfolio-title { font-size: 2.75rem; }
           .portfolio-scroll-container { display: flex; gap: 2rem; overflow-x: auto; }
           .portfolio-card-link { 
-            width: 60vh; 
+            width: 30vw; 
             flex-shrink: 0; 
             scroll-snap-align: start; 
             margin-right: 0; 
@@ -110,7 +113,7 @@ const PortfolioSection = () => {
         @media (min-width: 2560px) {
           .portfolio-wrapper { padding: 8vh 0; }
           .portfolio-title { font-size: 5.2rem; }
-          .portfolio-card-link { width: 60vh; }
+          .portfolio-card-link { width: 30vw; }
           .portfolio-card-box { border-radius: 4rem; }
           .portfolio-header { margin-bottom: 5vh; }
           .portfolio-nav { gap: 1.5rem; }
@@ -120,7 +123,8 @@ const PortfolioSection = () => {
         }
       `}} />
 
-      <div className="mx-auto px-[5vw] relative z-10" style={{ maxWidth: "2200px" }}>
+      {/* CHANGED: Container padding adjusted to maintain visual alignment despite breaking the parent's padding */}
+      <div className="pl-[10%] relative z-10" style={{ maxWidth: "2200px" }}>
         
         {/* HEADER AREA */}
         <div className="portfolio-header">

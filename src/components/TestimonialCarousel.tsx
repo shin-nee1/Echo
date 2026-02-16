@@ -53,7 +53,6 @@ const TestimonialCard = ({
       className="absolute transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] flex flex-col items-center justify-center"
       style={containerStyle}
     >
-      {/* CIRCLE */}
       <div
         className={`relative rounded-full border-[2px] flex items-center justify-center transition-all duration-1000 ${
           isCenter ? "border-slate-400/30 backdrop-blur-md" : "border-white/10"
@@ -63,7 +62,6 @@ const TestimonialCard = ({
           height: "clamp(280px, 35vw, 600px)",
         }}
       >
-        {/* ORBIT ICON */}
         <div
           className="absolute inset-0 pointer-events-none z-20"
           style={{
@@ -86,7 +84,6 @@ const TestimonialCard = ({
           </div>
         </div>
 
-        {/* GLOW EFFECT */}
         <div
           className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-1000 -z-10 ${
             isCenter ? "bg-[#43c6e4]/10 opacity-100 blur-3xl" : "bg-transparent opacity-0"
@@ -94,7 +91,6 @@ const TestimonialCard = ({
           style={{ width: "60%", height: "60%" }}
         />
 
-        {/* QUOTE TEXT */}
         <div
           className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-center transition-all duration-700 z-10 ${
             isCenter ? "opacity-100" : "opacity-0"
@@ -110,8 +106,6 @@ const TestimonialCard = ({
         </div>
       </div>
 
-      {/* AVATAR & INFO */}
-      {/* Mobile/Tablet: below circle | Desktop: inside circle */}
       <div
         className={`flex flex-col items-center transition-all duration-700 z-10
         ${isCenter ? "opacity-100" : "opacity-40"}
@@ -155,64 +149,72 @@ const TestimonialCarousel = ({ testimonials = DEFAULT_TESTIMONIALS }: { testimon
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
+    /* CHANGED: Added Full Bleed classes 
+       w-screen: forces viewport width
+       -ml-[50vw]: pulls left to screen edge
+       left-1/2: centers the section
+    */
     <section
-      className="relative w-full flex flex-col items-center font-sans overflow-hidden z-10"
+      className="relative w-screen left-1/2 right-1/2 -ml-[50vw] mr-[50vw] flex flex-col items-center font-sans overflow-hidden z-10"
       style={{ padding: "clamp(4rem, 10vw, 8rem) 0" }}
     >
-      <div className="text-center z-50" style={{ marginBottom: "clamp(3rem, 6vw, 5rem)" }}>
-        <h2 className="text-white font-bold tracking-tight" style={{ fontSize: "clamp(32px, 5vw, 64px)" }}>
-          Client <span className="text-[#43c6e4]">Testimonials</span>
-        </h2>
-      </div>
+      {/* Container for alignment */}
+      <div className="w-full px-[5vw] flex flex-col items-center">
+        <div className="text-center z-50" style={{ marginBottom: "clamp(3rem, 6vw, 5rem)" }}>
+          <h2 className="text-white font-bold tracking-tight" style={{ fontSize: "clamp(32px, 5vw, 64px)" }}>
+            Testimonials
+          </h2>
+        </div>
 
-      <div
-        className="relative w-full flex items-center justify-center"
-        style={{ height: "clamp(400px, 45vw, 700px)", maxWidth: "1440px" }}
-      >
-        {testimonials.map((item, index) => {
-          const distance = index - currentIndex;
-          const isCenter = distance === 0;
-          const isLeft = distance === -1;
-          const isRight = distance === 1;
-
-          if (!isCenter && !isLeft && !isRight) return null;
-
-          return (
-            <TestimonialCard
-              key={index}
-              item={item}
-              position={isCenter ? "center" : isLeft ? "left" : "right"}
-            />
-          );
-        })}
-      </div>
-
-      <div className="flex z-50" style={{ gap: "2rem", marginTop: "3rem" }}>
-        <button
-          onClick={() => currentIndex > 0 && setCurrentIndex(currentIndex - 1)}
-          disabled={currentIndex === 0}
-          className={`rounded-full border flex items-center justify-center backdrop-blur-md transition-all group ${
-            currentIndex === 0
-              ? "border-white/5 text-white/5 cursor-not-allowed"
-              : "border-white/10 text-white/60 hover:text-white hover:border-[#43c6e4] hover:bg-white/5 shadow-lg"
-          }`}
-          style={{ width: "clamp(50px, 5vw, 75px)", height: "clamp(50px, 5vw, 75px)" }}
+        <div
+          className="relative w-full flex items-center justify-center"
+          style={{ height: "clamp(400px, 45vw, 700px)", maxWidth: "1440px" }}
         >
-          <ChevronLeft style={{ width: "40%", height: "40%" }} className="transition-transform group-hover:-translate-x-1" />
-        </button>
+          {testimonials.map((item, index) => {
+            const distance = index - currentIndex;
+            const isCenter = distance === 0;
+            const isLeft = distance === -1;
+            const isRight = distance === 1;
 
-        <button
-          onClick={() => currentIndex < testimonials.length - 1 && setCurrentIndex(currentIndex + 1)}
-          disabled={currentIndex === testimonials.length - 1}
-          className={`rounded-full border flex items-center justify-center backdrop-blur-md transition-all group ${
-            currentIndex === testimonials.length - 1
-              ? "border-white/5 text-white/5 cursor-not-allowed"
-              : "border-white/10 text-white/60 hover:text-white hover:border-[#43c6e4] hover:bg-white/5 shadow-lg"
-          }`}
-          style={{ width: "clamp(50px, 5vw, 75px)", height: "clamp(50px, 5vw, 75px)" }}
-        >
-          <ChevronRight style={{ width: "40%", height: "40%" }} className="transition-transform group-hover:translate-x-1" />
-        </button>
+            if (!isCenter && !isLeft && !isRight) return null;
+
+            return (
+              <TestimonialCard
+                key={index}
+                item={item}
+                position={isCenter ? "center" : isLeft ? "left" : "right"}
+              />
+            );
+          })}
+        </div>
+
+        <div className="flex z-50" style={{ gap: "2rem", marginTop: "3rem" }}>
+          <button
+            onClick={() => currentIndex > 0 && setCurrentIndex(currentIndex - 1)}
+            disabled={currentIndex === 0}
+            className={`rounded-full border flex items-center justify-center backdrop-blur-md transition-all group ${
+              currentIndex === 0
+                ? "border-white/5 text-white/5 cursor-not-allowed"
+                : "border-white/10 text-white/60 hover:text-white hover:border-[#43c6e4] hover:bg-white/5 shadow-lg"
+            }`}
+            style={{ width: "clamp(50px, 5vw, 75px)", height: "clamp(50px, 5vw, 75px)" }}
+          >
+            <ChevronLeft style={{ width: "40%", height: "40%" }} className="transition-transform group-hover:-translate-x-1" />
+          </button>
+
+          <button
+            onClick={() => currentIndex < testimonials.length - 1 && setCurrentIndex(currentIndex + 1)}
+            disabled={currentIndex === testimonials.length - 1}
+            className={`rounded-full border flex items-center justify-center backdrop-blur-md transition-all group ${
+              currentIndex === testimonials.length - 1
+                ? "border-white/5 text-white/5 cursor-not-allowed"
+                : "border-white/10 text-white/60 hover:text-white hover:border-[#43c6e4] hover:bg-white/5 shadow-lg"
+            }`}
+            style={{ width: "clamp(50px, 5vw, 75px)", height: "clamp(50px, 5vw, 75px)" }}
+          >
+            <ChevronRight style={{ width: "40%", height: "40%" }} className="transition-transform group-hover:translate-x-1" />
+          </button>
+        </div>
       </div>
 
       <style>{`

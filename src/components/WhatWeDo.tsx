@@ -13,19 +13,19 @@ const services = [
   {
     title: "DESIGN",
     highlight: "Shape how the world sees you.",
-    description: "Visual systems built for recognition and impact across every brand layer.",
+    description: "We design every visual layer of your brand. From brand and product design to campaign creative and content direction, we create visual systems built for recognition.",
     href: "/design"
   },
   {
     title: "DEVELOPMENT",
     highlight: "Build what brings brands to life.",
-    description: "Digital experiences that perform flawlessly and scale as fast as your ideas.",
+    description: "Websites and online stores to full-scale mobile and web apps, we develop digital experiences that perform flawlessly, scale easily, and move as fast as your ideas.",
     href: "/develop"
   },
   {
     title: "MARKETING",
     highlight: "Grow what matters most.",
-    description: "Performance-driven growth strategy focused on measurable impact.",
+    description: "We market creativity into conversion through paid media, SEO, content, and much more, connecting your brand to measurable growth.",
     href: "/market"
   }
 ];
@@ -35,13 +35,17 @@ const WhatWeDo = () => {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = direction === "left" ? -300 : 300;
+      // Adjusted scroll amount for smoother navigation on larger screens
+      const scrollAmount = direction === "left" ? -400 : 400;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
   return (
     <section className="whatwedo-wrapper relative bg-transparent overflow-hidden z-10">
+      {/* INNER CONTAINER: 
+        This restores the alignment so your text lines up with the rest of the app 
+      */}
       <div className="mx-auto px-[5vw] relative z-10" style={{ maxWidth: "2200px" }}>
         
         {/* HEADER AREA */}
@@ -53,9 +57,12 @@ const WhatWeDo = () => {
               </h2>
             </div>
             
-            <div className="whatwedo-divider pl-[0.75rem] md:pl-[2rem] border-l border-white/10 pb-[0.15rem]">
-              <p className="whatwedo-subtitle text-slate-400 leading-tight">
-                Every brand we build follows a rhythm.
+            <div className="whatwedo-divider md:pl-[rem]  ">
+              <p className="whatwedo-subtitle text-slate-400 leading-tight]">
+                Every brand we build follows a rhythm.                             
+              </p>
+               <p className="whatwedo-subtitle text-slate-400 leading-tight">
+                Designed to create presence.                          
               </p>
             </div>
           </div>
@@ -112,10 +119,10 @@ const WhatWeDo = () => {
                     )}
                   </div>
 
-                  <h3 className="whatwedo-tag text-white font-black tracking-widest uppercase mb-1">
+                  <h3 className="whatwedo-tag text-white font-bold  tracking-widest uppercase mb-1">
                     {service.title}
                   </h3>
-                  <p className="whatwedo-highlight text-[#43c6e4] font-bold mb-2 tracking-tight leading-tight">
+                  <p className="whatwedo-highlight text-[#43c6e4] mb-2 tracking-tight leading-tight">
                     {service.highlight}
                   </p>
                   <p className="whatwedo-desc text-slate-400 leading-snug mb-4 line-clamp-3">
@@ -123,10 +130,10 @@ const WhatWeDo = () => {
                   </p>
 
                   <div className="mt-auto">
-                    <span className="whatwedo-explore inline-flex items-center gap-2 text-white/80 font-bold uppercase tracking-wider border-b border-white/10 group-hover:border-[#43c6e4] pb-1 transition-all">
-                      Explore
-                      <ArrowRight size="0.75rem" className="group-hover:translate-x-1 transition-transform" />
-                    </span>
+                    <span className="whatwedo-explore inline-flex items-center gap-2 text-[#43c6e4] font-bold uppercase tracking-wider border-b border-[#43c6e4]/40 group-hover:border-[#43c6e4] pb-1 transition-all">
+  Explore {service.title}
+  <ArrowRight size="0.75rem" className="group-hover:translate-x-1 transition-transform" />
+</span>
                   </div>
                 </div>
               </motion.div>
@@ -160,6 +167,18 @@ const WhatWeDo = () => {
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
+        /* THE BREAKOUT LOGIC: Forces full width even inside padded parents */
+        .whatwedo-wrapper {
+          width: 100vw;
+          position: relative;
+          left: 50%;
+          right: 50%;
+          margin-left: -50vw;
+          margin-right: -50vw;
+          padding-top: 2rem; 
+          padding-bottom: 5rem;
+        }
+
         .whatwedo-scroll-container {
           -ms-overflow-style: none;
           scrollbar-width: none;
@@ -206,9 +225,9 @@ const WhatWeDo = () => {
           to { transform: translateX(100px); }
         }
 
-        .whatwedo-wrapper { padding-top: 2rem; padding-bottom: 5rem; }
+        /* TYPOGRAPHY & LAYOUT SIZING */
         .whatwedo-header { margin-bottom: 1rem; }
-        .whatwedo-title { font-size: 1.85rem; }
+        .whatwedo-title { font-size: 1.55rem; }
         .whatwedo-subtitle { font-size: 0.7rem; max-width: 150px; }
         .whatwedo-card-link { width: 65vw; }
         .whatwedo-card { padding: 1.3rem; min-height: 16rem; }
@@ -220,9 +239,8 @@ const WhatWeDo = () => {
         .whatwedo-highlight { font-size: 0.85rem; }
         .whatwedo-desc { font-size: 0.75rem; }
         .whatwedo-explore { font-size: 9px; }
-        .whatwedo-scroll-container { padding-bottom: 0rem; }
         
-        /* 4K RIBBON FIX */
+        /* RIBBON STYLES */
         .whatwedo-ribbon p { font-size: 1rem; }
         .whatwedo-ribbon .uppercase { 
             font-size: 0.75rem; 
@@ -232,7 +250,6 @@ const WhatWeDo = () => {
         }
         .whatwedo-ribbon svg { width: 230px; height: 25px; }
 
-        /* MOBILE & TABLET STACKING LOGIC */
         @media (max-width: 1023px) {
           .whatwedo-ribbon p.uppercase {
              display: flex;
@@ -240,12 +257,9 @@ const WhatWeDo = () => {
              gap: 0.5rem;
              align-items: center;
           }
-          .whatwedo-ribbon p.uppercase span {
-             display: none; /* Hides the | separator */
-          }
+          .whatwedo-ribbon p.uppercase span { display: none; }
         }
 
-        /* INCREASED HORIZONTAL WIDTH FOR TABLET/SMALL LAPTOP */
         @media (max-width: 1440px) {
            .whatwedo-ribbon {
               width: calc(100% + 10vw);
@@ -265,15 +279,14 @@ const WhatWeDo = () => {
           .whatwedo-img-area { height: 7rem; }
           .whatwedo-img-primary { width: 7rem; }
           .whatwedo-img-full { width: 10rem; }
-           /* 4K RIBBON FIX */
-        .whatwedo-ribbon p { font-size: 1.15rem; }
-        .whatwedo-ribbon .uppercase { 
+          .whatwedo-ribbon p { font-size: 1.15rem; }
+          .whatwedo-ribbon .uppercase { 
             font-size: 0.75rem; 
             margin-bottom: 0.4rem; 
             text-align: center; 
             width: 100%;
-        }
-        .whatwedo-ribbon svg { width: 280px; height: 25px; }
+          }
+          .whatwedo-ribbon svg { width: 280px; height: 25px; }
         }
 
         @media (min-width: 1024px) {
@@ -289,8 +302,7 @@ const WhatWeDo = () => {
 
         @media (min-width: 1440px) {
           .whatwedo-wrapper { padding-bottom: 18vh; }
-        .whatwedo-title { 
-          font-size: 2.7rem; }
+          .whatwedo-title { font-size: 2.7rem; }
           .whatwedo-card-link { width: 30vw; }
           .whatwedo-img-area { height: 7rem; }
           .whatwedo-img-primary { width: 8rem; }
@@ -298,15 +310,14 @@ const WhatWeDo = () => {
           .whatwedo-tag { font-size: 17px; }
           .whatwedo-highlight { font-size: 0.95rem; }
           .whatwedo-desc { font-size: 0.85rem; }
-          /* 4K RIBBON FIX */
-        .whatwedo-ribbon p { font-size: 1.2rem; }
-        .whatwedo-ribbon .uppercase { 
+          .whatwedo-ribbon p { font-size: 1.2rem; }
+          .whatwedo-ribbon .uppercase { 
             font-size: 0.75rem; 
             margin-bottom: 0.4rem; 
             text-align: center; 
             width: 100%;
-        }
-        .whatwedo-ribbon svg { width: 300px; height: 25px; }
+          }
+          .whatwedo-ribbon svg { width: 300px; height: 25px; }
         }
 
         @media (min-width: 2560px) {
@@ -327,8 +338,6 @@ const WhatWeDo = () => {
           .whatwedo-nav button { width: 5rem; height: 5rem; }
           .whatwedo-nav svg { width: 2rem; height: 2rem; }
           .whatwedo-scroll-container { padding-bottom: 5rem; }
-          
-          /* 4K RIBBON FIX */
           .whatwedo-ribbon p { font-size: 2.2rem; }
           .whatwedo-ribbon .uppercase { font-size: 1.4rem; margin-bottom: 2.5rem; }
           .whatwedo-ribbon svg { width: 500px; height: 55px; }
