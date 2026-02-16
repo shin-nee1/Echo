@@ -8,15 +8,15 @@ const AboutHero: React.FC = () => {
       
       <div className="container relative z-10 mx-auto px-[5vw] text-center flex flex-col items-center">
         
-        {/* TITLE: Matches IndexHero .hero-title scaling */}
-        <h2 className="about-hero-title font-bold text-white mx-auto leading-tight">
+        {/* TITLE: Centered */}
+        <h2 className="about-hero-title font-bold text-white leading-tight text-center">
           About <span className="text-[#00d8ff]">Us</span>
         </h2>
 
-        {/* IMAGE: Matches IndexHero .hero-slider-container scaling logic */}
-        <div className="about-image-container mb-6 md:mb-8 lg:mb-10">
+        {/* IMAGE: Increased Size & Centered */}
+        <div className="about-image-container mb-12 md:mb-16 lg:mb-20">
           <motion.div 
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
@@ -25,103 +25,83 @@ const AboutHero: React.FC = () => {
             <img 
               src={AboutImg} 
               alt="About Echo & Impact" 
-              className="h-full w-auto object-contain drop-shadow-[0_0_15px_rgba(0,216,255,0.08)]"
+              className="h-full w-auto object-contain drop-shadow-[0_0_30px_rgba(0,216,255,0.1)]"
             />
           </motion.div>
         </div>
 
-        {/* TEXT CONTENT: Matches IndexHero .hero-subtitle scaling */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 md:gap-y-6 max-w-[85vw] md:max-w-2xl lg:max-w-3xl 2xl:max-w-5xl">
-          
-          {/* Main Lead Paragraph */}
-          <p className="about-lead-text text-white/95 font-light md:col-span-2 md:text-center">
-            Echo & Impact was created with a simple belief: Great work comes from <span className="text-[#00d2ff] font-normal">clarity and structure.</span>
-          </p>
+        {/* TEXT CONTENT: Specifically Left-Aligned */}
+        <div className="flex flex-col items-start w-full max-w-[90vw] md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
+          <p className="about-lead-text text-white/85 font-light text-left whitespace-pre-line">
+{`Echo & Impact was created with a simple belief at its core. Great work comes from clarity, structure, and a team that genuinely cares about outcomes, not checklists.
 
-          {/* Secondary Paragraphs */}
-          <p className="about-sub-text text-white/60 font-light leading-relaxed text-left md:text-left">
-            We noticed a recurring problem: businesses invested in branding, yet lacked a partner who stayed <span className="text-white/80">accountable from first idea to execution.</span>
-          </p>
-          
-          <p className="about-sub-text text-white/60 font-light leading-relaxed text-left md:text-left">
-            We built this to be the opposite. Strategy is intentional, processes are transparent, and every step moves your brand forward with purpose.
+Over the years, we noticed a recurring problem across the industry. Businesses were investing in branding, websites, and marketing, yet they often lacked a partner who stayed accountable from the first idea to the final execution. Scopes were vague, expectations unclear, deadlines shifting, and communication fragmented.
+
+We built Echo & Impact to be the opposite of that experience. Here, strategy is intentional, processes are transparent, and execution is disciplined. Our team brings together specialists across design, engineering, and marketing under one system, so every decision reinforces the next and every step moves your brand forward with purpose.
+
+What matters to us is not just onboarding you but delivering the work and standing behind it. Guiding you when things are unclear. Advising when something is unnecessary. Challenging ideas when they are not strong enough. And supporting you long after launch, not just during the project timeline.
+
+Every relationship we build is grounded in clarity, honesty, and a shared commitment to growth. Every decision is thoughtful. Every outcome is intentional. Every partnership is built to last. clarity and structure.`}
           </p>
         </div>
 
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        /* 1. GLOBAL FLUID VARIABLES (Mobile First) */
         .about-hero-wrapper {
-          padding-top: clamp(6.5rem, 10vh, 8rem); 
-          padding-bottom: clamp(3rem, 5vh, 4rem);
-          min-height: auto; 
+          padding-top: clamp(7rem, 12vh, 10rem); 
+          padding-bottom: clamp(5rem, 10vh, 8rem);
         }
 
         .about-hero-title {
-          font-size: clamp(1.75rem, 8vw, 1.95rem); 
-          margin-bottom: clamp(1rem, 3vh, 1.5rem);
-          max-width: 100vw; 
+          font-size: clamp(2.2rem, 9vw, 2.8rem); 
+          margin-bottom: clamp(2rem, 5vh, 3rem);
+          width: 100%;
         }
 
         .about-image-container {
           position: relative;
-          height: clamp(150px, 20vh, 200px); /* Scaled slightly smaller than hero slider */
+          /* INCREASED HEIGHTS: Returning to high-impact scale */
+          height: clamp(300px, 45vh, 500px); 
           width: 100%;
           display: flex;
           justify-content: center;
         }
 
         .about-lead-text {
-          font-size: clamp(0.95rem, 3vw, 1.1rem);
-          line-height: 1.4;
-          margin-bottom: 0.5rem;
+          font-size: 1rem;
+          line-height: 1.7; 
+          letter-spacing: 0.01em;
+          white-space: pre-line;
+          text-align: left;
         }
 
-        .about-sub-text {
-          font-size: clamp(0.75rem, 2.5vw, 0.85rem);
-        }
-
-        /* 2. TABLET (768px) */
+        /* TABLET (768px) */
         @media (min-width: 768px) {
-          .about-hero-title { font-size: clamp(2rem, 5vw, 2.35rem); }
-          .about-image-container { height: 25vh; }
-          .about-lead-text { font-size: clamp(1.1rem, 2.5vw, 1.3rem); }
-          .about-sub-text { font-size: 0.9rem; }
+          .about-hero-title { font-size: 3.5rem; }
+          .about-image-container { height: 55vh; }
+          .about-lead-text { font-size: 1.1rem; }
         }
 
-        /* 3. LAPTOP (1024px) */
+        /* LAPTOP (1024px) */
         @media (min-width: 1024px) {
-          .about-hero-wrapper { padding-top: 15vh; padding-bottom: 8vh; }
-          .about-hero-title { font-size: 2.95rem; }
-          .about-image-container { height: 30vh; margin-bottom: 3rem; }
-          .about-lead-text { font-size: 1.35rem; }
-          .about-sub-text { font-size: 0.95rem; line-height: 1.7; }
+          .about-hero-title { font-size: 4rem; }
+          .about-image-container { height: 70vh; }
+          .about-lead-text { font-size: 1.15rem; }
         }
 
-        /* 4. LARGE LAPTOP (1440px) */
+        /* LARGE LAPTOP (1440px) */
         @media (min-width: 1440px) {
-          .about-hero-title { font-size: 3.35rem; }
-          .about-image-container { height: 35vh; }
-          .about-lead-text { font-size: 1.5rem; }
-          .about-sub-text { font-size: 1rem; }
+          .about-hero-title { font-size: 4.8rem; }
+          .about-image-container { height: 65vh; }
+          .about-lead-text { font-size: 1.2rem; }
         }
 
-        /* 5. 4K MONITORS (2560px) */
+        /* 4K MONITORS (2560px) */
         @media (min-width: 2560px) {
-          .about-hero-wrapper { padding-top: 15vh; padding-bottom: 10vh; }
-          .about-hero-title { font-size: 5rem; }
-          .about-image-container { height: 40vh; margin-bottom: 4rem; }
-          .about-lead-text { font-size: 2.2rem; }
-          .about-sub-text { font-size: 1.5rem; line-height: 1.8; }
-        }
-
-        /* 6. SMALL MOBILE (Max 425px) */
-        @media (max-width: 425px) {
-          .about-hero-title { font-size: 1.6rem; }
-          .about-image-container { height: 140px; }
-          .about-lead-text { font-size: 0.9rem; }
-          .about-sub-text { font-size: 0.8rem; }
+          .about-hero-title { font-size: 6rem; }
+          .about-image-container { height: 75vh; }
+          .about-lead-text { font-size: 1.5rem; }
         }
       `}} />
     </section>

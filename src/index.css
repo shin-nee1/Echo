@@ -6,6 +6,7 @@
 @tailwind utilities;
 
 /* 3️⃣ Custom base styles */
+/* 3️⃣ Custom base styles */
 @layer base {
   :root {
     --background: 210 50% 4%;
@@ -37,9 +38,21 @@
     --gradient-blue: linear-gradient(180deg, hsl(210, 80%, 30%) 0%, hsl(210, 50%, 4%) 100%);
   }
 
-  /* FORCE GENERAL SANS (Inter) ON EVERYTHING */
-  *, *::before, *::after, body, button, input, optgroup, select, textarea {
-    font-family: 'Inter', sans-serif !important;
+  /* FORCE GENERAL SANS ON EVERYTHING 
+     Removed the Heading exceptions to ensure total uniformity.
+  */
+  *, 
+  *::before, 
+  *::after, 
+  body, 
+  h1, h2, h3, h4, h5, h6,
+  button, 
+  input, 
+  optgroup, 
+  select, 
+  textarea,
+  .font-display {
+    font-family: 'General Sans', sans-serif !important;
     border-color: hsl(var(--border));
   }
 
@@ -155,10 +168,11 @@
 
     /* ADJUSTED: Reduced radii to prevent text overlap */
     --cut-radius: 0px; 
-    @media (min-width: 768px)  { --cut-radius: 42px; }  /* Reduced from 52px */
-    @media (min-width: 1024px) { --cut-radius: 52px; }  /* Reduced from 65px */
-    @media (min-width: 1260px) { --cut-radius: 64px; }  /* Reduced from 78px */ 
-    @media (min-width: 1700px) { --cut-radius: 75px; }  /* Reduced from 90px */
+    @media (min-width: 768px)  { --cut-radius: 52px; }  /* Reduced from 52px */
+    @media (min-width: 1024px) { --cut-radius: 65px; }  /* Reduced from 65px */
+    @media (min-width: 1260px) { --cut-radius: 75px; }
+     @media (min-width: 1460px) { --cut-radius: 92px; }  /* Reduced from 78px */ 
+    @media (min-width: 1700px) { --cut-radius: 105px; }  /* Reduced from 90px */
 
     /* SHARP HOLE MASKING */
     mask: radial-gradient(

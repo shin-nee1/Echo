@@ -3,7 +3,6 @@ import React from "react";
 
 interface HeroSubServiceProps {
   title: React.ReactNode;
-  // subtitle prop removed
   ctaText: string;
 }
 
@@ -17,10 +16,8 @@ const HeroSubService = ({ title, ctaText }: HeroSubServiceProps) => {
           {title}
         </h1>
         
-        {/* SUBTITLE REMOVED */}
-
-        {/* BUTTON */}
-        <button className="sub-hero-btn bg-[#43c6e4] text-black font-bold rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(67,198,228,0.3)] hover:shadow-[0_0_30px_rgba(67,198,228,0.5)]">
+        {/* BUTTON - Color dimmed, bold removed, no glows */}
+        <button className="sub-hero-btn bg-[#3a9db4] text-white font-normal rounded-full transition-all hover:scale-105 active:scale-95 border-none outline-none">
           {ctaText}
         </button>
       </div>
@@ -35,14 +32,16 @@ const HeroSubService = ({ title, ctaText }: HeroSubServiceProps) => {
 
         .sub-hero-title {
           font-size: clamp(2.1rem, 9vw, 2.8rem); 
-          /* Increased bottom margin since subtitle is gone to separate button from title */
-          margin-bottom: clamp(2.5rem, 5vh, 4rem); 
+          margin-bottom: clamp(2rem, 4vh, 3rem); 
         }
 
         .sub-hero-btn {
-          height: clamp(3rem, 6vw, 3.5rem);
-          padding: 0 clamp(2rem, 5vw, 2.5rem);
-          font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+          height: clamp(2.6rem, 5vw, 3rem);
+          padding: 0 clamp(1.8rem, 4vw, 2.2rem);
+          font-size: clamp(0.85rem, 2.2vw, 1rem);
+          box-shadow: none !important;
+          -webkit-appearance: none;
+          letter-spacing: 0.02em; /* Added slight tracking for readability with normal weight */
         }
 
         /* 2. TABLET (768px) */
@@ -55,17 +54,17 @@ const HeroSubService = ({ title, ctaText }: HeroSubServiceProps) => {
         /* 3. LAPTOP (1024px) */
         @media (min-width: 1024px) {
           .sub-hero-wrapper { 
-            min-height: 75vh; 
+            min-height: 65vh; 
             padding-top: 20vh;
           }
           .sub-hero-title { 
             font-size: 3rem; 
-            max-width: 80%;
+            max-width: 100%;
           }
           .sub-hero-btn {
-            height: 3.5rem;
-            padding: 0 2.5rem;
-            font-size: 1.1rem;
+            height: 3rem;
+            padding: 0 2rem;
+            font-size: 1rem;
           }
         }
 
@@ -86,12 +85,12 @@ const HeroSubService = ({ title, ctaText }: HeroSubServiceProps) => {
           .sub-hero-title { 
             font-size: 5rem; 
             max-width: 1600px;
-            margin-bottom: 6rem;
+            margin-bottom: 5rem;
           }
           .sub-hero-btn { 
-            height: 5rem; 
-            padding: 0 5rem; 
-            font-size: 1.8rem; 
+            height: 4.2rem; 
+            padding: 0 4rem; 
+            font-size: 1.5rem; 
           }
         }
 
@@ -99,7 +98,7 @@ const HeroSubService = ({ title, ctaText }: HeroSubServiceProps) => {
         @media (max-width: 425px) {
           .sub-hero-wrapper { min-height: 60vh; }
           .sub-hero-title { font-size: 2rem; }
-          .sub-hero-btn { height: 3rem; font-size: 1rem; }
+          .sub-hero-btn { height: 2.5rem; font-size: 0.9rem; }
         }
       `}} />
     </section>

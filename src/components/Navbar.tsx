@@ -8,7 +8,7 @@ import { serviceTitleToSlug } from "@/data/servicesData";
 import navLogo from "../assets/image-removebg-preview (13).png";
 
 /* =======================
-   SERVICES DROPDOWN (DESKTOP)
+    SERVICES DROPDOWN (DESKTOP)
 ======================= */
 const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
   const sections = [
@@ -51,23 +51,20 @@ const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
   };
 
   return (
-    // REDUCED: gap-4 -> gap-2, text-sm -> text-xs, min-w reduced
-    <div className="flex flex-col gap-2 text-xs min-w-[180px]">
+    <div className="flex flex-col gap-3 text-sm min-w-[200px]">
       {sections.map((section) => (
-        <div key={section.title}>
-          {/* REDUCED: mb-1 -> mb-0.5, text-lg -> text-sm */}
-          <h4 className="mb-0.5 text-sm font-bold text-foreground border-b border-border pb-1 md:border-none">
+        <div key={section.title} className="mb-1">
+          <h4 className="mb-1 text-base font-bold text-foreground border-b border-border pb-1 md:border-none">
             {section.title}
           </h4>
 
-          <ul className="space-y-0">
+          <ul className="space-y-0.5">
             {section.items.map((item) => (
               <li key={item}>
                 <Link
                   to={getServiceLink(item)}
                   onClick={onClose}
-                  // REDUCED: py-1 -> py-0.5
-                  className="block rounded-lg px-2 py-0.5 text-muted-foreground hover:bg-cyan/20 hover:text-cyan transition-all whitespace-normal"
+                  className="block rounded-lg px-2 py-1 text-muted-foreground hover:bg-cyan/20 hover:text-cyan transition-all whitespace-normal"
                 >
                   {item}
                 </Link>
@@ -81,7 +78,7 @@ const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
 };
 
 /* =======================
-   NAVBAR
+    NAVBAR
 ======================= */
 const Navbar = () => {
   const location = useLocation();
@@ -106,7 +103,6 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
   const isServicesActive = location.pathname.startsWith("/services");
 
-  // REUSABLE ACTIVE UNDERLINE COMPONENT
   const ActiveUnderline = () => (
     <motion.div
       layoutId="navbar-underline"
@@ -131,13 +127,11 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* DESKTOP NAV & CTA CONTAINER */}
+          {/* DESKTOP NAV & CTA */}
           <div className="hidden min-[769px]:flex flex-1 items-center justify-end gap-8">
             
-            {/* NAV LINKS */}
             <div className="flex items-center gap-x-8">
               
-              {/* HOME LINK */}
               <Link
                 to="/"
                 className="relative text-sm font-medium transition-colors group py-2"
@@ -151,7 +145,6 @@ const Navbar = () => {
                 {isActive("/") && <ActiveUnderline />}
               </Link>
 
-              {/* SERVICES (DESKTOP) */}
               <div
                 ref={servicesRef}
                 className="relative"
@@ -175,15 +168,13 @@ const Navbar = () => {
                   {isServicesActive && <ActiveUnderline />}
                 </button>
 
-                {/* DROPDOWN MENU */}
                 <AnimatePresence>
                   {servicesOpen && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      // REDUCED: mt-4 -> mt-2, p-6 -> p-3
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max rounded-2xl border border-cyan/40 bg-background shadow-2xl p-3 z-[9999]"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max rounded-2xl border border-cyan/40 bg-background shadow-2xl p-4 z-[9999]"
                     >
                       <ServicesDropdown onClose={() => setServicesOpen(false)} />
                     </motion.div>
@@ -191,7 +182,6 @@ const Navbar = () => {
                 </AnimatePresence>
               </div>
 
-              {/* OTHER LINKS */}
               {["/work", "/about", "/contact"].map((path) => (
                 <Link
                   key={path}
@@ -209,11 +199,10 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* DESKTOP CTA */}
             <div className="flex items-center">
               <Button
                 size="sm"
-                className="bg-cyan text-background hover:bg-cyan/90 px-6 font-bold rounded-full"
+                className="bg-[#0891b2] text-white hover:bg-[#077691] px-6 font-bold rounded-full shadow-none border-none"
               >
                 Start Project
               </Button>
@@ -239,7 +228,6 @@ const Navbar = () => {
               className="min-[769px]:hidden border-t border-border/50 bg-background touch-pan-y overflow-y-auto max-h-[85vh]"
             >
               <div className="py-6 space-y-4 px-2">
-
                 {["Home", "Work", "About", "Contact"].map((item) => {
                   const path = item === "Home" ? "/" : `/${item.toLowerCase()}`;
                   return (
@@ -258,7 +246,6 @@ const Navbar = () => {
                   );
                 })}
 
-                {/* MOBILE SERVICES */}
                 <div className="pt-4 border-t border-border/50">
                   <button
                     onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
@@ -300,10 +287,9 @@ const Navbar = () => {
                   </AnimatePresence>
                 </div>
 
-                {/* CTA */}
                 <div className="pt-4 flex justify-center pb-6">
                   <Button
-                    className="bg-cyan text-background px-8 py-3 text-base font-semibold shadow-lg hover:bg-cyan/90 rounded-full"
+                    className="bg-[#0891b2] text-white px-8 py-3 text-base font-semibold hover:bg-[#077691] rounded-full shadow-none"
                     asChild
                   >
                     <Link to="/contact" onClick={() => setMobileOpen(false)}>
@@ -311,7 +297,6 @@ const Navbar = () => {
                     </Link>
                   </Button>
                 </div>
-
               </div>
             </motion.div>
           )}

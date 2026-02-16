@@ -19,7 +19,7 @@ const IndexHero: React.FC = () => {
   }, [slides.length]);
 
   return (
-    <section className="hero-wrapper relative flex flex-col items-center justify-center overflow-hidden">
+    <section className="hero-wrapper relative flex flex-col items-center justify-center overflow-hidden w-screen">
       
       {/* IMPROVED VISIBLE GRID */}
       <div 
@@ -46,7 +46,7 @@ const IndexHero: React.FC = () => {
 
         <div className="hero-subtitle text-slate-200 mx-auto font-normal opacity-90">
           <p>From strategy and storytelling to code and conversion.</p>
-          <p>One partner to shape your brand and drive performance.</p>
+          <p>One partner to shape your brand, build your digital presence,  and drive performance.</p>
         </div>
 
         <div className="hero-link-container">
@@ -56,7 +56,12 @@ const IndexHero: React.FC = () => {
         </div>
 
         <div className="hero-btn-container">
-          <Button variant="cyan" size="hero" className="hero-btn">
+          {/* UPDATED BUTTON: Reduced color opacity and removed bold */}
+          <Button 
+            variant="cyan" 
+            size="hero" 
+            className="hero-btn font-normal bg-[#43c6e4]/80 hover:bg-[#43c6e4] text-white"
+          >
             Start Project
           </Button>
         </div>
@@ -67,11 +72,11 @@ const IndexHero: React.FC = () => {
             <motion.div
               key={currentSlide}
               initial={{ opacity: 0, y: "100%" }} // New image starts fully below
-              animate={{ opacity: 1, y: 0 }}       // New image moves to center
+              animate={{ opacity: 1, y: 0 }}      // New image moves to center
               exit={{ opacity: 0, y: "100%" }}    // Old image passes through to the top
               transition={{ 
                 duration: 0.5, 
-   // A more sophisticated "passing" ease
+                // A more sophisticated "passing" ease
               }}
               className="absolute inset-0 w-full h-full flex items-center justify-center"
             >
@@ -90,6 +95,14 @@ const IndexHero: React.FC = () => {
           padding-top: clamp(6.5rem, 10vh, 8rem); 
           padding-bottom: clamp(1.5rem, 5vh, 3rem);
           min-height: 80vh;
+          
+          /* BREAKOUT LOGIC: Forces full width even inside padded parents */
+          width: 100vw;
+          position: relative;
+          left: 50%;
+          right: 50%;
+          margin-left: -50vw;
+          margin-right: -50vw;
         }
 
         .hero-title {
@@ -110,6 +123,7 @@ const IndexHero: React.FC = () => {
         .hero-link { font-size: clamp(0.85rem, 2vw, 0.95rem); }
 
         .hero-btn-container { margin-bottom: clamp(2rem, 5vh, 5rem); }
+        
         .hero-btn {
           height: clamp(2.25rem, 5vw, 3rem) !important;
           padding: 0 clamp(1.75rem, 3vw, 2rem) !important;
@@ -139,19 +153,20 @@ const IndexHero: React.FC = () => {
 
         @media (min-width: 1024px) {
           .hero-wrapper { padding-top: 18vh; }
-          .hero-title { font-size: 2.95rem; max-width: 600px; }
-          .hero-subtitle { font-size: 0.9rem; max-width: 650px; }
+          .hero-title { font-size: 4.3rem; max-width: 800px; }
+          .hero-subtitle { font-size: 1.2rem; max-width: 800px; }
           .hero-link-container { margin-bottom: clamp(1.2rem, 1vh, 2.5rem); }
-          .hero-link { font-size: clamp(0.75rem, 2vw, 1rem); }
+          .hero-link { font-size: clamp(0.75rem, 2vw, 1.4rem); }
           .hero-slider-container { height: 45vh; max-width: 70vw; }
           .hero-btn { height: 2.2rem !important; padding: 0 1.5rem !important; 
           font-size: clamp(0.85rem, 2vw, 0.95rem) !important;}
         }
 
         @media (min-width: 1440px) {
-          .hero-title { font-size: 3.35rem; max-width: 900px; }
-          .hero-subtitle { font-size: 1rem; max-width: 750px; }
-          .hero-link { font-size: clamp(0.75rem, 2vw, 1rem); }
+        .hero-wrapper { padding-top: 15vh; }
+          .hero-title { font-size: 4.3rem; max-width: 800px; }
+          .hero-subtitle { font-size: 1.2rem; max-width: 800px; }
+          .hero-link { font-size: clamp(0.75rem, 2vw, 1.4rem); }
           .hero-slider-container { height: 45vh; max-width: 900px; }
           .hero-btn { height: 2.5rem !important; padding: 0 1.75rem !important; 
           font-size: clamp(0.75rem, 2vw, 1rem) !important;}
