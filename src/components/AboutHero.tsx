@@ -50,7 +50,7 @@ Every relationship we build is grounded in clarity, honesty, and a shared commit
       <style dangerouslySetInnerHTML={{ __html: `
         .about-hero-wrapper {
           padding-top: clamp(7rem, 12vh, 10rem); 
-          padding-bottom: clamp(5rem, 10vh, 8rem);
+          
         }
 
         .about-hero-title {
