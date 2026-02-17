@@ -16,7 +16,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         
         // ✅ EXACT VISUAL MATCH TO YOUR IMAGES
-        cyan: "bg-gradient-to-r from-[#2c7182] to-[#43c6e4] hover:opacity-90 text-white rounded-full font-semibold border-none shadow-[0_0_20px_rgba(67,198,228,0.3)] tracking-wide",
+        cyan: "bg-gradient-to-r from-[#2c7182] to-[#43c6e4] hover:opacity-90 text-white rounded-full  border-none shadow-[0_0_20px_rgba(67,198,228,0.3)] tracking-wide",
       },
       size: {
         default: "h-10 px-4",

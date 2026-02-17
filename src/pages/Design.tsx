@@ -108,7 +108,7 @@ const Design = () => {
       {/* WRAPPER DIV FOR FLUID SPACING 
           Using clamp for consistent vertical rhythm across the entire page
       */}
-      <div className="flex flex-col gap-[clamp(4rem, 12vh, 10rem)]">
+      <div className="flex flex-col gap-[clamp(9rem, 12vh, 10rem)]">
         
        <PageHero
   title={
