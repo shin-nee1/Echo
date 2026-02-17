@@ -102,6 +102,7 @@ const InfoSectionTWO = ({
 
         /* 4. LARGE DESKTOP (1440px - 2559px) */
         @media (min-width: 1440px) {
+        .info-container { padding: 0 3vw !important; max-width: 70% !important; }
           .info-flex-wrapper { gap: 6vw; }
           .info-text-side { width: 55%; }
           .info-title { font-size: 2.55rem; }
@@ -111,7 +112,7 @@ const InfoSectionTWO = ({
 
         /* 5. 4K MONITORS (2560px+) */
         @media (min-width: 2560px) {
-          .info-container { padding: 0 3vw !important; }
+          .info-container { padding: 0 3vw !important; max-width: 70% !important; }
           .info-section-wrapper { padding: 1rem 0; }
           .info-title { font-size: 5rem; margin-bottom: 3.2rem; }
           .info-p-text { font-size: 1.75rem; max-width: 1200px; }
