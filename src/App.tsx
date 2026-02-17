@@ -43,22 +43,22 @@ const ScrollingCubes = () => {
           <img 
             src={CubeImg} 
             alt="" 
-            className="absolute top-[20%] right-[1%] w-[25vw] opacity-100 rotate-45" 
+            className="absolute top-[19.5%] right-[1%] w-[25vw] opacity-100 rotate-[0deg]" 
           />
           <img 
             src={CubeImg} 
             alt="" 
-            className="absolute top-[36%] left-[5%] w-[19vw] opacity-100 -rotate-12" 
+            className="absolute top-[38.15%] left-[1%] w-[19vw] opacity-100 -rotate-[0deg]" 
           />
           <img 
             src={CubeImg} 
             alt="" 
-            className="absolute top-[45%] right-[-10%] w-[35vw] opacity-100 rotate-45" 
+            className="absolute top-[47.5%] right-[-10%] w-[33vw] opacity-100 rotate-[0deg]" 
           />
           <img 
             src={CubeImg} 
             alt="" 
-            className="absolute top-[55%] left-[-10%] w-[22vw] opacity-100 rotate-[30deg]" 
+            className="absolute top-[55%] left-[-10%] w-[22.5vw] opacity-100 rotate-[0deg]" 
           />
         </>
       )}
@@ -67,8 +67,8 @@ const ScrollingCubes = () => {
         <>
           <img src={CubeImg} alt="" className="absolute top-[4%] left-[-12%] w-[24vw] opacity-100 rotate-[0deg]" />
           <img src={CubeImg} alt="" className="absolute top-[17%] right-[-8%] w-[28vw] opacity-100 rotate-[0deg]" />
-          <img src={CubeImg} alt="" className="absolute top-[33%] left-[-10%] w-[28vw] opacity-100 rotate-[0deg]" />
-          <img src={CubeImg} alt="" className="absolute top-[48%] right-[-7%] w-[22vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[33%] left-[-6%] w-[28vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[50%] right-[-6%] w-[24vw] opacity-100 rotate-[0deg]" />
           <img src={CubeImg} alt="" className="absolute top-[73%] left-[-15%] w-[36vw] opacity-100 rotate-[0deg]" />
         </>
       )}

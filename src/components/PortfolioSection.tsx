@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react"; // FIXED IMPORT
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -26,7 +26,7 @@ const PortfolioSection = () => {
   };
 
   return (
-    /* CHANGED: Added full-bleed logic to the section to ignore parent padding */
+    /* SECTION: full-bleed logic to the section to ignore parent padding */
     <section className="portfolio-section relative bg-transparent overflow-hidden z-10 w-screen left-1/2 right-1/2 -ml-[50vw] mr-[50vw]">
       <style dangerouslySetInnerHTML={{ __html: `
         /* REMOVE SCROLLBAR BUT KEEP SWIPE */
@@ -105,7 +105,7 @@ const PortfolioSection = () => {
             scroll-snap-align: start; 
             margin-right: 0; 
           }
-          .portfolio-nav { display: flex; gap: 0.75rem; padding-bottom: 0.5rem; } 
+          .portfolio-nav { display: flex; gap: 0.75rem; padding-bottom: 0rem; } 
           .portfolio-view-all { font-size: 0.95rem; height: 2.8rem; padding: 0 2.2rem; }
         }
 
@@ -123,7 +123,6 @@ const PortfolioSection = () => {
         }
       `}} />
 
-      {/* CHANGED: Container padding adjusted to maintain visual alignment despite breaking the parent's padding */}
       <div className="pl-[10%] relative z-10" style={{ maxWidth: "2200px" }}>
         
         {/* HEADER AREA */}
@@ -134,7 +133,8 @@ const PortfolioSection = () => {
             </h2>
           </div>
 
-          <div className="flex flex-row items-end gap-[1.5rem] shrink-0">
+          {/* pr-[5%] nudges buttons toward the left */}
+          <div className="flex flex-row items-end gap-[1.5rem] shrink-0 pr-[5%]">
             <div className="portfolio-nav">
               <button onClick={() => scroll("left")}><ArrowLeft size="1.2rem" /></button>
               <button onClick={() => scroll("right")}><ArrowRight size="1.2rem" /></button>
