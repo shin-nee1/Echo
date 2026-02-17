@@ -1,6 +1,6 @@
 import React from "react";
 import { Mail, Phone, Home, ChevronDown } from "lucide-react";
-import ContactImg from "@/assets/telephone.png.png";
+import ContactImg from "@/assets/telephone.png.png"; // Ensure this path is correct for your project
 import ContactHeroMobile from "./ContactHeroMobile";
 
 const ContactHero = () => {
@@ -21,7 +21,12 @@ const ContactHero = () => {
 
       {/* ================= DESKTOP VIEW ================= */}
       <div className="hidden lg:block w-full h-full">
-        <div className="w-full h-[85vh] min-h-[750px] relative overflow-hidden bg-transparent m-0 px-[1px]">
+        {/* UPDATED CONTAINER:
+            1. w-screen: Forces width to be the viewport width.
+            2. left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]: Centers the element and pulls it 
+               outside of any parent padding (like App.tsx container) using negative margins.
+        */}
+        <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[85vh] min-h-[750px] overflow-hidden bg-transparent m-0">
           <section className="relative w-full h-full flex items-center justify-center selection:bg-[#00d2ff]/30">
             {/* MASTER SCALING WRAPPER */}
             <div
@@ -164,7 +169,7 @@ const ContactHero = () => {
                         0300-1234567
                       </span>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-center gap-3">
                       <Home className="text-white w-4 h-4 shrink-0 mt-0.5" />
                       <span className="text-white text-[11px] xl:text-xs font-medium leading-tight">
                         North Nazimabad Block 3 Building 304
