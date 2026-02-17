@@ -202,7 +202,7 @@ const Navbar = () => {
             <div className="flex items-center">
               <Button
                 size="sm"
-                className="bg-[#0891b2] text-white hover:bg-[#077691] px-6 font-bold rounded-full shadow-none border-none"
+                className="bg-[#0891b2] text-white hover:bg-[#077691] px-6  rounded-full shadow-none border-none"
               >
                 Start Project
               </Button>

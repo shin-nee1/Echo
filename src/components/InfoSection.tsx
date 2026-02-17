@@ -117,18 +117,18 @@ const InfoSection = ({
 
         /* 4. LARGE DESKTOP (1440px - 2559px) */
         @media (min-width: 1440px) {
-          .info-container { padding: 0 0vw !important; }
-          .info-flex-wrapper { gap: 4vw; }
+          .info-container { padding: 0 6vw !important; max-width: 69% !important; }
+          .info-flex-wrapper { gap: 2vw; }
           .info-text-side { width: 60%; }
           .info-title { font-size: 2.75rem; }
           .info-p-text { font-size: 1.2rem; max-width: 700px; }
           .info-image-side { width: 50%; justify-content: flex-end; padding-top: 0.3rem; }}
-          .info-image-inner { max-width: 300px; }
+          .info-image-inner { max-width: 250px; }
         }
 
         /* 5. 4K MONITORS (2560px+) */
         @media (min-width: 2560px) {
-          .info-container { padding: 0 12vw !important; }
+          .info-container { padding: 0 12vw !important; max-width: 69% !important; }
           .info-section-wrapper { padding: 12rem 0; }
           .info-title { font-size: 7rem; margin-bottom: 4rem; }
           .info-p-text { font-size: 2rem; max-width: 1100px; }

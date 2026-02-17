@@ -11,7 +11,9 @@ interface PageHeroProps {
 
 const PageHero = ({ title, subtitle, ctaText = "Shape your Next Move" }: PageHeroProps) => {
   return (
-    <section className="relative overflow-hidden bg-transparent hero-wrapper">
+    <section 
+      className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden bg-transparent hero-wrapper"
+    >
       
       <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
         
@@ -117,12 +119,12 @@ const PageHero = ({ title, subtitle, ctaText = "Shape your Next Move" }: PageHer
 
         /* 3. LAPTOP (1024px) */
         @media (min-width: 1024px) {
-          .hero-wrapper { padding-top: 12rem; padding-bottom: 8rem; }
+          .hero-wrapper { padding-top: 11rem; padding-bottom: 6rem; }
           
-          .hero-title-box { max-width: 950px; } /* Forces the 2-line structure */
+          .hero-title-box { max-width: 100%; } /* Forces the 2-line structure */
           
           .hero-title { 
-            font-size: 2.5rem; 
+            font-size: 3rem; 
             margin-bottom: 1rem;
             letter-spacing: -0.04em;
           }
@@ -144,7 +146,7 @@ const PageHero = ({ title, subtitle, ctaText = "Shape your Next Move" }: PageHer
         @media (min-width: 1440px) {
           .hero-wrapper { padding-top: 15rem; padding-bottom: 10rem; }
           
-          .hero-title-box { max-width: 1000px; }
+          .hero-title-box { max-width: 100%; }
           
           .hero-title { font-size: 3rem; }
           
@@ -163,7 +165,7 @@ const PageHero = ({ title, subtitle, ctaText = "Shape your Next Move" }: PageHer
         @media (min-width: 2560px) {
           .hero-wrapper { padding-top: 22rem; padding-bottom: 15rem; }
           
-          .hero-title-box { max-width: 1800px; }
+          .hero-title-box { max-width: 180%; }
           
           .hero-title { 
             font-size: 5rem; 
