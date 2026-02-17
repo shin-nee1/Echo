@@ -38,9 +38,7 @@
     --gradient-blue: linear-gradient(180deg, hsl(210, 80%, 30%) 0%, hsl(210, 50%, 4%) 100%);
   }
 
-  /* FORCE GENERAL SANS ON EVERYTHING 
-     Removed the Heading exceptions to ensure total uniformity.
-  */
+ 
   *, 
   *::before, 
   *::after, 

@@ -59,7 +59,7 @@ const WhatWeDo = () => {
             
             <div className="whatwedo-divider md:pl-[rem]  ">
               <p className="whatwedo-subtitle text-slate-400 leading-tight]">
-                Every brand we build follows a rhythm.                             
+                Every brand we build follows a rhythm.                            
               </p>
                <p className="whatwedo-subtitle text-slate-400 leading-tight">
                 Designed to create presence.                          
@@ -131,9 +131,9 @@ const WhatWeDo = () => {
 
                   <div className="mt-auto">
                     <span className="whatwedo-explore inline-flex items-center gap-2 text-[#43c6e4] font-bold uppercase tracking-wider border-b border-[#43c6e4]/40 group-hover:border-[#43c6e4] pb-1 transition-all">
-  Explore {service.title}
-  <ArrowRight size="0.75rem" className="group-hover:translate-x-1 transition-transform" />
-</span>
+                      Explore {service.title}
+                      <ArrowRight size="0.75rem" className="group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </div>
                 </div>
               </motion.div>
@@ -183,6 +183,7 @@ const WhatWeDo = () => {
           -ms-overflow-style: none;
           scrollbar-width: none;
           -webkit-overflow-scrolling: touch;
+          scroll-behavior: smooth; /* Added for smoother CSS-based scrolling */
         }
         .whatwedo-scroll-container::-webkit-scrollbar { display: none; }
 
@@ -191,11 +192,12 @@ const WhatWeDo = () => {
         }
 
         .whatwedo-glass-layer {
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
+          /* Reduced blur from 8px to 3px for high transparency */
+          backdrop-filter: blur(3px);
+          -webkit-backdrop-filter: blur(3px);
           background: radial-gradient(
             circle at top left, 
-            rgba(255, 255, 255, 0.02) 0%, 
+            rgba(255, 255, 255, 0.01) 0%, 
             transparent 100%
           );
           box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
@@ -208,11 +210,11 @@ const WhatWeDo = () => {
         .whatwedo-card-link:hover .whatwedo-glass-layer {
           background: radial-gradient(
             circle at 100% 100%, 
-            rgba(67, 198, 228, 0.22) 0%, 
+            rgba(67, 198, 228, 0.18) 0%, 
             transparent 75%
           );
           box-shadow: 
-            inset -20px -20px 60px rgba(67, 198, 228, 0.2),
+            inset -20px -20px 60px rgba(67, 198, 228, 0.15),
             0 25px 50px rgba(0, 0, 0, 0.4);
         }
 

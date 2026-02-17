@@ -50,56 +50,67 @@ const Market = () => {
     }
   ];
 
-  // 2. Marketing Services Data
+  // 2. Marketing Services Data - Updated to match 6 cards from image
   const marketServices = [
     {
-      title: "Growth Strategy",
+      title: "Paid Social Media",
       items: [
-        "Market positioning & competitor analysis",
-        "Target audience profiling & segmentation",
-        "Conversion rate optimization (CRO)",
-        "Funnel architecture & lead gen strategy",
-        "Brand growth roadmaps"
+        "Meta, Google, TikTok, and YouTube ads",
+        "Full-funnel campaign structure",
+        "Creative testing frameworks",
+        "Audience & competition research and targeting strategy",
+        "Budget planning, spending, and pacing"
       ]
     },
     {
-      title: "Content Marketing",
+      title: "Social Media Management",
       items: [
-        "Social media strategy & management",
-        "Copywriting & narrative storytelling",
-        "Email marketing & automation flows",
-        "SEO-driven blog & editorial content",
-        "Video content distribution strategy"
+        "Content planning & monthly calendars",
+        "Short-form video, post, content creation and direction",
+        "Caption writing and brand voice",
+        "Community management & audience engagement",
+        "Design, editing, and scheduled publishing"
       ]
     },
     {
-      title: "Paid Media & Ads",
+      title: "SEO & Content Strategy",
       items: [
-        "Meta Ads (Instagram & Facebook)",
-        "Google Search & Display Ads",
-        "LinkedIn B2B lead generation",
-        "TikTok for Business & creative testing",
-        "Budget management & ROI reporting"
+        "Technical SEO audits",
+        "Keyword research & content mapping",
+        "On-page optimization",
+        "Blog & content strategy",
+        "Backlink & authority-building roadmap",
+        "Performance reporting & ranking insights"
       ]
     },
     {
-      title: "Influencer & PR",
+      title: "Email & SMS Marketing",
       items: [
-        "Influencer sourcing & management",
-        "Brand partnership opportunities",
-        "Press release & media outreach",
-        "Community building & engagement",
-        "Event marketing & activation support"
+        "Flows & automations",
+        "Campaign planning & segmentation",
+        "Copywriting & creative",
+        "Deliverability optimization",
+        "Reporting & lifecycle analysis"
       ]
     },
     {
-      title: "Performance Data",
+      title: "Analytics & Tracking",
       items: [
-        "Custom analytics dashboards",
-        "A/B testing & heat-mapping",
-        "Monthly performance reports",
-        "Attribution modeling & tracking",
-        "Data-driven scaling recommendations"
+        "GA4 setup & event configuration",
+        "Pixel & conversion tracking (Meta, TikTok, Google)",
+        "CAPI integrations",
+        "Attribution setup & funnel tracking",
+        "Dashboards & performance insights"
+      ]
+    },
+    {
+      title: "Creative Optimization",
+      items: [
+        "Variant-based creative testing",
+        "Data-led design & messaging adjustments",
+        "Performance insights for scaling",
+        "Ad creative refinement frameworks",
+        "Thumbnail, hook, layout, and copy iterations"
       ]
     }
   ];

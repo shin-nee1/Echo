@@ -1,5 +1,5 @@
 import * as React from "react";
-import Navbar from "./Navbar";
+// DELETED: import Navbar from "./Navbar"; 
 
 interface ServicePageLayoutProps {
   children: React.ReactNode;
@@ -7,9 +7,8 @@ interface ServicePageLayoutProps {
 
 const ServicePageLayout = ({ children }: ServicePageLayoutProps) => {
   return (
-    // Removed bg-[#010a0f] to allow the global App background to show through
+    // Removed <Navbar /> to prevent doubling with the global Navbar in App.tsx
     <div className="min-h-screen text-white selection:bg-cyan/30">
-      <Navbar />
       <main>{children}</main>
     </div>
   );
