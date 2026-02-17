@@ -128,7 +128,7 @@ const InfoSection = ({
 
         /* 5. 4K MONITORS (2560px+) */
         @media (min-width: 2560px) {
-          .info-container { padding: 0 12vw !important; }
+          .info-container { padding: 0 10vw !important; }
           .info-section-wrapper { padding: 12rem 0; }
           .info-title { font-size: 7rem; margin-bottom: 4rem; }
           .info-p-text { font-size: 2rem; max-width: 1100px; }

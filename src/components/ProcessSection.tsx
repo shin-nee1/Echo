@@ -43,7 +43,7 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
       </div>
 
       {/* CARDS CONTAINER */}
-      <div className="mx-auto px-4 lg:px-[6vw] max-w-[1000px] relative z-10">
+      <div className="mx-auto px-4 lg:px-[6vw] max-w-[1200px] relative z-10">
         <div className="flex flex-col items-center w-full relative">
           {steps.map((step, index) => {
             const isLeft = index % 2 === 0;
@@ -57,18 +57,30 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
               : "radial-gradient(circle at 50% 100%, rgba(67, 198, 228, 0.2) 0%, transparent 75%)";
 
             return (
-              <div key={index} className={`w-full flex justify-center lg:grid lg:grid-cols-2 lg:h-[445px] mb-12 lg:mb-0 relative ${index > 0 ? "lg:-mt-20" : ""}`}>
+              <div key={index} className={`w-full flex justify-center lg:grid lg:grid-cols-2 lg:h-[450px] mb-12 lg:mb-0 relative ${index > 0 ? "lg:-mt-20" : ""}`}>
                 <div className={`flex w-full justify-center items-center ${isLeft ? "lg:justify-start lg:order-1" : "lg:justify-end lg:order-2"}`}>
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className={`relative w-full ${mobileTransform} lg:translate-x-0 mx-auto lg:mx-0 backdrop-blur-2xl border border-white/20 flex flex-col transition-all duration-500 hover:border-[#43c6e4]/50 z-20 shadow-2xl`}
+                    // -----------------------------------------------------------
+                    // UPDATED CLASSES:
+                    // lg: ... -> Targets specific 1024px laptop screens
+                    // xl: ... -> Restores your original design for bigger screens
+                    // -----------------------------------------------------------
+                    className={`
+                      relative w-full ${mobileTransform} lg:translate-x-0 mx-auto lg:mx-0 
+                      backdrop-blur-xl border border-white/20 flex flex-col transition-all duration-500 
+                      hover:border-[#43c6e4]/50 z-20 shadow-2xl rounded-[1.5rem]
+                      
+                      /* 1024px Specific Dimensions (Adjusted Size/Length) */
+                      lg:max-w-[300px] lg:h-[350px] lg:p-[1.8rem]
+
+                      /* Original Desktop Dimensions (Restored for 1280px+) */
+                      xl:max-w-[345px] xl:h-[345px] xl:p-[2.2rem]
+                    `}
                     style={{ 
-                        maxWidth: "345px", 
-                        padding: "2.2rem", 
-                        borderRadius: "1.5rem", 
-                        height: "345px", 
+                        // Moved Dimensions to Tailwind classes above ^
                         background: `${glowGradient}, linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)`,
                         boxShadow: "inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 0 12px 40px 0 rgba(0, 0, 0, 0.5)"
                     }}
@@ -76,16 +88,13 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                     {isTopGlow ? (
                       <>
                         <div className="relative self-center w-full flex justify-center items-center flex-grow">
-                          <motion.img
-                            animate={{ y: [0, -8, 0] }}
-                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                          <img
                             src={step.image}
                             alt={step.title}
                             className="object-contain w-40 h-40 md:w-44 md:h-44" 
                           />
                         </div>
                         <div className="w-full text-left mt-4">
-                          {/* UPDATED: WIDER PILL WITH CYAN TINTED GLASS */}
                           <span className="inline-block px-6 py-1 rounded-full bg-[#43c6e4]/15 backdrop-blur-xl border border-[#43c6e4]/30 text-white font-bold text-[0.7rem] mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
                             {step.number}
                           </span>
@@ -100,7 +109,6 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                     ) : (
                       <>
                         <div className="w-full text-left mb-4">
-                          {/* UPDATED: WIDER PILL WITH CYAN TINTED GLASS */}
                           <span className="inline-block px-6 py-1 rounded-full bg-[#43c6e4]/15 backdrop-blur-xl border border-[#43c6e4]/30 text-white font-bold text-[0.7rem] mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
                             {step.number}
                           </span>
@@ -112,9 +120,7 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                           </p>
                         </div>
                         <div className="relative self-center w-full flex justify-center items-center flex-grow">
-                          <motion.img
-                            animate={{ y: [0, -8, 0] }}
-                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                          <img
                             src={step.image}
                             alt={step.title}
                             className="object-contain w-40 h-40 md:w-44 md:h-44" 
@@ -125,8 +131,18 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                   </motion.div>
                 </div>
 
+                {/* LINE CONNECTION */}
                 {!isLast && (
-                  <div className={`hidden lg:block absolute top-1/2 h-full pointer-events-none z-0 ${isLeft ? "left-[200px] w-[54%]" : "right-[210px] w-[54%]"}`}>
+                  <div 
+                    className={`
+                        hidden lg:block absolute top-1/2 h-full pointer-events-none z-0 
+                        /* Logic to position lines correctly based on new card width at 1024px */
+                        ${isLeft 
+                            ? "lg:left-[120px] xl:left-[190px] w-[60%]" 
+                            : "lg:right-[120px] xl:right-[190px] w-[60%]"
+                        }
+                    `}
+                  >
                     <svg width="100%" height="90%" viewBox="0 0 100 100" preserveAspectRatio="none" className="overflow-visible">
                       <path
                         d={isLeft ? "M 0 0 L 85 0 Q 100 0 100 15 L 100 100" : "M 100 0 L 15 0 Q 0 0 0 15 L 0 100"}

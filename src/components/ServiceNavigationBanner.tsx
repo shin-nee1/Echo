@@ -26,22 +26,35 @@ const ServiceNavigationBanner = ({
     <section className="relative w-full bg-transparent overflow-visible nav-banner-wrapper">
       <div className="container mx-auto relative z-10 nav-banner-container">
         
-        {/* THE MAIN GLASS CARD */}
-        <div className="relative w-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-[40px] shadow-[0_40px_100px_rgba(0,0,0,0.5)] nav-banner-card">
+        {/* THE MAIN GLASS CARD - High transparency with 2px blur & UPDATED 1rem Radius */}
+        <div className="relative w-full rounded-[2rem] lg:rounded-[2rem] overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-[2px] shadow-[0_40px_100px_rgba(0,0,0,0.5)] nav-banner-card">
           
-          {/* STATIC AMBIENT GLOWS */}
-          <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-            <div className="absolute -top-[120%] -left-[10%] w-[60%] h-[250%] bg-[#00d8ff]/15 blur-[130px] rounded-full" />
-            <div className="absolute -bottom-[120%] -right-[10%] w-[60%] h-[250%] bg-cyan-900/25 blur-[130px] rounded-full" />
+          {/* STATIC AMBIENT GLOWS - Re-engineered for extreme corner bleed */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <div className="absolute -top-[120%] -left-[10%] w-[60%] h-[250%] bg-[#00d8ff]/15 blur-[130px] rounded-full opacity-20" />
+            
+            {/* THE EXTREME CORNER GLOW: MOVED DEEPER INTO THE CORNER */}
+            {/* Changed: 
+                1. Added -bottom-[15%] and -right-[10%] to push it into the corner 
+                2. Increased size to w-[60%] h-[80%] to maintain bleed 
+                3. Tightened gradient stops (30% vs 40%) for a sharper light source 
+            */}
+            <div 
+              className="absolute -bottom-[15%] -right-[10%] w-[60%] h-[80%] opacity-60" 
+              style={{
+                background: 'radial-gradient(circle at 100% 100%, rgba(0, 216, 255, 0.6) 0%, rgba(0, 216, 255, 0.15) 30%, transparent 70%)',
+                filter: 'blur(50px)'
+              }}
+            />
           </div>
           
           {/* CONTENT SECTION */}
           <div className="relative z-30 flex flex-col items-center justify-center nav-banner-content">
             
-            {/* HEADING */}
+            {/* HEADING - All text white */}
             <div className="text-center w-full nav-banner-header">
               <h2 className="text-white font-bold tracking-tight leading-[1.2] nav-banner-title">
-                {titlePrefix} <span className="text-[#00d8ff]">{highlight1}</span> {middleText} <span className="text-[#00d8ff]">{highlight2}</span>?
+                {titlePrefix} <span className="text-white">{highlight1}</span> {middleText} <span className="text-white">{highlight2}</span>?
               </h2>
             </div>
 
@@ -61,8 +74,8 @@ const ServiceNavigationBanner = ({
             </div>
           </div>
 
-          {/* EDGE LIGHTING */}
-          <div className="absolute inset-0 rounded-[2rem] lg:rounded-[3rem] border border-white/5 pointer-events-none z-40" />
+          {/* EDGE LIGHTING - Radius updated to 1rem to match card */}
+          <div className="absolute inset-0 rounded-[1rem] border border-white/5 pointer-events-none z-40" />
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#00d8ff]/30 to-transparent z-40" />
         </div>
       </div>
@@ -73,18 +86,26 @@ const ServiceNavigationBanner = ({
         .nav-banner-content { padding: 3rem 1.5rem; gap: 2.5rem; }
         .nav-banner-title { font-size: 1.2rem; }
         .nav-banner-btn-group { gap: 1rem; width: 70%; }
+        
+        /* Buttons: Cyan Gradient, Black Text, 15px Font */
         .nav-btn-secondary, .nav-btn-primary { 
-            height: 45px; border-radius: 1rem; font-size: 13px; font-weight: 600; 
+            height: 45px; 
+            border-radius: 8px; 
+            font-size: 15px; 
+            font-weight: 700; 
+            border: 1px solid rgba(255,255,255,0.1);
+            background: linear-gradient(180deg, #3d8894 0%, #5bbec9 100%); 
+            color: black;
+            box-shadow: 0 10px 30px rgba(61, 136, 148, 0.3);
+            transition: 0.3s ease;
         }
-        .nav-btn-secondary { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: white; }
-        .nav-btn-primary { background: #00d8ff; color: #010a0f; }
 
         /* 2. TABLET (768px - 1023px) */
         @media (min-width: 768px) {
           .nav-banner-wrapper { padding: 5rem 2rem; }
           .nav-banner-title { font-size: 1.55rem; }
           .nav-banner-btn-group { width: auto; gap: 1.5rem; }
-          .nav-btn-secondary, .nav-btn-primary { width: 180px; font-size: 13px; }
+          .nav-btn-secondary, .nav-btn-primary { width: 180px; font-size: 15px; }
         }
 
         /* 3. LAPTOP (1024px - 1439px) */
@@ -109,13 +130,15 @@ const ServiceNavigationBanner = ({
           .nav-banner-container { max-width: 2200px !important; }
           .nav-banner-title { font-size: 3.6rem; max-width: 1800px; }
           .nav-banner-content { padding: 5rem 8rem; gap: 5rem; }
-          .nav-btn-secondary, .nav-btn-primary { height: 70px; width: 400px; font-size: 1.6rem; border-radius: 2rem; }
+          .nav-btn-secondary, .nav-btn-primary { height: 70px; width: 400px; font-size: 1.8rem; border-radius: 12px; }
         }
 
-        /* Hover Transitions */
-        .nav-btn-secondary:hover { background: rgba(255,255,255,0.08); }
-        .nav-btn-primary:hover { background: white; transition: 0.3s ease; }
-        .nav-btn-primary { box-shadow: 0 15px 40px rgba(0,216,255,0.2); transition: 0.3s ease; }
+        /* Hover States */
+        .nav-btn-secondary:hover, .nav-btn-primary:hover { 
+          filter: brightness(1.15); 
+          transform: translateY(-1px);
+          color: black;
+        }
       `}} />
     </section>
   );

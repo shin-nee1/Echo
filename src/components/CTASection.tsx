@@ -85,110 +85,82 @@ const CTASection = ({
           .ring-2 { width: 20rem; height: 20rem; right: -5rem; bottom: -8rem; border-width: 1.5rem; }
         }
 
-        /* 3. LAPTOP (1024px - 1439px) - IMPLEMENTING REFERENCE LOOK */
         /* 3. LAPTOP (1024px - 1439px) */
-@media (min-width: 1024px) {
-  .cta-container { max-width: 100% !important; padding: 0 0rem !important; }
-  
-  /* Reduced min-height to make the box more rectangular */
-  .cta-banner-card { flex-direction: row; min-height: 320px; border-radius: 2rem; }
-  
-  .cta-content-wrapper { text-align: left; flex-direction: row; position: relative; }
-  
-  /* Reduced top padding (1.5rem) to tighten the internal space */
-  .cta-text-side { width: 70%; padding: 1rem 0rem 5rem 2rem; }
-  
-  .cta-title { font-size: 2.2rem; }
-  .cta-subtitle { font-size: 1rem; max-width: 450px; } 
-  
-  .cta-image-side { 
-    width: 50%; 
-    display: flex; 
-    justify-content: flex-end; 
-    align-items: flex-end; 
-    position: absolute; 
-    right: 0; 
-    bottom: 0; 
-  }
-  .cta-img { 
-    width: 90%; 
-    max-width: 650px;
-    transform: translate(5%, 15%); 
-  }
-  
-  .cta-main-btn { width: auto; padding: 0 2rem; height: 2.5rem; }
-}
+        @media (min-width: 1024px) {
+          .cta-container { max-width: 100% !important; padding: 0 0rem !important; }
+          .cta-banner-card { flex-direction: row; min-height: 320px; border-radius: 2rem; }
+          .cta-content-wrapper { text-align: left; flex-direction: row; position: relative; }
+          .cta-text-side { width: 70%; padding: 1rem 0rem 5rem 2rem; }
+          .cta-title { font-size: 2.2rem; }
+          .cta-subtitle { font-size: 1rem; max-width: 450px; } 
+          .cta-image-side { 
+            width: 50%; 
+            display: flex; 
+            justify-content: flex-end; 
+            align-items: flex-end; 
+            position: absolute; 
+            right: 0; 
+            bottom: 0; 
+          }
+          .cta-img { 
+            width: 90%; 
+            max-width: 650px;
+            transform: translate(5%, 15%); 
+          }
+          .cta-main-btn { width: auto; padding: 0 2rem; height: 2.5rem; }
+        }
 
         /* 4. LARGE DESKTOP (1440px - 2559px) */
-@media (min-width: 1440px) {
-  .cta-container { padding: 0 0vw !important; }
-
-  /* Reduced min-height from 450px to 360px for a rectangular look */
-  .cta-banner-card { flex-direction: row; min-height: 360px; border-radius: 2rem; }
-
-  .cta-content-wrapper { text-align: left; flex-direction: row; position: relative; }
-
-  /* Reduced top padding to 1.5rem to match the laptop style */
-  .cta-text-side { width: 75%; padding: 1.5rem 0rem 3rem 3rem; }
-
-  .cta-title { font-size: 2.65rem; }
-  .cta-subtitle { font-size: 1.05rem; max-width: 500px; }
-
-  /* Maintaining the absolute overlap style */
-  .cta-image-side { 
-    width: 65%; 
-    display: flex; 
-    justify-content: flex-end; 
-    align-items: flex-end; 
-    position: absolute; 
-    right: 0; 
-    bottom: 0; 
-  }
-  
-  .cta-img { 
-    width: 70%; 
-    max-width: 750px;
-    transform: translate(1.5%, 2%); /* Adjusted to keep the bleeding edge look */
-  }
-}
+        @media (min-width: 1440px) {
+          .cta-container { padding: 0 0vw !important; }
+          .cta-banner-card { flex-direction: row; min-height: 360px; border-radius: 2rem; }
+          .cta-content-wrapper { text-align: left; flex-direction: row; position: relative; }
+          .cta-text-side { width: 75%; padding: 1.5rem 0rem 3rem 3rem; }
+          .cta-title { font-size: 2.65rem; }
+          .cta-subtitle { font-size: 1.05rem; max-width: 500px; }
+          .cta-image-side { 
+            width: 65%; 
+            display: flex; 
+            justify-content: flex-end; 
+            align-items: flex-end; 
+            position: absolute; 
+            right: 0; 
+            bottom: 0; 
+          }
+          .cta-img { 
+            width: 70%; 
+            max-width: 750px;
+            max-height: 350px; /* Locked height for 2k to prevent cutting */
+            transform: translate(1.5%, 2%); 
+          }
+        }
 
         /* 5. 4K MONITORS (2560px+) */
-@media (min-width: 2560px) {
-  .cta-container { padding: 0 0vw !important; }
-
-  /* Reduced min-height from 750px to 550px to create the rectangular profile */
-  .cta-banner-card { flex-direction: row; min-height: 550px; border-radius: 4rem; }
-
-  .cta-content-wrapper { text-align: left; flex-direction: row; position: relative; }
-
-  /* Reduced top padding to 2.5rem (scaled for 4K) to tighten the top edge */
-  /* Format: padding: top right bottom left */
-  .cta-text-side { width: 75%; padding: 2.5rem 0rem 5rem 5rem; }
-
-  .cta-title { font-size: 5rem; }
-  .cta-subtitle { font-size: 1.75rem; max-width: 1000px; margin-bottom: 2rem; }
-
-  .cta-main-btn { height: 5rem; font-size: 1.6rem; padding: 0 4rem; border-radius: 1.5rem; }
-
-  /* Absolute positioning to match the Laptop/Desktop layout style */
-  .cta-image-side { 
-    width: 60%; 
-    display: flex; 
-    justify-content: flex-end; 
-    align-items: flex-end; 
-    position: absolute; 
-    right: 0; 
-    bottom: 0; 
-  }
-
-  .cta-img { 
-    width: 65%;
-    max-width: 1200px; 
-    transform: translate(1.5%, 5%); 
-  }
-
-  .ring-1 { width: 35rem; height: 35rem; border-width: 4rem; }
-}
+        @media (min-width: 2560px) {
+          .cta-container { padding: 0 0vw !important; }
+          .cta-banner-card { flex-direction: row; min-height: 550px; border-radius: 4rem; }
+          .cta-content-wrapper { text-align: left; flex-direction: row; position: relative; }
+          .cta-text-side { width: 75%; padding: 2.5rem 0rem 5rem 5rem; }
+          .cta-title { font-size: 5rem; }
+          .cta-subtitle { font-size: 1.75rem; max-width: 1000px; margin-bottom: 2rem; }
+          .cta-main-btn { height: 5rem; font-size: 1.6rem; padding: 0 4rem; border-radius: 1.5rem; }
+          .cta-image-side { 
+            width: 60%; 
+            display: flex; 
+            justify-content: flex-end; 
+            align-items: flex-end; 
+            position: absolute; 
+            right: 0; 
+            bottom: 0; 
+          }
+          .cta-img { 
+            width: 65%;
+            max-width: 1200px; 
+            max-height: 520px; /* Locked height for 4k to prevent cutting */
+            transform: translate(1.5%, 5%); 
+          }
+          .ring-1 { width: 35rem; height: 35rem; border-width: 4rem; }
+        }
       `}} />
     </section>
   );
