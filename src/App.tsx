@@ -17,7 +17,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 // ASSETS
-import CubeImg from "@/assets/cube.png";
+import CubeImg from "@/assets/Cube.png";
 
 const queryClient = new QueryClient();
 
