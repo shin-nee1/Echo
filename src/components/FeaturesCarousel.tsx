@@ -115,9 +115,11 @@ const FeaturesCarousel = ({
         grayscale = "0%";
       } else if (isAnyExpanded) {
         const clampedRatio = Math.min(absRatio, 2.0);
-        const verticalIntensity = isCompact ? 80 : 180; 
+        // INCREASED ARCH: Jumped from 80/180 to 160/350
+        const verticalIntensity = isCompact ? 160 : 350; 
         const translateY = Math.pow(clampedRatio, 2) * verticalIntensity;
-        const rotate = ratio * 25; 
+        // Increased rotation to match the steeper curve
+        const rotate = ratio * 35; 
         const scale = 1 - Math.min(absRatio * 0.25, 0.4);
 
         transform = `translate3d(0, ${translateY + 20}px, 0) rotate(${rotate}deg) scale(${scale})`;
@@ -126,9 +128,11 @@ const FeaturesCarousel = ({
         grayscale = "100%";
       } else {
         const clampedRatio = Math.min(absRatio, 2.2);
-        const verticalIntensity = isCompact ? 50 : 110; 
+        // INCREASED ARCH: Jumped from 50/110 to 120/260
+        const verticalIntensity = isCompact ? 120 : 260; 
         const translateY = Math.pow(clampedRatio, 2) * verticalIntensity;
-        const rotate = ratio * 18; 
+        // Increased rotation to match the steeper curve
+        const rotate = ratio * 28; 
         const scale = 1 - Math.min(absRatio * 0.15, 0.25);
 
         opacity = "1"; 
@@ -183,21 +187,17 @@ const FeaturesCarousel = ({
           </h2>
         </div>
 
-        {/* Adjusted min-height for the reduced card heights */}
+        {/* INCREASED WRAPPER MIN-HEIGHT to accommodate deeper arch drop */}
         <div className={`relative w-full flex flex-col items-center justify-center 
-          ${isCompact ? "min-h-[500px]" : "min-h-[680px]"}
+          ${isCompact ? "min-h-[580px]" : "min-h-[800px]"}
           ${isCompact ? "[mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]" : ""}`}>
 
           <div className="w-full overflow-visible" ref={emblaRef}>
-            <div className={`flex touch-pan-y items-start pb-8 ${isCompact ? "min-h-[440px]" : "min-h-[620px]"}`}>
+            {/* INCREASED INNER MIN-HEIGHT to accommodate deeper arch drop */}
+            <div className={`flex touch-pan-y items-start pb-8 ${isCompact ? "min-h-[520px]" : "min-h-[740px]"}`}>
               {extendedFeatures.map((feature, index) => {
                 const isExpanded = expandedId === feature.uniqueId;
                 
-                /**
-                 * HEIGHT REDUCTIONS:
-                 * imageHeight: 300 -> 240 (Compact), 420 -> 340 (Desktop)
-                 * originalHeight: 420 -> 350 (Compact), 580 -> 480 (Desktop)
-                 */
                 const imageHeight = isCompact ? 240 : 340;
                 const originalHeight = isCompact ? 350 : 480;
 
