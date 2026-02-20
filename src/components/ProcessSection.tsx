@@ -15,127 +15,147 @@ interface ProcessSectionProps {
 }
 
 const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
-  const stepCount = steps.length;
-
-  /**
-   * GENERATE DYNAMIC PATH
-   * This logic extends the snake path based on the number of cards provided.
-   * Heights are calculated to match the lg:-mt-48 staggering.
-   */
-  const getDynamicPath = () => {
-    const base = "M 175 250 H 585 Q 625 250 625 290 V 610 Q 625 650 585 650 H 215 Q 175 650 175 690 V 1010 Q 175 1050 215 1050 H 585 Q 625 1050 625 1090 V 1410 Q 625 1450 585 1450 H 215 Q 175 1450 175 1490 V 1810 Q 175 1850 215 1850";
-    
-    // Step 6 path extension
-    const toSix = " H 585 Q 625 1850 625 1890 V 2210 Q 625 2250 585 2250 H 175";
-    
-    // Step 7 path extension
-    const toSeven = " H 585 Q 625 1850 625 1890 V 2210 Q 625 2250 585 2250 H 215 Q 175 2250 175 2290 V 2610 Q 175 2650 215 2650 H 175";
-
-    if (stepCount >= 7) return base + toSeven;
-    if (stepCount === 6) return base + toSix;
-    return base + " H 175"; // Default for 5 steps
+  const fontConfig = {
+    mobileSize: "1.65rem",
+    tabletSize: "2.2rem",
+    laptopSize: "2.3rem",
+    desktop4kSize: "3rem",
+    titleWeight: "font-bold",
+    highlightColor: "#43c6e4",
+    titleColor: "text-white"
   };
 
   return (
-    <section className="relative w-full bg-transparent py-24 lg:py-32 overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-20 relative z-10">
-        
-        {/* HEADER */}
-        <div className="mb-32 text-center lg:text-left">
-          <h2 className="text-white text-4xl md:text-6xl lg:text-[5rem] font-bold tracking-tight leading-none mb-4 whitespace-nowrap">
-            {title} <span className="text-[#43c6e4]">{highlight}</span>
-          </h2>
-        </div>
+    <section className="relative w-full bg-transparent overflow-hidden" style={{ padding: "clamp(2rem, 8vh, 5rem) 0" }}>
+      
+      {/* HEADER */}
+      <div className="w-full p-0 mb-12 lg:mb-16 text-center lg:text-left relative z-20">
+        <h2 
+          className={`${fontConfig.titleColor} ${fontConfig.titleWeight} tracking-tight leading-tight `} 
+          style={{ 
+            fontSize: `clamp(${fontConfig.mobileSize}, 4vw, ${fontConfig.desktop4kSize})`,
+          }}
+        >
+          <span>
+            {title} <span style={{ color: fontConfig.highlightColor }}>{highlight}</span>
+          </span>
+        </h2>
+      </div>
 
-        <div className="relative max-w-6xl mx-auto">
-          {/* ADAPTIVE BEELINE */}
-          <div className="absolute inset-0 z-0 hidden lg:block pointer-events-none">
-            <svg 
-              width="100%" 
-              // Adjust height dynamically to prevent clipping
-              height={stepCount >= 7 ? "3000" : stepCount === 6 ? "2600" : "2200"} 
-              viewBox={stepCount >= 7 ? "0 0 800 3000" : stepCount === 6 ? "0 0 800 2600" : "0 0 800 2200"} 
-              fill="none" 
-              className="overflow-visible"
-            >
-              <path
-                d={getDynamicPath()} 
-                stroke="rgba(67, 198, 228, 0.35)"
-                strokeWidth="2.5"
-                strokeDasharray="12 16"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
+      {/* CARDS CONTAINER */}
+      <div className="mx-auto px-4 lg:px-[6vw] max-w-[1200px] relative z-10">
+        <div className="flex flex-col items-center w-full relative">
+          {steps.map((step, index) => {
+            const isLeft = index % 2 === 0;
+            const isLast = index === steps.length - 1;
+            const mobileTransform = (index < 4) ? "-translate-x-[12px]" : "translate-x-[12px]";
+            
+            // GLOW LOGIC
+            const isTopGlow = index % 2 === 0; 
+            const glowGradient = isTopGlow 
+              ? "radial-gradient(circle at 50% 0%, rgba(67, 198, 228, 0.2) 0%, transparent 75%)"
+              : "radial-gradient(circle at 50% 100%, rgba(67, 198, 228, 0.2) 0%, transparent 75%)";
 
-          <div className="relative z-10">
-            {steps.map((step, index) => {
-              const isEven = index % 2 === 0;
-              // Add index 5 and 7 to flipped logic for visual variety
-              const isFlippedLayout = index === 1 || index === 3 || index === 5 || index === 7;
-
-              return (
-                <div
-                  key={index}
-                  className={`flex flex-col lg:flex-row items-center w-full mb-24 lg:mb-0 ${
-                    isEven ? "lg:justify-start" : "lg:justify-end"
-                  } ${index !== 0 ? "lg:-mt-48" : ""}`} 
-                >
+            return (
+              <div key={index} className={`w-full flex justify-center lg:grid lg:grid-cols-2 lg:h-[450px] mb-12 lg:mb-0 relative ${index > 0 ? "lg:-mt-20" : ""}`}>
+                <div className={`flex w-full justify-center items-center ${isLeft ? "lg:justify-start lg:order-1" : "lg:justify-end lg:order-2"}`}>
                   <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="relative w-full max-w-md p-10 rounded-[3rem] bg-white/[0.02] backdrop-blur-xl border border-white/10 flex flex-col items-start text-left group transition-all duration-500 hover:border-[#43c6e4]/50 hover:bg-white/[0.04] z-20"
-                  >
-                    {!isFlippedLayout && (
-                      <div className="relative mb-10 self-center">
-                        <motion.img
-                          animate={{ y: [0, -15, 0] }}
-                          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                          src={step.image}
-                          alt={step.title}
-                          className="w-64 h-64 object-contain drop-shadow-[0_20px_50px_rgba(67,198,228,0.45)]"
-                        />
-                      </div>
-                    )}
+                    viewport={{ once: true }}
+                    // -----------------------------------------------------------
+                    // UPDATED CLASSES:
+                    // lg: ... -> Targets specific 1024px laptop screens
+                    // xl: ... -> Restores your original design for bigger screens
+                    // -----------------------------------------------------------
+                    className={`
+                      relative w-full ${mobileTransform} lg:translate-x-0 mx-auto lg:mx-0 
+                      backdrop-blur-xl border border-white/20 flex flex-col transition-all duration-500 
+                      hover:border-[#43c6e4]/50 z-20 shadow-2xl rounded-[1.5rem]
+                      
+                      /* 1024px Specific Dimensions (Adjusted Size/Length) */
+                      lg:max-w-[300px] lg:h-[350px] lg:p-[1.8rem]
 
-                    <div className="w-full px-2">
-                      <div className="mb-8 flex justify-start">
-                        <div className="flex items-center justify-center w-20 h-10 rounded-full bg-cyan-950/60 border border-[#43c6e4]/40 shadow-[inset_0_0_15px_rgba(67,198,228,0.3)]">
-                          <span className="text-white text-lg font-black leading-none select-none">
+                      /* Original Desktop Dimensions (Restored for 1280px+) */
+                      xl:max-w-[345px] xl:h-[345px] xl:p-[2.2rem]
+                    `}
+                    style={{ 
+                        // Moved Dimensions to Tailwind classes above ^
+                        background: `${glowGradient}, linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)`,
+                        boxShadow: "inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 0 12px 40px 0 rgba(0, 0, 0, 0.5)"
+                    }}
+                  >
+                    {isTopGlow ? (
+                      <>
+                        <div className="relative self-center w-full flex justify-center items-center flex-grow">
+                          <img
+                            src={step.image}
+                            alt={step.title}
+                            className="object-contain w-40 h-40 md:w-44 md:h-44" 
+                          />
+                        </div>
+                        <div className="w-full text-left mt-4">
+                          <span className="inline-block px-6 py-1 rounded-full bg-[#43c6e4]/15 backdrop-blur-xl border border-[#43c6e4]/30 text-white font-bold text-[0.7rem] mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
                             {step.number}
                           </span>
+                          <h3 className="font-bold text-white uppercase mb-2 text-base tracking-widest leading-tight">
+                            {step.title}
+                          </h3>
+                          <p className="text-slate-400/90 leading-relaxed font-light text-[0.8rem] line-clamp-3">
+                            {step.description}
+                          </p>
                         </div>
-                      </div>
-
-                      <h3 className="text-3xl font-black text-white tracking-[0.2em] uppercase mb-5">
-                        {step.title}
-                      </h3>
-
-                      <p className="text-slate-400 text-base lg:text-lg leading-relaxed font-medium opacity-80 group-hover:opacity-100 transition-opacity">
-                        {step.description}
-                      </p>
-                    </div>
-
-                    {isFlippedLayout && (
-                      <div className="relative mt-10 self-center">
-                        <motion.img
-                          animate={{ y: [0, 15, 0] }}
-                          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                          src={step.image}
-                          alt={step.title}
-                          className="w-64 h-64 object-contain drop-shadow-[0_20px_50px_rgba(67,198,228,0.45)]"
-                        />
-                      </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="w-full text-left mb-4">
+                          <span className="inline-block px-6 py-1 rounded-full bg-[#43c6e4]/15 backdrop-blur-xl border border-[#43c6e4]/30 text-white font-bold text-[0.7rem] mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
+                            {step.number}
+                          </span>
+                          <h3 className="font-bold text-white uppercase mb-2 text-base tracking-widest leading-tight">
+                            {step.title}
+                          </h3>
+                          <p className="text-slate-400/90 leading-relaxed font-light text-[0.8rem] line-clamp-3">
+                            {step.description}
+                          </p>
+                        </div>
+                        <div className="relative self-center w-full flex justify-center items-center flex-grow">
+                          <img
+                            src={step.image}
+                            alt={step.title}
+                            className="object-contain w-40 h-40 md:w-44 md:h-44" 
+                          />
+                        </div>
+                      </>
                     )}
-                    
-                    <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#43c6e4]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[3rem]" />
                   </motion.div>
                 </div>
-              );
-            })}
-          </div>
+
+                {/* LINE CONNECTION */}
+                {!isLast && (
+                  <div 
+                    className={`
+                        hidden lg:block absolute top-1/2 h-full pointer-events-none z-0 
+                        /* Logic to position lines correctly based on new card width at 1024px */
+                        ${isLeft 
+                            ? "lg:left-[120px] xl:left-[190px] w-[60%]" 
+                            : "lg:right-[120px] xl:right-[190px] w-[60%]"
+                        }
+                    `}
+                  >
+                    <svg width="100%" height="90%" viewBox="0 0 100 100" preserveAspectRatio="none" className="overflow-visible">
+                      <path
+                        d={isLeft ? "M 0 0 L 85 0 Q 100 0 100 15 L 100 100" : "M 100 0 L 15 0 Q 0 0 0 15 L 0 100"}
+                        stroke="#43c6e4" strokeOpacity="0.8" strokeWidth="2" strokeDasharray="6 6" fill="none" vectorEffect="non-scaling-stroke"
+                        style={{ filter: "drop-shadow(0 0 8px rgba(67, 198, 228, 0.6))" }}
+                      />
+                    </svg>
+                  </div>
+                )}
+                <div className={`hidden lg:block w-full ${isLeft ? "lg:order-2" : "lg:order-1"}`} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

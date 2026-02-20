@@ -1,6 +1,5 @@
 import { useParams, Navigate } from "react-router-dom";
-import ServicePageLayout from "@/components/ServicePageLayout";
-import PageHero from "@/components/PageHero";
+import HeroSubService from "@/components/HeroSubService";
 import CTASection from "@/components/CTASection";
 import WhyUsSection from "@/components/WhyUsSection";
 import FAQ from "@/components/FAQ";
@@ -10,64 +9,60 @@ import { getServiceBySlug } from "@/data/servicesData";
 
 const SubServicePage = () => {
   const { slug } = useParams<{ slug: string }>();
-  
-  // Get service data based on URL slug
   const service = slug ? getServiceBySlug(slug) : undefined;
 
-  // If no service found, redirect to 404
   if (!service) {
     return <Navigate to="/404" replace />;
   }
 
+  const titleWords = service.title.trim().split(/\s+/);
+  const lastWord = titleWords.pop();
+  const titleWithoutLastWord = titleWords.join(" ");
+
   return (
-    /* ServicePageLayout should not have a solid background color 
-       if you want the App.tsx halo to persist.
-    */
-    <ServicePageLayout>
-      {/* Page Hero */}
-      <PageHero
-        title={
-          <>
-            {service.title.split(service.highlightedTitle)[0]}
-            <span className="text-cyan">{service.highlightedTitle}</span>
-            {service.title.split(service.highlightedTitle)[1] || ""} Services<br />
-            Tailored For <span className="text-cyan">Your Success</span>.
-          </>
-        }
-        subtitle={service.subtitle}
-        ctaText={service.ctaText}
-      />
+    <>
+      {/* 1. FULL WIDTH WRAPPER (Everything except CTA) */}
+      <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-x-hidden">
+        <div className="flex flex-col w-full items-center text-center">
+          
+          <HeroSubService
+            title={
+              <>
+                {titleWithoutLastWord}{" "}
+                <span className="text-[#00d8ff]">{lastWord}</span>
+              </>
+            }
+            ctaText={service.ctaText}
+          />
 
-      {/* What Is Section - Transparent Background */}
-      <WhatIsSection
-        title={service.whatIs.title}
-        highlightedWord={service.whatIs.highlightedWord}
-        description={service.whatIs.description}
-        bulletPoints={service.whatIs.bulletPoints}
-        imageSrc={service.whatIs.imageSrc}
-        imageAlt={service.whatIs.imageAlt}
-      />
+          <div className="w-full flex flex-col items-center space-y-[6vh] md:space-y-[8vh] lg:space-y-[10vh] pb-[10vh]">
+            <WhatIsSection
+              title={service.whatIs.title}
+              highlightedWord={service.whatIs.highlightedWord}
+              description={service.whatIs.description}
+              imageSrc={service.whatIs.imageSrc}
+              imageAlt={service.whatIs.imageAlt}
+            />
 
-      {/* Features Carousel - Transparent Background */}
-      <FeaturesCarousel
-        sectionTitle={`Our ${service.highlightedTitle} Features`}
-        highlightedWord={service.highlightedTitle}
-        features={service.features}
-      />
+            <FeaturesCarousel
+              sectionTitle={`Everything ${service.nonHighlightedText} `}
+              highlightedWord={service.highlightedText}
+              features={service.features}
+            />
+          </div>
+        </div>
 
-      {/* Why Us Section - Ensure this is also transparent */}
-      <WhyUsSection />
+        <WhyUsSection />
+        <FAQ />
+      </div>
 
-      {/* FAQ Section */}
-      <FAQ />
-
-      {/* Call To Action */}
+      {/* 2. CONSTRAINED CTA (Sits outside the breakout wrapper) */}
       <CTASection
         title="Ready to Transform Your"
-        highlight={service.highlightedTitle}
+        highlight={service.highlightedText}
         subtitle={`Partner with us to achieve ${service.title.toLowerCase()} excellence with precision and creativity.`}
       />
-    </ServicePageLayout>
+    </>
   );
 };
 

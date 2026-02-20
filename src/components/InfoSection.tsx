@@ -18,57 +18,124 @@ const InfoSection = ({
   ],
 }: InfoSectionProps) => {
   return (
-    <section className="relative w-full bg-transparent py-12 md:py-24 lg:py-32 overflow-hidden">
-      
-      <div className="container mx-auto px-6 lg:px-20 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-16 lg:gap-24">
+    <section className="relative w-full bg-transparent overflow-hidden info-section-wrapper">
+      <div className="container mx-auto relative z-10 info-container">
+        
+        <div className="flex flex-col lg:flex-row items-center justify-between info-flex-wrapper">
           
           {/* TEXT CONTENT */}
-          <div className="w-full lg:max-w-[650px]">
-            <div className="mb-10">
-              <h2 className="text-white text-4xl md:text-6xl lg:text-[5rem] font-bold tracking-tight leading-none mb-4 whitespace-nowrap">
+          <div className="info-text-side">
+            <div className="info-header-wrapper">
+              <h2 className="text-white font-bold tracking-tight leading-[1.1] info-title">
                 {title} <span className="text-[#43c6e4]">{highlight}</span>
               </h2>
             </div>
 
-            <div className="space-y-8">
+            <div className="flex flex-col info-paragraphs-gap">
               {paragraphs.map((p, i) => (
-                <p key={i} className="text-slate-400 text-lg md:text-xl leading-relaxed font-normal">
+                <p 
+                  key={i} 
+                  className="text-slate-400/70 font-light leading-relaxed info-p-text"
+                >
                   {p}
                 </p>
               ))}
             </div>
           </div>
 
-          {/* RIGHT SIDE IMAGE - Shifted Up/Right & Floating Animation */}
-          <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+          {/* IMAGE CONTAINER */}
+          <div className="info-image-side">
             <motion.div 
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              /* lg:translate-x-12 pushes it further right on desktop */
-              className="relative w-full max-w-[500px] -mt-12 lg:-mt-24 lg:translate-x-12"
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full info-image-inner"
             >
               <motion.img 
                 src={DesignPage} 
                 alt={highlight} 
-                /* Smooth Up & Down Animation */
                 animate={{
-                  y: [0, -15, 0],
+                  y: [0, -12, 0],
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 6,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="w-full h-auto object-contain opacity-95"
+                className="w-full h-auto object-contain opacity-80 drop-shadow-[0_8px_30px_rgba(67,198,228,0.12)]"
               />
             </motion.div>
           </div>
 
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* 1. MOBILE (< 768px) */
+        .info-section-wrapper { padding: 0rem 1rem; }
+        .info-text-side { width: 100%; text-align: center; margin-bottom: 4rem; }
+        .info-title { font-size: 1.95rem; margin-bottom: 1.2rem; }
+        .info-paragraphs-gap { gap: 0.5rem; }
+        .info-p-text { font-size: 0.9rem; }
+        .info-image-side { width: 55%; display: flex; justify-content: center; }
+        .info-image-inner { max-width: 160px; }
+
+        /* 2. TABLET (768px - 1023px) */
+@media (min-width: 768px) {
+  .info-section-wrapper { 
+    padding: 0rem 1rem; 
+  }
+  .info-title { 
+    font-size: 2.2rem; 
+  }
+  .info-p-text { 
+    font-size: 1rem; 
+  }
+  .info-image-side { 
+    width: 40%; /* Keep it full width to allow centering on tablet if stacked */
+    display: flex; 
+    justify-content: center; 
+    margin-top: 0rem; /* Add some space since it's likely still stacked here */
+  }
+  .info-image-inner { 
+    /* REDUCED SIZE HERE */
+    max-width: 140px; 
+  }
+}
+
+        /* 3. LAPTOP (1024px - 1439px) */
+        @media (min-width: 1024px) {
+          .info-container { max-width: 100% !important; padding: 0 0rem !important; }
+          .info-flex-wrapper { flex-direction: row; gap: 5vw; align-items: flex-start; }
+          .info-text-side { width: 55%; text-align: left; margin-bottom: 0; }
+          .info-title { font-size: 2.5rem; margin-bottom: 2rem; }
+          .info-p-text { font-size: 1.05rem; max-width: 600px; }
+          .info-image-side { width: 30%; justify-content: flex-end; padding-top: 0.3rem; }
+          .info-image-inner { max-width: 250px; }
+        }
+
+        /* 4. LARGE DESKTOP (1440px - 2559px) */
+        @media (min-width: 1440px) {
+          .info-container { padding: 0 6vw !important; max-width: 69% !important; }
+          .info-flex-wrapper { gap: 2vw; }
+          .info-text-side { width: 60%; }
+          .info-title { font-size: 2.75rem; }
+          .info-p-text { font-size: 1.2rem; max-width: 700px; }
+          .info-image-side { width: 50%; justify-content: flex-end; padding-top: 0.3rem; }}
+          .info-image-inner { max-width: 250px; }
+        }
+
+        /* 5. 4K MONITORS (2560px+) */
+        @media (min-width: 2560px) {
+          .info-container { padding: 0 12vw !important; max-width: 69% !important; }
+          .info-section-wrapper { padding: 12rem 0; }
+          .info-title { font-size: 7rem; margin-bottom: 4rem; }
+          .info-p-text { font-size: 2rem; max-width: 1100px; }
+          .info-paragraphs-gap { gap: 2.5rem; }
+          .info-image-inner { max-width: 800px; }
+        }
+      `}} />
     </section>
   );
 };

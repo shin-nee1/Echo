@@ -1,75 +1,76 @@
 import React from "react";
 import { motion } from "framer-motion";
-import SectionHeader from "./SectionHeader";
+import VisionImg from "@/assets/Our Vision.png"; 
 
 const VisionSection = () => {
   return (
-    /* Removed bg-[#010a0f] - Now transparent */
-    <section className="pt-20 lg:pt-20 pb-15 lg:pb-24 relative overflow-hidden">
-      
-      {/* BACKGROUND ATMOSPHERE - Kept for depth, but reduced opacity */}
-      <div className="absolute top-1/2 left-[-10%] -translate-y-1/2 w-[500px] h-[500px] bg-[#00d8ff]/5 blur-[120px] rounded-full pointer-events-none" />
-
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+    <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden bg-transparent py-12 md:py-20">
+      <div className="mx-auto px-6 lg:px-12 max-w-[1800px] relative z-10">
+        
+        {/* UPDATED: Minimized gap to lg:gap-0 and xl:gap-4 to bring columns together */}
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-0 xl:gap-4">
           
-          {/* LEFT: VISION CONTENT */}
+          {/* LEFT COLUMN: TEXT */}
           <motion.div 
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="order-2 lg:order-1 flex flex-col"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="lg:flex-[1] w-full flex flex-col items-center lg:items-end text-center lg:text-left"
           >
-            <SectionHeader 
-              title="Our" 
-              highlight="Vision" 
-              centered={false} 
-            />
-            
-            {/* WRAPPER: Pulls text up to align with the header line */}
-            <div className="relative -mt-12 md:-mt-16 lg:-mt-20"> 
-              <div className="space-y-6 text-white/50 text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-xl">
-                <p>
-                  To create a place where businesses can finally work with a partner they trust. One that <span className="text-white/80 font-normal">communicates clearly</span>, documents properly, and shows up consistently from start to scale.
-                </p>
-                
-                <div className="pl-6 border-l border-[#00d8ff]/30 space-y-4">
-                  <p>
-                    A partner that believes process is not bureaucracy; it is the <span className="text-white/80 font-normal">foundation of good work</span>. And execution is not just delivery; it is craft and responsibility.
-                  </p>
-                </div>
+            {/* UPDATED: Slightly increased max-width to let text sit closer to the center line */}
+            <div className="w-full lg:max-w-[520px] xl:max-w-[600px] 2xl:max-w-[700px]">
+              <div className="mb-6 lg:mb-8">
+                 <h2 className="text-white font-bold tracking-tight leading-[1.1] 
+                                text-[clamp(2rem,8vw,2.5rem)] 
+                                md:text-[clamp(2.5rem,6vw,3rem)] 
+                                lg:text-[clamp(1.8rem,3vw,2.4rem)] 
+                                xl:text-[2.8rem] 2xl:text-[3.2rem]">
+                    Our <span className="text-[#00d8ff]">Vision</span>
+                 </h2>
+              </div>
 
-                <p className="text-white/90 pt-2 text-lg md:text-xl">
-                  Our vision is to build brands and digital systems that are <span className="text-[#00d8ff] font-medium italic">stable, scalable, and strategically sound.</span>
+              {/* MOBILE IMAGE */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10 flex justify-center mb-8 lg:hidden w-full max-w-[280px] mx-auto"
+              >
+                <img 
+                  src={VisionImg} 
+                  alt="Our Vision" 
+                  className="w-full h-auto object-contain drop-shadow-[0_0_20px_rgba(0,216,255,0.05)]"
+                />
+              </motion.div>
+              
+              <div className="flex flex-col"> 
+                <p className="text-white/60 font-light leading-relaxed whitespace-pre-line
+                              text-[0.95rem] md:text-[1rem] 
+                              lg:text-[1rem] 
+                              xl:text-[1.15rem] 2xl:text-[1.35rem]">
+{`To create a place where businesses can finally work with a partner they trust. One that communicates clearly, documents properly, sets real expectations, and shows up consistently from start to scale.
+
+A partner that believes process is not bureaucracy; it is the foundation of good work. And execution is not just delivery; it is craft, responsibility, and pride.
+
+Our vision is to build brands and digital systems that are stable, scalable, and strategically sound so your business can keep making the impact while we build the echo that carries it forward.`}
                 </p>
               </div>
             </div>
           </motion.div>
 
-          {/* RIGHT: IMAGE COMPONENT */}
-          <div className="relative order-1 lg:order-2 flex justify-center items-start pt-8 lg:pt-8">
+          {/* RIGHT COLUMN: IMAGE */}
+          <div className="lg:flex-[1] w-full hidden lg:flex justify-center lg:justify-start items-center">
             <motion.div
-              animate={{ 
-                y: [0, -15, 0],
-              }}
-              transition={{ 
-                duration: 4, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-              className="relative w-full aspect-video md:aspect-[4/3] max-w-2xl lg:ml-auto flex items-center justify-center z-10"
+              animate={{ y: [0, -15, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-full max-w-[600px] xl:max-w-[750px] 2xl:max-w-[850px]"
             >
-              {/* Massive Glass Placeholder - Inherits background through transparency */}
-              <div className="w-full h-full rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md flex items-center justify-center overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.3)]">
-                <div className="absolute inset-0 bg-[radial-gradient(#00d8ff08_1px,transparent_1px)] bg-[size:32px_32px]" />
-                <span className="text-white/20 font-medium tracking-[0.4em] uppercase text-[10px] md:text-xs px-10 text-center">
-                  Vision Narrative Visual Component
-                </span>
-              </div>
-
-              {/* AMBIENT FLOOR REFLECTION */}
-              <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[85%] h-12 bg-[#00d8ff]/10 blur-[60px] rounded-full -z-10" />
+              <img 
+                src={VisionImg} 
+                alt="Our Vision" 
+                className="w-full h-auto object-contain drop-shadow-[0_0_50px_rgba(0,216,255,0.15)]"
+              />
+              <div className="absolute inset-0 bg-cyan/5 blur-[100px] rounded-full -z-10" />
             </motion.div>
           </div>
 

@@ -1,8 +1,47 @@
 import { Facebook, Linkedin, Twitter, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { serviceTitleToSlug } from "@/data/servicesData";
-// Import your local image
-import footerLogo from "../assets/image-removebg-preview (13).png";
+// IMPORTING LOGO FROM ASSETS
+import logo from "@/assets/image-removebg-preview (13).png";
+
+type FooterSection = {
+  title: string;
+  links: (string | { text: string; href: string })[];
+};
+
+const SectionBlock = ({
+  section,
+  getServiceLink,
+}: {
+  section: FooterSection;
+  getServiceLink: (s: string) => string;
+}) => {
+  const isObj = (link: any): link is { text: string; href: string } =>
+    typeof link === "object" && "href" in link;
+
+  return (
+    <div>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-1.5 h-1.5 rounded-full bg-[#43c6e4] shadow-[0_0_10px_#43c6e4]" />
+        <h4 className="text-lg font-bold tracking-tight text-white">{section.title}</h4>
+      </div>
+      <ul className="space-y-4">
+        {section.links.map((link, lIdx) => {
+          const text = isObj(link) ? link.text : link;
+          const to = isObj(link) ? link.href : getServiceLink(link);
+          return (
+            <li key={lIdx} className="flex items-center gap-2 group cursor-pointer">
+              <ArrowRight className="w-3 h-3 text-[#43c6e4] opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0" />
+              <Link to={to} className="text-white font-medium group-hover:text-[#43c6e4] transition-colors" style={{ fontSize: "clamp(0.8rem, 0.9vw, 0.9rem)" }}>
+                {text}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
 
 const Footer = () => {
   const footerSections = [
@@ -54,124 +93,131 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-[#030f14] to-[#010507] text-white pt-24 pb-12 relative border-t border-white/10">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <footer
+      className="relative bg-transparent text-white"
+      style={{ paddingTop: "clamp(3rem, 8vh, 6rem)", paddingBottom: "3rem" }}
+    >
+      <style>
+        {`
+          @media (min-width: 1024px) and (max-width: 1280px) {
+            .laptop-fix { padding-left: 2.5rem !important; padding-right: 1rem !important; }
+            .laptop-first-col-fix { padding-left: 1.5rem !important; }
+          }
+        `}
+      </style>
+
+      <div className="container mx-auto px-6">
+        {/* TOPMOST LINE - More Prominent White */}
+        <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-white/40 to-transparent mb-16" />
+
         {/* TOP TIER */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
           <div className="hidden md:block w-1/4">
-            <p className="text-slate-300 text-[13px] leading-relaxed max-w-[200px] font-medium opacity-80">
+            <p
+              className="text-white leading-relaxed font-medium opacity-90"
+              style={{ fontSize: "clamp(0.75rem, 0.8vw, 0.875rem)", maxWidth: "200px" }}
+            >
               Shaping brands with clarity, precision, and purpose.
             </p>
           </div>
 
-          {/* Logo Section: Increased size and removed tagline */}
           <div className="w-full md:w-1/2 flex flex-col items-center">
             <Link to="/" className="block">
-              <img 
-                src={footerLogo} 
-                alt="Echo & Impact Logo" 
-                className="h-24 md:h-32 w-auto object-contain drop-shadow-[0_0_20px_rgba(0,216,255,0.3)] hover:scale-105 transition-transform duration-300"
-              />
+              <img src={logo} alt="Echo & Impact Logo" className="w-[180px] h-auto object-contain" />
             </Link>
           </div>
 
-          {/* Socials */}
-          <div className="w-full md:w-1/4 flex flex-col items-center md:items-end mt-10 md:mt-0 gap-3">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Socials links</span>
+          <div className="w-full md:w-1/4 flex flex-col items-center md:items-end gap-3">
+            <span className="font-bold text-white uppercase tracking-widest" style={{ fontSize: "10px" }}>
+              Social links
+            </span>
             <div className="flex gap-3">
               {[Facebook, Linkedin, Twitter].map((Icon, i) => (
                 <a
                   key={i}
                   href="#"
-                  className="w-11 h-11 flex items-center justify-center rounded-lg border border-white/20 bg-white/5 hover:border-cyan/50 hover:bg-cyan/10 transition-all duration-300 group"
+                  className="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 bg-white/5 hover:border-[#43c6e4]/50 hover:bg-[#43c6e4]/10 transition-all duration-300 group"
                 >
-                  <Icon className="w-4 h-4 text-white group-hover:text-cyan" />
+                  <Icon className="w-4 h-4 text-white group-hover:text-[#43c6e4]" />
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-20" />
+        {/* HORIZONTAL LINE - More Prominent White */}
+        <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-white/40 to-transparent mb-16" />
 
-        {/* MIDDLE TIER */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
+        {/* MIDDLE TIER - Desktop */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-x-0 mb-20">
           {footerSections.map((section, idx) => (
-            <div
-              key={section.title}
-              className={`relative ${idx !== 0 ? "lg:pl-12 lg:border-l border-white/10" : ""}`}
-            >
-              <div className="flex items-center gap-3 mb-10">
-                <div className="w-2 h-2 rounded-full bg-cyan shadow-[0_0_15px_rgba(0,229,255,1)]" />
-                <h4 className="text-xl font-bold tracking-tight text-white">{section.title}</h4>
+            <div key={section.title} className="relative">
+              {idx !== 0 && (
+                <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/30 to-transparent" />
+              )}
+              <div className={`${idx === 0 ? "laptop-first-col-fix" : "pl-8 laptop-fix"}`}>
+                <SectionBlock section={section} getServiceLink={getServiceLink} />
               </div>
-              <ul className="space-y-5">
-                {section.links.map((link) => {
-                  if (typeof link === "object" && "href" in link) {
-                    return (
-                      <li key={link.text} className="flex items-center gap-3 group cursor-pointer">
-                        <ArrowRight className="w-3 h-3 text-cyan opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                        <Link
-                          to={link.href}
-                          className="text-slate-300 text-[14px] font-medium group-hover:text-white transition-colors"
-                        >
-                          {link.text}
-                        </Link>
-                      </li>
-                    );
-                  }
-                  
-                  const linkText = link as string;
-                  return (
-                    <li key={linkText} className="flex items-center gap-3 group cursor-pointer">
-                      <ArrowRight className="w-3 h-3 text-cyan opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      <Link
-                        to={getServiceLink(linkText)}
-                        className="text-slate-300 text-[14px] font-medium group-hover:text-white transition-colors"
-                      >
-                        {linkText}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
             </div>
           ))}
         </div>
 
+        {/* MIDDLE TIER - Mobile/Tablet */}
+        <div className="lg:hidden mb-20 relative">
+          <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-white/40 to-transparent -translate-x-px" />
+          <div className="grid grid-cols-2">
+            <div className="pr-6 flex flex-col">
+              <div className="pb-8">
+                <SectionBlock section={footerSections[0]} getServiceLink={getServiceLink} />
+              </div>
+              <div className="w-full h-[2px] bg-gradient-to-r from-transparent to-white/40" />
+              <div className="pt-8">
+                <SectionBlock section={footerSections[1]} getServiceLink={getServiceLink} />
+              </div>
+            </div>
+            <div className="pl-6 flex flex-col">
+              <div className="pb-8">
+                <SectionBlock section={footerSections[2]} getServiceLink={getServiceLink} />
+              </div>
+              <div className="w-full h-[2px] bg-gradient-to-l from-transparent to-white/40" />
+              <div className="pt-8">
+                <SectionBlock section={footerSections[3]} getServiceLink={getServiceLink} />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* BOTTOM TIER: Contact */}
-        <div className="pt-12 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div className="flex items-center gap-5">
-            <div className="p-3 rounded-full bg-cyan/10">
-              <Phone className="w-5 h-5 text-cyan" />
+        <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-white/40 to-transparent mb-16" />
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-left items-start mb-12">
+          {[
+            { icon: Phone, label: "Phone", val: "+44 7548 479 791" },
+            { icon: Mail, label: "Email", val: "info@echoandimpact.com" },
+            { icon: MapPin, label: "Location", val: "NY, USA, SERVING GLOBALLY" },
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-4 justify-start">
+              {/* Removed background container, kept shrink-0 */}
+              <div className="shrink-0">
+                {/* Increased size from w-4 h-4 to w-6 h-6 */}
+                <item.icon className="w-6 h-6 text-[#43c6e4]" />
+              </div>
+              <div className="min-w-0">
+                <p className="uppercase tracking-widest text-[#43c6e4] font-bold mb-0.5" style={{ fontSize: "9px" }}>
+                  {item.label}
+                </p>
+                <p className="text-white font-semibold tracking-tight break-words" style={{ fontSize: "clamp(0.85rem, 0.9vw, 1rem)" }}>
+                  {item.val}
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-widest text-cyan font-bold mb-1">Phone</p>
-              <p className="text-white text-[15px] font-semibold tracking-tight">+44 7548 479 791</p>
-            </div>
-          </div>
+          ))}
+        </div>
 
-          <div className="flex items-center gap-5">
-            <div className="p-3 rounded-full bg-cyan/10">
-              <Mail className="w-5 h-5 text-cyan" />
-            </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-widest text-cyan font-bold mb-1">Email</p>
-              <p className="text-white text-[15px] font-semibold tracking-tight">info@echoandimpact.com</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-5">
-            <div className="p-3 rounded-full bg-cyan/10">
-              <MapPin className="w-5 h-5 text-cyan" />
-            </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-widest text-cyan font-bold mb-1">Location</p>
-              <p className="text-white text-[15px] font-semibold tracking-tight uppercase">
-                ny, usa, serving clients globally
-              </p>
-            </div>
-          </div>
+        <div className="mt-12 text-center border-t border-white/10 pt-8">
+          <p className="text-white text-xs opacity-80">
+            Echo & Impact. All rights reserved. 2026 Terms & Conditions | Privacy Policy
+          </p>
         </div>
       </div>
     </footer>

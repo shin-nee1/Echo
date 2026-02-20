@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 // ASSETS
 import DesignImg5 from "@/assets/image-removebg-preview (5).png";
@@ -24,78 +25,114 @@ const services = [
   {
     title: "MARKETING",
     highlight: "Grow what matters most.",
-    description: "We market with a focus on performance. From organic SEO, content, and paid media to social and growth strategy, we drive measurable impact.",
+    description: "We market creativity into conversion through paid media, SEO, content, and much more, connecting your brand to measurable growth.",
     href: "/market"
   }
 ];
 
 const WhatWeDo = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      // Adjusted scroll amount for smoother navigation on larger screens
+      const scrollAmount = direction === "left" ? -400 : 400;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="relative py-16 md:py-24 bg-transparent overflow-hidden z-10">
-      <div className="container mx-auto px-6 relative z-10">
+    <section className="whatwedo-wrapper relative bg-transparent overflow-hidden z-10">
+      {/* INNER CONTAINER: 
+        This restores the alignment so your text lines up with the rest of the app 
+      */}
+      <div className="mx-auto px-[5vw] relative z-10" style={{ maxWidth: "2200px" }}>
         
-        {/* HEADER - Responsive alignment and sizing */}
-        <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-10 mb-16 md:mb-20">
-          <div className="shrink-0">
-            <h2 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-none">
-              What We <span className="text-[#43c6e4]">Do</span>
-            </h2>
+        {/* HEADER AREA */}
+        <div className="whatwedo-header flex flex-col lg:flex-row lg:items-end justify-between gap-[1rem]">
+          <div className="flex flex-row items-end gap-[0.75rem] md:gap-[2rem]">
+            <div className="shrink-0">
+              <h2 className="whatwedo-title text-white font-bold tracking-tighter leading-none">
+                What We <span className="text-[#43c6e4]">Do</span>
+              </h2>
+            </div>
+            
+            <div className="whatwedo-divider md:pl-[rem]  ">
+              <p className="whatwedo-subtitle text-slate-400 leading-tight]">
+                Every brand we build follows a rhythm.                            
+              </p>
+               <p className="whatwedo-subtitle text-slate-400 leading-tight">
+                Designed to create presence.                          
+              </p>
+            </div>
           </div>
-          <p className="text-slate-400 text-sm md:text-base font-normal max-w-[280px] leading-snug pt-2 md:pl-8 md:border-l md:border-white/10">
-            Every brand we build follows a rhythm. <br className="hidden md:block" />
-            Designed to create presence.
-          </p>
+
+          <div className="whatwedo-nav hidden lg:flex gap-[0.75rem]">
+            <button 
+              onClick={() => scroll("left")} 
+              className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] hover:border-[#43c6e4] transition-all w-10 h-10"
+            >
+              <ArrowLeft size="1rem" />
+            </button>
+            <button 
+              onClick={() => scroll("right")} 
+              className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] hover:border-[#43c6e4] transition-all w-10 h-10"
+            >
+              <ArrowRight size="1rem" />
+            </button>
+          </div>
         </div>
 
-        {/* SERVICE CARDS GRID - 1 col on mobile, 3 on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        {/* SERVICE CARDS ROW */}
+        <div 
+          ref={scrollRef}
+          className="whatwedo-scroll-container flex gap-[1rem] md:gap-[2rem] overflow-x-auto pt-5 pb-[1.5rem] -mx-[5vw] px-[5vw] snap-x snap-mandatory scrollbar-none"
+        >
           {services.map((service, i) => (
-            <Link key={i} to={service.href} className="group block h-full">
+            <Link 
+              key={i} 
+              to={service.href} 
+              className="whatwedo-card-link group block shrink-0 snap-center"
+            >
               <motion.div 
-                whileHover={{ y: -10 }}
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                className="relative h-full p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-white/[0.01] border border-white/[0.12] backdrop-blur-[32px] transition-all duration-300 
-                group-hover:border-[#43c6e4]/40 group-hover:bg-white/[0.05] overflow-hidden"
+                whileHover={{ y: -15 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="whatwedo-card relative flex flex-col rounded-[1.25rem] md:rounded-[2rem] overflow-hidden transition-all duration-500"
               >
-                {/* GLASS TEXTURE */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] via-transparent to-black/[0.2] pointer-events-none" />
-                
-                {/* 3D IMAGE ASSETS - Responsive Positioning */}
-                <div className="relative w-full h-32 sm:h-40 md:h-44 mb-4 md:mb-2 pointer-events-none">
-                  
-                  {/* DESIGN CARD */}
-                  {service.title === "DESIGN" && (
-                    <>
-                      <img src={DesignImg6} className="absolute -top-4 -right-2 md:-top-6 md:-right-4 w-32 md:w-40 h-auto filter drop-shadow-[0_20px_40px_rgba(67,198,228,0.3)] group-hover:scale-110 transition-transform duration-500" />
-                      <img src={DesignImg5} className="absolute bottom-0 left-0 w-20 md:w-24 h-auto filter drop-shadow-[0_15px_30px_rgba(67,198,228,0.4)] group-hover:-translate-y-3 transition-transform duration-500" />
-                    </>
-                  )}
+                <div className="whatwedo-glass-layer absolute inset-0 z-0 transition-all duration-500" />
 
-                  {/* DEVELOPMENT CARD */}
-                  {service.title === "DEVELOPMENT" && (
-                    <img 
-                      src={DevImg7} 
-                      className="absolute top-0 -left-6 md:-top-0 md:-left-10 w-44 md:w-60 h-auto group-hover:scale-105 transition-transform duration-500 filter drop-shadow-[0_30px_60px_rgba(67,198,228,0.3)]" 
-                    />
-                  )}
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="whatwedo-img-area relative w-full mb-[0.75rem] pointer-events-none flex-shrink-0">
+                    {service.title === "DESIGN" && (
+                      <>
+                        <img src={DesignImg6} alt="" className="whatwedo-img-primary absolute -top-2 -right-2 h-auto group-hover:scale-110 transition-transform duration-500" />
+                        <img src={DesignImg5} alt="" className="whatwedo-img-secondary absolute -bottom-2 -left-2 h-auto group-hover:rotate-12 transition-transform duration-500" />
+                      </>
+                    )}
 
-                  {/* MARKETING CARD */}
-                  {service.title === "MARKETING" && (
-                    <img 
-                      src={MarketImg8} 
-                      className="absolute -top-4 -left-6 md:-top-9 md:-left-8 w-48 md:w-64 h-auto group-hover:scale-105 transition-transform duration-500 filter drop-shadow-[0_30px_60px_rgba(67,198,228,0.35)]" 
-                    />
-                  )}
-                </div>
+                    {service.title === "DEVELOPMENT" && (
+                      <img src={DevImg7} alt="" className="whatwedo-img-full absolute top-0 -left-2 max-w-none h-auto group-hover:scale-105 transition-transform duration-500" />
+                    )}
 
-                <div className="space-y-4 relative z-10">
-                  {/* RESPONSIVE HEADING SIZE */}
-                  <h3 className="text-white text-xl md:text-2xl font-black tracking-[0.15em] uppercase leading-none">{service.title}</h3>
-                  <p className="text-[#43c6e4] font-bold text-lg md:text-xl leading-tight">{service.highlight}</p>
-                  <p className="text-slate-300 text-sm md:text-base leading-relaxed opacity-80">{service.description}</p>
-                  <div className="pt-4 md:pt-6">
-                    <span className="text-white text-xs md:text-sm font-medium border-b border-white/20 group-hover:border-[#43c6e4] pb-1 transition-all">
-                      Explore {service.title.charAt(0) + service.title.slice(1).toLowerCase()}
+                    {service.title === "MARKETING" && (
+                      <img src={MarketImg8} alt="" className="whatwedo-img-full absolute -top-2 -left-2 max-w-none h-auto group-hover:scale-105 transition-transform duration-500" />
+                    )}
+                  </div>
+
+                  <h3 className="whatwedo-tag text-white font-bold  tracking-widest uppercase mb-1">
+                    {service.title}
+                  </h3>
+                  <p className="whatwedo-highlight text-[#43c6e4] mb-2 tracking-tight leading-tight">
+                    {service.highlight}
+                  </p>
+                  <p className="whatwedo-desc text-slate-400 leading-snug mb-4 line-clamp-3">
+                    {service.description}
+                  </p>
+
+                  <div className="mt-auto">
+                    <span className="whatwedo-explore inline-flex items-center gap-2 text-[#43c6e4] font-bold uppercase tracking-wider border-b border-[#43c6e4]/40 group-hover:border-[#43c6e4] pb-1 transition-all">
+                      Explore {service.title}
+                      <ArrowRight size="0.75rem" className="group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
                 </div>
@@ -104,28 +141,215 @@ const WhatWeDo = () => {
           ))}
         </div>
 
-        {/* FOOTER AREA - Optimized for smaller screens */}
-        <div className="mt-20 md:mt-28 text-center space-y-8 md:space-y-10 relative z-10">
-          <div className="flex flex-wrap justify-center items-center gap-y-3 gap-x-4 md:gap-x-6 text-slate-500 text-[10px] md:text-[13px] tracking-wide uppercase font-bold px-4">
-            <span>Design defines you.</span>
-            <span className="hidden sm:inline text-white/10">|</span>
-            <span>Development builds you.</span>
-            <span className="hidden sm:inline text-white/10">|</span>
-            <span>Marketing scales you.</span>
-          </div>
-          
-          <div className="relative inline-block px-4">
-            <h4 className="text-white text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight pb-6 md:pb-8">
-              Together, They create your <span className="text-[#43c6e4] italic ml-1">echo.</span>
-            </h4>
-            <div className="absolute bottom-2 left-0 w-full overflow-hidden px-4">
-              <svg className="w-full h-3 md:h-4" viewBox="0 0 100 20" preserveAspectRatio="none">
-                <path d="M0 10 Q 12.5 0 25 10 T 50 10 T 75 10 T 100 10" stroke="#43c6e4" strokeWidth="4" fill="transparent" strokeLinecap="round" />
+        {/* ECHO RIBBON TEXT */}
+        <div className="whatwedo-ribbon flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-12 text-center">
+          <p className="text-white font-medium text-xs md:text-sm uppercase tracking-[0.2em] opacity-80">
+            Design defines you. <span className="mx-4 opacity-20">|</span> Development builds you. <span className="mx-4 opacity-20">|</span> Marketing scales you.
+          </p>
+          <div className="w-full mt-3">
+            <p className="text-white font-bold text-base md:text-lg tracking-tight">
+              Together, They create your <span className="text-[#43c6e4]">echo.</span>
+            </p>
+            {/* ANIMATED WAVE SVG UNDERLINE */}
+            <div className="flex justify-center mt-1 overflow-hidden">
+              <svg width="220" height="10" viewBox="0 0 220 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-60">
+                <path 
+                  className="wave-path"
+                  d="M-100 8C-80 8 -70 2 -50 2C-30 2 -20 8 0 8C20 8 30 2 50 2C70 2 80 8 100 8C120 8 130 2 150 2C170 2 180 8 200 8C220 8 230 2 250 2C270 2 280 8 300 8" 
+                  stroke="#43c6e4" 
+                  strokeWidth="2.5" 
+                  strokeLinecap="round"
+                />
               </svg>
             </div>
           </div>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* THE BREAKOUT LOGIC: Forces full width even inside padded parents */
+        .whatwedo-wrapper {
+          width: 100vw;
+          position: relative;
+          left: 50%;
+          right: 50%;
+          margin-left: -50vw;
+          margin-right: -50vw;
+          padding-top: 2rem; 
+          padding-bottom: 5rem;
+        }
+
+        .whatwedo-scroll-container {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
+          scroll-behavior: smooth; /* Added for smoother CSS-based scrolling */
+        }
+        .whatwedo-scroll-container::-webkit-scrollbar { display: none; }
+
+        .whatwedo-card {
+          border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .whatwedo-glass-layer {
+          /* Reduced blur from 8px to 3px for high transparency */
+          backdrop-filter: blur(3px);
+          -webkit-backdrop-filter: blur(3px);
+          background: radial-gradient(
+            circle at top left, 
+            rgba(255, 255, 255, 0.01) 0%, 
+            transparent 100%
+          );
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+        }
+
+        .whatwedo-card-link:hover .whatwedo-card {
+          border-color: rgba(67, 198, 228, 0.4);
+        }
+
+        .whatwedo-card-link:hover .whatwedo-glass-layer {
+          background: radial-gradient(
+            circle at 100% 100%, 
+            rgba(67, 198, 228, 0.18) 0%, 
+            transparent 75%
+          );
+          box-shadow: 
+            inset -20px -20px 60px rgba(67, 198, 228, 0.15),
+            0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .wave-path {
+          animation: waveFlow 4s linear infinite;
+        }
+
+        @keyframes waveFlow {
+          from { transform: translateX(0); }
+          to { transform: translateX(100px); }
+        }
+
+        /* TYPOGRAPHY & LAYOUT SIZING */
+        .whatwedo-header { margin-bottom: 1rem; }
+        .whatwedo-title { font-size: 1.55rem; }
+        .whatwedo-subtitle { font-size: 0.7rem; max-width: 150px; }
+        .whatwedo-card-link { width: 65vw; }
+        .whatwedo-card { padding: 1.3rem; min-height: 16rem; }
+        .whatwedo-img-area { height: 6rem; }
+        .whatwedo-img-primary { width: 6rem; }
+        .whatwedo-img-secondary { width: 4rem; }
+        .whatwedo-img-full { width: 9rem; }
+        .whatwedo-tag { font-size: 16px; }
+        .whatwedo-highlight { font-size: 0.85rem; }
+        .whatwedo-desc { font-size: 0.75rem; }
+        .whatwedo-explore { font-size: 9px; }
+        
+        /* RIBBON STYLES */
+        .whatwedo-ribbon p { font-size: 1rem; }
+        .whatwedo-ribbon .uppercase { 
+            font-size: 0.75rem; 
+            margin-bottom: 0.4rem; 
+            text-align: center; 
+            width: 100%;
+        }
+        .whatwedo-ribbon svg { width: 230px; height: 25px; }
+
+        @media (max-width: 1023px) {
+          .whatwedo-ribbon p.uppercase {
+             display: flex;
+             flex-direction: column;
+             gap: 0.5rem;
+             align-items: center;
+          }
+          .whatwedo-ribbon p.uppercase span { display: none; }
+        }
+
+        @media (max-width: 1440px) {
+           .whatwedo-ribbon {
+              width: calc(100% + 10vw);
+              margin-left: -5vw;
+              margin-right: -5vw;
+              padding-left: 1rem;
+              padding-right: 1rem;
+           }
+        }
+
+        @media (min-width: 768px) {
+          .whatwedo-wrapper { padding-bottom: 8rem; }
+          .whatwedo-title { font-size: 2.5rem; }
+          .whatwedo-subtitle { font-size: 0.85rem; max-width: 200px; }
+          .whatwedo-card-link { width: 45vw; }
+          .whatwedo-card { padding: 1.75rem; min-height: 15rem; }
+          .whatwedo-img-area { height: 7rem; }
+          .whatwedo-img-primary { width: 7rem; }
+          .whatwedo-img-full { width: 10rem; }
+          .whatwedo-ribbon p { font-size: 1.15rem; }
+          .whatwedo-ribbon .uppercase { 
+            font-size: 0.75rem; 
+            margin-bottom: 0.4rem; 
+            text-align: center; 
+            width: 100%;
+          }
+          .whatwedo-ribbon svg { width: 280px; height: 25px; }
+        }
+
+        @media (min-width: 1024px) {
+          .whatwedo-wrapper { padding-top: 3rem; padding-bottom: 10rem; }
+          .whatwedo-title { font-size: 2.8rem; }
+          .whatwedo-card-link { width: 40vw; }
+          .whatwedo-card { padding: 2rem; min-height: 20rem; }
+          .whatwedo-highlight { font-size: 1.4rem; }
+          .whatwedo-tag { font-size: 16px; }
+          .whatwedo-highlight { font-size: 0.85rem; }
+          .whatwedo-desc { font-size: 0.75rem; }
+        }
+
+        @media (min-width: 1440px) {
+          .whatwedo-wrapper { padding-bottom: 18vh; }
+          .whatwedo-title { font-size: 2.7rem; }
+          .whatwedo-card-link { width: 30vw; }
+          .whatwedo-img-area { height: 7rem; }
+          .whatwedo-img-primary { width: 8rem; }
+          .whatwedo-img-full { width: 10rem; }
+          .whatwedo-tag { font-size: 17px; }
+          .whatwedo-highlight { font-size: 0.95rem; }
+          .whatwedo-desc { font-size: 0.85rem; }
+          .whatwedo-ribbon p { font-size: 1.2rem; }
+          .whatwedo-ribbon .uppercase { 
+            font-size: 0.75rem; 
+            margin-bottom: 0.4rem; 
+            text-align: center; 
+            width: 100%;
+          }
+          .whatwedo-ribbon svg { width: 300px; height: 25px; }
+        }
+
+        @media (min-width: 2560px) {
+          .whatwedo-wrapper { padding-top: 5vh; padding-bottom: 20vh; }
+          .whatwedo-title { font-size: 4.8rem; }
+          .whatwedo-subtitle { font-size: 1.55rem; max-width: 400px; }
+          .whatwedo-card-link { width: 35vw; }
+          .whatwedo-card { padding: 2.55rem; min-height: 35rem; border-radius: 4rem; }
+          .whatwedo-img-area { height: 15rem; margin-bottom: 3rem; }
+          .whatwedo-img-primary { width: 15rem; }
+          .whatwedo-img-secondary { width: 8rem; }
+          .whatwedo-img-full { width: 24rem; }
+          .whatwedo-tag { font-size: 2.2rem; margin-bottom: 1.5rem; }
+          .whatwedo-highlight { font-size: 1.75rem; margin-bottom: 1rem; }
+          .whatwedo-desc { font-size: 1.65rem; line-height: 1.6; margin-bottom: 3rem; }
+          .whatwedo-explore { font-size: 1.2rem; padding-bottom: 1rem; gap: 1.5rem; }
+          .whatwedo-nav { gap: 2rem; }
+          .whatwedo-nav button { width: 5rem; height: 5rem; }
+          .whatwedo-nav svg { width: 2rem; height: 2rem; }
+          .whatwedo-scroll-container { padding-bottom: 5rem; }
+          .whatwedo-ribbon p { font-size: 2.2rem; }
+          .whatwedo-ribbon .uppercase { font-size: 1.4rem; margin-bottom: 2.5rem; }
+          .whatwedo-ribbon svg { width: 500px; height: 55px; }
+        }
+
+        @media (max-width: 425px) {
+          .whatwedo-title { font-size: 1.85rem; }
+          .whatwedo-highlight { font-size: 0.85rem; }
+        }
+      `}} />
     </section>
   );
 };

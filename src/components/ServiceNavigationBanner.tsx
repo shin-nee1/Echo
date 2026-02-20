@@ -23,58 +23,123 @@ const ServiceNavigationBanner = ({
   rightBtnLink
 }: NavigationBannerProps) => {
   return (
-    <section className="py-20 bg-transparent relative">
-      <div className="container mx-auto px-6 max-w-[1450px]">
+    <section className="relative w-full bg-transparent overflow-visible nav-banner-wrapper">
+      <div className="container mx-auto relative z-10 nav-banner-container">
         
-        {/* SLENDER VERTICAL STACK CONTAINER */}
-        <div className="relative w-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-[40px] shadow-[0_40px_100px_rgba(0,0,0,0.5)]">
+        {/* THE MAIN GLASS CARD - High transparency with 2px blur & UPDATED 1rem Radius */}
+        <div className="relative w-full rounded-[2rem] lg:rounded-[2rem] overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-[2px] shadow-[0_40px_100px_rgba(0,0,0,0.5)] nav-banner-card">
           
-          {/* STATIC AMBIENT GLOWS */}
-          <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-            <div className="absolute -top-[120%] -left-[10%] w-[60%] h-[250%] bg-[#00d8ff]/15 blur-[130px] rounded-full" />
-            <div className="absolute -bottom-[120%] -right-[10%] w-[60%] h-[250%] bg-cyan-900/25 blur-[130px] rounded-full" />
+          {/* STATIC AMBIENT GLOWS - Re-engineered for extreme corner bleed */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <div className="absolute -top-[120%] -left-[10%] w-[60%] h-[250%] bg-[#00d8ff]/15 blur-[130px] rounded-full opacity-20" />
+            
+            {/* THE EXTREME CORNER GLOW: MOVED DEEPER INTO THE CORNER */}
+            {/* Changed: 
+                1. Added -bottom-[15%] and -right-[10%] to push it into the corner 
+                2. Increased size to w-[60%] h-[80%] to maintain bleed 
+                3. Tightened gradient stops (30% vs 40%) for a sharper light source 
+            */}
+            <div 
+              className="absolute -bottom-[15%] -right-[10%] w-[60%] h-[80%] opacity-60" 
+              style={{
+                background: 'radial-gradient(circle at 100% 100%, rgba(0, 216, 255, 0.6) 0%, rgba(0, 216, 255, 0.15) 30%, transparent 70%)',
+                filter: 'blur(50px)'
+              }}
+            />
           </div>
           
           {/* CONTENT SECTION */}
-          <div className="relative z-30 flex flex-col items-center justify-center px-10 py-12 lg:py-16 gap-12">
+          <div className="relative z-30 flex flex-col items-center justify-center nav-banner-content">
             
-            {/* 1. SINGLE LINE HEADING - FIXED CLIPPING */}
-            <div className="text-center w-full pb-2"> {/* Added pb-2 for descender room */}
-              <h2 className="text-white text-2xl md:text-4xl lg:text-[2.8rem] font-bold tracking-[-0.03em] leading-[1.2] font-display">
-                {/* Removed leading-none: it was too tight.
-                   Removed whitespace-nowrap: it causes cutting on mobile.
-                */}
-                {titlePrefix} <span className="text-[#00d8ff]">{highlight1}</span> {middleText} <span className="text-[#00d8ff]">{highlight2}</span>?
+            {/* HEADING - All text white */}
+            <div className="text-center w-full nav-banner-header">
+              <h2 className="text-white font-bold tracking-tight leading-[1.2] nav-banner-title">
+                {titlePrefix} <span className="text-white">{highlight1}</span> {middleText} <span className="text-white">{highlight2}</span>?
               </h2>
             </div>
 
-            {/* 2. MATCHED BUTTONS */}
-            <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto items-center">
-              {/* Secondary Button */}
+            {/* BUTTON GROUP */}
+            <div className="flex flex-col sm:flex-row nav-banner-btn-group">
               <a href={leftBtnLink} className="w-full sm:w-auto">
-                <Button 
-                  className="w-full sm:w-auto h-[60px] bg-white/[0.03] hover:bg-white/[0.08] text-white border border-white/10 px-12 rounded-2xl text-[14px] font-bold tracking-[0.15em] uppercase transition-all duration-300 backdrop-blur-md"
-                >
+                <Button className="w-full sm:w-auto nav-btn-secondary">
                   {leftBtnText}
                 </Button>
               </a>
               
-              {/* Primary Button */}
               <a href={rightBtnLink} className="w-full sm:w-auto">
-                <Button 
-                  className="w-full sm:w-auto h-[60px] bg-[#00d8ff] text-[#010a0f] hover:bg-white transition-all duration-300 px-12 rounded-2xl text-[14px] font-bold tracking-[0.15em] uppercase shadow-[0_15px_40px_rgba(0,216,255,0.2)] active:scale-[0.97]"
-                >
+                <Button className="w-full sm:w-auto nav-btn-primary">
                   {rightBtnText}
                 </Button>
               </a>
             </div>
           </div>
 
-          {/* EDGE LIGHTING */}
-          <div className="absolute inset-0 rounded-[2rem] lg:rounded-[3rem] border border-white/5 pointer-events-none z-40" />
-          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#00d8ff]/20 to-transparent z-40" />
+          {/* EDGE LIGHTING - Radius updated to 1rem to match card */}
+          <div className="absolute inset-0 rounded-[1rem] border border-white/5 pointer-events-none z-40" />
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#00d8ff]/30 to-transparent z-40" />
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* 1. MOBILE (< 768px) */
+        .nav-banner-wrapper { padding: 3rem 0rem; }
+        .nav-banner-content { padding: 3rem 1.5rem; gap: 2.5rem; }
+        .nav-banner-title { font-size: 1.2rem; }
+        .nav-banner-btn-group { gap: 1rem; width: 70%; }
+        
+        /* Buttons: Cyan Gradient, Black Text, 15px Font */
+        .nav-btn-secondary, .nav-btn-primary { 
+            height: 45px; 
+            border-radius: 8px; 
+            font-size: 15px; 
+            font-weight: 700; 
+            border: 1px solid rgba(255,255,255,0.1);
+            background: linear-gradient(180deg, #3d8894 0%, #5bbec9 100%); 
+            color: black;
+            box-shadow: 0 10px 30px rgba(61, 136, 148, 0.3);
+            transition: 0.3s ease;
+        }
+
+        /* 2. TABLET (768px - 1023px) */
+        @media (min-width: 768px) {
+          .nav-banner-wrapper { padding: 5rem 2rem; }
+          .nav-banner-title { font-size: 1.55rem; }
+          .nav-banner-btn-group { width: auto; gap: 1.5rem; }
+          .nav-btn-secondary, .nav-btn-primary { width: 180px; font-size: 15px; }
+        }
+
+        /* 3. LAPTOP (1024px - 1439px) */
+        @media (min-width: 1024px) {
+          .nav-banner-wrapper { padding: 6rem 4rem; }
+          .nav-banner-container { max-width: 1200px !important; }
+          .nav-banner-content { padding: 2rem 4rem; gap: 3rem; }
+          .nav-banner-title { font-size: 1.95rem; max-width: 900px; }
+          .nav-btn-secondary, .nav-btn-primary { height: 45px; width: 200px; }
+        }
+
+        /* 4. LARGE DESKTOP (1440px - 2559px) */
+        @media (min-width: 1440px) {
+          .nav-banner-container { max-width: 1400px !important; }
+          .nav-banner-title { font-size: 2.6rem; max-width: 1100px; }
+          .nav-banner-content { padding: 3rem 5rem; }
+          .nav-btn-secondary, .nav-btn-primary { height: 45px; width: 200px; }
+        }
+
+        /* 5. 4K MONITORS (2560px+) */
+        @media (min-width: 2560px) {
+          .nav-banner-container { max-width: 2200px !important; }
+          .nav-banner-title { font-size: 3.6rem; max-width: 1800px; }
+          .nav-banner-content { padding: 5rem 8rem; gap: 5rem; }
+          .nav-btn-secondary, .nav-btn-primary { height: 70px; width: 400px; font-size: 1.8rem; border-radius: 12px; }
+        }
+
+        /* Hover States */
+        .nav-btn-secondary:hover, .nav-btn-primary:hover { 
+          filter: brightness(1.15); 
+          transform: translateY(-1px);
+          color: black;
+        }
+      `}} />
     </section>
   );
 };

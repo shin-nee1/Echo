@@ -19,149 +19,194 @@ const WhyUsSection = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-transparent z-10">
-      <div className="container mx-auto px-6 relative z-10">
+    <section 
+      className="relative bg-transparent"
+      style={{ padding: "clamp(3.5rem, 6vw, 8rem) 0" }}
+    >
+      <div className="mx-auto w-full px-[5vw]">
         
-        {/* HEADER - Reduced bottom margin on mobile to bring accordion closer */}
-        <div className="flex flex-col items-center text-center mb-8 md:mb-24 relative">
-          <h2 className="text-white text-5xl md:text-6xl font-bold tracking-tight leading-none">
+        <div className="text-center" style={{ paddingBottom: "0.5rem" }}>
+          <h2 className="text-white font-bold leading-tight why-us-main-title">
             Why Echo & <span className="text-[#43c6e4]">Impact?</span>
           </h2>
         </div>
 
-        {/* ACCORDION WRAPPER */}
-        <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row justify-center items-stretch min-h-[600px] md:h-[650px] relative">
+        {/* FLEX CONTAINER 
+            UPDATED: Changed lg:w-[100vw] to lg:w-[92vw] to prevent edge-touching on 1024px
+        */}
+        <div className="why-us-container w-[70vw] md:w-[70vw] lg:w-[92vw] relative left-1/2 -translate-x-1/2 flex flex-col lg:flex-row justify-center items-stretch gap-0 lg:h-[35vw] min-h-[80vh] lg:min-h-0 mt-2 md:mt-4 mb-10 lg:my-20">
           {items.map((item, index) => {
             const isActive = activeIndex === index;
-            const isLast = index === items.length - 1;
-            const shouldGlow = activeIndex === index || activeIndex === index - 1;
 
             return (
               <div
                 key={index}
                 onClick={() => setActiveIndex(isActive ? null : index)}
-                className={`
-                  relative cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group overflow-hidden
-                  ${isActive ? "h-[400px] md:h-auto" : "h-[80px] md:h-auto"}
-                  ${isActive ? "md:flex-[6]" : "md:flex-1"}
-                `}
-                style={{
-                  marginBottom: "-1px", 
-                  marginRight: typeof window !== 'undefined' && window.innerWidth >= 768 && index !== items.length - 1 ? "-15px" : "0",
-                  // Added padding to prevent title from hitting the bottom separator
-                  paddingBottom: isLast && typeof window !== 'undefined' && window.innerWidth < 768 ? "20px" : "0"
-                }}
+                style={{ zIndex: isActive ? 20 : 10 }}
+                className={`relative cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] overflow-visible lg:!h-full why-us-item ${
+                  isActive ? "why-us-item-active" : "why-us-item-inactive"
+                }`}
               >
-                {/* CLIP PATH CONTAINER */}
-                <div className="absolute inset-0 w-full h-full bg-transparent"
-                  style={{
-                    clipPath: typeof window !== 'undefined' && window.innerWidth >= 768 
-                      ? `polygon(0% 0%, 100% 0%, 100% 45%, calc(100% + 15px) 50%, 100% 55%, 100% 100%, 0% 100%, 0% 55%, 15px 50%, 0% 45%)` 
-                      : `none`
+                {/* BACKGROUND HIGHLIGHT & INNER GLOW */}
+                <div
+                  className={`absolute transition-all duration-500 pointer-events-none ${
+                    isActive ? "opacity-100" : "opacity-0"
+                  }
+                  lg:inset-0
+                  max-lg:left-0 max-lg:right-0 max-lg:top-[-1.35vw] max-lg:bottom-[0.15vw]
+                  lg:[clip-path:polygon(0%_0%,100%_0%,100%_45%,calc(100%+1vw)_50%,100%_55%,100%_100%,0%_100%,0%_55%,1vw_50%,0%_45%)]
+                  max-lg:[clip-path:polygon(0%_0%,45%_0%,50%_1.2vw,55%_0%,100%_0%,100%_calc(100%-1.2vw),55%_calc(100%-1.2vw),50%_100%,45%_calc(100%-1.2vw),0%_calc(100%-1.2vw))]`}
+                  style={{ 
+                    backgroundColor: "rgba(67, 198, 228, 0.1)",
+                    boxShadow: isActive ? "inset 0 0 35px 5px rgba(67, 198, 228, 0.9)" : "none",
                   }}
-                >
-                  {/* HIGHLIGHTER GLOW */}
-                  <div 
-                    className={`absolute inset-0 transition-all duration-700 pointer-events-none
-                      ${isActive 
-                        ? "opacity-100 shadow-[inset_0_0_80px_rgba(0,216,255,0.15)]" 
-                        : "opacity-0"}
-                    `}
-                  />
-                </div>
+                />
 
-                {/* --- SEPARATORS --- */}
-                
-                {/* DESKTOP SEPARATOR (Vertical - Left Side) */}
-                <div className="absolute hidden md:block inset-y-0 left-0 w-10 z-40 pointer-events-none">
-                  <svg viewBox="0 0 40 100" preserveAspectRatio="none" className="h-full w-full">
-                    <path 
-                      d="M 2 0 L 2 45 L 18 50 L 2 55 L 2 100" 
-                      fill="none" 
-                      stroke="white" 
-                      strokeWidth="2"
-                      vectorEffect="non-scaling-stroke"
-                      className={`transition-all duration-700 ${shouldGlow ? "opacity-100 drop-shadow-[0_0_12px_rgba(255,255,255,1)]" : "opacity-40"}`}
-                    />
-                  </svg>
-                </div>
-
-                {/* DESKTOP SEPARATOR (Vertical - Final Right Side) */}
-                {isLast && (
-                  <div className="absolute hidden md:block inset-y-0 -right-[15px] w-10 z-40 pointer-events-none">
-                    <svg viewBox="0 0 40 100" preserveAspectRatio="none" className="h-full w-full">
-                      <path 
-                        d="M 2 0 L 2 45 L 18 50 L 2 55 L 2 100" 
-                        fill="none" 
-                        stroke="white" 
-                        strokeWidth="2"
-                        vectorEffect="non-scaling-stroke"
-                        className={`transition-all duration-700 ${isActive ? "opacity-100 drop-shadow-[0_0_12px_rgba(255,255,255,1)]" : "opacity-40"}`}
-                      />
-                    </svg>
-                  </div>
-                )}
-
-                {/* MOBILE SEPARATOR (Horizontal - Top Side) */}
-                <div className="absolute block md:hidden top-0 inset-x-0 h-6 z-40 pointer-events-none">
-                   <svg viewBox="0 0 100 20" preserveAspectRatio="none" className="w-full h-full">
-                    <path 
-                      d="M 0 2 L 45 2 L 50 12 L 55 2 L 100 2" 
-                      fill="none" 
-                      stroke="white" 
-                      strokeWidth="2"
-                      vectorEffect="non-scaling-stroke"
-                      className={`transition-all duration-700 ${shouldGlow ? "opacity-100 drop-shadow-[0_0_10px_rgba(255,255,255,1)]" : "opacity-40"}`}
-                    />
-                  </svg>
-                </div>
-
-                {/* MOBILE SEPARATOR (Horizontal - Final Bottom Side) */}
-                {isLast && (
-                  <div className="absolute block md:hidden bottom-0 inset-x-0 h-6 z-40 pointer-events-none translate-y-[10px]">
-                    <svg viewBox="0 0 100 20" preserveAspectRatio="none" className="w-full h-full">
-                      <path 
-                        d="M 0 2 L 45 2 L 50 12 L 55 2 L 100 2" 
-                        fill="none" 
-                        stroke="white" 
-                        strokeWidth="2"
-                        vectorEffect="non-scaling-stroke"
-                        className={`transition-all duration-700 ${isActive ? "opacity-100 drop-shadow-[0_0_10px_rgba(255,255,255,1)]" : "opacity-40"}`}
-                      />
-                    </svg>
-                  </div>
-                )}
-
-                {/* TITLES */}
-                <div className={`hidden md:flex absolute inset-0 items-center justify-center transition-all duration-500 ${isActive ? "opacity-0 translate-y-8" : "opacity-100 translate-y-0"}`}>
-                  <h3 className="text-xl font-bold tracking-[0.3em] uppercase text-white whitespace-nowrap -rotate-90">
-                    {item.title}
-                  </h3>
-                </div>
-
-                <div className={`md:hidden absolute top-0 left-0 right-0 h-[80px] flex items-center justify-center transition-all duration-500 z-20 ${isActive ? "opacity-0 -translate-y-4" : "opacity-100 translate-y-0"}`}>
-                   <h3 className="text-lg font-bold tracking-[0.2em] uppercase text-white">
-                    {item.title}
-                  </h3>
-                </div>
-
-                {/* ACTIVE CONTENT PANEL */}
-                <div className={`relative w-full h-full p-8 md:p-20 flex flex-col justify-center transition-all duration-700 ${isActive ? "opacity-100 scale-100 delay-100" : "opacity-0 scale-95 pointer-events-none absolute inset-0"}`}>
-                  <div className="max-w-xl space-y-6 md:space-y-10 pl-4 border-l-2 border-[#00d8ff]">
-                    <Sparkles className="text-[#00d8ff] w-6 h-6 md:w-8 md:h-8 animate-pulse" />
-                    <h3 className="text-3xl md:text-6xl font-bold text-white tracking-tight leading-none">
+                {/* CONTENT LAYER */}
+                <div className="absolute inset-0 overflow-hidden lg:overflow-visible flex items-center justify-center">
+                  
+                  {/* COLLAPSED TITLES */}
+                  <div
+                    className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
+                      isActive ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+                    }`}
+                  >
+                    <h3 className="hidden lg:block font-bold uppercase text-white whitespace-nowrap -rotate-90 origin-center why-us-collapsed-text">
                       {item.title}
                     </h3>
-                    <p className="text-gray-300 leading-relaxed text-base md:text-xl font-light">
-                      {item.description}
-                    </p>
+                    <h3 className="lg:hidden font-bold uppercase text-white text-center w-full px-[5vw] why-us-collapsed-text">
+                      {item.title}
+                    </h3>
                   </div>
+
+                  {/* EXPANDED CONTENT */}
+                  <div
+                    className={`absolute inset-0 flex flex-col items-center justify-center px-[8%] text-center lg:items-start lg:justify-start lg:text-left lg:px-0 lg:pl-[3vw] lg:pt-[3vw] transition-all duration-700 ${
+                      isActive ? "opacity-100 scale-100 delay-200" : "opacity-0 scale-95 pointer-events-none"
+                    }`}
+                  >
+                    <Sparkles 
+                      className="text-[#00d8ff]" 
+                      style={{ 
+                        width: "clamp(20px, 1.8vw, 28px)", 
+                        height: "clamp(20px, 1.8vw, 28px)", 
+                        marginBottom: "1.5vw" 
+                      }} 
+                    />
+                    <h3 className="font-bold text-white uppercase tracking-wider why-us-expanded-title mb-[1vw]">{item.title}</h3>
+                    <p className="text-gray-300 leading-relaxed mx-auto lg:mx-0 why-us-description">{item.description}</p>
+                  </div>
+                </div>
+
+                {/* SVG SEPARATORS */}
+                {index === 0 && (
+                  <div className="hidden lg:block absolute top-0 left-0 w-[2.5vw] h-full z-30 pointer-events-none">
+                    <svg viewBox="0 0 40 100" preserveAspectRatio="none" className="h-full w-full">
+                      <defs>
+                        <linearGradient id="vertical-fade" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="white" stopOpacity="0.1" />
+                          <stop offset="50%" stopColor="white" stopOpacity="1" />
+                          <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M 2 0 L 2 45 L 18 50 L 2 55 L 2 100" fill="none" stroke="url(#vertical-fade)" strokeWidth="1" className="transition-all duration-500" />
+                    </svg>
+                  </div>
+                )}
+                <div className="hidden lg:block absolute top-0 right-[-2.5vw] w-[2.5vw] h-full z-30 pointer-events-none">
+                  <svg viewBox="0 0 40 100" preserveAspectRatio="none" className="h-full w-full">
+                      <defs>
+                        <linearGradient id="vertical-fade-right" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="white" stopOpacity="0.1" />
+                          <stop offset="50%" stopColor="white" stopOpacity="1" />
+                          <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+                        </linearGradient>
+                      </defs>
+                    <path d="M 2 0 L 2 45 L 18 50 L 2 55 L 2 100" fill="none" stroke="url(#vertical-fade-right)" strokeWidth="1" className="transition-all duration-500" />
+                  </svg>
+                </div>
+                {index === 0 && (
+                  <div className="lg:hidden absolute top-[-1.5vw] left-0 w-full h-[3vw] z-30 pointer-events-none">
+                    <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="w-full h-full">
+                      <defs>
+                        <linearGradient id="horizontal-fade" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="white" stopOpacity="0.1" />
+                          <stop offset="50%" stopColor="white" stopOpacity="1" />
+                          <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M 0 2 L 45 2 L 50 18 L 55 2 L 100 2" fill="none" stroke="url(#horizontal-fade)" strokeWidth="1" className="transition-all duration-500" />
+                    </svg>
+                  </div>
+                )}
+                <div className="lg:hidden absolute bottom-[-1.5vw] left-0 w-full h-[3vw] z-30 pointer-events-none">
+                  <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="w-full h-full">
+                      <defs>
+                        <linearGradient id="horizontal-fade-bottom" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="white" stopOpacity="0.1" />
+                          <stop offset="50%" stopColor="white" stopOpacity="1" />
+                          <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+                        </linearGradient>
+                      </defs>
+                    <path d="M 0 2 L 45 2 L 50 18 L 55 2 L 100 2" fill="none" stroke="url(#horizontal-fade-bottom)" strokeWidth="1" className="transition-all duration-500" />
+                  </svg>
                 </div>
               </div>
             );
           })}
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .why-us-collapsed-text { font-size: 11px; letter-spacing: 0.2em; }
+        .why-us-expanded-title { font-size: 14px; letter-spacing: 0.05em; }
+        .why-us-description { font-size: 12px; max-width: 280px; }
+        .why-us-main-title { font-size: 28px !important; }
+
+        @media (max-width: 763px) { 
+          .why-us-item-inactive { height: 11vh !important; }
+          .why-us-item-active { height: 30vh !important; }
+        }
+
+        @media (min-width: 764px) {
+          .why-us-collapsed-text { font-size: 13.5px; letter-spacing: 0.25em; }
+          .why-us-expanded-title { font-size: 16px; letter-spacing: 0.08em; }
+          .why-us-description { font-size: 13px; max-width: 300px; }
+          .why-us-main-title { font-size: 42px !important; }
+          .why-us-item-inactive { height: 12vh !important; }
+          .why-us-item-active { height: 32vh !important; }
+        }
+
+        @media (min-width: 1024px) {
+          .why-us-collapsed-text { font-size: 15px; letter-spacing: 0.3em; }
+          .why-us-expanded-title { font-size: 18px; letter-spacing: 0.1em; }
+          .why-us-description { font-size: 14px; max-width: 320px; line-height: 1.6; }
+          .why-us-main-title { font-size: 48px !important; }
+          .why-us-item-inactive { width: 95px !important; height: 100% !important; }
+          .why-us-item-active { width: 420px !important; height: 100% !important; }
+          .why-us-container { height: 30vw !important; }
+        }
+
+        @media (min-width: 1440px) {
+          .why-us-collapsed-text { font-size: 19px; letter-spacing: 0.4em; }
+          .why-us-expanded-title { font-size: 20px; letter-spacing: 0.12em; }
+          .why-us-description { font-size: 15px; max-width: 380px; line-height: 1.7; }
+          .why-us-main-title { font-size: 45px !important; }
+          .why-us-item-inactive { width: 150px !important; }
+          .why-us-item-active { width: 620px !important; }
+          .why-us-container { height: 26vw !important; }
+        }
+
+        @media (min-width: 2560px) {
+          .why-us-collapsed-text { font-size: 25px; letter-spacing: 0.5em; }
+          .why-us-expanded-title { font-size: 30px; }
+          .why-us-description { font-size: 20px; max-width: 500px; }
+          .why-us-main-title { font-size: 85px !important; }
+          .why-us-item-inactive { width: 200px !important; }
+          .why-us-item-active { width: 900px !important; }
+          .why-us-container { height: 22vw !important; max-width: 2600px; margin: 6rem auto 0 auto !important; }
+        }
+      `}} />
     </section>
   );
 };

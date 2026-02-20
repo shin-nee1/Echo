@@ -6,6 +6,7 @@
 @tailwind utilities;
 
 /* 3️⃣ Custom base styles */
+/* 3️⃣ Custom base styles */
 @layer base {
   :root {
     --background: 210 50% 4%;
@@ -37,9 +38,19 @@
     --gradient-blue: linear-gradient(180deg, hsl(210, 80%, 30%) 0%, hsl(210, 50%, 4%) 100%);
   }
 
-  /* FORCE GENERAL SANS (Inter) ON EVERYTHING */
-  *, *::before, *::after, body, button, input, optgroup, select, textarea {
-    font-family: 'Inter', sans-serif !important;
+ 
+  *, 
+  *::before, 
+  *::after, 
+  body, 
+  h1, h2, h3, h4, h5, h6,
+  button, 
+  input, 
+  optgroup, 
+  select, 
+  textarea,
+  .font-display {
+    font-family: 'General Sans', sans-serif !important;
     border-color: hsl(var(--border));
   }
 
@@ -132,78 +143,84 @@
   animation: float-slow 18s ease-in-out infinite;
 }
 @layer components {
-  /* ============================= */
-  /* CONCAVE CARD SYSTEM  */
-  /* ============================= */
+  /* =========================================
+     THE REFINED GLASS CONCAVE SYSTEM (FIXED)
+     ========================================= */
 
   .concave-card {
-    /* 1. Basic Geometry */
     position: relative;
-    border-radius: 2rem; /* The outer rounded corners */
-    min-height: 320px;
+    border-radius: 2.1rem; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     
-    /* 2. Define Variables */
-    --cut-radius: 130px; /* Size of the bite */
-    --border-width: 1px;
-    --cyan-color: hsl(187, 100%, 50%); 
-    --card-fill: hsl(210, 40%, 6%, 0.95); /* High opacity dark background */
+    background: linear-gradient(
+      135deg, 
+      rgba(255, 255, 255, 0.04) 0%, 
+      transparent 100%
+    ), rgba(8, 12, 20, 0.5);
     
-    /* 3. THE MAGIC GRADIENT 
-       This creates: 
-       - Transparent Center (0 to radius)
-       - Cyan Border Line (radius to radius + border)
-       - Dark Card Background (rest)
-    */
-    background: radial-gradient(
-      circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y),
-      transparent var(--cut-radius),
-      var(--cyan-color) calc(var(--cut-radius) + var(--border-width)),
-      var(--card-fill) calc(var(--cut-radius) + var(--border-width) + 1px)
-    );
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
 
-    /* 4. Outer Border Logic 
-       We use a box-shadow to create the border on the rectangular sides,
-       but we mask it so it doesn't draw over the empty hole space.
-    */
-    box-shadow: inset 0 0 0 1px hsl(210, 30%, 18%); /* Subtle outer border */
-    
-    /* 5. Clean Edges */
-    /* This ensures the box-shadow doesn't bleed into the hole */
-    -webkit-mask: radial-gradient(
-      circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y),
-      transparent var(--cut-radius),
-      #000 calc(var(--cut-radius) + 0.5px)
-    );
+    /* ADJUSTED: Reduced radii to prevent text overlap */
+    --cut-radius: 0px; 
+    @media (min-width: 768px)  { --cut-radius: 52px; }  /* Reduced from 52px */
+    @media (min-width: 1024px) { --cut-radius: 65px; }  /* Reduced from 65px */
+    @media (min-width: 1260px) { --cut-radius: 75px; }
+     @media (min-width: 1460px) { --cut-radius: 92px; }  /* Reduced from 78px */ 
+    @media (min-width: 1700px) { --cut-radius: 105px; }  /* Reduced from 90px */
+
+    /* SHARP HOLE MASKING */
     mask: radial-gradient(
       circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y),
       transparent var(--cut-radius),
-      #000 calc(var(--cut-radius) + 0.5px)
+      #000 calc(var(--cut-radius) + 0.8px)
+    );
+    -webkit-mask: radial-gradient(
+      circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y),
+      transparent var(--cut-radius),
+      #000 calc(var(--cut-radius) + 0.8px)
     );
   }
 
-  /* POSITION MAPPING */
-  .cut-br {
-    --cut-pos-x: 100%;
-    --cut-pos-y: 100%;
+  .concave-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 20;
+
+    background: radial-gradient(
+      circle at var(--cut-pos-x) var(--cut-pos-y),
+      rgba(255, 255, 255, 0.7) 0%,    
+      rgba(255, 255, 255, 0.12) 35%,   
+      transparent 72%
+    );
+
+    padding: 1.5px; 
+    mask: 
+      radial-gradient(circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y), transparent var(--cut-radius), #000 calc(var(--cut-radius) + 0.8px)) content-box, 
+      radial-gradient(circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y), transparent var(--cut-radius), #000 calc(var(--cut-radius) + 0.8px));
+    
+    -webkit-mask: 
+      radial-gradient(circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y), transparent var(--cut-radius), #000 calc(var(--cut-radius) + 0.8px)) content-box, 
+      radial-gradient(circle var(--cut-radius) at var(--cut-pos-x) var(--cut-pos-y), transparent var(--cut-radius), #000 calc(var(--cut-radius) + 0.8px));
+      
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
   }
 
-  .cut-bl {
-    --cut-pos-x: 0%;
-    --cut-pos-y: 100%;
-  }
+  /* Helpers */
+  .cut-br { --cut-pos-x: 100%; --cut-pos-y: 100%; }
+  .cut-bl { --cut-pos-x: 0%;   --cut-pos-y: 100%; }
+  .cut-tr { --cut-pos-x: 100%; --cut-pos-y: 0%;   }
+  .cut-tl { --cut-pos-x: 0%;   --cut-pos-y: 0%;   }
 
-  .cut-tr {
-    --cut-pos-x: 100%;
-    --cut-pos-y: 0%;
-  }
-
-  .cut-tl {
-    --cut-pos-x: 0%;
-    --cut-pos-y: 0%;
-  }
-  
-  /* Helper for the cyan glow line inside the card text */
-  .box-shadow-glow {
-    box-shadow: 0 0 10px var(--cyan-color);
+  .concave-card:hover {
+    background-color: rgba(22, 30, 48, 0.6);
+    transform: translateY(-3px);
   }
 }

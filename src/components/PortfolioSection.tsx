@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react"; // FIXED IMPORT
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 // ASSET IMPORTS
 import PortImg9 from "@/assets/image-removebg-preview (9).png";
@@ -9,99 +11,160 @@ import PortImg11 from "@/assets/image-removebg-preview (11).png";
 
 const PortfolioSection = () => {
   const projects = [
-    { id: 1, img: PortImg9, name: "Uber", sub: "SuperApp Concept", bg: "bg-[#141414]" },
-    { id: 2, img: PortImg10, name: "Barclays", sub: "Mobile App", bg: "bg-[#00AEEF]" },
-    { id: 3, img: PortImg11, name: "FINKOFF.", sub: "Finance Manager", bg: "bg-white", text: "text-black", subText: "text-slate-600" }
+    { id: 1, img: PortImg9, name: "Uber", bg: "bg-[#141414]", href: "/portfolio/uber" },
+    { id: 2, img: PortImg10, name: "Barclays", bg: "bg-[#00AEEF]", href: "/portfolio/barclays" },
+    { id: 3, img: PortImg11, name: "FINKOFF.", bg: "bg-white", href: "/portfolio/finkoff" }
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleNext = () => {
-    if (currentIndex < projects.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === "left" ? -400 : 400;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
   return (
-    <section className="relative py-12 md:py-24 bg-transparent overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
+    /* SECTION: full-bleed logic to the section to ignore parent padding */
+    <section className="portfolio-section relative bg-transparent overflow-hidden z-10 w-screen left-1/2 right-1/2 -ml-[50vw] mr-[50vw]">
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* REMOVE SCROLLBAR BUT KEEP SWIPE */
+        .portfolio-scroll-container {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          -webkit-overflow-scrolling: touch;
+        }
+        .portfolio-scroll-container::-webkit-scrollbar { display: none; }
+
+        /* 1. BASE / MOBILE FIRST */
+        .portfolio-wrapper { padding: 3rem 0; }
+        .portfolio-header { margin-bottom: 2rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+        .portfolio-title { font-size: 1.85rem; font-weight: 700; letter-spacing: -0.06em; line-height: 1; color: white; }
+        .portfolio-card-link { width: 55vw; flex-shrink: 0; scroll-snap-align: center; margin-right: 1.4rem; }
+        .portfolio-card-box { aspect-ratio: 1.1 / 1; border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+        .portfolio-nav { display: none; } 
         
-        {/* HEADER */}
-        <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-10 mb-12 md:mb-16">
-          <div className="shrink-0">
-            <h2 className="text-white text-5xl md:text-6xl font-bold tracking-tight leading-none">
-              Our <span className="text-[#43c6e4]">Portfolio</span>
+        .portfolio-view-all { 
+          font-size: 0.75rem; 
+          height: 2.2rem; 
+          padding: 0 1.5rem; 
+          box-shadow: none !important; 
+          filter: none !important; 
+        }
+
+        /* NEW: LARGE MOBILE / PHABLETS (600px - 767px) */
+        @media (min-width: 600px) and (max-width: 767px) {
+          .portfolio-card-link { width: 38vw; }
+        }
+
+        /* 2. TABLET (768px) */
+        @media (min-width: 768px) {
+          .portfolio-title { font-size: 2.3rem; }
+          .portfolio-card-link { width: 38vw; margin-right: 2rem; }
+          .portfolio-card-box { border-radius: 2.5rem; }
+          .portfolio-view-all { font-size: 0.85rem; height: 2.5rem; padding: 0 1.8rem; }
+        }
+
+        /* 3. SMALL LAPTOPS (800px - 1023px) */
+        @media (min-width: 800px) and (max-width: 1023px) {
+          .portfolio-title { font-size: 2.5rem; }
+          .portfolio-card-link { width: 34vw; margin-right: 1.5rem; } 
+          .portfolio-card-box { border-radius: 2rem; }
+        }
+
+        /* 3. LAPTOP (1024px) */
+        @media (min-width: 1024px) {
+          .portfolio-wrapper { padding: 4rem 0; }
+          .portfolio-title { font-size: 2.8rem; }
+          .portfolio-card-link { width: 38vw; margin-right: 1.5rem; }
+          .portfolio-nav { display: flex; gap: 0.75rem; padding-bottom: 0rem; }
+          .portfolio-nav button { 
+            width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
+            color: white; display: flex; align-items: center; justify-content: center; transition: all 0.3s;
+          }
+          .portfolio-nav button:hover { background: #43c6e4; border-color: #43c6e4; color: black; }
+          .portfolio-view-all { font-size: 0.9rem; height: 2.5rem; padding: 0 1.5rem; }
+        }
+
+        /* NEW: LARGE LAPTOPS (1200px - 1439px) */
+        @media (min-width: 1200px) and (max-width: 1439px) {
+          .portfolio-card-link { width: 35vw; }
+        }
+
+        /* 6. LARGE DESKTOP (1440px) */
+        @media (min-width: 1440px) {
+          .portfolio-title { font-size: 2.75rem; }
+          .portfolio-scroll-container { display: flex; gap: 2rem; overflow-x: auto; }
+          .portfolio-card-link { 
+            width: 30vw; 
+            flex-shrink: 0; 
+            scroll-snap-align: start; 
+            margin-right: 0; 
+          }
+          .portfolio-nav { display: flex; gap: 0.75rem; padding-bottom: 0rem; } 
+          .portfolio-view-all { font-size: 0.95rem; height: 2.8rem; padding: 0 2.2rem; }
+        }
+
+        /* 5. 4K MONITORS (2560px) */
+        @media (min-width: 2560px) {
+          .portfolio-wrapper { padding: 8vh 0; }
+          .portfolio-title { font-size: 5.2rem; }
+          .portfolio-card-link { width: 30vw; }
+          .portfolio-card-box { border-radius: 4rem; }
+          .portfolio-header { margin-bottom: 5vh; }
+          .portfolio-nav { gap: 1.5rem; }
+          .portfolio-nav button { width: 5.5rem; height: 5.5rem; }
+          .portfolio-nav svg { width: 2rem; height: 2rem; }
+          .portfolio-view-all { font-size: 1.5rem; height: 5.5rem; padding: 0 4.5rem; border-radius: 6rem; }
+        }
+      `}} />
+
+      <div className="pl-[10%] relative z-10" style={{ maxWidth: "2200px" }}>
+        
+        {/* HEADER AREA */}
+        <div className="portfolio-header">
+          <div className="shrink">
+            <h2 className="portfolio-title">
+              Explore <span className="text-[#43c6e4]">Our Portfolio</span>
             </h2>
           </div>
-          <p className="text-slate-400 text-sm md:text-base font-normal max-w-[280px] leading-snug pt-2 md:pl-8 md:border-l md:border-white/10">
-            Showcasing digital excellence. <br />
-            Built to scale.
-          </p>
 
-          <div className="flex items-center gap-4 ml-auto">
-            <div className="flex gap-2">
-              <button 
-                onClick={handlePrev}
-                disabled={currentIndex === 0}
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 active:scale-90 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
-              >
-                <ArrowLeft className={`w-5 h-5 ${currentIndex === 0 ? 'text-gray-500' : 'text-white'}`} />
-              </button>
-              <button 
-                onClick={handleNext}
-                disabled={currentIndex === projects.length - 1}
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 active:scale-90 transition-all disabled:opacity-20 disabled:cursor-not-allowed"
-              >
-                <ArrowRight className={`w-5 h-5 ${currentIndex === projects.length - 1 ? 'text-gray-500' : 'text-white'}`} />
-              </button>
+          {/* pr-[5%] nudges buttons toward the left */}
+          <div className="flex flex-row items-end gap-[1.5rem] shrink-0 pr-[5%]">
+            <div className="portfolio-nav">
+              <button onClick={() => scroll("left")}><ArrowLeft size="1.2rem" /></button>
+              <button onClick={() => scroll("right")}><ArrowRight size="1.2rem" /></button>
             </div>
-            <Button 
-              variant="cyan"
-              size="lg"
-            >
+
+            <Button variant="cyan" size="hero" className="portfolio-view-all rounded-full">
               View All
             </Button>
           </div>
         </div>
-      </div>
 
-      {/* TRACK */}
-      <div className="relative w-full overflow-visible">
-        <style dangerouslySetInnerHTML={{ __html: `
-          .portfolio-track {
-            transform: translateX(calc(-${currentIndex} * (85vw + 1.5rem)));
-          }
-          @media (min-width: 640px) {
-            .portfolio-track {
-              transform: translateX(calc(-${currentIndex} * (500px + 2.5rem)));
-            }
-          }
-        `}} />
-
-        <div className="portfolio-track flex gap-6 md:gap-10 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] px-6 md:pl-[calc((100vw-1280px)/2+1.5rem)]">
+        {/* PORTFOLIO CARDS ROW */}
+        <div ref={scrollRef} className="portfolio-scroll-container -mx-[5vw] px-[5vw] lg:mx-0 lg:px-0">
           {projects.map((project) => (
-            <div 
-              key={project.id}
-              className={`flex-shrink-0 w-[85vw] sm:w-[500px] aspect-square rounded-[2.5rem] overflow-hidden ${project.bg} border border-white/5 relative group transition-all duration-500`}
-            >
-              <img 
-                src={project.img} 
-                alt={project.name}
-                // Removed opacity-90 to keep it 100% vibrant
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              {/* Removed the black gradient overlay. Text now sits directly on image. */}
-              <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                <h3 className={`text-3xl font-black mb-1 ${project.text || 'text-white'}`}>{project.name}</h3>
-                <p className={`text-[11px] font-bold uppercase tracking-[0.3em] ${project.subText || 'text-[#43c6e4]'}`}>{project.sub}</p>
-              </div>
-            </div>
+            <Link key={project.id} to={project.href} className="portfolio-card-link group">
+              <motion.div 
+                whileHover={{ y: -10 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="flex flex-col"
+              >
+                <div className={`portfolio-card-box relative w-full ${project.bg} flex items-center justify-center transition-all duration-500`}>
+                  <img 
+                    src={project.img} 
+                    alt={project.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-500" />
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>

@@ -16,13 +16,13 @@ import REFINEMENT from "@/assets/RefinementDesign.png";
 import DELIVERY from "@/assets/DeliveryDesign.png";
 
 const Design = () => {
-  // 1. Process Data - Correctly passing imported assets as variables
+  // 1. Process Data - Fluid Asset Mapping
   const designSteps: ProcessStepData[] = [
     { 
       number: "1", 
       title: "Discovery", 
       description: "Clarifying your brand, audience, and goals.", 
-      image: DISCOVERY // Use .src for Next.js imports or just DISCOVERY depending on your config
+      image: DISCOVERY 
     },
     { 
       number: "2", 
@@ -105,58 +105,64 @@ const Design = () => {
 
   return (
     <ServicePageLayout>
-      <PageHero
-        title={
-          <>
-            We Shape How The <span className="text-cyan">World</span> Sees,<br />
-            Understands, And <span className="text-cyan">Experiences</span> Your Brand.
-          </>
-        }
-        subtitle="Great Design Isn't Decoration. It's Direction."
-        ctaText="Shape your Next Move"
-      />
+      {/* WRAPPER DIV FOR FLUID SPACING 
+          Using clamp for consistent vertical rhythm across the entire page
+      */}
+      <div className="flex flex-col gap-[clamp(4rem, 12vh, 10rem)]">
+        
+       <PageHero
+  title={
+    <>
+      We Shape How The <span className="text-[#00d8ff]">World</span> Sees,
+      <br className="hidden md:block" />
+      Understands, And <span className="text-[#00d8ff]">Experiences</span> Your Brand.
+    </>
+  }
+  subtitle="Great Design Isn't Decoration. It's Direction."
+  ctaText="Shape your Next Move"
+/>
 
-      <InfoSection
-        title="What is"
-        highlight="Design?"
-        paragraphs={[
-          "At Echo & Impact, design goes far beyond visuals—it's the strategic foundation that defines how your brand communicates and behaves.",
-          "From brand identity to product UI/UX, every element is crafted with intention to ensure your brand looks consistent and feels unified.",
-          "Our focus remains: design that creates recognition, builds trust, and sets the direction for everything that follows."
-        ]}
-      />
+        <InfoSection
+          title="What is"
+          highlight="Design?"
+          paragraphs={[
+            "At Echo & Impact, design goes far beyond visuals—it's the strategic foundation that defines how your brand communicates and behaves.",
+            "From brand identity to product UI/UX, every element is crafted with intention to ensure your brand looks consistent and feels unified.",
+            "Our focus remains: design that creates recognition, builds trust, and sets the direction for everything that follows."
+          ]}
+        />
 
-      {/* REUSABLE PROCESS SECTION */}
-      <ProcessSection 
-        title="Design" 
-        highlight="Process" 
-        steps={designSteps} 
-      />
+        <ProcessSection 
+          title="Design" 
+          highlight="Process" 
+          steps={designSteps} 
+        />
 
-      <ServicesGrid 
-        title="Design" 
-        highlight="Services" 
-        services={designServices} 
-      />
+        <ServicesGrid 
+          title="Design" 
+          highlight="Services" 
+          services={designServices} 
+        />
 
-      <PortfolioSection />
+        <PortfolioSection />
 
-      <ServiceNavigationBanner
-        titlePrefix="Interested In"
-        highlight1="Development"
-        middleText="Or"
-        highlight2="Marketing"
-        leftBtnText="Explore Development"
-        leftBtnLink="/development"
-        rightBtnText="Explore Marketing"
-        rightBtnLink="/marketing"
-      />
+        <ServiceNavigationBanner
+          titlePrefix="Interested In"
+          highlight1="Development"
+          middleText="Or"
+          highlight2="Marketing"
+          leftBtnText="Explore Development"
+          leftBtnLink="/development"
+          rightBtnText="Explore Marketing"
+          rightBtnLink="/marketing"
+        />
 
-      <CTASection
-        title="Let's Shape Your"
-        highlight="Brand"
-        subtitle="We shape how the world Sees, Understands, And Experiences Your Brand."
-      />
+        <CTASection
+          title="Let's Shape Your"
+          highlight="Brand"
+          subtitle="We shape how the world Sees, Understands, And Experiences Your Brand."
+        />
+      </div>
     </ServicePageLayout>
   );
 };
