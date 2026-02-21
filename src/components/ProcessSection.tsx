@@ -63,15 +63,14 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    // -----------------------------------------------------------
-                    // UPDATED CLASSES:
-                    // lg: ... -> Targets specific 1024px laptop screens
-                    // xl: ... -> Restores your original design for bigger screens
-                    // -----------------------------------------------------------
                     className={`
                       relative w-full ${mobileTransform} lg:translate-x-0 mx-auto lg:mx-0 
                       backdrop-blur-xl border border-white/20 flex flex-col transition-all duration-500 
-                      hover:border-[#43c6e4]/50 z-20 shadow-2xl rounded-[1.5rem]
+                      hover:border-[#43c6e4]/50 z-20 shadow-2xl rounded-[1.5rem] 
+                      p-6
+                      
+                      /* ADDED: Max width for screens below 1024px */
+                      max-w-[420px] 
                       
                       /* 1024px Specific Dimensions (Adjusted Size/Length) */
                       lg:max-w-[300px] lg:h-[350px] lg:p-[1.8rem]
@@ -80,7 +79,6 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                       xl:max-w-[345px] xl:h-[345px] xl:p-[2.2rem]
                     `}
                     style={{ 
-                        // Moved Dimensions to Tailwind classes above ^
                         background: `${glowGradient}, linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)`,
                         boxShadow: "inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 0 12px 40px 0 rgba(0, 0, 0, 0.5)"
                     }}

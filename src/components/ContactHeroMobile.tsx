@@ -21,7 +21,8 @@ const ContactHeroMobile = () => {
           </div>
 
           {/* 2. SEMI-CIRCLES (The Crown) - z-0 */}
-          <div className="absolute top-[-15%] w-full h-[30%] z-0 pointer-events-none flex items-end justify-center overflow-visible">
+          {/* Added max-[500px]:top-[-28%] to pull the arches up on small screens so they don't sink behind the form */}
+          <div className="absolute top-[-15%] max-[500px]:top-[-20%] w-full h-[30%] z-0 pointer-events-none flex items-end justify-center overflow-visible">
             <svg
               viewBox="0 0 400 200"
               className="w-[115%] h-auto overflow-visible"

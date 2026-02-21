@@ -45,7 +45,8 @@ const FAQ: React.FC = () => {
 
         {/* ACCORDION CONTAINER */}
         <div className="mx-auto w-full faq-card-container">
-          <div className="w-full border border-[#0c7a7f]/30 bg-black/40 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] faq-glass-card">
+          {/* Removed shadow-[0_20px_50px_rgba(0,0,0,0.5)] to remove glow */}
+          <div className="w-full border border-[#0c7a7f]/30 bg-black/40 backdrop-blur-2xl overflow-hidden faq-glass-card">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem
@@ -95,7 +96,7 @@ const FAQ: React.FC = () => {
         .faq-header-wrapper { margin-bottom: 2rem; }
         .faq-main-title { font-size: 26.5px; }
         .faq-card-container { max-width: 100%; }
-        .faq-glass-card { border-radius: 1rem; min-height: 200px; } /* Added min-height */
+        .faq-glass-card { border-radius: 1rem; min-height: 250px; } /* Increased min-height */
         .faq-item { padding: 0 1.25rem; }
         .faq-trigger { font-size: 12px; padding: 1.25rem 0; line-height: 1.4; }
         .faq-content-text { font-size: 11px; padding-bottom: 1.25rem; line-height: 1.6; }
@@ -108,7 +109,7 @@ const FAQ: React.FC = () => {
           .faq-section { padding: 0rem 0; }
           .faq-main-title { font-size: 38px; }
           .faq-card-container { max-width: 550px; }
-          .faq-glass-card { min-height: 300px; } /* Added min-height */
+          .faq-glass-card { min-height: 350px; } /* Increased min-height */
           .faq-item { padding: 0 2rem; }
           .faq-trigger { font-size: 13px; padding: 1.5rem 0; }
           .faq-content-text { font-size: 12px; padding-bottom: 1.5rem; }
@@ -120,7 +121,7 @@ const FAQ: React.FC = () => {
           .faq-header-wrapper { margin-bottom: 3rem; }
           .faq-main-title { font-size: 45px; }
           .faq-card-container { max-width: 750px; }
-          .faq-glass-card { min-height: 250px; } /* Added min-height */
+          .faq-glass-card { min-height: 400px; } /* Increased min-height */
           .faq-item { padding: 0 2.5rem; }
           .faq-trigger { font-size: 14px; padding: 1.75rem 0; }
           .faq-content-text { font-size: 13px; }
@@ -131,7 +132,7 @@ const FAQ: React.FC = () => {
         @media (min-width: 1440px) {
           .faq-main-title { font-size: 48px; }
           .faq-card-container { max-width: 950px; }
-          .faq-glass-card { min-height: 400px; } /* Added min-height */
+          .faq-glass-card { min-height: 450px; } /* Increased min-height */
           .faq-trigger { font-size: 15px; }
           .faq-content-text { font-size: 14px; }
           .faq-all-btn { height: 3rem; padding: 0 2rem; font-size: 0.85rem; }
@@ -143,7 +144,7 @@ const FAQ: React.FC = () => {
           .faq-header-wrapper { margin-bottom: 5rem; }
           .faq-main-title { font-size: 85px; }
           .faq-card-container { max-width: 1650px; }
-          .faq-glass-card { border-radius: 2rem; min-height: 500px; } /* Scaled min-height */
+          .faq-glass-card { border-radius: 2rem; min-height: 600px; } /* Increased min-height */
           .faq-item { padding: 0 4rem; }
           .faq-trigger { font-size: 28px; padding: 3.5rem 0; }
           .faq-content-text { font-size: 27px; padding-bottom: 3.5rem; }
