@@ -29,18 +29,13 @@ const ServiceNavigationBanner = ({
         {/* THE MAIN GLASS CARD - High transparency with 2px blur & UPDATED 1rem Radius */}
         <div className="relative w-full rounded-[2rem] lg:rounded-[2rem] overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-[2px] shadow-[0_40px_100px_rgba(0,0,0,0.5)] nav-banner-card">
           
-          {/* STATIC AMBIENT GLOWS - Re-engineered for extreme corner bleed */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
+          {/* STATIC AMBIENT GLOWS - ADDED: rounded-[2rem] and overflow-hidden to clip glows to the box */}
+          <div className="absolute inset-0 z-0 pointer-events-none rounded-[2rem] overflow-hidden">
             <div className="absolute -top-[120%] -left-[10%] w-[60%] h-[250%] bg-[#00d8ff]/15 blur-[130px] rounded-full opacity-20" />
             
-            {/* THE EXTREME CORNER GLOW: MOVED DEEPER INTO THE CORNER */}
-            {/* Changed: 
-                1. Added -bottom-[15%] and -right-[10%] to push it into the corner 
-                2. Increased size to w-[60%] h-[80%] to maintain bleed 
-                3. Tightened gradient stops (30% vs 40%) for a sharper light source 
-            */}
+            {/* THE EXTREME CORNER GLOW */}
             <div 
-              className="absolute -bottom-[15%] -right-[10%] w-[60%] h-[80%] opacity-60" 
+              className="absolute -bottom-[15%] -right-[10%] w-[60%] h-[80%] opacity-60 rounded-[2rem]" 
               style={{
                 background: 'radial-gradient(circle at 100% 100%, rgba(0, 216, 255, 0.6) 0%, rgba(0, 216, 255, 0.15) 30%, transparent 70%)',
                 filter: 'blur(50px)'

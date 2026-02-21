@@ -26,7 +26,7 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
   };
 
   return (
-    <section className="relative w-full bg-transparent overflow-hidden" style={{ padding: "clamp(2rem, 8vh, 5rem) 0" }}>
+    <section className="relative w-full bg-transparent overflow-hidden" style={{ paddingTop: "clamp(2rem, 8vh, 5rem)", paddingBottom: "0.5rem" }}>
       
       {/* HEADER */}
       <div className="w-full p-0 mb-12 lg:mb-16 text-center lg:text-left relative z-20">
@@ -57,25 +57,33 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
               : "radial-gradient(circle at 50% 100%, rgba(67, 198, 228, 0.2) 0%, transparent 75%)";
 
             return (
-              <div key={index} className={`w-full flex justify-center lg:grid lg:grid-cols-2 lg:h-[450px] mb-12 lg:mb-0 relative ${index > 0 ? "lg:-mt-20" : ""}`}>
+              <div key={index} className={`w-full flex justify-center lg:grid lg:grid-cols-2 lg:h-[450px] ${isLast ? "mb-4" : "mb-12"} lg:mb-0 relative ${index > 0 ? "lg:-mt-20" : ""}`}>
                 <div className={`flex w-full justify-center items-center ${isLeft ? "lg:justify-start lg:order-1" : "lg:justify-end lg:order-2"}`}>
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    /* ANIMATION CHANGED FOR MOBILE ONLY BELOW */
+                    initial={{ 
+                      opacity: 0, 
+                      scale: (typeof window !== 'undefined' && window.innerWidth < 1024) ? 0.92 : 1,
+                      y: (typeof window !== 'undefined' && window.innerWidth < 1024) ? 0 : 25 
+                    }}
+                    whileInView={{ 
+                      opacity: 1, 
+                      scale: 1, 
+                      y: 0 
+                    }}
+                    transition={{ 
+                      duration: (typeof window !== 'undefined' && window.innerWidth < 1024) ? 0.4 : 0.6,
+                      ease: [0.22, 1, 0.36, 1]
+                    }}
+                    viewport={{ once: true, margin: "-50px" }}
                     className={`
                       relative w-full ${mobileTransform} lg:translate-x-0 mx-auto lg:mx-0 
                       backdrop-blur-xl border border-white/20 flex flex-col transition-all duration-500 
                       hover:border-[#43c6e4]/50 z-20 shadow-2xl rounded-[1.5rem] 
                       p-6
                       
-                      /* ADDED: Max width for screens below 1024px */
                       max-w-[420px] 
-                      
-                      /* 1024px Specific Dimensions (Adjusted Size/Length) */
                       lg:max-w-[300px] lg:h-[350px] lg:p-[1.8rem]
-
-                      /* Original Desktop Dimensions (Restored for 1280px+) */
                       xl:max-w-[345px] xl:h-[345px] xl:p-[2.2rem]
                     `}
                     style={{ 
@@ -129,12 +137,10 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                   </motion.div>
                 </div>
 
-                {/* LINE CONNECTION */}
                 {!isLast && (
                   <div 
                     className={`
                         hidden lg:block absolute top-1/2 h-full pointer-events-none z-0 
-                        /* Logic to position lines correctly based on new card width at 1024px */
                         ${isLeft 
                             ? "lg:left-[120px] xl:left-[190px] w-[60%]" 
                             : "lg:right-[120px] xl:right-[190px] w-[60%]"
