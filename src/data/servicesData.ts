@@ -23,7 +23,7 @@ export interface ServiceData {
   faqItems?: { question: string; answer: string }[];
 }
 
-const BASE_PATH = "/src/assets/Features images";
+const BASE_PATH = "/Features images";
 
 export const servicesData: ServiceData[] = [
   // ==================== DESIGN SERVICES ====================
