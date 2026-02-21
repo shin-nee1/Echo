@@ -2,9 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 
 import BeliefImg1 from "@/assets/what we beleive 1.png";
-import BeliefImg2 from "@/assets/what we beleive 2.png";
-import BeliefImg3 from "@/assets/what we beleive 3.png";
-import BeliefImg4 from "@/assets/what we beleive 4.png";
+import BeliefImg2 from "@/assets/What we beleive 2.png";
+import BeliefImg3 from "@/assets/What we beleive 3.png";
+import BeliefImg4 from "@/assets/What we beleive 4.png";
 
 const WhatWeBelieve = () => {
   const beliefs = [
