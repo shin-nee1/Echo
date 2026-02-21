@@ -14,7 +14,7 @@ const ServiceCard = ({ title, items }: ServiceData) => {
       // VERTICAL LENGTH ADJUSTMENT:
       // aspect-square remains for mobile/tablet/standard laptop.
       // xl:aspect-[4/5] increases vertical length for 1440px screens.
-      className="relative w-full aspect-square xl:aspect-[8/9] group"
+      className="relative w-full aspect-[3/4] xl:aspect-[8/9] group"
       style={{ zIndex: isHovered ? 100 : 10 }} 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
