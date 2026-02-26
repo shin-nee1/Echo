@@ -163,7 +163,7 @@ const WhyUsSection = () => {
 
         @media (max-width: 763px) { 
           .why-us-item-inactive { height: 11vh !important; }
-          .why-us-item-active { height: 30vh !important; }
+          .why-us-item-active { height: 33vh !important; }
         }
 
         @media (min-width: 764px) {
