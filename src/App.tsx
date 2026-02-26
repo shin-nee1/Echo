@@ -154,42 +154,42 @@ const App = () => (
             
             {/* 1. TOP LEFT BLOB */}
             <div 
-              className="absolute top-[1%] left-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
-              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+              className="absolute top-[-1%] left-[-27%] w-[80vw] h-[80vw] rounded-full blur-[120px] opacity-[0.24]"
+              style={{ background: 'radial-gradient(circle, #47c2d2 5%, transparent 45%)' }}
             />
 
             <div 
-              className="absolute top-[-2%] right-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
-              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+              className="absolute top-[-2%] right-[-25%] w-[80vw] h-[80vw] rounded-full blur-[120px] opacity-[0.24]"
+              style={{ background: 'radial-gradient(circle, #47c2d2 5%, transparent 45%)' }}
             />
             <div 
-              className="absolute top-[15%] right-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
-              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+              className="absolute top-[15%] right-[-25%] w-[80vw] h-[80vw] rounded-full blur-[120px] opacity-[0.24]"
+              style={{ background: 'radial-gradient(circle, #47c2d2 5%, transparent 45%)' }}
             />
 
             <div 
-              className="absolute top-[25%] left-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
-              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+              className="absolute top-[25%] left-[-25%] w-[80vw] h-[80vw] rounded-full blur-[120px] opacity-[0.24]"
+              style={{ background: 'radial-gradient(circle, #47c2d2 5%, transparent 45%)' }}
             />
             <div 
-              className="absolute top-[33%] right-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
-              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+              className="absolute top-[33%] right-[-25%] w-[80vw] h-[80vw] rounded-full blur-[120px] opacity-[0.24]"
+              style={{ background: 'radial-gradient(circle, #47c2d2 5%, transparent 45%)' }}
             />
             <div 
-              className="absolute top-[40%] left-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
-              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+              className="absolute top-[40%] left-[-25%] w-[80vw] h-[80vw] rounded-full blur-[120px] opacity-[0.24]"
+              style={{ background: 'radial-gradient(circle, #47c2d2 5%, transparent 45%)' }}
             />
              <div 
-              className="absolute top-[57%] right-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
-              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+              className="absolute top-[57%] right-[-25%] w-[70vw] h-[70vw] rounded-full blur-[120px] opacity-[0.24]"
+              style={{ background: 'radial-gradient(circle, #47c2d2 5%, transparent 45%)' }}
             />
             <div 
-              className="absolute top-[57%] left-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
-              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+              className="absolute top-[57%] left-[-25%] w-[70vw] h-[70vw] rounded-full blur-[120px] opacity-[0.24]"
+              style={{ background: 'radial-gradient(circle, #47c2d2 5%, transparent 45%)' }}
             />
             <div 
-              className="absolute top-[77%] left-[-25%] w-[70vw] h-[70vw] rounded-full blur-[110px] opacity-[0.15]"
-              style={{ background: 'radial-gradient(circle, #43c6e4 0%, transparent 50%)' }}
+              className="absolute top-[77%] left-[-25%] w-[80vw] h-[80vw] rounded-full blur-[120px] opacity-[0.24]"
+              style={{ background: 'radial-gradient(circle, #59afb0 5%, transparent 45%)' }}
             />
             {/* GRID OVERLAY (Stretches the full height) */}
             <div 

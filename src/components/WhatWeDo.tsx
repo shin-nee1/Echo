@@ -43,9 +43,7 @@ const WhatWeDo = () => {
 
   return (
     <section className="whatwedo-wrapper relative bg-transparent overflow-hidden z-10">
-      {/* INNER CONTAINER: 
-        This restores the alignment so your text lines up with the rest of the app 
-      */}
+      {/* INNER CONTAINER */}
       <div className="mx-auto px-[5vw] relative z-10" style={{ maxWidth: "2200px" }}>
         
         {/* HEADER AREA */}
@@ -53,7 +51,7 @@ const WhatWeDo = () => {
           <div className="flex flex-row items-end gap-[0.75rem] md:gap-[2rem]">
             <div className="shrink-0">
               <h2 className="whatwedo-title text-white font-bold tracking-tighter leading-none">
-                What We <span className="text-[#43c6e4]">Do</span>
+                What We <span className="text-[#47c2d2]">Do</span>
               </h2>
             </div>
             
@@ -70,13 +68,13 @@ const WhatWeDo = () => {
           <div className="whatwedo-nav hidden lg:flex gap-[0.75rem]">
             <button 
               onClick={() => scroll("left")} 
-              className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] hover:border-[#43c6e4] transition-all w-10 h-10"
+              className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#47c2d2] hover:border-[#47c2d2] transition-all w-10 h-10"
             >
               <ArrowLeft size="1rem" />
             </button>
             <button 
               onClick={() => scroll("right")} 
-              className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#43c6e4] hover:border-[#43c6e4] transition-all w-10 h-10"
+              className="rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-[#47c2d2] hover:border-[#47c2d2] transition-all w-10 h-10"
             >
               <ArrowRight size="1rem" />
             </button>
@@ -122,7 +120,7 @@ const WhatWeDo = () => {
                   <h3 className="whatwedo-tag text-white font-bold  tracking-widest uppercase mb-1">
                     {service.title}
                   </h3>
-                  <p className="whatwedo-highlight text-[#43c6e4] mb-2 tracking-tight leading-tight">
+                  <p className="whatwedo-highlight text-[#47c2d2] mb-2 tracking-tight leading-tight">
                     {service.highlight}
                   </p>
                   <p className="whatwedo-desc text-slate-400 leading-snug mb-4 line-clamp-3">
@@ -130,7 +128,7 @@ const WhatWeDo = () => {
                   </p>
 
                   <div className="mt-auto">
-                    <span className="whatwedo-explore inline-flex items-center gap-2 text-[#43c6e4] font-bold uppercase tracking-wider border-b border-[#43c6e4]/40 group-hover:border-[#43c6e4] pb-1 transition-all">
+                    <span className="whatwedo-explore inline-flex items-center gap-2 text-[#47c2d2] font-bold uppercase tracking-wider border-b border-[#47c2d2]/40 group-hover:border-[#47c2d2] pb-1 transition-all">
                       Explore {service.title}
                       <ArrowRight size="0.75rem" className="group-hover:translate-x-1 transition-transform" />
                     </span>
@@ -148,7 +146,7 @@ const WhatWeDo = () => {
           </p>
           <div className="w-full mt-3">
             <p className="text-white font-bold text-base md:text-lg tracking-tight">
-              Together, They create your <span className="text-[#43c6e4]">echo.</span>
+              Together, They create your <span className="text-[#47c2d2]">echo.</span>
             </p>
             {/* ANIMATED WAVE SVG UNDERLINE */}
             <div className="flex justify-center mt-1 overflow-hidden">
@@ -156,7 +154,7 @@ const WhatWeDo = () => {
                 <path 
                   className="wave-path"
                   d="M-100 8C-80 8 -70 2 -50 2C-30 2 -20 8 0 8C20 8 30 2 50 2C70 2 80 8 100 8C120 8 130 2 150 2C170 2 180 8 200 8C220 8 230 2 250 2C270 2 280 8 300 8" 
-                  stroke="#43c6e4" 
+                  stroke="#47c2d2" 
                   strokeWidth="2.5" 
                   strokeLinecap="round"
                 />
@@ -167,7 +165,6 @@ const WhatWeDo = () => {
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        /* THE BREAKOUT LOGIC: Forces full width even inside padded parents */
         .whatwedo-wrapper {
           width: 100vw;
           position: relative;
@@ -183,7 +180,7 @@ const WhatWeDo = () => {
           -ms-overflow-style: none;
           scrollbar-width: none;
           -webkit-overflow-scrolling: touch;
-          scroll-behavior: smooth; /* Added for smoother CSS-based scrolling */
+          scroll-behavior: smooth;
         }
         .whatwedo-scroll-container::-webkit-scrollbar { display: none; }
 
@@ -192,7 +189,6 @@ const WhatWeDo = () => {
         }
 
         .whatwedo-glass-layer {
-          /* Reduced blur from 8px to 3px for high transparency */
           backdrop-filter: blur(3px);
           -webkit-backdrop-filter: blur(3px);
           background: radial-gradient(
@@ -204,17 +200,17 @@ const WhatWeDo = () => {
         }
 
         .whatwedo-card-link:hover .whatwedo-card {
-          border-color: rgba(67, 198, 228, 0.4);
+          border-color: rgba(71, 194, 210, 0.4);
         }
 
         .whatwedo-card-link:hover .whatwedo-glass-layer {
           background: radial-gradient(
             circle at 100% 100%, 
-            rgba(67, 198, 228, 0.18) 0%, 
+            rgba(71, 194, 210, 0.18) 0%, 
             transparent 75%
           );
           box-shadow: 
-            inset -20px -20px 60px rgba(67, 198, 228, 0.15),
+            inset -20px -20px 60px rgba(71, 194, 210, 0.15),
             0 25px 50px rgba(0, 0, 0, 0.4);
         }
 
@@ -242,7 +238,6 @@ const WhatWeDo = () => {
         .whatwedo-desc { font-size: 0.75rem; }
         .whatwedo-explore { font-size: 9px; }
         
-        /* RIBBON STYLES */
         .whatwedo-ribbon p { font-size: 1rem; }
         .whatwedo-ribbon .uppercase { 
             font-size: 0.75rem; 

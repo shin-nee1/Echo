@@ -39,14 +39,13 @@ const FAQ: React.FC = () => {
         {/* HEADER */}
         <div className="flex flex-col items-center text-center faq-header-wrapper">
           <h2 className="text-white font-bold tracking-tight leading-[1.1] faq-main-title">
-            Frequently Asked <span className="text-[#43c6e4]">Questions</span>
+            Frequently Asked <span className="text-[#47c2d2]">Questions</span>
           </h2>
         </div>
 
         {/* ACCORDION CONTAINER */}
         <div className="mx-auto w-full faq-card-container">
-          {/* Removed shadow-[0_20px_50px_rgba(0,0,0,0.5)] to remove glow */}
-          <div className="w-full border border-[#0c7a7f]/30 bg-black/40 backdrop-blur-2xl overflow-hidden faq-glass-card">
+          <div className="w-full border border-[#47c2d2]/20 bg-black/40 backdrop-blur-2xl overflow-hidden faq-glass-card">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem
@@ -55,7 +54,7 @@ const FAQ: React.FC = () => {
                   className="relative border-b-0 faq-item"
                 >
                   <AccordionTrigger 
-                    className="text-white hover:text-[#43c6e4] transition-colors text-left font-medium border-none outline-none focus:outline-none faq-trigger"
+                    className="text-white hover:text-[#47c2d2] transition-colors text-left font-medium border-none outline-none focus:outline-none faq-trigger"
                   >
                     {faq.question}
                   </AccordionTrigger>
@@ -69,7 +68,7 @@ const FAQ: React.FC = () => {
                   {/* CUSTOM DIVIDER */}
                   {index !== faqs.length - 1 && (
                     <div 
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-[#0c7a7f]/20 faq-divider" 
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-[#47c2d2]/10 faq-divider" 
                     />
                   )}
                 </AccordionItem>
@@ -82,7 +81,8 @@ const FAQ: React.FC = () => {
             <Button
               asChild
               variant="cyan"
-              className="rounded-full flex items-center justify-center transition-transform hover:scale-105 faq-all-btn"
+              size="lg"
+              className="shadow-none hover:shadow-none" // Explicitly removing any shadow/glow
             >
               <Link to="/faq">View All FAQs</Link>
             </Button>
@@ -96,20 +96,20 @@ const FAQ: React.FC = () => {
         .faq-header-wrapper { margin-bottom: 2rem; }
         .faq-main-title { font-size: 26.5px; }
         .faq-card-container { max-width: 100%; }
-        .faq-glass-card { border-radius: 1rem; min-height: 250px; } /* Increased min-height */
+        .faq-glass-card { border-radius: 1rem; min-height: 250px; }
         .faq-item { padding: 0 1.25rem; }
         .faq-trigger { font-size: 12px; padding: 1.25rem 0; line-height: 1.4; }
         .faq-content-text { font-size: 11px; padding-bottom: 1.25rem; line-height: 1.6; }
         .faq-divider { height: 1px; width: 90%; }
         .faq-button-wrapper { margin-top: 1.5rem; }
-        .faq-all-btn { height: 2.5rem; padding: 0 1.5rem; font-size: 0.75rem; }
+        .faq-all-btn { height: 2.5rem; padding: 0 1.5rem; font-size: 0.75rem; box-shadow: none !important; }
 
         /* 2. TABLET (768px - 1023px) */
         @media (min-width: 768px) {
           .faq-section { padding: 0rem 0; }
           .faq-main-title { font-size: 38px; }
           .faq-card-container { max-width: 550px; }
-          .faq-glass-card { min-height: 350px; } /* Increased min-height */
+          .faq-glass-card { min-height: 350px; }
           .faq-item { padding: 0 2rem; }
           .faq-trigger { font-size: 13px; padding: 1.5rem 0; }
           .faq-content-text { font-size: 12px; padding-bottom: 1.5rem; }
@@ -121,7 +121,7 @@ const FAQ: React.FC = () => {
           .faq-header-wrapper { margin-bottom: 3rem; }
           .faq-main-title { font-size: 45px; }
           .faq-card-container { max-width: 750px; }
-          .faq-glass-card { min-height: 400px; } /* Increased min-height */
+          .faq-glass-card { min-height: 400px; }
           .faq-item { padding: 0 2.5rem; }
           .faq-trigger { font-size: 14px; padding: 1.75rem 0; }
           .faq-content-text { font-size: 13px; }
@@ -132,7 +132,7 @@ const FAQ: React.FC = () => {
         @media (min-width: 1440px) {
           .faq-main-title { font-size: 48px; }
           .faq-card-container { max-width: 950px; }
-          .faq-glass-card { min-height: 450px; } /* Increased min-height */
+          .faq-glass-card { min-height: 450px; }
           .faq-trigger { font-size: 15px; }
           .faq-content-text { font-size: 14px; }
           .faq-all-btn { height: 3rem; padding: 0 2rem; font-size: 0.85rem; }
@@ -144,7 +144,7 @@ const FAQ: React.FC = () => {
           .faq-header-wrapper { margin-bottom: 5rem; }
           .faq-main-title { font-size: 85px; }
           .faq-card-container { max-width: 1650px; }
-          .faq-glass-card { border-radius: 2rem; min-height: 600px; } /* Increased min-height */
+          .faq-glass-card { border-radius: 2rem; min-height: 600px; }
           .faq-item { padding: 0 4rem; }
           .faq-trigger { font-size: 28px; padding: 3.5rem 0; }
           .faq-content-text { font-size: 27px; padding-bottom: 3.5rem; }

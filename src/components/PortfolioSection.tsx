@@ -129,7 +129,7 @@ const PortfolioSection = () => {
         <div className="portfolio-header">
           <div className="shrink">
             <h2 className="portfolio-title">
-              Explore <span className="text-[#43c6e4]">Our Portfolio</span>
+              Explore <span className="text-[#47c2d2]">Our Portfolio</span>
             </h2>
           </div>
 

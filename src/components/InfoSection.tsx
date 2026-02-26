@@ -27,7 +27,7 @@ const InfoSection = ({
           <div className="info-text-side">
             <div className="info-header-wrapper">
               <h2 className="text-white font-bold tracking-tight leading-[1.1] info-title">
-                {title} <span className="text-[#43c6e4]">{highlight}</span>
+                {title} <span className="text-[#47c2d2]">{highlight}</span>
               </h2>
             </div>
 
@@ -35,7 +35,7 @@ const InfoSection = ({
               {paragraphs.map((p, i) => (
                 <p 
                   key={i} 
-                  className="text-slate-400/70 font-light leading-relaxed info-p-text"
+                  className="text-white-400/70 font-light leading-relaxed info-p-text"
                 >
                   {p}
                 </p>

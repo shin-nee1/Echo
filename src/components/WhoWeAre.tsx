@@ -12,7 +12,6 @@ const WhoWeAre = () => {
           {/* IMAGE SIDE (Left on Desktop) */}
           <div className="whoweare-img-side relative flex justify-center items-center">
             <div className="whoweare-img-container relative w-full group">
-              {/* REMOVED filter drop-shadow-[...] classes */}
               <img 
                 src={WhoWeAreImg} 
                 alt="Who We Are" 
@@ -25,7 +24,7 @@ const WhoWeAre = () => {
           <div className="whoweare-content">
             <div className="whoweare-title-box relative inline-block">
               <h2 className="whoweare-title text-white font-bold tracking-tight leading-[1.1]">
-                Who We <span className="text-[#43c6e4]">Are</span>
+                Who We <span className="text-[#47c2d2]">Are</span>
               </h2>
             </div>
 
@@ -51,7 +50,10 @@ const WhoWeAre = () => {
             </div>
 
             <div className="whoweare-btn-box">
-              <Button variant="cyan" size="hero" className="whoweare-btn">
+              <Button 
+                variant="cyan" 
+                size="hero"
+              >
                 Read More
               </Button>
             </div>
@@ -78,8 +80,8 @@ const WhoWeAre = () => {
           height: clamp(2.6rem, 5vw, 3rem) !important;
           padding: 0 clamp(1.8rem, 4vw, 2rem) !important;
           font-size: clamp(0.85rem, 2vw, 1rem) !important;
-          box-shadow: none !important; /* Removes the glow */
-          font-weight: 400 !important;   /* Removes the bold */
+          box-shadow: none !important; 
+          font-weight: 400 !important;   
         }
 
         /* --- TABLET VIEW (768px - 1023px) --- */
