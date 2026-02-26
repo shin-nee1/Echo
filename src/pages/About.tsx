@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
 import AboutHero from "@/components/AboutHero";
 import VisionSection from "@/components/VisionSection";
 import HowWeWork from "@/components/HowWeWork"; 
@@ -12,7 +11,6 @@ const About = () => {
   return (
     /* Removed bg-[#010a0f] - now inherits from App.tsx/layout */
     <div className="min-h-screen text-white selection:bg-[#00d8ff]/30">
-      <Navbar />
       <AboutHero />
       <VisionSection />
       <HowWeWork />

@@ -28,7 +28,7 @@ const ServicesGrid = ({ title, highlight, services }: ServicesGridProps) => {
             xl:text-[3.5rem]   
             /* 4. Large Laptops/4K (1280px/1440px+) */
           ">
-            {title} <span className="text-[#00d8ff]">{highlight}</span>
+            {title} <span className="text-[#47c2d2]">{highlight}</span>
           </h2>
         </div>
 

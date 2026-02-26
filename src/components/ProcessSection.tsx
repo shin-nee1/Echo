@@ -21,7 +21,7 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
     laptopSize: "2.3rem",
     desktop4kSize: "3rem",
     titleWeight: "font-bold",
-    highlightColor: "#43c6e4",
+    highlightColor: "#47c2d2",
     titleColor: "text-white"
   };
 
@@ -53,8 +53,8 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
             // GLOW LOGIC
             const isTopGlow = index % 2 === 0; 
             const glowGradient = isTopGlow 
-              ? "radial-gradient(circle at 50% 0%, rgba(67, 198, 228, 0.2) 0%, transparent 75%)"
-              : "radial-gradient(circle at 50% 100%, rgba(67, 198, 228, 0.2) 0%, transparent 75%)";
+              ? "radial-gradient(circle at 50% 0%, rgba(71, 194, 210, 0.2) 0%, transparent 75%)"
+              : "radial-gradient(circle at 50% 100%, rgba(71, 194, 210, 0.2) 0%, transparent 75%)";
 
             return (
               <div key={index} className={`w-full flex justify-center lg:grid lg:grid-cols-2 lg:h-[450px] ${isLast ? "mb-4" : "mb-12"} lg:mb-0 relative ${index > 0 ? "lg:-mt-20" : ""}`}>
@@ -79,7 +79,7 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                     className={`
                       relative w-full ${mobileTransform} lg:translate-x-0 mx-auto lg:mx-0 
                       backdrop-blur-xl border border-white/20 flex flex-col transition-all duration-500 
-                      hover:border-[#43c6e4]/50 z-20 shadow-2xl rounded-[1.5rem] 
+                      hover:border-[#47c2d2]/50 z-20 shadow-2xl rounded-[1.5rem] 
                       p-6
                       
                       max-w-[420px] 
@@ -101,7 +101,7 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                           />
                         </div>
                         <div className="w-full text-left mt-4">
-                          <span className="inline-block px-6 py-1 rounded-full bg-[#43c6e4]/15 backdrop-blur-xl border border-[#43c6e4]/30 text-white font-bold text-[0.7rem] mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
+                          <span className="inline-block px-6 py-1 rounded-full bg-[#47c2d2]/15 backdrop-blur-xl border border-[#47c2d2]/30 text-white font-bold text-[0.7rem] mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
                             {step.number}
                           </span>
                           <h3 className="font-bold text-white uppercase mb-2 text-base tracking-widest leading-tight">
@@ -115,7 +115,7 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                     ) : (
                       <>
                         <div className="w-full text-left mb-4">
-                          <span className="inline-block px-6 py-1 rounded-full bg-[#43c6e4]/15 backdrop-blur-xl border border-[#43c6e4]/30 text-white font-bold text-[0.7rem] mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
+                          <span className="inline-block px-6 py-1 rounded-full bg-[#47c2d2]/15 backdrop-blur-xl border border-[#47c2d2]/30 text-white font-bold text-[0.7rem] mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
                             {step.number}
                           </span>
                           <h3 className="font-bold text-white uppercase mb-2 text-base tracking-widest leading-tight">
@@ -150,8 +150,8 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                     <svg width="100%" height="90%" viewBox="0 0 100 100" preserveAspectRatio="none" className="overflow-visible">
                       <path
                         d={isLeft ? "M 0 0 L 85 0 Q 100 0 100 15 L 100 100" : "M 100 0 L 15 0 Q 0 0 0 15 L 0 100"}
-                        stroke="#43c6e4" strokeOpacity="0.8" strokeWidth="2" strokeDasharray="6 6" fill="none" vectorEffect="non-scaling-stroke"
-                        style={{ filter: "drop-shadow(0 0 8px rgba(67, 198, 228, 0.6))" }}
+                        stroke="#47c2d2" strokeOpacity="0.8" strokeWidth="2" strokeDasharray="6 6" fill="none" vectorEffect="non-scaling-stroke"
+                        style={{ filter: "drop-shadow(0 0 8px rgba(71, 194, 210, 0.6))" }}
                       />
                     </svg>
                   </div>

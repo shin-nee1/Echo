@@ -21,14 +21,14 @@ const IndexHero: React.FC = () => {
   return (
     <section className="hero-wrapper relative flex flex-col items-center justify-center overflow-hidden w-screen">
       
-      {/* IMPROVED VISIBLE GRID */}
+      {/* IMPROVED VISIBLE GRID - MATCHED TO EXACT BRAND COLOR #47c2d2 */}
       <div 
         className="hero-grid-bg absolute inset-0 pointer-events-none" 
         style={{
           zIndex: 1,
           backgroundImage: `
-            linear-gradient(rgba(67, 198, 228, 0.15) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(67, 198, 228, 0.15) 1px, transparent 1px)
+            linear-gradient(rgba(71, 194, 210, 0.15) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(71, 194, 210, 0.15) 1px, transparent 1px)
           `,
           backgroundSize: '50px 50px',
           backgroundPosition: 'center center',
@@ -39,7 +39,7 @@ const IndexHero: React.FC = () => {
 
       <div className="container relative z-10 mx-auto px-[5vw] text-center">
         <h1 className="hero-title font-bold text-white mx-auto">
-          We Create The <span className="text-[#43c6e4]">Echo</span>,
+          We Create The <span className="text-[#47c2d2]">Echo</span>,
           <br className="block" />
           You Make The Impact.
         </h1>
@@ -50,17 +50,15 @@ const IndexHero: React.FC = () => {
         </div>
 
         <div className="hero-link-container">
-          <a href="#" className="hero-link text-[#43c6e4] transition-all font-semibold border-b border-transparent hover:border-[#43c6e4]">
+          <a href="#" className="hero-link text-[#47c2d2] transition-all font-semibold border-b border-transparent hover:border-[#47c2d2]">
             Access Your Free Project Guide
           </a>
         </div>
 
         <div className="hero-btn-container">
-          {/* UPDATED BUTTON: Reduced color opacity and removed bold */}
           <Button 
             variant="cyan" 
             size="hero" 
-            className="hero-btn font-normal bg-[#43c6e4]/80 hover:bg-[#43c6e4] text-white"
           >
             Start Project
           </Button>
@@ -71,12 +69,11 @@ const IndexHero: React.FC = () => {
           <AnimatePresence initial={false}>
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, y: "100%" }} // New image starts fully below
-              animate={{ opacity: 1, y: 0 }}      // New image moves to center
-              exit={{ opacity: 0, y: "100%" }}    // Old image passes through to the top
+              initial={{ opacity: 0, y: "100%" }} 
+              animate={{ opacity: 1, y: 0 }}      
+              exit={{ opacity: 0, y: "100%" }}    
               transition={{ 
                 duration: 0.5, 
-                // A more sophisticated "passing" ease
               }}
               className="absolute inset-0 w-full h-full flex items-center justify-center"
             >
@@ -95,8 +92,6 @@ const IndexHero: React.FC = () => {
           padding-top: clamp(6.5rem, 10vh, 8rem); 
           padding-bottom: clamp(1.5rem, 5vh, 3rem);
           min-height: 80vh;
-          
-          /* BREAKOUT LOGIC: Forces full width even inside padded parents */
           width: 100vw;
           position: relative;
           left: 50%;
@@ -136,7 +131,7 @@ const IndexHero: React.FC = () => {
           width: 100%;
           height: clamp(220px, 25vh, 300px); 
           margin: 0 auto;
-          overflow: visible; /* Allows images to be seen as they pass the boundaries */
+          overflow: visible; 
         }
 
         @media (min-width: 768px) {
