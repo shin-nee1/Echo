@@ -114,27 +114,34 @@ const InfoSection = ({
           .info-image-side { width: 30%; justify-content: flex-end; padding-top: 0.3rem; }
           .info-image-inner { max-width: 250px; }
         }
-
-        /* 4. LARGE DESKTOP (1440px - 2559px) */
+        
+        /* 4. LARGE DESKTOP (1440px - 2559px) - FIXED OVERLAP & SPACING */
         @media (min-width: 1440px) {
-          .info-container { padding: 0 6vw !important; max-width: 69% !important; }
-          .info-flex-wrapper { gap: 2vw; }
-          .info-text-side { width: 60%; }
-          .info-title { font-size: 2.75rem; }
-          .info-p-text { font-size: 1.2rem; max-width: 700px; }
-          .info-image-side { width: 50%; justify-content: flex-end; padding-top: 0.3rem; }}
-          .info-image-inner { max-width: 250px; }
+        .info-container { max-width: 1300px !important; margin: 0 auto; padding: 0 0vw !important; }
+        .info-flex-wrapper { gap: 5vw; }
+        .info-text-side { width: 50%; }
+        .info-title { font-size: 3rem; }
+        .info-p-text { font-size: 1.25rem; max-width: 650px; }
+        .info-image-side { width: 40%; justify-content: flex-end; }
+        .info-image-inner { max-width: 320px; }
         }
 
         /* 5. 4K MONITORS (2560px+) */
         @media (min-width: 2560px) {
-          .info-container { padding: 0 12vw !important; max-width: 69% !important; }
-          .info-section-wrapper { padding: 12rem 0; }
-          .info-title { font-size: 7rem; margin-bottom: 4rem; }
+          .info-container { padding: 0 0vw !important; max-width: 100% !important; }
+          .info-flex-wrapper { 
+          gap: 5vw; /* Significantly increased to prevent the laptop from feeling 'stuck' to the text */}
+          .info-title { font-size: 6rem; margin-bottom: 3rem; }
           .info-p-text { font-size: 2rem; max-width: 1100px; }
           .info-paragraphs-gap { gap: 2.5rem; }
-          .info-image-inner { max-width: 800px; }
+          .info-image-inner { max-width: 580px; }
         }
+          .info-image-side {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end; /* Changed from flex-end to move it left */
+    padding-right: 3vw; /* Keeps it from hitting the text while moving it left */
+  }
       `}} />
     </section>
   );
