@@ -99,25 +99,45 @@ const InfoSectionTWO = ({
           .info-image-side { width: 45%; justify-content: flex-end; padding-top: 3rem; }
           .info-image-inner { max-width: 470px; }
         }
-
         /* 4. LARGE DESKTOP (1440px - 2559px) */
         @media (min-width: 1440px) {
-        .info-container { padding: 0 3vw !important; max-width: 70% !important; }
-          .info-flex-wrapper { gap: 6vw; }
-          .info-text-side { width: 55%; }
-          .info-title { font-size: 2.55rem; }
-          .info-p-text { font-size: 1.2rem; max-width: 750px; }
-          .info-image-inner { max-width: 550px; }
+        .info-container { 
+        padding: 0 0vw !important; 
+        max-width: 100% !important; /* Increased from 70% to give the internal flexbox more "breathing room" */
         }
-
+        .info-flex-wrapper { 
+    gap: 5vw; /* Increased gap for a more premium, airy feel */
+    align-items: center; /* Centers the phone vertically against the text block */
+  }
+  .info-text-side { 
+    width: 55%; /* Reduced from 55% to prevent crowding the image */
+  }
+  .info-title { 
+    font-size: 3rem; /* Slightly larger to match the scale of a large screen */
+    margin-bottom: 2.5rem; 
+  }
+  .info-p-text { 
+    font-size: 1.15rem; 
+    max-width: 680px; /* Constraining text width improves readability */
+    line-height: 1.8; 
+  }
+  .info-image-side { 
+    width: 55%; 
+    display: flex; 
+    justify-content: flex-end; 
+  }
+  .info-image-inner { 
+    max-width: 500px; /* 550px was too large for a 1440px screen, causing the 'cramped' look */
+  }
+}
         /* 5. 4K MONITORS (2560px+) */
         @media (min-width: 2560px) {
-          .info-container { padding: 0 3vw !important; max-width: 70% !important; }
+          .info-container { padding: 0 0vw !important; max-width: 100% !important; }
           .info-section-wrapper { padding: 1rem 0; }
           .info-title { font-size: 5rem; margin-bottom: 3.2rem; }
           .info-p-text { font-size: 1.75rem; max-width: 1200px; }
           .info-paragraphs-gap { gap: 1.7rem; }
-          .info-image-inner { max-width: 1000px; }
+          .info-image-inner { max-width: 800px; }
         }
       `}} />
     </section>
