@@ -267,9 +267,9 @@ Whether you're launching your first MVP, building a full mobile product, or tran
     },
     features: [
       { title: "iOS & Android Application Development", description: "Native mobile experiences.", imageSrc: `${BASE_PATH}/ios and andriod app dev.png` },
-      { title: "App UI Integration & Interaction Flows", description: "Seamless mobile interfaces.", imageSrc: `${BASE_PATH}/app ui integration and interaction.png` },
+      { title: "App UI Integration & Interaction Flows", description: "Seamless mobile interfaces.", imageSrc: `${BASE_PATH}/app ui integration and interaction flows.png` },
       { title: "API Connectivity & Backend Structure", description: "Robust data handling.", imageSrc: `${BASE_PATH}/api conectivity.png` },
-      { title: "Performance Optimization & Device Testing", description: "Smooth performance on all devices.", imageSrc: `${BASE_PATH}/performance optimization and testing.png` },
+      { title: "Performance Optimization & Device Testing", description: "Smooth performance on all devices.", imageSrc: `${BASE_PATH}/performance optimization and device.png` },
       { title: "App Deployment & Store Submission", description: "Launching to App Store & Play Store.", imageSrc: `${BASE_PATH}/app deployment and store.png` },
     ],
   },
@@ -325,9 +325,8 @@ Whether you’re launching a new product, scaling an existing one, or expanding 
       imageAlt: "Paid media campaign dashboard",
     },
     features: [
-      { title: "Data, Tracking & Optimization", description: "Measurement tracking for ROAS.", imageSrc: `${BASE_PATH}/performance monitoing and insights.png` },
       { title: "Audience Strategy", description: "Targeting your ideal customer.", imageSrc: `${BASE_PATH}/audience strategy.png` },
-      { title: "Creative Direction & Ad Development", description: "Ads that stop the scroll.", imageSrc: `${BASE_PATH}/creative direction and Ad development.png` },
+      { title: "Creative Direction & Ad Development", description: "Ads that stop the scroll.", imageSrc: `${BASE_PATH}/creative direction and Ad dev.png` },
       { title: "Full-Funnel Campaign Structure", description: "Awareness to conversion.", imageSrc: `${BASE_PATH}/full funnel campaign.png` },
       { title: "Cross-Platform Execution", description: "Omnichannel advertising.", imageSrc: `${BASE_PATH}/cross platform integration.png` },
       { title: "Landing Page & Offer Alignment", description: "Matching ads to destination.", imageSrc: `${BASE_PATH}/landing page funnel.png` },
@@ -358,8 +357,7 @@ Whether you need a full content overhaul, long term management, or a system buil
       { title: "Creative Content Production", description: "High-quality social assets.", imageSrc: `${BASE_PATH}/creative content production.png` },
       { title: "Platform Management And Publishing", description: "Consistent posting schedules.", imageSrc: `${BASE_PATH}/platform management and publishing.png` },
       { title: "Community Interaction And Growth", description: "Engaging with your audience.", imageSrc: `${BASE_PATH}/community interaction and growth.png` },
-      { title: "Performance Monitoring And Insights", description: "Tracking social KPIs.", imageSrc: `${BASE_PATH}/performance monitoing and insights.png` },
-      { title: "Content Frameworks And Branding Consistency", description: "Unified brand voice.", imageSrc: `${BASE_PATH}/visual lang.png` },
+      
     ],
   },
   {
@@ -388,7 +386,6 @@ Whether you’re improving existing rankings, launching a new site, or creating 
       { title: "Content Architecture & Strategy", description: "Planning for organic growth.", imageSrc: `${BASE_PATH}/content architecture and strategy.png` },
       { title: "Blog & Resource Development", description: "Content that ranks and converts.", imageSrc: `${BASE_PATH}/blog and resourece dev.png` },
       { title: "Local & Global SEO Setup", description: "Ranking in your target markets.", imageSrc: `${BASE_PATH}/landing page optimization.png` },
-      { title: "Performance Monitoring & Refinement", description: "Continuous SEO improvement.", imageSrc: `${BASE_PATH}/performance monitoing and insights.png` },
     ],
   },
   {
@@ -415,8 +412,7 @@ Whether you need a full lifecycle build, ongoing campaigns, or a complete overha
       { title: "Campaign Strategy And Execution", description: "Targeted promotional blasts.", imageSrc: `${BASE_PATH}/campaign strat and execute.png` },
       { title: "Segmentation And Personalization", description: "Hyper-relevant messaging.", imageSrc: `${BASE_PATH}/segmentation and personalization.png` },
       { title: "SMS Strategy And Short-Form Messaging", description: "Direct mobile engagement.", imageSrc: `${BASE_PATH}/sms strat and short form.png` },
-      { title: "Design And Content Production", description: "Beautiful emails that convert.", imageSrc: `${BASE_PATH}/creative content production.png` },
-      { title: "Performance Tracking And Optimization", description: "Improving open and click rates.", imageSrc: `${BASE_PATH}/performance monitoing and insights.png` },
+      { title: "Design And Content Production", description: "Beautiful emails that convert.", imageSrc: `${BASE_PATH}/design and content produciton.png` },
     ],
   },
   {
@@ -440,11 +436,10 @@ Whether you need a clean tracking setup, deeper visibility, improved attribution
     },
     features: [
       { title: "Analytics Setup And Configuration", description: "Robust data foundation.", imageSrc: `${BASE_PATH}/analytics setup and configure.png` },
-      { title: "Event Tracking And User Behavior Mapping", description: "Understanding user actions.", imageSrc: `${BASE_PATH}/event tracing and user behavior.png` },
+      { title: "Event Tracking And User Behavior Mapping", description: "Understanding user actions.", imageSrc: `${BASE_PATH}/event tracting and user behaviour.png` },
       { title: "Attribution And Conversion Tracking", description: "Knowing what drives sales.", imageSrc: `${BASE_PATH}/attribution and conversion.png` },
-      { title: "Dashboards And Reporting", description: "Visualizing key metrics.", imageSrc: `${BASE_PATH}/Custom dashboards.png` },
+      { title: "Dashboards And Reporting", description: "Visualizing key metrics.", imageSrc: `${BASE_PATH}/dashboard and reporting.png` },
       { title: "Funnel And Performance Audits", description: "Identifying drop-off points.", imageSrc: `${BASE_PATH}/funnel and performance audit.png` },
-      { title: "Privacy And Compliance Setup", description: "GDPR/CCPA compliant tracking.", imageSrc: `${BASE_PATH}/Analytics Hero.png` },
     ],
   },
   {
@@ -470,7 +465,7 @@ Our approach combines structured testing, audience analysis, creative strategy, 
       { title: "Platform-Specific Creative Strategy", description: "Native content for each channel.", imageSrc: `${BASE_PATH}/platform spcific creative.png` },
       { title: "Messaging And Hook Frameworks", description: "Capturing attention instantly.", imageSrc: `${BASE_PATH}/mesaaging and hook.png` },
       { title: "Content Refresh Cycles", description: "Combating ad fatigue.", imageSrc: `${BASE_PATH}/content refresh.png` },
-      { title: "Performance Tracking And Creative Insights", description: "Data-backed design decisions.", imageSrc: `${BASE_PATH}/performance monitoing and insights.png` },
+   
     ],
   },
 ];
