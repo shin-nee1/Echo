@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom"; // Added for navigation
 
 // ASSETS
 import HeroImg1 from "@/assets/image-removebg-preview (1).png";
@@ -10,6 +11,7 @@ import HeroImg3 from "@/assets/image-removebg-preview (3).png";
 const IndexHero: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [HeroImg1, HeroImg2, HeroImg3];
+  const navigate = useNavigate(); // Initialize navigation
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -59,8 +61,9 @@ const IndexHero: React.FC = () => {
           <Button 
             variant="cyan" 
             size="hero" 
+            onClick={() => navigate("/contact")} // Links to Contact.tsx route
           >
-            Start Project
+            Next →
           </Button>
         </div>
 

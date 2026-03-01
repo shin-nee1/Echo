@@ -188,7 +188,11 @@ const App = () => (
               style={{ background: 'radial-gradient(circle, #47c2d2 5%, transparent 45%)' }}
             />
             <div 
-              className="absolute top-[77%] left-[-25%] w-[80vw] h-[80vw] rounded-full blur-[120px] opacity-[0.24]"
+              className="absolute top-[77%] right-[-25%] w-[80vw] h-[80vw] rounded-full blur-[120px] opacity-[0.24]"
+              style={{ background: 'radial-gradient(circle, #59afb0 5%, transparent 45%)' }}
+            />
+            <div 
+              className="absolute top-[68%] left-[-25%] w-[80vw] h-[80vw] rounded-full blur-[120px] opacity-[0.24]"
               style={{ background: 'radial-gradient(circle, #59afb0 5%, transparent 45%)' }}
             />
             {/* GRID OVERLAY (Stretches the full height) */}

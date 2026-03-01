@@ -14,7 +14,7 @@ const ServiceCard = ({ title, items }: ServiceData) => {
       // VERTICAL LENGTH ADJUSTMENT:
       // aspect-square remains for mobile/tablet/standard laptop.
       // xl:aspect-[4/5] increases vertical length for 1440px screens.
-      className="relative w-full aspect-[3/4] xl:aspect-[8/9] group"
+      className="relative w-full aspect-[2/3] md:aspect-[6/7] lg:aspect-[5/6] xl:aspect-[3/3] 2xl:aspect-[3/4] group"
       style={{ zIndex: isHovered ? 100 : 10 }} 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -29,7 +29,7 @@ const ServiceCard = ({ title, items }: ServiceData) => {
           duration: 0.5 
         }}
         // Added xl:pb-12 to handle the extra vertical height gracefully
-        className="relative z-30 w-full h-full rounded-[2rem] bg-white/[0.04] backdrop-blur-[35px] border border-white/[0.12] p-6 lg:p-9 xl:pb-12 flex flex-col shadow-[0_40px_80px_-15px_rgba(0,0,0,0.8)] overflow-hidden will-change-transform"
+        className="relative z-30 w-full h-full rounded-[2rem] bg-white/[0.04] backdrop-blur-[35px] border border-white/[0.12] p-6 lg:p-9 xl:p-8 xl:pb-16 flex flex-col shadow-[0_40px_80px_-15px_rgba(0,0,0,0.8)] overflow-hidden will-change-transform"
       >
         <div className="absolute top-[5%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#00d8ff]/10 blur-[80px] rounded-full pointer-events-none" />
         
