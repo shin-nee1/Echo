@@ -1,6 +1,7 @@
 import React from "react";
 import { Mail, Phone, Home, ChevronDown } from "lucide-react";
 import ContactImg from "@/assets/telephone.png.png";
+import { servicesData } from "@/data/servicesData";
 
 const ContactHeroMobile = () => {
   const noiseTexture = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.60' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E")`;
@@ -21,7 +22,6 @@ const ContactHeroMobile = () => {
           </div>
 
           {/* 2. SEMI-CIRCLES (The Crown) - z-0 */}
-          {/* Added max-[500px]:top-[-28%] to pull the arches up on small screens so they don't sink behind the form */}
           <div className="absolute top-[-15%] max-[500px]:top-[-18%] w-full h-[30%] z-0 pointer-events-none flex items-end justify-center overflow-visible">
             <svg
               viewBox="0 0 400 200"
@@ -77,39 +77,72 @@ const ContactHeroMobile = () => {
               <h2 className="text-white font-bold tracking-tight text-center mb-[1.5rem] text-[1.25rem] whitespace-nowrap drop-shadow-md">
                 Tell Us About Your Project
               </h2>
+              
               <form className="grid grid-cols-2 gap-[0.75rem]">
-                {["Name", "Email", "Phone", "Company"].map((p) => (
+                {/* INPUTS */}
+                {["Name*", "Email*", "Phone*", "Company"].map((p) => (
                   <input
                     key={p}
+                    type={p === "Email*" ? "email" : "text"}
                     placeholder={p}
+                    required={p.includes("*")}
                     className="rounded-xl px-[1rem] bg-zinc-900/80 border border-white/10 text-white placeholder:text-white/40 text-[0.85rem] h-[2.75rem] focus:outline-none focus:ring-1 focus:ring-[#00d2ff]/30 transition-all shadow-inner"
                   />
                 ))}
 
+                {/* SERVICE INTEREST DROPDOWN */}
                 <div className="col-span-2 relative">
-                  <select className="w-full rounded-xl px-[1rem] bg-zinc-900/80 border border-white/10 text-white/50 text-[0.85rem] appearance-none h-[2.75rem] cursor-pointer focus:outline-none">
-                    <option className="bg-[#050a0f]">Service Interest</option>
+                  <select defaultValue="" className="w-full rounded-xl px-[1rem] bg-zinc-900/80 border border-white/10 text-white/50 text-[0.85rem] appearance-none h-[2.75rem] cursor-pointer focus:outline-none focus:text-white">
+                    <option value="" disabled className="bg-[#050a0f]">
+                      Service Interest
+                    </option>
+                    
+                    <optgroup label="Design Services" className="bg-[#050a0f]">
+                      {servicesData.filter(s => s.category === "design").map((service) => (
+                        <option key={service.slug} value={service.slug}>{service.title}</option>
+                      ))}
+                    </optgroup>
+
+                    <optgroup label="Development Services" className="bg-[#050a0f]">
+                      {servicesData.filter(s => s.category === "develop").map((service) => (
+                        <option key={service.slug} value={service.slug}>{service.title}</option>
+                      ))}
+                    </optgroup>
+
+                    <optgroup label="Marketing Services" className="bg-[#050a0f]">
+                      {servicesData.filter(s => s.category === "market").map((service) => (
+                        <option key={service.slug} value={service.slug}>{service.title}</option>
+                      ))}
+                    </optgroup>
                   </select>
                   <ChevronDown className="absolute right-[1rem] top-1/2 -translate-y-1/2 w-[1.1rem] h-[1.1rem] text-white/40 pointer-events-none" />
                 </div>
 
-                <div className="col-span-2 relative">
-                  <select className="w-full rounded-xl px-[1rem] bg-zinc-900/80 border border-white/10 text-white/50 text-[0.85rem] appearance-none h-[2.75rem] cursor-pointer focus:outline-none">
-                    <option className="bg-[#050a0f]">Budget Range</option>
-                  </select>
-                  <ChevronDown className="absolute right-[1rem] top-1/2 -translate-y-1/2 w-[1.1rem] h-[1.1rem] text-white/40 pointer-events-none" />
-                </div>
-
+                {/* PROJECT DESCRIPTION */}
                 <textarea
                   placeholder="Project Description..."
                   className="col-span-2 rounded-xl px-[1rem] py-[0.75rem] bg-zinc-900/80 border border-white/10 text-white placeholder:text-white/40 resize-none text-[0.85rem] focus:outline-none h-[6rem] shadow-inner"
                 />
 
+                {/* BUDGET RANGE (Input) */}
+                <div className="col-span-2">
+                  <input
+                    type="text"
+                    placeholder="Budget Range (Min - Max $)"
+                    className="w-full rounded-xl px-[1rem] bg-zinc-900/80 border border-white/10 text-white placeholder:text-white/40 text-[0.85rem] h-[2.75rem] focus:outline-none focus:ring-1 focus:ring-[#00d2ff]/30 transition-all shadow-inner"
+                  />
+                </div>
+
+                {/* TIMELINE DROPDOWN */}
                 <div className="col-span-2 relative">
-                  <select className="w-full rounded-xl px-[1rem] bg-zinc-900/80 border border-white/10 text-white/50 text-[0.85rem] appearance-none h-[2.75rem] cursor-pointer focus:outline-none">
-                    <option className="bg-[#050a0f]">
+                  <select defaultValue="" className="w-full rounded-xl px-[1rem] bg-zinc-900/80 border border-white/10 text-white/50 text-[0.85rem] appearance-none h-[2.75rem] cursor-pointer focus:outline-none focus:text-white">
+                    <option value="" disabled className="bg-[#050a0f]">
                       How soon do you want to start?
                     </option>
+                    <option value="Immediately" className="bg-[#050a0f]">Immediately</option>
+                    <option value="In a month" className="bg-[#050a0f]">In a month</option>
+                    <option value="In 2 - 3 months" className="bg-[#050a0f]">In 2 - 3 months</option>
+                    <option value="Not sure" className="bg-[#050a0f]">Not sure</option>
                   </select>
                   <ChevronDown className="absolute right-[1rem] top-1/2 -translate-y-1/2 w-[1.1rem] h-[1.1rem] text-white/40 pointer-events-none" />
                 </div>
@@ -141,13 +174,13 @@ const ContactHeroMobile = () => {
                 <div className="flex items-center gap-[0.75rem]">
                   <Phone className="text-white w-[1.1rem] h-[1.1rem] shrink-0" />
                   <span className="text-white text-[0.75rem] font-medium tracking-wide">
-                    0300-1234567
+                    +1 (844) 591-ECHO
                   </span>
                 </div>
                 <div className="flex items-start gap-[0.75rem]">
                   <Home className="text-white w-[1.1rem] h-[1.1rem] shrink-0 mt-[0.1rem]" />
                   <span className="text-white text-[0.75rem] font-medium leading-tight tracking-wide">
-                    North Nazimabad Block 3 Building 304
+                    5225 Main St, Suite 4, Buffalo NY, 14221
                   </span>
                 </div>
               </div>

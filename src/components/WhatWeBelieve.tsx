@@ -15,17 +15,17 @@ const WhatWeBelieve = () => {
     },
     {
       subtitle: "Quality is a consistent practice",
-      description: "We don't believe in 'one-off' brilliance. We build systems that maintain excellence at every touchpoint.",
+      description: "It comes from senior level skill, thoughtful decisions, and disciplined execution — not templates, shortcuts, or rushed timelines.",
       image: BeliefImg2,
     },
     {
       subtitle: "Growth comes from partnership, not transactions",
-      description: "We align our success with yours, moving beyond the vendor relationship into true brand stewardship.",
+      description: "We invest deeply in understanding your brand and business. When you grow, we grow, and the partnership strengthens.",
       image: BeliefImg3,
     },
     {
       subtitle: "Support should not end at delivery",
-      description: "We stay present long after launch—refining, advising, and helping your brand move forward with confidence.",
+      description: "We stay present long after launch, advising, refining, and helping your brand move forward with confidence.",
       image: BeliefImg4,
     }
   ];

@@ -15,24 +15,29 @@ export const faqCategories: FAQCategory[] = [
     highlight: "Echo & Impact",
     faqs: [
       {
-        question: "How do I get started working with your team?",
+        question: "How does a project typically start?",
         answer:
-          "Getting started is simple! Fill out our contact form with your project details, and we'll schedule a discovery call within 48 hours to discuss your needs and determine if we're a good fit.",
+          "Every engagement begins with a discovery and alignment phase. We clarify your goals, audience, constraints, scope, timelines, and success criteria before any execution begins. This ensures both sides have full clarity and prevents misalignment later.",
       },
       {
-        question: "What types of businesses do you work with?",
+        question: "Is the first call a sales call?",
         answer:
-          "We specialize in working with growth-stage startups, established SMBs, and enterprise companies looking to improve their digital presence. Our sweet spot is ambitious teams who value quality and collaboration.",
+          "No. The first conversation is consultative. The purpose is to understand what you’re trying to build, whether we’re a good fit, and what approach makes sense before any commercial discussion.",
       },
       {
-        question: "Do you work with clients internationally?",
+        question: "Do I need a detailed brief before contacting you?",
         answer:
-          "Yes! We work with clients globally and have experience collaborating across time zones. We use async communication tools and flexible scheduling to make remote partnerships seamless.",
+          "No. You can come with an idea, a rough direction, or even uncertainty. Our role is to help you structure and clarify your requirements.",
       },
       {
-        question: "What makes your approach different from other agencies?",
+        question: "Who will be working on my project?",
         answer:
-          "We combine senior talent, strategic thinking, and hands-on execution in a boutique setting. You won't be handed off to junior staff—the people you meet are the people who do the work.",
+          "Your project is handled by senior-level designers, engineers, and strategists. We do not hand projects off to juniors or outsource core work.",
+      },
+      {
+        question: "Do you sign NDAs?",
+        answer:
+          "Yes. We operate under NDA by default and treat all information, assets, and discussions as confidential.",
       },
     ],
   },
@@ -41,24 +46,29 @@ export const faqCategories: FAQCategory[] = [
     highlight: "Contracts",
     faqs: [
       {
-        question: "How do you price your projects?",
+        question: "How do you define scope?",
         answer:
-          "We offer both project-based pricing and retainer arrangements depending on your needs. Project pricing is based on scope, complexity, and timeline. We're always transparent about costs upfront.",
+          "Scope is defined collaboratively during discovery and documented clearly before work begins. It includes deliverables, timelines, responsibilities, and assumptions so there is no ambiguity.",
       },
       {
-        question: "What's the typical project budget range?",
+        question: "Can scope change after the project starts?",
         answer:
-          "Our projects typically range from $10,000 to $150,000+, depending on scope. We have solutions for various budgets and can help you prioritize features to match your investment level.",
+          "If priorities change, scope can be adjusted through a documented change process. Changes are discussed, approved, and priced transparently before execution.",
       },
       {
-        question: "Do you require long-term contracts?",
+        question: "How is pricing determined?",
         answer:
-          "Not necessarily. While we love building long-term partnerships, we also take on single projects. Our retainer clients enjoy priority scheduling and discounted rates.",
+          "Pricing is based on scope, complexity, and timeline. We offer both structured packages and custom pricing depending on your needs.",
       },
       {
-        question: "What's included in your proposals?",
+        question: "Do you offer fixed pricing or hourly billing?",
         answer:
-          "Our proposals include detailed scope, timeline, deliverables, payment schedule, and terms. You'll know exactly what you're getting and when to expect it.",
+          "We primarily work on fixed-scope, fixed-fee engagements or monthly retainers for ongoing work. This creates predictability and accountability.",
+      },
+      {
+        question: "Do you require upfront payment?",
+        answer:
+          "We do not require full payment upfront unless a client specifically requests it. Most projects are structured either as milestone-based engagements with partial payments tied to defined phases, or as monthly retainers. This approach keeps cash flow predictable for both sides while ensuring progress, accountability, and transparency throughout the engagement.",
       },
     ],
   },
@@ -67,50 +77,55 @@ export const faqCategories: FAQCategory[] = [
     highlight: "Delivery",
     faqs: [
       {
-        question: "What does your typical project process look like?",
+        question: "How involved do I need to be as a client?",
         answer:
-          "We follow a proven process: Discovery → Strategy → Design → Development → Testing → Launch → Support. Each phase has clear milestones and checkpoints for your feedback.",
+          "Your involvement is focused on providing inputs, approvals, and feedback at defined checkpoints. We manage execution end-to-end.",
       },
       {
-        question: "How long do projects typically take?",
+        question: "How do you handle feedback and revisions?",
         answer:
-          "Timeline varies by scope. A brand identity might take 4–6 weeks, while a full website redesign could be 8–12 weeks. We'll provide realistic timelines during our discovery call.",
+          "We use structured review cycles with clear feedback windows. This keeps the process efficient and avoids endless or fragmented revisions.",
       },
       {
-        question: "How do you handle revisions and feedback?",
+        question: "How do you ensure alignment between design, development, and marketing?",
         answer:
-          "We build revision rounds into every project phase. You'll have ample opportunity to provide feedback, and we use collaborative tools to make the review process smooth and efficient.",
+          "All teams operate through one integrated roadmap with shared documentation, guidelines, and a dedicated project manager overseeing alignment.",
       },
       {
-        question: "What happens if the project scope changes?",
+        question: "How do you communicate progress?",
         answer:
-          "Scope changes happen—we get it. We'll discuss the impact on timeline and budget, provide a change order for approval, and adjust accordingly. No surprises.",
+          "Through structured updates, milestones, shared documentation, and scheduled check-ins. You always know what’s happening and what’s next.",
+      },
+      {
+        question: "What happens if timelines are delayed?",
+        answer:
+          "We proactively communicate risks and adjust timelines collaboratively if external dependencies or changes arise.",
       },
     ],
   },
   {
-    title: "Ownership,",
-    highlight: "Rights & Data",
+    title: "Ownership, Rights &",
+    highlight: "Data",
     faqs: [
       {
-        question: "Who owns the final deliverables?",
+        question: "Do I own the work once the project is complete?",
         answer:
-          "You do! Upon final payment, all deliverables and intellectual property rights transfer to you completely.",
+          "Yes. All approved deliverables are transferred to you along with necessary access, files, and documentation, subject to contractual terms.",
       },
       {
-        question: "Will I receive source files?",
+        question: "Do you use third-party tools or licenses?",
         answer:
-          "Absolutely. We provide all source files, assets, and documentation.",
+          "Some tools, platforms, or frameworks may carry their own licenses. We inform you where applicable.",
       },
       {
-        question: "How do you handle confidential information?",
+        question: "Is my data secure?",
         answer:
-          "We take confidentiality seriously and are happy to sign NDAs.",
+          "Yes. We follow industry best practices for data handling, access control, and security.",
       },
       {
-        question: "Can I use the work in my portfolio?",
+        question: "Will you use my project in your portfolio?",
         answer:
-          "Yes — great work deserves to be showcased!",
+          "We may showcase work unless confidentiality or exclusivity is contractually required.",
       },
     ],
   },
@@ -119,24 +134,19 @@ export const faqCategories: FAQCategory[] = [
     highlight: "Global Clients",
     faqs: [
       {
-        question: "How do you collaborate with remote teams?",
+        question: "Do you work with international clients?",
         answer:
-          "We use Slack, Zoom, Figma, and project management tools with regular check-ins.",
+          "Yes. We work with clients globally and across time zones.",
       },
       {
-        question: "What time zones do you work in?",
+        question: "How do you manage time zone differences?",
         answer:
-          "Primarily US time zones, but we're flexible globally.",
+          "Through structured communication, documentation, and overlap windows for meetings when needed.",
       },
       {
-        question: "Do you ever meet in person?",
+        question: "Can everything be done remotely?",
         answer:
-          "Yes, for major milestones or workshops when it makes sense.",
-      },
-      {
-        question: "How do you maintain quality remotely?",
-        answer:
-          "Clear processes, documentation, and regular touchpoints.",
+          "Yes. All services can be delivered remotely without compromising quality or process.",
       },
     ],
   },
@@ -147,22 +157,17 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Do you offer ongoing support after launch?",
         answer:
-          "Yes! We offer maintenance retainers and optimization services.",
+          "Yes. We offer maintenance, optimization, and growth retainers depending on your needs.",
       },
       {
-        question: "What kind of post-launch services do you provide?",
+        question: "Can you take over work built by another agency?",
         answer:
-          "Hosting, security, performance, content updates, and analytics.",
+          "Yes, after a technical and strategic audit to assess feasibility and risks.",
       },
       {
-        question: "How quickly can you respond to urgent issues?",
+        question: "Can you scale with us as we grow?",
         answer:
-          "Retainer clients receive priority same-day responses.",
-      },
-      {
-        question: "Can you train our team on the new systems?",
-        answer:
-          "Absolutely. We provide training and documentation.",
+          "Yes. Our systems, architecture, and processes are designed for long-term scalability.",
       },
     ],
   },
@@ -171,24 +176,14 @@ export const faqCategories: FAQCategory[] = [
     highlight: "Expectations",
     faqs: [
       {
-        question: "How do I know if we're a good fit?",
+        question: "Who is Echo & Impact not a good fit for?",
         answer:
-          "Our discovery call helps both sides decide.",
+          "We may not be the right fit if you’re looking for the cheapest provider, quick shortcuts, or purely tactical execution without strategy or structure.",
       },
       {
-        question: "What do you expect from clients?",
+        question: "What type of clients do you work best with?",
         answer:
-          "Timely feedback, clear communication, and trust.",
-      },
-      {
-        question: "What if we're not happy with the work?",
-        answer:
-          "We collaborate closely and revise until it's right.",
-      },
-      {
-        question: "Can we start with a small project first?",
-        answer:
-          "Yes — many long-term clients start small.",
+          "We work best with clients who value clarity, quality, transparency, and long-term thinking and who see their digital presence as a strategic asset.",
       },
     ],
   },

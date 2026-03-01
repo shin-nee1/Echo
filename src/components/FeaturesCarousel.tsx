@@ -6,6 +6,7 @@ export interface Feature {
   title: string;
   description: string;
   imageSrc: string;
+  alternateImageSrc?: string; // <-- Added the alternate image property here
   slug?: string;
 }
 
@@ -102,7 +103,7 @@ const FeaturesCarousel = ({
             let opacity = 1;
             let zIndex = 10;
             let grayscale = "0%";
-            let brightness = "100%"; // Our new brightness variable
+            let brightness = "100%"; 
 
             if (isExpanded) {
               y = 0;
@@ -119,7 +120,6 @@ const FeaturesCarousel = ({
               rotate = ratio * 35;
               scale = 1 - Math.min(absRatio * 0.25, 0.4);
               
-              // Keep fully opaque, but darken drastically
               opacity = 1;
               zIndex = 1;
               grayscale = "100%";
@@ -131,13 +131,10 @@ const FeaturesCarousel = ({
               rotate = ratio * 28;
               scale = 1 - Math.min(absRatio * 0.15, 0.25);
               
-              // Asymmetrical stacking: Left is tucked under, Right overlaps
               zIndex = Math.round(50 + dist * 10);
               
               grayscale = "0%";
-              // Dim the cards based on distance from center, keeping a minimum brightness of 40%
               brightness = `${Math.max(40, 100 - (absRatio * 25))}%`;
-              // Only drop opacity to 0 to completely hide the cards wrapping around the extreme back
               opacity = absRatio > 2.5 ? 0 : 1; 
             }
 
@@ -149,7 +146,6 @@ const FeaturesCarousel = ({
                 key={feature.uniqueId}
                 animate={{ 
                   x, y, rotate, scale, opacity, zIndex, 
-                  // Combine grayscale and brightness into the filter
                   filter: `grayscale(${grayscale}) brightness(${brightness})`,
                   pointerEvents: opacity === 0 ? "none" : "auto"
                 }}
@@ -190,6 +186,12 @@ const FeaturesCarousel = ({
                         src={feature.imageSrc}
                         alt={feature.title}
                         className="w-full h-full object-contain drop-shadow-xl"
+                        // <-- Added fallback logic here:
+                        onError={(e) => {
+                          if (feature.alternateImageSrc && e.currentTarget.src !== feature.alternateImageSrc) {
+                            e.currentTarget.src = feature.alternateImageSrc;
+                          }
+                        }}
                       />
                       <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-black/40 to-transparent" />
                     </div>
