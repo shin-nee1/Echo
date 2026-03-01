@@ -4,27 +4,27 @@ import { motion } from "framer-motion";
 const steps = [
   {
     number: "01",
-    title: "ONE TEAM FOR THE ENTIRE JOURNEY",
+    title: "One Team for the Entire Journey",
     description: "Designers, developers, and marketers work together from day one. No handoffs to disconnected groups. No fragmented understanding of your brand."
   },
   {
     number: "02",
-    title: "CLARITY BEFORE EXECUTION",
+    title: "Clarity Before Execution",
     description: "We begin with alignment, structure, and understanding. We define goals, constraints, needs, and outcomes before we design a screen or write code."
   },
   {
     number: "03",
-    title: "PROCESS THAT REDUCES STRESS",
+    title: "Process That Reduces Stress, Not Adds to It",
     description: "Clients often come to us after experiencing disorganized workflows elsewhere. We solve that through documented scopes and clear milestones."
   },
   {
     number: "04",
-    title: "LONG TERM THINKING",
+    title: "Long Term Thinking Behind Every Decision",
     description: "We don't design or build for the moment. We plan for how your brand will grow, scale, communicate, and compete years from now."
   },
   {
     number: "05",
-    title: "TRANSPARENCY AT EVERY STAGE",
+    title: "Transparency at Every Stage",
     description: "You always know what is happening, why it is happening, and what decisions were made. There are no gray areas or disappearing teams."
   }
 ];

@@ -2,6 +2,7 @@ import React from "react";
 import { Mail, Phone, Home, ChevronDown } from "lucide-react";
 import ContactImg from "@/assets/telephone.png.png"; // Ensure this path is correct for your project
 import ContactHeroMobile from "./ContactHeroMobile";
+import { servicesData } from "@/data/servicesData";
 
 const ContactHero = () => {
   const viewBoxSize = 1400;
@@ -21,11 +22,6 @@ const ContactHero = () => {
 
       {/* ================= DESKTOP VIEW ================= */}
       <div className="hidden lg:block w-full h-full">
-        {/* UPDATED CONTAINER:
-            1. w-screen: Forces width to be the viewport width.
-            2. left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]: Centers the element and pulls it 
-               outside of any parent padding (like App.tsx container) using negative margins.
-        */}
         <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[85vh] min-h-[750px] overflow-hidden bg-transparent m-0">
           <section className="relative w-full h-full flex items-center justify-center selection:bg-[#00d2ff]/30">
             {/* MASTER SCALING WRAPPER */}
@@ -69,7 +65,7 @@ const ContactHero = () => {
                 </g>
               </svg>
 
-              {/* 2. TELEPHONE - z-10 (LOWERED to sit behind form) */}
+              {/* 2. TELEPHONE - z-10 */}
               <div
                 className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                 style={{ width: "28%" }}
@@ -81,7 +77,7 @@ const ContactHero = () => {
                 />
               </div>
 
-              {/* 3. THE FORM CARD - z-20 (HIGHER than phone) */}
+              {/* 3. THE FORM CARD - z-20 */}
               <div
                 className="absolute z-20 flex flex-col border border-white/20 shadow-2xl backdrop-blur-sm"
                 style={{
@@ -107,36 +103,70 @@ const ContactHero = () => {
                   </h2>
 
                   <form className="grid grid-cols-2 gap-3 flex-grow content-center">
-                    {["Name", "Email", "Phone", "Company"].map((p) => (
+                    {/* INPUTS */}
+                    {["Name*", "Email*", "Phone*", "Company"].map((p) => (
                       <input
                         key={p}
+                        type={p === "Email*" ? "email" : "text"}
                         placeholder={p}
+                        required={p.includes("*")}
                         className="rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white placeholder:text-white/30 placeholder:font-bold text-xs xl:text-sm h-10 focus:outline-none focus:border-[#00d2ff]/50 transition-all shadow-inner w-full"
                       />
                     ))}
+
+                    {/* SERVICE INTEREST DROPDOWN */}
                     <div className="col-span-2 relative">
-                      <select className="w-full rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white/50 text-xs xl:text-sm appearance-none h-10 cursor-pointer focus:outline-none">
-                        <option className="bg-[#050a0f]">
+                      <select defaultValue="" className="w-full rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white/50 text-xs xl:text-sm appearance-none h-10 cursor-pointer focus:outline-none focus:text-white">
+                        <option value="" disabled className="bg-[#050a0f]">
                           Service Interest
                         </option>
+                        
+                        <optgroup label="Design Services" className="bg-[#050a0f]">
+                          {servicesData.filter(s => s.category === "design").map((service) => (
+                            <option key={service.slug} value={service.slug}>{service.title}</option>
+                          ))}
+                        </optgroup>
+
+                        <optgroup label="Development Services" className="bg-[#050a0f]">
+                          {servicesData.filter(s => s.category === "develop").map((service) => (
+                            <option key={service.slug} value={service.slug}>{service.title}</option>
+                          ))}
+                        </optgroup>
+
+                        <optgroup label="Marketing Services" className="bg-[#050a0f]">
+                          {servicesData.filter(s => s.category === "market").map((service) => (
+                            <option key={service.slug} value={service.slug}>{service.title}</option>
+                          ))}
+                        </optgroup>
                       </select>
                       <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 pointer-events-none" />
                     </div>
-                    <div className="col-span-2 relative">
-                      <select className="w-full rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white/50 text-xs xl:text-sm appearance-none h-10 cursor-pointer focus:outline-none">
-                        <option className="bg-[#050a0f]">Budget Range</option>
-                      </select>
-                      <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 pointer-events-none" />
-                    </div>
+
+                    {/* PROJECT DESCRIPTION */}
                     <textarea
                       placeholder="Project Description..."
                       className="col-span-2 rounded-xl px-4 py-3 bg-zinc-900/60 border border-white/10 text-white placeholder:text-white/30 placeholder:font-bold resize-none text-xs xl:text-sm focus:outline-none h-20 xl:h-24 shadow-inner"
                     />
+
+                    {/* BUDGET RANGE (Input) */}
+                    <div className="col-span-2">
+                      <input
+                        type="text"
+                        placeholder="Budget Range (Min - Max $)"
+                        className="w-full rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white placeholder:text-white/30 placeholder:font-bold text-xs xl:text-sm h-10 focus:outline-none focus:border-[#00d2ff]/50 transition-all shadow-inner"
+                      />
+                    </div>
+
+                    {/* TIMELINE DROPDOWN */}
                     <div className="col-span-2 relative">
-                      <select className="w-full rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white/50 text-xs xl:text-sm appearance-none h-10 cursor-pointer focus:outline-none">
-                        <option className="bg-[#050a0f]">
+                      <select defaultValue="" className="w-full rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white/50 text-xs xl:text-sm appearance-none h-10 cursor-pointer focus:outline-none focus:text-white">
+                        <option value="" disabled className="bg-[#050a0f]">
                           How soon do you want to start?
                         </option>
+                        <option value="Immediately" className="bg-[#050a0f]">Immediately</option>
+                        <option value="In a month" className="bg-[#050a0f]">In a month</option>
+                        <option value="In 2 - 3 months" className="bg-[#050a0f]">In 2 - 3 months</option>
+                        <option value="Not sure" className="bg-[#050a0f]">Not sure</option>
                       </select>
                       <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 pointer-events-none" />
                     </div>
@@ -166,13 +196,13 @@ const ContactHero = () => {
                     <div className="flex items-center gap-3">
                       <Phone className="text-white w-4 h-4 shrink-0" />
                       <span className="text-white text-[11px] xl:text-xs font-medium">
-                        0300-1234567
+                        +1 (844) 591-ECHO
                       </span>
                     </div>
                     <div className="flex items-center gap-3">
                       <Home className="text-white w-4 h-4 shrink-0 mt-0.5" />
                       <span className="text-white text-[11px] xl:text-xs font-medium leading-tight">
-                        North Nazimabad Block 3 Building 304
+                        5225 Main St, Suite 4, Buffalo NY, 14221
                       </span>
                     </div>
                   </div>

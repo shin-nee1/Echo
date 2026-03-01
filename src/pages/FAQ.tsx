@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // <-- Added import for navigation
 import Navbar from "@/components/Navbar";
 import CTASection from "@/components/CTASection";
 import {
@@ -83,6 +84,8 @@ const FAQCategory = ({ title, highlight, faqs }: FAQCategoryType) => {
 };
 
 const FAQ = () => {
+  const navigate = useNavigate(); // <-- Initialize navigation hook
+
   return (
     /* Added global padding-bottom to ensure breathing room from components below */
     <div className="font-sans text-white selection:bg-[#4fb3c4]/30 overflow-x-hidden min-h-screen pb-[5vh]">
@@ -160,15 +163,13 @@ const FAQ = () => {
           </div>
         </div>
       </section>
+      
       <CTASection 
         title="Still Have"
         highlight="Questions?"
         subtitle="If something isn't covered here, or you want to discuss your specific situation, we're happy to help."
         primaryButtonText="Start A Conversation"
-        primaryButtonAction={() => {
-            // Add your navigation or contact logic here
-            console.log("Conversation started");
-        }}
+        primaryButtonAction={() => navigate("/contact")} // <-- Routes to the contact page
       />
 
       <style>{`

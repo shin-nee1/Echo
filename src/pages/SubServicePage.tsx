@@ -1,4 +1,4 @@
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate, useNavigate } from "react-router-dom"; // <-- Added useNavigate here
 import HeroSubService from "@/components/HeroSubService";
 import CTASection from "@/components/CTASection";
 import WhyUsSection from "@/components/WhyUsSection";
@@ -8,25 +8,32 @@ import WhatIsSection from "@/components/WhatIsSection";
 import { getServiceBySlug } from "@/data/servicesData";
 
 // 1. IMPORT YOUR DATA
-import { whyUsData } from "@/data/whyUsData"; // Adjust this path as needed
-import { faqData2 } from "@/data/faqData2"; // Import the newly named FAQ data file
+import { whyUsData } from "@/data/whyUsData"; 
+import { faqData2 } from "@/data/faqData2"; 
 
 const SubServicePage = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate(); // <-- Initialize the hook here
+  
   const service = slug ? getServiceBySlug(slug) : undefined;
 
   if (!service) {
     return <Navigate to="/404" replace />;
   }
 
+  // Hero Title Split Logic
   const titleWords = service.title.trim().split(/\s+/);
   const lastWord = titleWords.pop();
   const titleWithoutLastWord = titleWords.join(" ");
 
+  // CTA Title Split Logic
+  const ctaTitleWords = service.contactCta.title.trim().split(/\s+/);
+  const ctaHighlightWord = ctaTitleWords.pop() || "";
+  const ctaTitleWithoutLastWord = ctaTitleWords.join(" ");
+
   // 2. GET THE SPECIFIC DATA FOR THIS SLUG
-  // If the slug doesn't match perfectly, it defaults to an empty array so nothing breaks.
   const whyUsItems = slug && whyUsData[slug] ? whyUsData[slug] : [];
-  const faqItems = slug && faqData2[slug] ? faqData2[slug] : []; // Extract FAQ data dynamically
+  const faqItems = slug && faqData2[slug] ? faqData2[slug] : []; 
 
   return (
     <>
@@ -64,15 +71,16 @@ const SubServicePage = () => {
         {/* 3. INJECT THE DYNAMIC DATA */}
         <WhyUsSection items={whyUsItems} />
         
-        {/* Pass the extracted faqItems to the FAQ component */}
         <FAQ items={faqItems} />
       </div>
 
       {/* 2. CONSTRAINED CTA (Sits outside the breakout wrapper) */}
       <CTASection
-        title="Ready to Transform Your"
-        highlight={service.highlightedText}
-        subtitle={`Partner with us to achieve ${service.title.toLowerCase()} excellence with precision and creativity.`}
+        title={ctaTitleWithoutLastWord}
+        highlight={ctaHighlightWord}
+        subtitle={service.contactCta.description}
+        primaryButtonText={service.contactCta.buttonText} 
+        primaryButtonAction={() => navigate("/contact")} // <-- This routes the user to the contact page when clicked
       />
     </>
   );

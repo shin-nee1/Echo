@@ -16,19 +16,19 @@ const Contact = () => {
     {
       number: "01",
       title: "REVIEW",
-      description: "We review your submission to understand your goals and requirements.",
+      description: "We review your submission to understand context and requirements.",
       image: step1Image,
     },
     {
       number: "02",
       title: "CONVERSATION",
-      description: "If aligned, we schedule a discovery call to clarify scope and direction.",
+      description: "If there’s alignment, we schedule a discovery call to clarify goals and direction",
       image: step2Image,
     },
     {
       number: "03",
       title: "NEXT STEPS",
-      description: "You receive a clear proposal covering approach, timeline, and pricing.",
+      description: "You receive clear guidance on scope, approach, and what makes sense moving forward.",
       image: step3Image,
     },
   ];
