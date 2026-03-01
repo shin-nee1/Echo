@@ -8,6 +8,9 @@ import WhatWeBelieve from "@/components/WhatWeBelieve";
 import FAQ from "@/components/FAQ";
 import CTASection from "@/components/CTASection";
 
+// 1. IMPORT YOUR FAQ DATA
+import { faqData2 } from "@/data/faqData2"; // Change to { faqData2 } if that's your export name
+
 const About = () => {
   return (
     /* Removed bg-[#010a0f] - now inherits from App.tsx/layout */
@@ -18,7 +21,10 @@ const About = () => {
       <HowWeWork />
       <WhoWeAreAbout />
       <WhatWeBelieve />
-      <FAQ />
+      
+      {/* 2. INJECT THE DYNAMIC DATA FOR ABOUT */}
+      <FAQ items={faqData2["about"]} />
+      
       <CTASection 
         title="Ready to Start" 
         highlight="Your Impact?" 

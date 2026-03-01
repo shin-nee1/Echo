@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
+import type { WhyUsItem } from "../data/whyUsData"; // Make sure to adjust this import path
 
-interface WhyUsItem {
-  title: string;
-  description: string;
+interface WhyUsSectionProps {
+  items: WhyUsItem[];
+  titlePrefix?: string;
+  titleHighlight?: string;
 }
 
-const items: WhyUsItem[] = [
-  { title: "Partnership", description: "We challenge, refine, and improve your ideas. We don’t just execute tasks, we think with you. If an idea won’t work, we say it. If there’s a better direction, we recommend it. If something needs refining, we challenge it. You get a partner who brings perspective, strategy, and strong creative judgment, ensuring your brand grows with purpose and intention." },
-  { title: "Seamless Collaboration", description: "You’re never left waiting for updates or chasing someone for clarity. Our workflows are structured, our communication is fast, and our team remains consistently accessible throughout the entire project. You always know where things stand and can move forward with confidence at every step." },
-  { title: "Senior Expertise", description: "No junior hand-offs or “learning on your project.” Your project is never handed off to inexperienced team members. Every stage is led by senior-level designers, engineers, and performance specialists with real-world experience. This means faster problem-solving, better decision-making, and work that is executed with depth, precision, and long-term thinking." },
-  { title: "Full Transparency", description: "Clear scopes. Clean timelines. Defined deliverables. You always know what’s happening, why it’s happening, and what comes next. Our scopes, deliverables, timelines, and processes are clearly defined and tracked so there is never confusion or guesswork. No hidden costs, no vague milestones, and no grey areas, just a clean and predictable partnership you can rely on." },
-  { title: "Unified Team", description: "Your brand, website, app, marketing, they all live within one connected system. Instead of juggling multiple partners, you work with a single team that designs, builds, and grows your entire digital presence with perfect alignment. Every output reinforces the next, creating consistency, efficiency, and long-term scalability." },
-  { title: "Client-First", description: "We prioritize your goals, your project,  your timelines, and your outcomes above everything else. Our focus is on building solutions that actually move your business forward, not padding invoices. You get honest communication, realistic expectations, and a team fully invested in your success from the first meeting to the final delivery. We grow with you." },
-];
-
-const WhyUsSection = () => {
+const WhyUsSection = ({ 
+  items, 
+  titlePrefix = "Why Echo & ", 
+  titleHighlight = "Impact?" 
+}: WhyUsSectionProps) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  // Fallback in case a page passes an empty array or undefined
+  if (!items || items.length === 0) return null; 
 
   return (
     <section 
@@ -27,13 +27,11 @@ const WhyUsSection = () => {
         
         <div className="text-center" style={{ paddingBottom: "0.5rem" }}>
           <h2 className="text-white font-bold leading-tight why-us-main-title">
-            Why Echo & <span className="text-[#43c6e4]">Impact?</span>
+            {titlePrefix} <span className="text-[#43c6e4]">{titleHighlight}</span>
           </h2>
         </div>
 
-        {/* FLEX CONTAINER 
-            UPDATED: Changed lg:w-[100vw] to lg:w-[92vw] to prevent edge-touching on 1024px
-        */}
+        {/* FLEX CONTAINER */}
         <div className="why-us-container w-[70vw] md:w-[70vw] lg:w-[92vw] relative left-1/2 -translate-x-1/2 flex flex-col lg:flex-row justify-center items-stretch gap-0 lg:h-[35vw] min-h-[80vh] lg:min-h-0 mt-2 md:mt-4 mb-10 lg:my-20">
           {items.map((item, index) => {
             const isActive = activeIndex === index;

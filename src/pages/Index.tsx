@@ -8,6 +8,9 @@ import FAQ from "@/components/FAQ";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import AboutUs from "@/components/AboutUs";
 import CTASection from "@/components/CTASection";
+import { faqData2 } from "@/data/faqData2";
+// 1. NEW IMPORT: Bring in the data file we just created
+import { whyUsData } from "@/data/whyUsData"; // Adjust this path based on where you saved the file
 
 const Index = () => {
   return (
@@ -16,8 +19,13 @@ const Index = () => {
       <WhoWeAre />
       <WhatWeDo />
       <PortfolioSection />
-      <WhyUsSection />
-      <FAQ />
+      
+      {/* 2. THE FIX: We are now passing the specific "home" data to the component.
+        This satisfies TypeScript and tells the section exactly what text to render.
+      */}
+      <WhyUsSection items={whyUsData["home"]} />
+      
+      <FAQ items={faqData2["home"]} />
       <TestimonialCarousel />
       <AboutUs />
       
