@@ -21,7 +21,7 @@ const Market = () => {
     { 
       number: "01", 
       title: "Discovery", 
-      description: "Clarifying your brand, audience and goals.", 
+      description: "Understanding your goals, audience, and market position.", 
       image: marketImg1 
     },
     { 
@@ -53,13 +53,14 @@ const Market = () => {
   // 2. Marketing Services Data - Updated to match 6 cards from image
   const marketServices = [
     {
-      title: "Paid Social Media",
+      title: "Paid Media",
       items: [
         "Meta, Google, TikTok, and YouTube ads",
         "Full-funnel campaign structure",
         "Creative testing frameworks",
         "Audience & competition research and targeting strategy",
-        "Budget planning, spending, and pacing"
+        "Budget planning, spending, and pacing",
+        "Performance tracking & reporting"
       ]
     },
     {
@@ -69,6 +70,7 @@ const Market = () => {
         "Short-form video, post, content creation and direction",
         "Caption writing and brand voice",
         "Community management & audience engagement",
+        "Platform-specific optimization (IG, TikTok, FB)",
         "Design, editing, and scheduled publishing"
       ]
     },
@@ -120,21 +122,21 @@ const Market = () => {
       <PageHero
         title={
           <>
-            We Scale How The <span className="text-cyan">World</span> Finds,<br />
-            Follows, And <span className="text-cyan">Invests</span> In Your Brand.
+            We turn <span className="text-cyan">creavity</span> into measurable,<br />
+            scalable, <span className="text-cyan">growth.</span>
           </>
         }
-        subtitle="Marketing Isn't Noise. It's Precision."
-        ctaText="Scale your Next Move"
+        subtitle="Marketing isn't noise. It's precision."
+        ctaText="Grow with intention →"
       />
 
       <InfoSection
         title="What is"
         highlight="Marketing?"
         paragraphs={[
-          "At Echo & Impact, marketing is more than just visibility—it is the strategic engine that drives attention, converts interest, and builds long-term brand authority.",
-          "From performance-led paid media to narrative-driven content strategy, we ensure every campaign is backed by data and executed with creative excellence.",
-          "Our focus remains: marketing that creates impact, fuels growth, and ensures your brand is not just seen, but remembered and chosen."
+          "At Echo & Impact, marketing is where strategy, creativity, and performance operate as one. We don’t chase vanity metrics, we build systems that attract the right audience, move them to action, and provide results.",
+          "From paid social media and SEO to content and full-funnel optimization, every channel is aligned under a single growth strategy built around your brand, your goals, your product and your customer behavior. We plan, create, execute, test, and refine with precision, ensuring you’re not just visible, you’re chosen.",
+          "Whether you’re launching, scaling, or rebuilding your marketing engine, our focus remains the same: marketing that is data-led, creatively strong, and built to drive ROI, not noise."
         ]}
       />
 

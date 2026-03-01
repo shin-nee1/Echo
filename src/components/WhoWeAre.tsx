@@ -30,19 +30,15 @@ const WhoWeAre = () => {
 
             <div className="whoweare-text-stack flex flex-col">
               <p className="whoweare-p text-slate-300 leading-relaxed font-normal">
-                Echo & Impact is built by creators, strategists, and engineers who take
-                brands from idea to execution, and from presence to performance.
+                Echo & Impact is built by creators, strategists, and engineers who take brands from idea to execution, and from presence to performance.
               </p>
 
               <p className="whoweare-p text-slate-300 leading-relaxed font-normal">
-                We unite design, development, and marketing into one intelligent system
-                that amplifies what your brand stands for and delivers measurable growth.
+                We unite design, development, and marketing into one intelligent system that amplifies what your brand stands for and delivers measurable growth.
               </p>
 
               <p className="whoweare-p text-slate-300 leading-relaxed font-normal">
-                No more juggling partners or agencies. We start with you and
-                stay with you, shaping every stage of your digital journey so you can focus on 
-                making the impact, while we turn ideas into results.
+                No more juggling partners or agencies. We start with you and stay with you, shaping every stage of your digital journey so you can focus on making the impact, while we turn ideas into results.
               </p>
               <p className="whoweare-p text-slate-300 leading-relaxed font-normal">
               We combine creative insight with technical precision to keep your brand consistent, adaptive, and ready for what’s next.

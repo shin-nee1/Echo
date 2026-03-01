@@ -23,44 +23,44 @@ const Develop = () => {
   const developSteps: ProcessStepData[] = [
     { 
       number: "1", 
-      title: "Discover", 
-      description: "Understanding requirements, user needs, and technical specs.", 
+      title: "Discovery", 
+      description: "Clarifying goals, requirements, and the technical scope.", 
       image: DISCOVERY 
     },
     { 
       number: "2", 
-      title: "Wireframes", 
-      description: "Creating detailed UI wireframes before development begins.", 
+      title: "Wireframes (UX)", 
+      description: "Structuring user flows, layouts, and core functionality.", 
       image: WIREFRAMES 
     },
     { 
       number: "3", 
-      title: "Visual Design", 
-      description: "Expert developers bring your project to life with clean code.", 
+      title: "Visual Design (UI)", 
+      description: " Defining the theme and the complete visual system.", 
       image: VISUAL
     },
     { 
       number: "4", 
       title: "Build", 
-      description: "Rigorous testing ensures flawlessness across all devices.", 
+      description: " Developing front-end, backend and integrations.", 
       image: BUILD
     },
     { 
       number: "5", 
       title: "Quality Assurance", 
-      description: "Smooth deployment and monitoring for optimal performance.", 
+      description: " Testing performance, functionality, and reliability.", 
       image: QUALITY 
     },
     { 
       number: "6", 
       title: "Launch", 
-      description: "Understanding requirements, user needs, and technical specs.", 
+      description: "Introducing the product to the world.", 
       image: LAUNCH
     },
     { 
       number: "7", 
       title: "Warranty", 
-      description: "Understanding requirements, user needs, and technical specs.", 
+      description: "Providing post-launch support for stability.", 
       image: WARRANTY
     }
   ];
@@ -71,50 +71,50 @@ const Develop = () => {
       title: "Website Development",
       items: [
         "Custom high-performance websites",
-        "CMS Integration (Headless & Traditional)",
-        "E-commerce & Storefront solutions",
-        "SEO-friendly architecture",
-        "Responsive & accessible design"
+        "Responsive and mobile-optimized builds",
+        "High-performance front-end & back-end architecture",
+        "CMS setup and content structuring",
+        "Landing pages, funnels, and multi-page sites"
       ]
     },
     {
-      title: "Mobile App Development",
+      title: "Shopify Development",
       items: [
-        "Native iOS & Android development",
-        "Cross-platform (React Native / Flutter)",
-        "Mobile UI/UX implementation",
-        "App Store & Play Store deployment",
-        "Push notifications & API sync"
+        "Shopify store setup & theme customization",
+        "Product, collection, and inventory structure",
+        "Conversion-optimized storefront design",
+        "Shopify apps & third-party integrations",
+        "Checkout optimization & fulfilment setup"
       ]
     },
     {
-      title: "Desktop Applications",
+      title: "Web Application Development",
       items: [
-        "Cross-platform (Windows, Mac, Linux)",
-        "Native performance & system integration",
-        "Offline-first capability",
-        "Secure enterprise software",
-        "Automated update systems"
+        "Custom dashboards & user portals",
+        "API development & integrations",
+        "Feature-driven and scalable architecture",
+        "Real-time systems & backend logic",
+        "Admin, reporting, and analytics tools"
       ]
     },
     {
-      title: "API & Backend Systems",
+      title: "Mobile Application Development",
       items: [
-        "RESTful & GraphQL API development",
-        "Microservices architecture",
-        "Database design & optimization",
-        "Third-party system integrations",
-        "Cloud infrastructure & DevOps"
+        "iOS & Android application development",
+        "App UI integration and interaction flows",
+        "API connectivity & backend structure",
+        "Performance optimization & device testing",
+        "App deployment & store submission"
       ]
     },
     {
-      title: "Data & Automation",
+      title: "CRO & Speed Optimization",
       items: [
-        "ETL pipelines & data processing",
-        "Enterprise-grade automation",
-        "Custom reporting & analytics",
-        "Legacy system modernization",
-        "Scalable cloud batch processing"
+        "Website speed improvement (Core Web Vitals)",
+        "Conversion audits & heatmap reviews",
+        "Funnel and landing page optimizations",
+        "A/B testing strategy & execution",
+        "Performance reporting & continuous refinement"
       ]
     }
   ];
@@ -125,12 +125,12 @@ const Develop = () => {
   <PageHero
     title={
       <>
-        We Build The <span className="text-[#47c2d2]">Digital Experiences</span> That<br />
-        Bring Your <span className="text-[#47c2d2]">Brand</span> To Life.
+        We build the <span className="text-[#47c2d2]">digital experiences</span> that<br />
+        bring your <span className="text-[#47c2d2]">brand</span> to life.
       </>
     }
-    subtitle="Development Isn't Just Code. It's Craftsmanship."
-    ctaText="Start Your Development Project"
+    subtitle="Development isn't just code. It's craftsmanship."
+    ctaText="Build it →"
   />
 </div>
 
@@ -138,9 +138,9 @@ const Develop = () => {
         title="What is"
         highlight="Develop?"
         paragraphs={[
-          "At Echo & Impact, development is the art of turning ideas into functional digital products. It is where design meets technology to create experiences that users love.",
-          "Our development process focuses on clean code, scalable architecture, and user-centric solutions that grow seamlessly with your business needs.",
-          "From high-speed websites to complex enterprise applications, we build digital products that are fast, reliable, and engineered to last."
+          "At Echo & Impact, development is where ideas turn into functional, scalable, and high-performing digital products. It’s the bridge between design, user experience, and real-world interaction. Built with precision, stability, and long-term growth in mind.",
+          "We develop websites, Shopify stores, mobile apps, web applications, and conversion-driven digital platforms. Everything we build is engineered to load fast, scale easily, and integrate seamlessly with your brand’s broader ecosystem.",
+          "Whether you need a high-performance website, a custom platform, or a full-scale product build, our focus remains the same, development that’s reliable, intuitive, and built for results."
         ]}
       />
 

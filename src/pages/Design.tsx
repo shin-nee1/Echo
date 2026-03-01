@@ -89,7 +89,8 @@ const Design = () => {
         "Product, lifestyle, and brand photography",
         "Founder and team video content",
         "Short-form content direction & production",
-        "Post editing, color grading, and delivery"
+        "Post editing, color grading, and delivery",
+        "Podcast shoots & studio space"
       ]
     },
     {
@@ -112,12 +113,12 @@ const Design = () => {
           <PageHero
             title={
               <> 
-                We Shape How The <span className="text-[#47c2d2]">World</span> Sees,
+                We shape how the <span className="text-[#47c2d2]">world</span> sees,
                 <br className="hidden md:block" /> 
-                Understands, And <span className="text-[#47c2d2]">Experiences</span> Your Brand. 
+                understands, and <span className="text-[#47c2d2]">experiences</span> your brand. 
               </> 
             }
-            subtitle="Great Design Isn't Decoration. It's Direction."
+            subtitle="Great design isn't decoration. It's direction."
             ctaText="Shape your Next Move"
           />
         </div>
@@ -126,9 +127,9 @@ const Design = () => {
           title="What is"
           highlight="Design?"
           paragraphs={[
-            "At Echo & Impact, design goes far beyond visuals—it's the strategic foundation that defines how your brand communicates and behaves.",
-            "From brand identity to product UI/UX, every element is crafted with intention to ensure your brand looks consistent and feels unified.",
-            "Our focus remains: design that creates recognition, builds trust, and sets the direction for everything that follows."
+            "At Echo & Impact, design goes far beyond visuals, it's the strategic foundation that defines how your brand communicates and behaves, and is experienced across every interaction",
+            "We build complete visual systems: from brand identity and creative direction to product UI/UX, content design, and campaign aesthetics. Every element is crafted with intention, ensuring your brand looks consistent, feels unified, and communicates with clarity across all touchpoints.",
+            "Whether we’re shaping a brand from the ground up or elevating an existing one, our focus remains the same, design that creates recognition, builds trust, guides user behavior, and sets the direction for everything that follows."
           ]}
         />
 
