@@ -1,5 +1,6 @@
 // FILE 1: HeroSubService.tsx
 import React from "react";
+import { Button } from "@/components/ui/button";
 
 interface HeroSubServiceProps {
   title: React.ReactNode;
@@ -17,9 +18,13 @@ const HeroSubService = ({ title, ctaText }: HeroSubServiceProps) => {
         </h1>
         
         {/* BUTTON - Color dimmed, bold removed, no glows */}
-        <button className="sub-hero-btn bg-[#3a9db4] text-white font-normal rounded-full transition-all hover:scale-105 active:scale-95 border-none outline-none">
+        <div className="hero-btn-container"><Button 
+        variant="cyan" 
+        size="hero" 
+        >
           {ctaText}
-        </button>
+          </Button>
+          </div>
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `

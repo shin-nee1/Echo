@@ -25,7 +25,7 @@ const AboutUs = () => {
             
             <div className="about-header-wrapper">
               <h2 className="text-white font-bold tracking-tight leading-none uppercase about-main-title">
-                ABOUT <span className="text-[#43c6e4]">US</span>
+                ABOUT <span className="text-[#47csd2]">US</span>
               </h2>
             </div>
 
@@ -43,7 +43,7 @@ const AboutUs = () => {
                 honesty and commitment. We guide, educate, and collaborate at every step.
               </p>
 
-              <p className="font-semibold text-[#43c6e4]/90 about-accent-text">
+              <p className="font-semibold text-[#47c2d2]/90 about-accent-text">
                 Every decision is thoughtful. Every outcome is meaningful. Every partnership 
                 is built to last.
               </p>
@@ -52,7 +52,7 @@ const AboutUs = () => {
             <div className="about-button-wrapper">
               <Button 
                 variant="cyan"
-                className="rounded-full flex items-center justify-center transition-all active:scale-95 about-cta-btn"
+                size = "lg"
               >
                 Find out more about us
               </Button>

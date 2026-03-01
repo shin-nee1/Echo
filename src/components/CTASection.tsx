@@ -33,17 +33,18 @@ const CTASection = ({
             {/* TEXT CONTENT */}
             <div className="cta-text-side">
               <h2 className="text-white font-bold tracking-tight leading-[1.1] cta-title">
-                {title} <span className="text-[#43c6e4]">{highlight}</span>
+                {title} <span className="text-[#47c2d2]">{highlight}</span>
               </h2>
 
-              <p className="text-slate-300 leading-relaxed opacity-80 cta-subtitle">
+              <p className="text-white-300 leading-relaxed opacity-80 cta-subtitle">
                 {subtitle}
               </p>
 
               <div className="cta-button-container">
                 <Button
                   onClick={primaryButtonAction}
-                  className="bg-gradient-to-r from-[#43c6e4]/90 to-[#43c6e4] text-slate-900 transition-all hover:scale-105 shadow-lg shadow-[#43c6e4]/20 border-none rounded-lg font-bold cta-main-btn"
+                  variant="cyan"
+                  className=" text-slate-900 rounded-lg font-bold cta-main-btn"
                 >
                   {primaryButtonText}
                 </Button>

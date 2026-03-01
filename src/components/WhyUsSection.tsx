@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sparkles } from "lucide-react";
+import { Pencil } from "lucide-react";
 import type { WhyUsItem } from "../data/whyUsData"; // Make sure to adjust this import path
 
 interface WhyUsSectionProps {
@@ -27,7 +27,7 @@ const WhyUsSection = ({
         
         <div className="text-center" style={{ paddingBottom: "0.5rem" }}>
           <h2 className="text-white font-bold leading-tight why-us-main-title">
-            {titlePrefix} <span className="text-[#43c6e4]">{titleHighlight}</span>
+            {titlePrefix} <span className="text-[#47c2d2]">{titleHighlight}</span>
           </h2>
         </div>
 
@@ -55,8 +55,8 @@ const WhyUsSection = ({
                   lg:[clip-path:polygon(0%_0%,calc(100%-1.125vw)_0%,calc(100%-1.125vw)_45%,100%_50%,calc(100%-1.125vw)_55%,calc(100%-1.125vw)_100%,0%_100%,0%_55%,1.125vw_50%,0%_45%)]
                   max-lg:[clip-path:polygon(0%_0%,45%_0%,50%_1.2vw,55%_0%,100%_0%,100%_calc(100%-1.2vw),55%_calc(100%-1.2vw),50%_100%,45%_calc(100%-1.2vw),0%_calc(100%-1.2vw))]`}
                   style={{ 
-                    backgroundColor: "rgba(67, 198, 228, 0.1)",
-                    boxShadow: isActive ? "inset 0 0 35px 5px rgba(67, 198, 228, 0.9)" : "none",
+                    backgroundColor: "rgba(71, 194, 210, 0.1)",
+                    boxShadow: isActive ? "inset 0 0 35px 5px rgba(71, 194, 210, 0.9)" : "none",
                   }}
                 />
 
@@ -83,11 +83,11 @@ const WhyUsSection = ({
                       isActive ? "opacity-100 scale-100 delay-200" : "opacity-0 scale-95 pointer-events-none"
                     }`}
                   >
-                    <Sparkles 
-                      className="text-[#00d8ff]" 
+                    <Pencil
+                      className="text-[#47c2d2]" 
                       style={{ 
-                        width: "clamp(20px, 1.8vw, 28px)", 
-                        height: "clamp(20px, 1.8vw, 28px)", 
+                        width: "clamp(24px, 2.2vw, 34px)", 
+                        height: "clamp(24px, 2.2vw, 34px)", 
                         marginBottom: "1.5vw" 
                       }} 
                     />
@@ -163,7 +163,7 @@ const WhyUsSection = ({
 
         @media (max-width: 763px) { 
           .why-us-item-inactive { height: 11vh !important; }
-          .why-us-item-active { height: 30vh !important; }
+          .why-us-item-active { height: 33vh !important; }
         }
 
         @media (min-width: 764px) {

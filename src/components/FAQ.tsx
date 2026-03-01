@@ -26,13 +26,13 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
         {/* HEADER */}
         <div className="flex flex-col items-center text-center faq-header-wrapper">
           <h2 className="text-white font-bold tracking-tight leading-[1.1] faq-main-title">
-            Frequently Asked <span className="text-[#43c6e4]">Questions</span>
+            Frequently Asked <span className="text-[#47c2d2]">Questions</span>
           </h2>
         </div>
 
         {/* ACCORDION CONTAINER */}
         <div className="mx-auto w-full faq-card-container">
-          <div className="w-full border border-[#0c7a7f]/30 bg-black/40 backdrop-blur-2xl overflow-hidden faq-glass-card">
+          <div className="w-full border border-[#47c2d2]/20 bg-black/40 backdrop-blur-2xl overflow-hidden faq-glass-card">
             <Accordion type="single" collapsible className="w-full">
               {items.map((faq, index) => (
                 <AccordionItem
@@ -41,7 +41,7 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
                   className="relative border-b-0 faq-item"
                 >
                   <AccordionTrigger 
-                    className="text-white hover:text-[#43c6e4] transition-colors text-left font-medium border-none outline-none focus:outline-none faq-trigger"
+                    className="text-white hover:text-[#47c2d2] transition-colors text-left font-medium border-none outline-none focus:outline-none faq-trigger"
                   >
                     {faq.question}
                   </AccordionTrigger>
@@ -55,7 +55,7 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
                   {/* CUSTOM DIVIDER */}
                   {index !== items.length - 1 && (
                     <div 
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-[#0c7a7f]/20 faq-divider" 
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-[#47c2d2]/10 faq-divider" 
                     />
                   )}
                 </AccordionItem>
@@ -68,7 +68,8 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
             <Button
               asChild
               variant="cyan"
-              className="rounded-full flex items-center justify-center transition-transform hover:scale-105 faq-all-btn"
+              size="lg"
+              className="shadow-none hover:shadow-none" // Explicitly removing any shadow/glow
             >
               <Link to="/faq">View All FAQs</Link>
             </Button>
@@ -88,7 +89,7 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
         .faq-content-text { font-size: 11px; padding-bottom: 1.25rem; line-height: 1.6; }
         .faq-divider { height: 1px; width: 90%; }
         .faq-button-wrapper { margin-top: 1.5rem; }
-        .faq-all-btn { height: 2.5rem; padding: 0 1.5rem; font-size: 0.75rem; }
+        .faq-all-btn { height: 2.5rem; padding: 0 1.5rem; font-size: 0.75rem; box-shadow: none !important; }
 
         /* 2. TABLET (768px - 1023px) */
         @media (min-width: 768px) {

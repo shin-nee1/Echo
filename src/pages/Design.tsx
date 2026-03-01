@@ -105,22 +105,22 @@ const Design = () => {
 
   return (
     <ServicePageLayout>
-      {/* WRAPPER DIV FOR FLUID SPACING 
-          Using clamp for consistent vertical rhythm across the entire page
-      */}
       <div className="flex flex-col gap-[clamp(4rem, 12vh, 10rem)]">
         
-       <PageHero
-  title={
-    <>
-      We Shape How The <span className="text-[#00d8ff]">World</span> Sees,
-      <br className="hidden md:block" />
-      Understands, And <span className="text-[#00d8ff]">Experiences</span> Your Brand.
-    </>
-  }
-  subtitle="Great Design Isn't Decoration. It's Direction."
-  ctaText="Shape your Next Move"
-/>
+        {/* WRAPPER TO FORCE SUBTITLE WHITE */}
+        <div className="[&_p]:!text-white [&_h3]:!text-white">
+          <PageHero
+            title={
+              <> 
+                We Shape How The <span className="text-[#47c2d2]">World</span> Sees,
+                <br className="hidden md:block" /> 
+                Understands, And <span className="text-[#47c2d2]">Experiences</span> Your Brand. 
+              </> 
+            }
+            subtitle="Great Design Isn't Decoration. It's Direction."
+            ctaText="Shape your Next Move"
+          />
+        </div>
 
         <InfoSection
           title="What is"
@@ -157,11 +157,14 @@ const Design = () => {
           rightBtnLink="/marketing"
         />
 
-        <CTASection
-          title="Let's Shape Your"
-          highlight="Brand"
-          subtitle="We shape how the world Sees, Understands, And Experiences Your Brand."
-        />
+        {/* WRAPPER TO FORCE CTA SUBTITLE WHITE */}
+        <div className="[&_p]:!text-white">
+          <CTASection
+            title="Let's Shape Your"
+            highlight="Brand"
+            subtitle="We shape how the world Sees, Understands, And Experiences Your Brand."
+          />
+        </div>
       </div>
     </ServicePageLayout>
   );

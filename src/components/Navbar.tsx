@@ -64,7 +64,7 @@ const ServicesDropdown = ({ onClose }: { onClose?: () => void }) => {
                 <Link
                   to={getServiceLink(item)}
                   onClick={onClose}
-                  className="block rounded-lg px-2 py-1 text-muted-foreground hover:bg-cyan/20 hover:text-cyan transition-all whitespace-normal"
+                  className="block rounded-lg px-2 py-1 text-muted-foreground hover:bg-[#47c2d2]/20 hover:text-[#47c2d2] transition-all whitespace-normal"
                 >
                   {item}
                 </Link>
@@ -106,7 +106,7 @@ const Navbar = () => {
   const ActiveUnderline = () => (
     <motion.div
       layoutId="navbar-underline"
-      className="absolute bottom-1 left-1/4 h-[2px]  rounded-full bg-[#00d2ff]"
+      className="absolute bottom-1 left-1/4 h-[2px]  rounded-full bg-[#47c2d2]"
       initial={{ opacity: 0, width: "0%" }}
       animate={{ opacity: 1, width: "50%" }} 
       transition={{ type: "spring", stiffness: 380, damping: 30 }}
@@ -123,7 +123,7 @@ const Navbar = () => {
             <img
               src={navLogo}
               alt="Echo & Impact"
-              className="h-12 md:h-16 lg:h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_15px_rgba(0,216,255,0.25)]"
+              className="h-12 md:h-16 lg:h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_15px_rgba(71,194,210,0.25)]"
             />
           </Link>
 
@@ -137,8 +137,8 @@ const Navbar = () => {
                 className="relative text-sm font-medium transition-colors group py-2"
               >
                 <span className={isActive("/") 
-                  ? "bg-gradient-to-r from-[#009dff] to-[#00e5ff] bg-clip-text text-transparent font-bold"
-                  : "text-muted-foreground hover:text-cyan"
+                  ? "bg-gradient-to-r from-[#295070] to-[#47c2d2] bg-clip-text text-transparent font-bold"
+                  : "text-muted-foreground hover:text-[#47c2d2]"
                 }>
                   Home
                 </span>
@@ -155,15 +155,15 @@ const Navbar = () => {
                   className="relative flex items-center gap-1 text-sm font-medium transition-colors group py-2"
                 >
                   <span className={isServicesActive || servicesOpen
-                    ? "bg-gradient-to-r from-[#009dff] to-[#00e5ff] bg-clip-text text-transparent font-bold"
-                    : "text-muted-foreground hover:text-cyan"
+                    ? "bg-gradient-to-r from-[#295070] to-[#47c2d2] bg-clip-text text-transparent font-bold"
+                    : "text-muted-foreground hover:text-[#47c2d2]"
                   }>
                     Services
                   </span>
                   <ChevronDown
                     className={`w-4 h-4 transition-transform ${
                       servicesOpen ? "rotate-180" : ""
-                    } ${isServicesActive || servicesOpen ? "text-[#00e5ff]" : "text-muted-foreground group-hover:text-cyan"}`}
+                    } ${isServicesActive || servicesOpen ? "text-[#47c2d2]" : "text-muted-foreground group-hover:text-[#47c2d2]"}`}
                   />
                   {isServicesActive && <ActiveUnderline />}
                 </button>
@@ -174,7 +174,7 @@ const Navbar = () => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max rounded-2xl border border-cyan/40 bg-background shadow-2xl p-4 z-[9999]"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max rounded-2xl border border-[#47c2d2]/40 bg-background shadow-2xl p-4 z-[9999]"
                     >
                       <ServicesDropdown onClose={() => setServicesOpen(false)} />
                     </motion.div>
@@ -189,8 +189,8 @@ const Navbar = () => {
                   className="relative text-sm font-medium transition-colors group py-2"
                 >
                   <span className={isActive(path)
-                    ? "bg-gradient-to-r from-[#009dff] to-[#00e5ff] bg-clip-text text-transparent font-bold"
-                    : "text-muted-foreground hover:text-cyan"
+                    ? "bg-gradient-to-r from-[#295070] to-[#47c2d2] bg-clip-text text-transparent font-bold"
+                    : "text-muted-foreground hover:text-[#47c2d2]"
                   }>
                     {path.replace("/", "").replace(/^./, (c) => c.toUpperCase())}
                   </span>
@@ -202,7 +202,7 @@ const Navbar = () => {
             <div className="flex items-center">
               <Button
                 size="sm"
-                className="bg-[#0891b2] text-white hover:bg-[#077691] px-6  rounded-full shadow-none border-none"
+                className="bg-gradient-to-r from-[#295070] to-[#47c2d2] text-white hover:brightness-110 px-6 rounded-full shadow-none border-none transition-all"
               >
                 Start Project
               </Button>
@@ -214,7 +214,7 @@ const Navbar = () => {
             className="min-[769px]:hidden p-2 rounded-lg hover:bg-foreground/5"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X size={28} className="text-cyan" /> : <Menu size={28} />}
+            {mobileOpen ? <X size={28} className="text-[#47c2d2]" /> : <Menu size={28} />}
           </button>
         </div>
 
@@ -237,7 +237,7 @@ const Navbar = () => {
                       onClick={() => setMobileOpen(false)}
                       className={`block text-lg font-semibold p-2 rounded-lg ${
                         isActive(path)
-                          ? "bg-gradient-to-r from-[#009dff] to-[#00e5ff] bg-clip-text text-transparent bg-cyan/5"
+                          ? "bg-gradient-to-r from-[#295070] to-[#47c2d2] bg-clip-text text-transparent bg-[#47c2d2]/5"
                           : "text-muted-foreground"
                       }`}
                     >
@@ -249,12 +249,12 @@ const Navbar = () => {
                 <div className="pt-4 border-t border-border/50">
                   <button
                     onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                    className="w-full flex items-center justify-between px-2 py-3 text-lg font-semibold text-muted-foreground hover:text-cyan"
+                    className="w-full flex items-center justify-between px-2 py-3 text-lg font-semibold text-muted-foreground hover:text-[#47c2d2]"
                   >
-                    <span className={isServicesActive ? "text-[#00e5ff]" : ""}>Services</span>
+                    <span className={isServicesActive ? "text-[#47c2d2]" : ""}>Services</span>
                     <ChevronDown
                       className={`w-5 h-5 transition-transform ${
-                        mobileServicesOpen ? "rotate-180 text-[#00e5ff]" : ""
+                        mobileServicesOpen ? "rotate-180 text-[#47c2d2]" : ""
                       }`}
                     />
                   </button>
@@ -276,7 +276,7 @@ const Navbar = () => {
                                 setMobileServicesOpen(false);
                                 setMobileOpen(false);
                               }}
-                              className="text-sm py-2 text-muted-foreground hover:text-cyan"
+                              className="text-sm py-2 text-muted-foreground hover:text-[#47c2d2]"
                             >
                               {title}
                             </Link>
@@ -289,7 +289,7 @@ const Navbar = () => {
 
                 <div className="pt-4 flex justify-center pb-6">
                   <Button
-                    className="bg-[#0891b2] text-white px-8 py-3 text-base font-semibold hover:bg-[#077691] rounded-full shadow-none"
+                    className="bg-gradient-to-r from-[#295070] to-[#47c2d2] text-white px-8 py-3 text-base font-semibold hover:brightness-110 rounded-full shadow-none border-none transition-all"
                     asChild
                   >
                     <Link to="/contact" onClick={() => setMobileOpen(false)}>

@@ -121,16 +121,18 @@ const Develop = () => {
 
   return (
     <ServicePageLayout>
-      <PageHero
-        title={
-          <>
-            We Build The <span className="text-cyan">Digital Experiences</span> That<br />
-            Bring Your <span className="text-cyan">Brand</span> To Life.
-          </>
-        }
-        subtitle="Development Isn't Just Code. It's Craftsmanship."
-        ctaText="Start Your Development Project"
-      />
+      <div className="[&_p]:!text-white [&_h3]:!text-white">
+  <PageHero
+    title={
+      <>
+        We Build The <span className="text-[#47c2d2]">Digital Experiences</span> That<br />
+        Bring Your <span className="text-[#47c2d2]">Brand</span> To Life.
+      </>
+    }
+    subtitle="Development Isn't Just Code. It's Craftsmanship."
+    ctaText="Start Your Development Project"
+  />
+</div>
 
       <InfoSectionTWO
         title="What is"
