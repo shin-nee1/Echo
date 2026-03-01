@@ -3,6 +3,9 @@ import ContactHero from "@/components/ContactHero";
 import FAQ from "@/components/FAQ";
 import ProcessSection, { type ProcessStepData } from "@/components/ProcessSection";
 
+// 1. IMPORT YOUR FAQ DATA
+import { faqData2 } from "@/data/faqData2"; // Change to { faqData2 } if you named the export that way
+
 // Asset imports
 import step1Image from "@/assets/freepik__background__95353.png";
 import step2Image from "@/assets/freepik__background__95352.png";
@@ -49,7 +52,8 @@ const Contact = () => {
 
       {/* 3. FAQ SECTION */}
       {/* FAQ handles its own internal spacing, but the container pb above protects it from the footer */}
-      <FAQ />
+      {/* 2. INJECT THE DYNAMIC DATA FOR CONTACT */}
+      <FAQ items={faqData2["contact"]} />
     </div>
   );
 };

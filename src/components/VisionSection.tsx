@@ -21,13 +21,13 @@ const VisionSection = () => {
             {/* UPDATED: Slightly increased max-width to let text sit closer to the center line */}
             <div className="w-full lg:max-w-[520px] xl:max-w-[600px] 2xl:max-w-[700px]">
               <div className="mb-6 lg:mb-8">
-                 <h2 className="text-white font-bold tracking-tight leading-[1.1] 
-                                text-[clamp(2rem,8vw,2.5rem)] 
-                                md:text-[clamp(2.5rem,6vw,3rem)] 
-                                lg:text-[clamp(1.8rem,3vw,2.4rem)] 
-                                xl:text-[2.8rem] 2xl:text-[3.2rem]">
-                    Our <span className="text-[#00d8ff]">Vision</span>
-                 </h2>
+                  <h2 className="text-white font-bold tracking-tight leading-[1.1] 
+                           text-[clamp(2rem,8vw,2.5rem)] 
+                           md:text-[clamp(2.5rem,6vw,3rem)] 
+                           lg:text-[clamp(1.8rem,3vw,2.4rem)] 
+                           xl:text-[2.8rem] 2xl:text-[3.2rem]">
+                    Our <span className="text-[#47C2D2]">Vision</span>
+                  </h2>
               </div>
 
               {/* MOBILE IMAGE */}
@@ -39,7 +39,7 @@ const VisionSection = () => {
                 <img 
                   src={VisionImg} 
                   alt="Our Vision" 
-                  className="w-full h-auto object-contain drop-shadow-[0_0_20px_rgba(0,216,255,0.05)]"
+                  className="w-full h-auto object-contain drop-shadow-[0_0_20px_rgba(71,194,210,0.05)]"
                 />
               </motion.div>
               
@@ -68,9 +68,9 @@ Our vision is to build brands and digital systems that are stable, scalable, and
               <img 
                 src={VisionImg} 
                 alt="Our Vision" 
-                className="w-full h-auto object-contain drop-shadow-[0_0_50px_rgba(0,216,255,0.15)]"
+                className="w-full h-auto object-contain drop-shadow-[0_0_50px_rgba(71,194,210,0.15)]"
               />
-              <div className="absolute inset-0 bg-cyan/5 blur-[100px] rounded-full -z-10" />
+              <div className="absolute inset-0 bg-[#47C2D2]/5 blur-[100px] rounded-full -z-10" />
             </motion.div>
           </div>
 
