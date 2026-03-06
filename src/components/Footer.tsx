@@ -2,7 +2,7 @@ import { Facebook, Linkedin, Twitter, Phone, Mail, MapPin, ArrowRight } from "lu
 import { Link } from "react-router-dom";
 import { serviceTitleToSlug } from "@/data/servicesData";
 // IMPORTING LOGO FROM ASSETS
-import logo from "@/assets/image-removebg-preview (13).png";
+import logo from "@/assets/Echo & Impact Logo (2).png";
 
 type FooterSection = {
   title: string;

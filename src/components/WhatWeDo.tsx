@@ -35,7 +35,6 @@ const WhatWeDo = () => {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      // Adjusted scroll amount for smoother navigation on larger screens
       const scrollAmount = direction === "left" ? -400 : 400;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
@@ -55,12 +54,12 @@ const WhatWeDo = () => {
               </h2>
             </div>
             
-            <div className="whatwedo-divider md:pl-[rem]  ">
-              <p className="whatwedo-subtitle text-slate-400 leading-tight]">
-                Every brand we build follows a rhythm.                            
+            <div className="whatwedo-divider md:pl-[1rem]">
+              <p className="whatwedo-subtitle text-white leading-tight">
+                Every brand we build follows a rhythm.
               </p>
-               <p className="whatwedo-subtitle text-slate-400 leading-tight">
-                Designed to create presence.                          
+              <p className="whatwedo-subtitle text-white leading-tight">
+                Designed to create presence.
               </p>
             </div>
           </div>
@@ -94,26 +93,27 @@ const WhatWeDo = () => {
             >
               <motion.div 
                 whileHover={{ y: -15 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="whatwedo-card relative flex flex-col rounded-[1.25rem] md:rounded-[2rem] overflow-hidden transition-all duration-500"
+                // Increased stiffness and lowered damping for a faster, snappier hover lift
+                transition={{ type: "spring", stiffness: 600, damping: 15 }}
+                className="whatwedo-card relative flex flex-col rounded-[1.25rem] md:rounded-[2rem] overflow-hidden transition-colors duration-300"
               >
-                <div className="whatwedo-glass-layer absolute inset-0 z-0 transition-all duration-500" />
+                <div className="whatwedo-glass-layer absolute inset-0 z-0 transition-all duration-300" />
 
                 <div className="relative z-10 flex flex-col h-full">
                   <div className="whatwedo-img-area relative w-full mb-[0.75rem] pointer-events-none flex-shrink-0">
                     {service.title === "DESIGN" && (
                       <>
-                        <img src={DesignImg6} alt="" className="whatwedo-img-primary absolute -top-2 -right-2 h-auto group-hover:scale-110 transition-transform duration-500" />
-                        <img src={DesignImg5} alt="" className="whatwedo-img-secondary absolute -bottom-2 -left-2 h-auto group-hover:rotate-12 transition-transform duration-500" />
+                        <img src={DesignImg6} alt="" className="whatwedo-img-primary absolute -top-2 -right-2 h-auto group-hover:scale-110 transition-transform duration-300" />
+                        <img src={DesignImg5} alt="" className="whatwedo-img-secondary absolute -bottom-2 -left-2 h-auto group-hover:rotate-12 transition-transform duration-300" />
                       </>
                     )}
 
                     {service.title === "DEVELOPMENT" && (
-                      <img src={DevImg7} alt="" className="whatwedo-img-full absolute top-0 -left-2 max-w-none h-auto group-hover:scale-105 transition-transform duration-500" />
+                      <img src={DevImg7} alt="" className="whatwedo-img-full absolute top-0 -left-2 max-w-none h-auto group-hover:scale-105 transition-transform duration-300" />
                     )}
 
                     {service.title === "MARKETING" && (
-                      <img src={MarketImg8} alt="" className="whatwedo-img-full absolute -top-2 -left-2 max-w-none h-auto group-hover:scale-105 transition-transform duration-500" />
+                      <img src={MarketImg8} alt="" className="whatwedo-img-full absolute -top-2 -left-2 max-w-none h-auto group-hover:scale-105 transition-transform duration-300" />
                     )}
                   </div>
 
@@ -123,7 +123,7 @@ const WhatWeDo = () => {
                   <p className="whatwedo-highlight text-[#47c2d2] mb-2 tracking-tight leading-tight">
                     {service.highlight}
                   </p>
-                  <p className="whatwedo-desc text-slate-400 leading-snug mb-4 line-clamp-3">
+                  <p className="whatwedo-desc text-white leading-snug mb-4 line-clamp-3">
                     {service.description}
                   </p>
 
@@ -141,8 +141,8 @@ const WhatWeDo = () => {
 
         {/* ECHO RIBBON TEXT */}
         <div className="whatwedo-ribbon flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-12 text-center">
-          <p className="text-white font-medium text-xs md:text-sm uppercase tracking-[0.2em] opacity-80">
-            Design defines you. <span className="mx-4 opacity-20">|</span> Development builds you. <span className="mx-4 opacity-20">|</span> Marketing scales you.
+          <p className="text-white font-medium text-xs md:text-sm uppercase tracking-[0.2em] opacity-80 flex flex-wrap justify-center items-center gap-2 md:gap-0">
+            Design defines you <span className="mx-2 md:mx-4 opacity-50">|</span> Development builds you <span className="mx-2 md:mx-4 opacity-50">|</span> Marketing scales you
           </p>
           <div className="w-full mt-3">
             <p className="text-white font-bold text-base md:text-lg tracking-tight">
@@ -186,6 +186,7 @@ const WhatWeDo = () => {
 
         .whatwedo-card {
           border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 0 15px rgba(71, 194, 210, 0.1); 
         }
 
         .whatwedo-glass-layer {
@@ -200,7 +201,11 @@ const WhatWeDo = () => {
         }
 
         .whatwedo-card-link:hover .whatwedo-card {
-          border-color: rgba(71, 194, 210, 0.4);
+          border-color: rgba(71, 194, 210, 0.6);
+          /* Added an inset shadow to create an inner top glow */
+          box-shadow: 
+            0 0 30px rgba(71, 194, 210, 0.4), 
+            inset 0 30px 40px -20px rgba(71, 194, 210, 0.5); 
         }
 
         .whatwedo-card-link:hover .whatwedo-glass-layer {
@@ -226,7 +231,7 @@ const WhatWeDo = () => {
         /* TYPOGRAPHY & LAYOUT SIZING */
         .whatwedo-header { margin-bottom: 1rem; }
         .whatwedo-title { font-size: 1.55rem; }
-        .whatwedo-subtitle { font-size: 0.7rem; max-width: 150px; }
+        .whatwedo-subtitle { font-size: 0.7rem; max-width: none; } 
         .whatwedo-card-link { width: 65vw; }
         .whatwedo-card { padding: 1.3rem; min-height: 16rem; }
         .whatwedo-img-area { height: 6rem; }
@@ -247,16 +252,6 @@ const WhatWeDo = () => {
         }
         .whatwedo-ribbon svg { width: 230px; height: 25px; }
 
-        @media (max-width: 1023px) {
-          .whatwedo-ribbon p.uppercase {
-             display: flex;
-             flex-direction: column;
-             gap: 0.5rem;
-             align-items: center;
-          }
-          .whatwedo-ribbon p.uppercase span { display: none; }
-        }
-
         @media (max-width: 1440px) {
            .whatwedo-ribbon {
               width: calc(100% + 10vw);
@@ -270,7 +265,7 @@ const WhatWeDo = () => {
         @media (min-width: 768px) {
           .whatwedo-wrapper { padding-bottom: 8rem; }
           .whatwedo-title { font-size: 2.5rem; }
-          .whatwedo-subtitle { font-size: 0.85rem; max-width: 200px; }
+          .whatwedo-subtitle { font-size: 0.85rem; max-width: none; }
           .whatwedo-card-link { width: 45vw; }
           .whatwedo-card { padding: 1.75rem; min-height: 15rem; }
           .whatwedo-img-area { height: 7rem; }
@@ -320,7 +315,7 @@ const WhatWeDo = () => {
         @media (min-width: 2560px) {
           .whatwedo-wrapper { padding-top: 5vh; padding-bottom: 20vh; }
           .whatwedo-title { font-size: 4.8rem; }
-          .whatwedo-subtitle { font-size: 1.55rem; max-width: 400px; }
+          .whatwedo-subtitle { font-size: 1.55rem; max-width: none; }
           .whatwedo-card-link { width: 35vw; }
           .whatwedo-card { padding: 2.55rem; min-height: 35rem; border-radius: 4rem; }
           .whatwedo-img-area { height: 15rem; margin-bottom: 3rem; }

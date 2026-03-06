@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom"; // Imported for routing
 import { Button } from "@/components/ui/button";
 import aboutImage from "../assets/image-removebg-preview (12).png";
 
 const AboutUs = () => {
+  const navigate = useNavigate(); // Initialized the hook
+
   return (
     <section className="relative bg-transparent overflow-hidden about-section">
 
@@ -25,7 +28,8 @@ const AboutUs = () => {
             
             <div className="about-header-wrapper">
               <h2 className="text-white font-bold tracking-tight leading-none uppercase about-main-title">
-                ABOUT <span className="text-[#47csd2]">US</span>
+                {/* Changed the hex code below */}
+                ABOUT <span className="text-[#42ACC0]">US</span>
               </h2>
             </div>
 
@@ -43,7 +47,7 @@ const AboutUs = () => {
                 honesty and commitment. We guide, educate, and collaborate at every step.
               </p>
 
-              <p className="font-semibold text-[#47c2d2]/90 about-accent-text">
+              <p >
                 Every decision is thoughtful. Every outcome is meaningful. Every partnership 
                 is built to last.
               </p>
@@ -52,7 +56,8 @@ const AboutUs = () => {
             <div className="about-button-wrapper">
               <Button 
                 variant="cyan"
-                size = "lg"
+                size="lg"
+                onClick={() => navigate("/about")} // Added the onClick handler
               >
                 Find out more about us
               </Button>

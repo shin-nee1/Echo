@@ -24,7 +24,8 @@ const PageHero = ({ title, subtitle, ctaText = "Shape your Next Move" }: PageHer
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto hero-title-box" 
         >
-          <h1 className="font-bold tracking-[-0.03em] text-white leading-[1.05] font-display hero-title">
+          {/* ADDED 'capitalize' HERE */}
+          <h1 className="font-bold tracking-[-0.03em] text-white leading-[1.05] font-display hero-title capitalize">
             {title}
           </h1>
         </motion.div>
