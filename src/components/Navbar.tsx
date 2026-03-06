@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { serviceTitleToSlug } from "@/data/servicesData";
 
-import navLogo from "../assets/image-removebg-preview (13).png";
+import navLogo from "../assets/Echo & Impact Logo (2).png";
 
 /* =======================
     SERVICES DROPDOWN (DESKTOP)
@@ -123,7 +123,7 @@ const Navbar = () => {
             <img
               src={navLogo}
               alt="Echo & Impact"
-              className="h-12 md:h-16 lg:h-20 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_15px_rgba(71,194,210,0.25)]"
+              className="h-16 md:h-24 lg:h-28 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_15px_rgba(71,194,210,0.25)]"
             />
           </Link>
 

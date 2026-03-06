@@ -52,9 +52,9 @@ const IndexHero: React.FC = () => {
         </div>
 
         <div className="hero-link-container">
-          <a href="#" className="hero-link text-[#47c2d2] transition-all font-semibold border-b border-transparent hover:border-[#47c2d2]">
+          <span className="hero-link text-[#47c2d2] transition-all font-semibold">
             Access Your Free Project Guide
-          </a>
+          </span>
         </div>
 
         <div className="hero-btn-container">
@@ -63,7 +63,7 @@ const IndexHero: React.FC = () => {
             size="hero" 
             onClick={() => navigate("/contact")} // Links to Contact.tsx route
           >
-            Next →
+            Free Guide
           </Button>
         </div>
 

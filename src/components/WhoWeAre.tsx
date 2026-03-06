@@ -1,9 +1,12 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom"; // Added import
 // IMPORT THE FOURTH IMAGE
 import WhoWeAreImg from "@/assets/image-removebg-preview (4).png";
 
 const WhoWeAre = () => {
+  const navigate = useNavigate(); // Initialize navigation
+
   return (
     <section className="whoweare-wrapper relative bg-transparent overflow-hidden">
       <div className="container mx-auto ">
@@ -49,6 +52,7 @@ const WhoWeAre = () => {
               <Button 
                 variant="cyan" 
                 size="hero"
+                onClick={() => navigate("/about")} // Added onClick navigation
               >
                 Read More
               </Button>

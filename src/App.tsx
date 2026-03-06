@@ -48,7 +48,7 @@ const ScrollingCubes = () => {
           <img 
             src={CubeImg} 
             alt="" 
-            className="absolute top-[38.15%] left-[1%] w-[19vw] opacity-100 -rotate-[0deg]" 
+            className="absolute top-[35.3%] left-[1%] w-[19vw] opacity-100 -rotate-[0deg]" 
           />
           <img 
             src={CubeImg} 
