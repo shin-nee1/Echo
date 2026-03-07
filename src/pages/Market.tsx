@@ -9,6 +9,8 @@ import ServiceNavigationBanner from "@/components/ServiceNavigationBanner";
 import CTASection from "@/components/CTASection";
 
 // --- IMAGE IMPORTS ---
+// FIXED: Removed the space from the filename. Ensure the actual file is renamed to match this!
+import marketInfoImg from "@/assets/market-info.png"; 
 import marketImg1 from "@/assets/image-removebg-preview (16).png";
 import marketImg2 from "@/assets/image-removebg-preview (17).png";
 import marketImg3 from "@/assets/image-removebg-preview (18).png";
@@ -127,12 +129,14 @@ const Market = () => {
           </>
         }
         subtitle="Marketing isn't noise. It's precision."
-        ctaText="Grow with intention →"
+        ctaText="Grow with intention "
       />
 
       <InfoSection
         title="What is"
         highlight="Marketing?"
+        image={marketInfoImg} 
+        imageScale={1.3} // <-- Added scale here! Change this number to dial in the perfect size
         paragraphs={[
           "At Echo & Impact, marketing is where strategy, creativity, and performance operate as one. We don’t chase vanity metrics, we build systems that attract the right audience, move them to action, and provide results.",
           "From paid social media and SEO to content and full-funnel optimization, every channel is aligned under a single growth strategy built around your brand, your goals, your product and your customer behavior. We plan, create, execute, test, and refine with precision, ensuring you’re not just visible, you’re chosen.",

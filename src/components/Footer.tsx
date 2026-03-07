@@ -2,7 +2,7 @@ import { Facebook, Linkedin, Twitter, Phone, Mail, MapPin, ArrowRight } from "lu
 import { Link } from "react-router-dom";
 import { serviceTitleToSlug } from "@/data/servicesData";
 // IMPORTING LOGO FROM ASSETS
-import logo from "@/assets/Echo & Impact Logo (2).png";
+import logo from "@/assets/Echo & Impact Logo (White).png";
 
 type FooterSection = {
   title: string;
@@ -192,9 +192,9 @@ const Footer = () => {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-left items-start mb-12">
           {[
-            { icon: Phone, label: "Phone", val: "+44 7548 479 791" },
+            { icon: Phone, label: "Phone", val: "+1 (844) 591-ECHO" },
             { icon: Mail, label: "Email", val: "info@echoandimpact.com" },
-            { icon: MapPin, label: "Location", val: "NY, USA, SERVING GLOBALLY" },
+            { icon: MapPin, label: "Location", val: "5225 Main St, Suit #4, Buffalo, NY, 14221" },
           ].map((item, i) => (
             <div key={i} className="flex items-center gap-4 justify-start">
               {/* Removed background container, kept shrink-0 */}

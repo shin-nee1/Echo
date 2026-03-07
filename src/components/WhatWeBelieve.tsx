@@ -15,7 +15,7 @@ const WhatWeBelieve = () => {
     },
     {
       subtitle: "Quality is a consistent practice",
-      description: "It comes from senior level skill, thoughtful decisions, and disciplined execution — not templates, shortcuts, or rushed timelines.",
+      description: "It comes from senior level skill, thoughtful decisions, and disciplined execution not templates, shortcuts, or rushed timelines.",
       image: BeliefImg2,
     },
     {

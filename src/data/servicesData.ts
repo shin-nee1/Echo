@@ -99,8 +99,8 @@ export const servicesData: ServiceData[] = [
     slug: "creative-direction",
     category: "design",
     title: "Creative Direction",
-    nonHighlightedText: "The Visual Narrative Of Your",
-    highlightedText: "Brand",
+    nonHighlightedText: "Behind Your Brand's",
+    highlightedText: "Expression",
     subtitle: "Strategic vision that guides your brand's visual narrative.",
     ctaText: "Let's Define The Vision",
     whatIs: {
@@ -160,7 +160,7 @@ export const servicesData: ServiceData[] = [
     subtitle: "Dynamic visuals that capture attention and communicate effectively.",
     ctaText: "Put It Into Motion",
     whatIs: {
-      title: "What is Motion Design",
+      title: "What is Motion & Graphic Design",
       highlightedWord: "Motion",
       description: `Motion and graphic design bring your brand to life through movement, clarity, and visual expression. At Echo & Impact, we create motion systems and graphic assets that elevate your storytelling, enhance recognition, and strengthen your brand’s presence across digital platforms.\n\nFrom animated elements and social graphics to explainer videos, transitions, and campaign visuals, every asset is built with intention and aligned with your brand identity.\n\nWhether you need high-volume content, product explainers, or a complete graphic library, our focus is consistent, design that communicates clearly, performs well, and feels unmistakably yours.`,
       imageSrc: `${BASE_PATH}/Motion hero.png`,
@@ -213,7 +213,7 @@ export const servicesData: ServiceData[] = [
     slug: "shopify-development",
     category: "develop",
     title: "Shopify Development",
-    nonHighlightedText: "Everything You Need For an",
+    nonHighlightedText: "You Need For an",
     highlightedText: "Online Shop",
     subtitle: "E-commerce solutions that drive sales and scale with your business.",
     ctaText: "My Online Shop",
@@ -246,8 +246,8 @@ export const servicesData: ServiceData[] = [
     subtitle: "Powerful web applications that streamline your business operations.",
     ctaText: "Code It",
     whatIs: {
-      title: "What is Web Application",
-      highlightedWord: "Web App",
+      title: "What is ",
+      highlightedWord: "Web Application",
       description: `Web applications are where your product, your users, and your business logic meet. At Echo & Impact, we build custom web applications that are stable, scalable, secure, and engineered around real functionality.\n\nFrom dashboards and portals to SaaS platforms, automation systems, API integrations, internal tools, and full-scale digital products, we develop applications with clean architecture, smooth user flow, and reliable performance.\n\nWhether you're launching an MVP, rebuilding a legacy system, or scaling a complex platform, our focus remains the same, an application built with clarity, functional logic, technical precision, and long-term scalability in mind.`,
       imageSrc: `${BASE_PATH}/web application dev hero.png`,
       imageAlt: "Web application interface",
@@ -272,7 +272,7 @@ export const servicesData: ServiceData[] = [
     nonHighlightedText: "Behind Your App",
     highlightedText: "Download",
     subtitle: "Native and cross-platform apps that engage users on the go.",
-    ctaText: "Display",
+    ctaText: "Deploy",
     whatIs: {
       title: "What is Mobile Development",
       highlightedWord: "Mobile",
@@ -304,17 +304,17 @@ export const servicesData: ServiceData[] = [
     whatIs: {
       title: "What is CRO & Optimization",
       highlightedWord: "Optimization",
-      description: `Your website can look great — but if it loads slowly or fails to convert, your growth hits a ceiling. CRO and speed optimization ensure your digital experience is fast, intuitive, and designed to turn visitors into customers.\n\nAt Echo & Impact, we optimize the full journey: performance, funnels, user behavior, and on-page clarity. Every improvement is backed by data, not guesswork.\n\nWhether your goal is more sign-ups, more sales, or deeper engagement, we refine the experience so every click works in your favor.`,
+      description: `Your website can look great but if it loads slowly or fails to convert, your growth hits a ceiling. CRO and speed optimization ensure your digital experience is fast, intuitive, and designed to turn visitors into customers.\n\nAt Echo & Impact, we optimize the full journey: performance, funnels, user behavior, and on-page clarity. Every improvement is backed by data, not guesswork.\n\nWhether your goal is more sign-ups, more sales, or deeper engagement, we refine the experience so every click works in your favor.`,
       imageSrc: `${BASE_PATH}/Cro and Speed hero.png`,
       imageAlt: "CRO optimization dashboard",
     },
     features: [
       { title: "Speed Optimization (Core Web Vitals)", description: "We analyze your site’s performance, identify bottlenecks, and optimize load times across all devices. This includes asset compression, code cleanup, server improvements, caching strategy, and best-practice implementation to ensure your experience feels fast, smooth, and effortless.", imageSrc: `${BASE_PATH}/speed optimization.png`, alternateImageSrc: `${BASE_PATH}/high performance front.png` },
-      { title: "Conversion Audits", description: "Heatmaps, behavior recordings, funnel analysis, user flows, bounce patterns — all evaluated to understand where users hesitate or disconnect. These insights reveal opportunities to increase conversions through clarity, structure, and simplified decision-making.", imageSrc: `${BASE_PATH}/conversion audits.png`, alternateImageSrc: `${BASE_PATH}/research insight.png` },
+      { title: "Conversion Audits", description: "Heatmaps, behavior recordings, funnel analysis, user flows, bounce patterns all evaluated to understand where users hesitate or disconnect. These insights reveal opportunities to increase conversions through clarity, structure, and simplified decision-making.", imageSrc: `${BASE_PATH}/conversion audits.png`, alternateImageSrc: `${BASE_PATH}/research insight.png` },
       { title: "Landing Page Optimization", description: "We refine layouts, messaging hierarchy, call-to-action placement, and visual flow to guide users toward the intended action. The goal is simple: less friction, more conversion, and an experience aligned with how users actually behave.", imageSrc: `${BASE_PATH}/landing page optimization.png`, alternateImageSrc: `${BASE_PATH}/landing page and offer.png` },
-      { title: "Funnel Improvements", description: "Your funnel is assessed end-to-end — from first impression to final action. We strengthen each stage by removing drop-off points, improving continuity, tightening messaging, and ensuring your offer is presented with clarity and confidence.", imageSrc: `${BASE_PATH}/funnel improvement.png`, alternateImageSrc: `${BASE_PATH}/user flows.png` },
+      { title: "Funnel Improvements", description: "Your funnel is assessed end-to-end from first impression to final action. We strengthen each stage by removing drop-off points, improving continuity, tightening messaging, and ensuring your offer is presented with clarity and confidence.", imageSrc: `${BASE_PATH}/funnel improvement.png`, alternateImageSrc: `${BASE_PATH}/user flows.png` },
       { title: "A/B Testing Framework", description: "We design tests that validate real user preferences. From headlines and CTA placement to layout variations and imagery, each test helps us understand what works, what doesn’t, and what drives more conversions.", imageSrc: `${BASE_PATH}/ab testing framework.png`, alternateImageSrc: `${BASE_PATH}/ab testing and variant.png` },
-      { title: "Analytics & Reporting", description: "Performance is measured consistently through dashboards, tracking tools, and structured reporting. You receive clear insights, actionable recommendations, and a roadmap of what to improve next — always driven by real data.", imageSrc: `${BASE_PATH}/Analytics Hero.png`, alternateImageSrc: `${BASE_PATH}/dashboard and reporting.png` },
+      { title: "Analytics & Reporting", description: "Performance is measured consistently through dashboards, tracking tools, and structured reporting. You receive clear insights, actionable recommendations, and a roadmap of what to improve next always driven by real data.", imageSrc: `${BASE_PATH}/Analytics Hero.png`, alternateImageSrc: `${BASE_PATH}/dashboard and reporting.png` },
     ],
     contactCta: {
       title: "Ready to optimize your performance?",
@@ -361,7 +361,7 @@ export const servicesData: ServiceData[] = [
     nonHighlightedText: "That Builds Your",
     highlightedText: "Presence",
     subtitle: "Build engaged communities that amplify your brand.",
-    ctaText: "Let Me Be Seen",
+    ctaText: "Let's Socialize",
     whatIs: {
       title: "What is Social Management",
       highlightedWord: "Social",
@@ -390,7 +390,7 @@ export const servicesData: ServiceData[] = [
     nonHighlightedText: "That Puts You",
     highlightedText: "On The Map",
     subtitle: "Rank higher and attract organic traffic that converts.",
-    ctaText: "Let Me Be Seen",
+    ctaText: "Search Us",
     whatIs: {
       title: "What is SEO & Content",
       highlightedWord: "SEO",
@@ -420,7 +420,7 @@ export const servicesData: ServiceData[] = [
     nonHighlightedText: "That Drives Your",
     highlightedText: "Messaging",
     subtitle: "Direct communication that nurtures leads and drives sales.",
-    ctaText: "Let Me Be Seen",
+    ctaText: "Send It",
     whatIs: {
       title: "What is Email & SMS Marketing",
       highlightedWord: "Email & SMS",
@@ -449,7 +449,7 @@ export const servicesData: ServiceData[] = [
     nonHighlightedText: "That Sharpens Your",
     highlightedText: "Visibility",
     subtitle: "Data-driven insights that inform smarter decisions.",
-    ctaText: "Let Me Be Seen",
+    ctaText: "Help Me Improve",
     whatIs: {
       title: "What is Analytics & Tracking",
       highlightedWord: "Analytics",
@@ -478,7 +478,7 @@ export const servicesData: ServiceData[] = [
     nonHighlightedText: "That Elevates Your",
     highlightedText: "Performance",
     subtitle: "Test and refine creative assets for maximum impact.",
-    ctaText: "Let Me Be Seen",
+    ctaText: "Make It Convert",
     whatIs: {
       title: "What is Creative Optimization",
       highlightedWord: "Creative",

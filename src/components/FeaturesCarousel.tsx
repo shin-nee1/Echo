@@ -68,7 +68,7 @@ const FeaturesCarousel = ({
         <div className={`flex flex-col items-center text-center ${isCompact ? "mb-6" : "mb-8"}`}>
           <h2 className={`${isCompact ? "text-3xl" : "text-[clamp(2.5rem,5vw,4rem)]"} font-bold tracking-tight text-white leading-[1.1]`}>
             {titleParts[0]}
-            <span className="text-[#00d8ff]">{highlightedWord}</span>
+            <span className="text-[#47c2d2]">{highlightedWord}</span>
             {titleParts[1]}
           </h2>
         </div>

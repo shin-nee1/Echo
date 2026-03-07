@@ -10,7 +10,7 @@ const AboutHero: React.FC = () => {
         
         {/* TITLE: Centered */}
         <h2 className="about-hero-title font-bold text-white leading-tight text-center">
-          About <span className="text-[#00d8ff]">Us</span>
+          About <span className="text-[#47c2d2]">Us</span>
         </h2>
 
         {/* IMAGE: Increased Size & Centered */}
