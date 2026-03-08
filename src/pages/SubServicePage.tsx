@@ -45,7 +45,7 @@ const SubServicePage = () => {
             title={
               <>
                 {titleWithoutLastWord}{" "}
-                <span className="text-[#00d8ff]">{lastWord}</span>
+                <span className="text-[#47c2d2]">{lastWord}</span>
               </>
             }
             ctaText={service.ctaText}

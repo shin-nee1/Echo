@@ -127,7 +127,7 @@ export const faqData2: Record<string, FAQItem[]> = {
   ],
   "cro-speed-optimization": [
     { question: "How long does CRO take to show results?", answer: "Most improvements show noticeable impact within a few weeks, depending on traffic and test complexity. We outline expected timelines during the initial assessment." },
-    { question: "Is CRO only for eCommerce?", answer: "No. CRO works across websites, SaaS platforms, B2B funnels, landing pages, and service sites — anywhere user action matters." },
+    { question: "Is CRO only for eCommerce?", answer: "No. CRO works across websites, SaaS platforms, B2B funnels, landing pages, and service sites anywhere user action matters." },
     { question: "Do you need access to our analytics?", answer: "Yes. Accurate CRO requires access to analytics, heatmaps, and tracking tools. If you don’t have them set up, we configure everything for you." },
     { question: "Will CRO affect my existing design or layout?", answer: "Optimizations enhance clarity and usability, but they never compromise your branding. Any major layout changes are always discussed and aligned before implementation." },
     { question: "Do you work under NDA?", answer: "Always. All assets, data, and insights remain fully confidential. We work exclusively under NDA to protect your business and user information." },

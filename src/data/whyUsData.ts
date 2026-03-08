@@ -65,7 +65,7 @@ export const whyUsData: Record<string, WhyUsItem[]> = {
     { title: "Architecture That Scales", description: "We build systems with clean structure, reliable logic, and extensible architecture. Your app remains stable as features expand and user volume grows." },
     { title: "Real UX & Engineering", description: "All features, flows, and behaviors are shaped through collaboration between UX designers and software engineers. This ensures the product feels intuitive and performs reliably from day one." },
     { title: "Clean Code & Structure", description: "No tangled logic, no legacy mess. We build applications with readability, maintainability, and longevity in mind, so you can scale confidently." },
-    { title: "Security, Performance & Reliability", description: "Authentication, authorization, encryption, load handling, and error resilience are part of the foundation, not an afterthought." }
+    { title: "Performance & Reliability", description: "Authentication, authorization, encryption, load handling, and error resilience are part of the foundation, not an afterthought." }
   ],
   "mobile-application-development": [
     { title: "UX + Engineering", description: "We don’t treat design and development as separate tracks. UX decisions guide engineering logic so the app feels intuitive, consistent, and frictionless." },
@@ -75,11 +75,11 @@ export const whyUsData: Record<string, WhyUsItem[]> = {
     { title: "QA & Continuous Testing", description: "Every build goes through structured, multi-stage QA to ensure the app is stable, intuitive, and technically sound. We test user journey, functionality, performance, device behavior, edge cases, and integration points throughout the development cycle, not only at the end." }
   ],
   "cro-speed-optimization": [
-    { title: "Data-Driven Decisions", description: "Every optimization is backed by user behavior, analytics, and structured insight. Nothing is changed for the sake of change — only actions that move performance forward." },
+    { title: "Data-Driven Decisions", description: "Every optimization is backed by user behavior, analytics, and structured insight. Nothing is changed for the sake of change only actions that move performance forward." },
     { title: "Performance Meets Design", description: "Functional improvements don’t come at the cost of your brand. We ensure changes enhance user experience and visual consistency while making the site faster and more effective." },
-    { title: "Holistic Optimization Approach", description: "We don’t just fix speed or buttons — we examine the entire journey across branding, messaging, UX, and technology to ensure your funnel works as one system." },
+    { title: "Holistic Optimization Approach", description: "We don’t just fix speed or buttons we examine the entire journey across branding, messaging, UX, and technology to ensure your funnel works as one system." },
     { title: "Senior-Level Expertise", description: "Your optimizations are executed by senior performance strategists, engineers, and UX specialists who understand both growth and user behavior at scale." },
-    { title: "Iterative Growth", description: "CRO isn’t a single task — it’s a cycle. We continuously analyze performance, test improvements, and refine direction to help you grow month after month." }
+    { title: "Iterative Growth", description: "CRO isn’t a single task it’s a cycle. We continuously analyze performance, test improvements, and refine direction to help you grow month after month." }
   ],
 
   // ==================== MARKET SERVICES ====================

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { serviceTitleToSlug } from "@/data/servicesData";
 
-import navLogo from "../assets/Echo & Impact Logo (2).png";
+import navLogo from "../assets/Echo & Impact Logo (White).png";
 
 /* =======================
     SERVICES DROPDOWN (DESKTOP)

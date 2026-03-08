@@ -40,7 +40,7 @@ const WhatIsSection = ({
                              lg:text-[clamp(2.4rem,3.5vw,2.8rem)] 
                              2xl:text-[clamp(2.4rem,3.5vw,2.8rem)]">
                 {titleParts[0]}
-                <span className="text-[#00d8ff]">{highlightedWord}</span>
+                <span className="text-[#47c2d2]">{highlightedWord}</span>
                 {titleParts[1] || ""}
               </h2>
             </div>

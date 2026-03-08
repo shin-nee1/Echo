@@ -50,14 +50,17 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
             const isLast = index === steps.length - 1;
             const mobileTransform = (index < 4) ? "-translate-x-[12px]" : "translate-x-[12px]";
             
-            // GLOW LOGIC
-            const isTopGlow = index % 2 === 0; 
-            const glowGradient = isTopGlow 
-              ? "radial-gradient(circle at 50% 0%, rgba(71, 194, 210, 0.2) 0%, transparent 75%)"
-              : "radial-gradient(circle at 50% 100%, rgba(71, 194, 210, 0.2) 0%, transparent 75%)";
+            // GLOW LOGIC: 
+            // Odd process (1, 3, 5) -> bottom center (50% 100%)
+            // Even process (2, 4, 6) -> top center (50% 0%)
+            const isOddProcess = (index + 1) % 2 !== 0;
+            const glowPosition = isOddProcess ? "50% 100%" : "50% 0%";
+            
+            // Spread reduced by changing the transparent stop from 100% to 60%
+            const glowGradient = `radial-gradient(circle at ${glowPosition}, rgba(66, 172, 192, 0.4) 0%, rgba(31, 81, 90, 0) 60%)`;
 
             return (
-              <div key={index} className={`w-full flex justify-center lg:grid lg:grid-cols-2 lg:h-[450px] ${isLast ? "mb-4" : "mb-12"} lg:mb-0 relative ${index > 0 ? "lg:-mt-20" : ""}`}>
+              <div key={index} className={`w-full flex justify-center lg:grid lg:grid-cols-2 lg:h-[500px] ${isLast ? "mb-4" : "mb-12"} lg:mb-0 relative ${index > 0 ? "lg:-mt-20" : ""}`}>
                 <div className={`flex w-full justify-center items-center ${isLeft ? "lg:justify-start lg:order-1" : "lg:justify-end lg:order-2"}`}>
                   <motion.div
                     /* ANIMATION CHANGED FOR MOBILE ONLY BELOW */
@@ -80,48 +83,48 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                       relative w-full ${mobileTransform} lg:translate-x-0 mx-auto lg:mx-0 
                       backdrop-blur-xl border border-white/20 flex flex-col transition-all duration-500 
                       hover:border-[#47c2d2]/50 z-20 shadow-2xl rounded-[1.5rem] 
-                      p-6
+                      p-3 lg:p-4 xl:p-5
                       
-                      max-w-[420px] 
-                      lg:max-w-[300px] lg:h-[350px] lg:p-[1.8rem]
-                      xl:max-w-[345px] xl:h-[345px] xl:p-[2.2rem]
+                      max-w-[460px] 
+                      lg:max-w-[360px] lg:h-[420px]
+                      xl:max-w-[420px] xl:h-[420px]
                     `}
                     style={{ 
                         background: `${glowGradient}, linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)`,
                         boxShadow: "inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 0 12px 40px 0 rgba(0, 0, 0, 0.5)"
                     }}
                   >
-                    {isTopGlow ? (
+                    {isLeft ? (
                       <>
                         <div className="relative self-center w-full flex justify-center items-center flex-grow">
                           <img
                             src={step.image}
                             alt={step.title}
-                            className="object-contain w-40 h-40 md:w-44 md:h-44" 
+                            className="object-contain w-60 h-60 md:w-62 md:h-62" 
                           />
                         </div>
-                        <div className="w-full text-left mt-4">
-                          <span className="inline-block px-6 py-1 rounded-full bg-[#47c2d2]/15 backdrop-blur-xl border border-[#47c2d2]/30 text-white font-bold text-[0.7rem] mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
+                        <div className="w-full text-left mt-2 md:mt-4">
+                          <span className="inline-block px-6 py-1.5 rounded-full bg-[#47c2d2]/15 backdrop-blur-xl border border-[#47c2d2]/30 text-white font-bold text-base md:text-lg mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
                             {step.number}
                           </span>
-                          <h3 className="font-bold text-white uppercase mb-2 text-base tracking-widest leading-tight">
+                          <h3 className="font-bold text-white uppercase mb-2 text-lg md:text-xl tracking-widest leading-tight">
                             {step.title}
                           </h3>
-                          <p className="text-slate-400/90 leading-relaxed font-light text-[0.8rem] line-clamp-3">
+                          <p className="text-white leading-relaxed font-light text-[0.95rem] md:text-base line-clamp-3">
                             {step.description}
                           </p>
                         </div>
                       </>
                     ) : (
                       <>
-                        <div className="w-full text-left mb-4">
-                          <span className="inline-block px-6 py-1 rounded-full bg-[#47c2d2]/15 backdrop-blur-xl border border-[#47c2d2]/30 text-white font-bold text-[0.7rem] mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
+                        <div className="w-full text-left mb-2 md:mb-4">
+                          <span className="inline-block px-6 py-1.5 rounded-full bg-[#47c2d2]/15 backdrop-blur-xl border border-[#47c2d2]/30 text-white font-bold text-base md:text-lg mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
                             {step.number}
                           </span>
-                          <h3 className="font-bold text-white uppercase mb-2 text-base tracking-widest leading-tight">
+                          <h3 className="font-bold text-white uppercase mb-2 text-lg md:text-xl tracking-widest leading-tight">
                             {step.title}
                           </h3>
-                          <p className="text-slate-400/90 leading-relaxed font-light text-[0.8rem] line-clamp-3">
+                          <p className="text-white leading-relaxed font-light text-[0.95rem] md:text-base line-clamp-3">
                             {step.description}
                           </p>
                         </div>
@@ -129,7 +132,7 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                           <img
                             src={step.image}
                             alt={step.title}
-                            className="object-contain w-40 h-40 md:w-44 md:h-44" 
+                            className="object-contain w-60 h-60 md:w-62 md:h-62" 
                           />
                         </div>
                       </>

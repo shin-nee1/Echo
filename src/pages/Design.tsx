@@ -153,9 +153,9 @@ const Design = () => {
           middleText="Or"
           highlight2="Marketing"
           leftBtnText="Explore Development"
-          leftBtnLink="/development"
+          leftBtnLink="/develop"
           rightBtnText="Explore Marketing"
-          rightBtnLink="/marketing"
+          rightBtnLink="/market"
         />
 
         {/* WRAPPER TO FORCE CTA SUBTITLE WHITE */}
