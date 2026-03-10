@@ -29,7 +29,7 @@ const Index = () => {
       <TestimonialCarousel />
       <AboutUs />
       
-      <CTASection title="Let's Create Your" highlight="Impact" />
+      <CTASection title="Let's Create Your" highlight="Echo" />
     </main>
   );
 };

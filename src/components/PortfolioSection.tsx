@@ -3,19 +3,27 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react"; // FIXED IMPORT
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
-// ASSET IMPORTS
-import PortImg9 from "@/assets/image-removebg-preview (9).png";
-import PortImg10 from "@/assets/image-removebg-preview (10).png";
-import PortImg11 from "@/assets/image-removebg-preview (11).png";
-
 const PortfolioSection = () => {
   const projects = [
-    { id: 1, img: PortImg9, name: "Uber", bg: "bg-[#141414]", href: "/portfolio/uber" },
-    { id: 2, img: PortImg10, name: "Barclays", bg: "bg-[#00AEEF]", href: "/portfolio/barclays" },
-    { id: 3, img: PortImg11, name: "FINKOFF.", bg: "bg-white", href: "/portfolio/finkoff" }
-  ];
-
+  { 
+    id: 1, 
+    img: "/clearmind al-3-01.png", 
+    name: "Clearmind", 
+    href: "/CaseStudyDetails?id=clearmind" 
+  },
+  { 
+    id: 2, 
+    img: "/bware al-03-01.png", 
+    name: "Bware", 
+    href: "/CaseStudyDetails?id=bware" 
+  },
+  { 
+    id: 3, 
+    img: "/rateo al-03-01.png", 
+    name: "Rateo", 
+    href: "/CaseStudyDetails?id=rateo" 
+  }
+];
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -140,9 +148,16 @@ const PortfolioSection = () => {
               <button onClick={() => scroll("right")}><ArrowRight size="1.2rem" /></button>
             </div>
 
-            <Button variant="cyan" size="hero" className="portfolio-view-all rounded-full">
-              View All
-            </Button>
+            <Button 
+  asChild 
+  variant="cyan" 
+  size="hero" 
+  className="portfolio-view-all rounded-full"
+>
+  <Link to="/work">
+    View All
+  </Link>
+</Button>
           </div>
         </div>
 
@@ -155,7 +170,7 @@ const PortfolioSection = () => {
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 className="flex flex-col"
               >
-                <div className={`portfolio-card-box relative w-full ${project.bg} flex items-center justify-center transition-all duration-500`}>
+                <div className={`portfolio-card-box relative w-full ${project} flex items-center justify-center transition-all duration-500`}>
                   <img 
                     src={project.img} 
                     alt={project.name}

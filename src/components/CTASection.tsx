@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
 import BannerBG from "../assets/cta.png"; 
 import BannerBGMobile from "../assets/cta2.png"; 
-import BannerBGTablet from "../assets/cta-tablet.png"; // <-- Imported tablet specific image
+import BannerBGTablet from "../assets/cta-tablet.png";
 
 interface CTASectionProps {
   title?: string;
   highlight?: string;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
   primaryButtonText?: string;
-  primaryButtonAction?: () => void;
+  href?: string;
 }
 
 const CTASection = ({
@@ -16,7 +16,7 @@ const CTASection = ({
   highlight = "App",
   subtitle = "Use specialized software to bring concepts to life. Let's talk about your project where imagination and knowledge collide.",
   primaryButtonText = "Start Your Project",
-  primaryButtonAction,
+  href = "/contact", 
 }: CTASectionProps) => {
   return (
     <section className="relative bg-transparent overflow-hidden cta-section-wrapper">
@@ -45,13 +45,15 @@ const CTASection = ({
               </p>
 
               <div className="cta-button-container">
-                <Button
-                  onClick={primaryButtonAction}
-                  variant="cyan"
-                  className="bg-[#47c2d2] hover:bg-[#3baab9] text-slate-900 rounded-lg font-bold cta-main-btn transition-all duration-300"
-                >
-                  {primaryButtonText}
-                </Button>
+                {/* WRAPPED BUTTON IN ANCHOR TAG */}
+                <a href={href} className="inline-block outline-none">
+                  <Button
+                    variant="cyan"
+                    className="bg-[#47c2d2] hover:bg-[#3baab9] text-slate-900 rounded-lg font-bold cta-main-btn transition-all duration-300"
+                  >
+                    {primaryButtonText}
+                  </Button>
+                </a>
               </div>
             </div>
 
@@ -124,7 +126,7 @@ const CTASection = ({
           .cta-main-btn { padding: 0 1.5rem; height: 2.8rem; font-size: 0.9rem; }
         }
 
-        /* 3. LARGE DESKTOP (1440px+) - UNTOUCHED */
+        /* 3. LARGE DESKTOP (1440px+) - FIX APPLIED HERE */
         @media (min-width: 1440px) {
           .cta-container { max-width: 1350px !important; }
           .cta-banner-card { 
@@ -135,7 +137,10 @@ const CTASection = ({
             background-position: center right !important;
           }
           .cta-text-side { width: 55%; }
-          .cta-title { font-size: 3rem; white-space: nowrap; }
+          .cta-title { 
+            font-size: 3rem; 
+            text-wrap: balance; /* Replaced white-space: nowrap; to allow wrapping */
+          }
           .cta-subtitle { font-size: 1.15rem; max-width: 480px; margin-bottom: 2.2rem; }
           .cta-main-btn { height: 3rem; font-size: 0.95rem; }
         }

@@ -61,7 +61,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to shape your identity?",
       description: "If your brand needs clarity, cohesion, or a stronger foundation, we can help you build it with intention.\n\nShare what you’re working on, and we’ll help you understand the best next steps.",
-      buttonText: "Let me be seen →",
+      buttonText: "Let me be seen ",
     },
   },
   {
@@ -92,7 +92,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to design an experience that works?",
       description: "If your product, platform, or website needs clearer structure, better usability, or a stronger interface, we can help you build it with intention.\n\nShare what you’re working on, and we’ll guide you toward the right next steps.",
-      buttonText: "Design my experience →",
+      buttonText: "Design my experience ",
     },
   },
   {
@@ -119,7 +119,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to define your creative direction?",
       description: "If your brand needs clarity, cohesion, or a distinctive visual narrative, we’ll help you shape it with intention.\n\nShare what you're working on, and we’ll guide you toward the next steps.",
-      buttonText: "Let’s define the vision →",
+      buttonText: "Let’s define the vision ",
     },
   },
   {
@@ -148,7 +148,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to bring your brand to life on camera?",
       description: "Whether you need scroll-stopping social content, product visuals, or a full brand shoot, we’ll help you create content that feels intentional and unmistakably yours.\n\nTell us what you’re working on, and we’ll guide you to the next steps.",
-      buttonText: "Shoot it →",
+      buttonText: "Shoot it ",
     },
   },
   {
@@ -176,7 +176,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to bring your visuals to life?",
       description: "Whether you need animated identity elements, campaign graphics, UI animations, or ongoing content, we help you create visuals that move with purpose.\n\nShare what you're building, and we’ll help define the next steps.",
-      buttonText: "Put it into motion →",
+      buttonText: "Put it into motion ",
     },
   },
 
@@ -206,7 +206,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to build your website?",
       description: "Whether you need a high-performance marketing site, a conversion-driven funnel, or a fully custom digital experience, we’ll help you build it with clarity and precision.\n\nShare your goals, and we’ll guide you through the next steps.",
-      buttonText: "Go Live →",
+      buttonText: "Go Live ",
     },
   },
   {
@@ -234,7 +234,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to build your store?",
       description: "If you want a Shopify experience that is fast, scalable, and designed for conversion, we’ll help you build it with precision and clarity.\n\nShare your goals, and we’ll guide you through the next steps.",
-      buttonText: "My Online Shop →",
+      buttonText: "My Online Shop ",
     },
   },
   {
@@ -246,8 +246,8 @@ export const servicesData: ServiceData[] = [
     subtitle: "Powerful web applications that streamline your business operations.",
     ctaText: "Code It",
     whatIs: {
-      title: "What is ",
-      highlightedWord: "Web Application",
+  title: "What is Web Application", // Put the full phrase here
+  highlightedWord: "Web Application",
       description: `Web applications are where your product, your users, and your business logic meet. At Echo & Impact, we build custom web applications that are stable, scalable, secure, and engineered around real functionality.\n\nFrom dashboards and portals to SaaS platforms, automation systems, API integrations, internal tools, and full-scale digital products, we develop applications with clean architecture, smooth user flow, and reliable performance.\n\nWhether you're launching an MVP, rebuilding a legacy system, or scaling a complex platform, our focus remains the same, an application built with clarity, functional logic, technical precision, and long-term scalability in mind.`,
       imageSrc: `${BASE_PATH}/web application dev hero.png`,
       imageAlt: "Web application interface",
@@ -262,7 +262,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to build your web application?",
       description: "If you're creating an internal tool, a SaaS platform, or a full digital product, we’ll help you build it with structure, clarity, and scalability from day one.\n\nShare your idea, and we’ll guide you toward the next steps.",
-      buttonText: "Code It →",
+      buttonText: "Code It ",
     },
   },
   {
@@ -290,7 +290,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to build your mobile app?",
       description: "From MVPs to full-scale mobile products, we develop apps built on structure, clarity, and long-term reliability.\n\nShare your goals, and we’ll guide you toward the next steps.",
-      buttonText: "Deploy →",
+      buttonText: "Deploy ",
     },
   },
   {
@@ -319,7 +319,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to optimize your performance?",
       description: "If your website needs to load faster, convert better, or scale with clarity, we’re here to refine every step of the journey.\nShare your goals — we’ll outline what to improve first.",
-      buttonText: "Make it perform →",
+      buttonText: "Make it perform ",
     },
   },
 
@@ -351,7 +351,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to grow where it matters?",
       description: "If you're looking for paid media that delivers clarity, efficiency, and real performance, we’re here to build it with intention.\nShare your goals, and we'll outline the smartest path forward.",
-      buttonText: "Let’s Scale →",
+      buttonText: "Let’s Scale ",
     },
   },
   {
@@ -378,9 +378,9 @@ export const servicesData: ServiceData[] = [
       { title: "Content Frameworks and Branding Consistency", description: "Your tone, styling, and creative direction are carried consistently across all posts. Frameworks allow your brand identity to stay cohesive even as trends shift.", imageSrc: `${BASE_PATH}/content frameworks and branding.png`, alternateImageSrc: `${BASE_PATH}/dashboard and reporting.png` },
     ],
     contactCta: {
-      title: "Ready to build a presence people actually connect with?",
-      description: "If your brand needs a clearer voice, stronger visuals, or more consistent execution, we can build the system that supports it.",
-      buttonText: "Lets Socialize→",
+      title: "Ready to build a presence?",
+      description: "If your brand needs a clearer voice, stronger visuals, or more consistent execution, we can build the system that supports it.\n\nShare your goals, and we'll outline the strongest path forward.",
+      buttonText: "Lets Socialize",
     },
   },
   {
@@ -410,7 +410,7 @@ export const servicesData: ServiceData[] = [
     contactCta: {
       title: "Ready to grow with long-term momentum?",
       description: "If your brand needs clarity, structure, and a search presence built to last, we’re here to help you create it.\n\nShare your goals, and we’ll outline the strongest path forward.",
-      buttonText: "Let People See Us →",
+      buttonText: "Search Us",
     },
   },
   {
@@ -438,8 +438,8 @@ export const servicesData: ServiceData[] = [
     ],
     contactCta: {
       title: "Ready to build communication that actually converts?",
-      description: "If your brand needs stronger engagement, smarter automation, or clearer messaging, we can help you build a system that works long term.",
-      buttonText: "Send It →",
+      description: "If your brand needs stronger engagement, smarter automation, or clearer messaging, we can help you build a system that works long term.\n\nShare your goals, and we’ll outline the strongest path forward.",
+      buttonText: "Send It ",
     },
   },
   {
@@ -467,8 +467,8 @@ export const servicesData: ServiceData[] = [
     ],
     contactCta: {
       title: "Ready to see your numbers clearly?",
-      description: "If your brand needs accurate tracking, smarter insights, or a clearer understanding of performance, we can build the system that supports it.",
-      buttonText: "Help Me Improve →",
+      description: "If your brand needs accurate tracking, smarter insights, or a clearer understanding of performance, we can build the system that supports it.\n\nShare your goals, and we’ll outline the strongest path forward.",
+      buttonText: "Help Me Improve ",
     },
   },
   {
@@ -496,8 +496,8 @@ export const servicesData: ServiceData[] = [
     ],
     contactCta: {
       title: "Ready to elevate the performance of your creative",
-      description: "If your brand needs sharper content, stronger ads, or a testing system that actually scales, we can build it with intention.",
-      buttonText: "Make It Convert →",
+      description: "If your brand needs sharper content, stronger ads, or a testing system that actually scales, we can build it with intention.\n\nShare your goals, and we’ll outline the strongest path forward.",
+      buttonText: "Make It Convert ",
     },
   },
 ];

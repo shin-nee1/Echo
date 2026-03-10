@@ -27,11 +27,11 @@ const About = () => {
       <FAQ items={faqData2["about"]} />
       
       <CTASection 
-        title="Ready to work with a team that treats your brand like its" 
-        highlight="own?" 
-        subtitle="If you want a partner built on clarity, craft, and long term commitment, we are ready to build with you." 
-        primaryButtonText="Meet Us →"
-        primaryButtonAction={() => navigate("/contact")} // <-- Routes to the contact page
+        title="Ready To Work With A Team That Treats Your Brand Like Its" 
+        highlight="Own?" 
+        subtitle="Share your ideas, and we will outline the strongest path forward." 
+        primaryButtonText="Meet Us "
+      
       />
     </div>
   );

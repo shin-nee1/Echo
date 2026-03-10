@@ -200,14 +200,17 @@ const Navbar = () => {
             </div>
 
             <div className="flex items-center">
-              <Button
-                size="sm"
-                className="bg-gradient-to-r from-[#295070] to-[#47c2d2] text-white hover:brightness-110 px-6 rounded-full shadow-none border-none transition-all"
-              >
-                Start Project
-              </Button>
-            </div>
-          </div>
+    <Button
+      asChild
+      size="sm"
+      className="bg-gradient-to-r from-[#295070] to-[#47c2d2] text-white hover:brightness-110 px-6 rounded-full shadow-none border-none transition-all"
+    >
+      <Link to="/contact">
+        Start Project
+      </Link>
+    </Button>
+  </div>
+</div>
 
           {/* MOBILE TOGGLE */}
           <button
