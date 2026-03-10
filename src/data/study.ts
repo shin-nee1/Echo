@@ -20,6 +20,7 @@ export interface CaseStudy {
   discovery: string[];
   problemsAndSolutions: ProblemSolution[];
   techStack: string;
+  images: string[];
 }
 
 export const caseStudiesData: CaseStudy[] = [
@@ -81,7 +82,10 @@ export const caseStudiesData: CaseStudy[] = [
         solution: "The UI was redesigned to focus on calm visuals, minimal navigation layers, and intuitive user flows, ensuring that users can start a session in just a few taps."
       }
     ],
-    techStack: "The Clear Minds application was built using a modern and scalable technology stack designed for performance and long-term maintainability."
+    techStack: "The Clear Minds application was built using a modern and scalable technology stack designed for performance and long-term maintainability.",
+    images: [
+      "/1.png", "/2.png", "/3.png", "/4.png", "/5.png", "/6.png", "/7.png", "/8.png", "/9.png"
+    ]
   },
   {
     id: "bware",
@@ -134,7 +138,10 @@ export const caseStudiesData: CaseStudy[] = [
         solution: "The mobile app enables instant reporting with the ability to attach photos, comments, and corrective actions."
       }
     ],
-    techStack: "The application was built using a scalable and secure technology stack to support both performance and long-term growth."
+    techStack: "The application was built using a scalable and secure technology stack to support both performance and long-term growth.",
+    images: [
+      "/11.png", "/22.png", "/33.png", "/44.png", "/55.png", "/66.png", "/77.png", "/88.png", "/99.png"
+    ]
   },
   {
     id: "rateo",
@@ -187,6 +194,9 @@ export const caseStudiesData: CaseStudy[] = [
         solution: "The app guides happy customers toward leaving public reviews on major platforms."
       }
     ],
-    techStack: "The Rateo mobile application was built using a modern and scalable technology stack to ensure reliability and performance."
+    techStack: "The Rateo mobile application was built using a modern and scalable technology stack to ensure reliability and performance.",
+    images: [
+      "/111.png", "/222.png", "/333.png", "/444.png", "/555.png", "/666.png", "/777.png", "/888.png", "/999.png"
+    ]
   }
 ];
