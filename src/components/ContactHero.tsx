@@ -68,7 +68,7 @@ const ContactHero = () => {
               {/* 2. TELEPHONE - z-10 */}
               <div
                 className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                style={{ width: "28%" }}
+                style={{ width: "23%" }}
               >
                 <img
                   src={ContactImg}

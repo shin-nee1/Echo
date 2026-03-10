@@ -172,8 +172,9 @@ const Market = () => {
       />
 
       <CTASection
-        title="Let's Scale Your"
-        highlight="Impact"
+        title="Let's Grow Where"
+        highlight="It Matters"
+        primaryButtonText="Start Growing"
         subtitle="We scale how the world Finds, Follows, And Invests In Your Brand."
       />
     </ServicePageLayout>

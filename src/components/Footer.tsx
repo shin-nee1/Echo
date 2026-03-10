@@ -215,9 +215,9 @@ const Footer = () => {
         <div className="mt-12 text-center border-t border-white/10 pt-8">
           <p className="text-white text-xs opacity-80">
             Echo & Impact. All rights reserved. 2026 {" "}
-            <Link to="/terms-conditions" className="hover:text-[#43c6e4] transition-colors">Terms & Conditions</Link> 
+            <Link to="/terms-conditions" className="text-[#43c6e4] transition-colors">Terms & Conditions</Link> 
             {" | "} 
-            <Link to="/privacyPolicy" className="hover:text-[#43c6e4] transition-colors">Privacy Policy</Link>
+            <Link to="/privacyPolicy" className="text-[#43c6e4] transition-colors">Privacy Policy</Link>
           </p>
         </div>
       </div>

@@ -63,7 +63,7 @@ const Design = () => {
       ]
     },
     {
-      title: "UI/UX Design",
+      title: "UI-UX Design",
       items: [
         "UX research & user journey flows",
         "Wireframes and layouts",
@@ -160,12 +160,13 @@ const Design = () => {
 
         {/* WRAPPER TO FORCE CTA SUBTITLE WHITE */}
         <div className="[&_p]:!text-white">
-          <CTASection
-            title="Let's Shape Your"
-            highlight="Brand"
-            subtitle="We shape how the world Sees, Understands, And Experiences Your Brand."
-          />
-        </div>
+  <CTASection
+    title="Let's Shape Your"
+    highlight="Brand"
+    subtitle="We shape how the world Sees, Understands, And Experiences Your Brand."
+    primaryButtonText="Let's Shape Your Brand" // <-- Add your custom text here
+  />
+</div>
       </div>
     </ServicePageLayout>
   );

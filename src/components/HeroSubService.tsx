@@ -17,14 +17,18 @@ const HeroSubService = ({ title, ctaText }: HeroSubServiceProps) => {
           {title}
         </h1>
         
-        {/* BUTTON - Color dimmed, bold removed, no glows */}
-        <div className="hero-btn-container"><Button 
-        variant="cyan" 
-        size="hero" 
-        >
-          {ctaText}
-          </Button>
-          </div>
+       {/* BUTTON - Color dimmed, bold removed, no glows */}
+<div className="hero-btn-container">
+  {/* Wrap the button in an anchor tag pointing to /contact */}
+  <a href="/contact" className="inline-block outline-none">
+    <Button 
+      variant="cyan" 
+      size="hero" 
+    >
+      {ctaText}
+    </Button>
+  </a>
+</div>
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
