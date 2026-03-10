@@ -15,6 +15,8 @@ import FAQ from "./pages/FAQ";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Work from "./pages/Work"; // <-- New Import
+import CaseStudyDetails from "./pages/CaseStudyDetails"; // <-- New Import
 
 // ASSETS
 import CubeImg from "@/assets/Cube.png";
@@ -30,36 +32,35 @@ const ScrollingCubes = () => {
   const isMarketPage = location.pathname === "/market";
   const isSubServicePage = location.pathname.startsWith("/services/");
   const isAboutPage = location.pathname === "/about";
-  const isContactPage = location.pathname === "/contact"
-  const isFAQPage = location.pathname === "/faq"
+  const isContactPage = location.pathname === "/contact";
+  const isFAQPage = location.pathname === "/faq";
+  // --- New Path Checks ---
+  const isWorkPage = location.pathname.toLowerCase() === "/work";
+  const isCaseStudyDetailsPage = location.pathname.toLowerCase() === "/casestudydetails";
 
-  if (!isHomePage && !isDesignPage && !isDevelopPage && !isMarketPage && !isSubServicePage && !isAboutPage && !isContactPage && !isFAQPage) return null;
+  if (
+    !isHomePage &&
+    !isDesignPage &&
+    !isDevelopPage &&
+    !isMarketPage &&
+    !isSubServicePage &&
+    !isAboutPage &&
+    !isContactPage &&
+    !isFAQPage &&
+    !isWorkPage && // <-- Added to check
+    !isCaseStudyDetailsPage // <-- Added to check
+  )
+    return null;
 
   return (
     <div className="absolute inset-0 z-[-1] pointer-events-none overflow-hidden">
-      {/* ================= HOME PAGE CUBES ================= */}
+      {/* ================= EXISTING CUBES ================= */}
       {isHomePage && (
         <>
-          <img 
-            src={CubeImg} 
-            alt="" 
-            className="absolute top-[19.5%] right-[1%] w-[25vw] opacity-100 rotate-[0deg]" 
-          />
-          <img 
-            src={CubeImg} 
-            alt="" 
-            className="absolute top-[35.3%] left-[1%] w-[19vw] opacity-100 -rotate-[0deg]" 
-          />
-          <img 
-            src={CubeImg} 
-            alt="" 
-            className="absolute top-[47.5%] right-[-10%] w-[33vw] opacity-100 rotate-[0deg]" 
-          />
-          <img 
-            src={CubeImg} 
-            alt="" 
-            className="absolute top-[55%] left-[-10%] w-[22.5vw] opacity-100 rotate-[0deg]" 
-          />
+          <img src={CubeImg} alt="" className="absolute top-[19.5%] right-[1%] w-[25vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[35.3%] left-[1%] w-[19vw] opacity-100 -rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[47.5%] right-[-10%] w-[33vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[55%] left-[-10%] w-[22.5vw] opacity-100 rotate-[0deg]" />
         </>
       )}
 
@@ -94,45 +95,43 @@ const ScrollingCubes = () => {
 
       {isSubServicePage && (
         <>
-          <img 
-            src={CubeImg} 
-            alt="" 
-            className="absolute top-[55%] right-[-10%] w-[30vw] opacity-100 rotate-[30deg]" 
-          />
+          <img src={CubeImg} alt="" className="absolute top-[55%] right-[-10%] w-[30vw] opacity-100 rotate-[30deg]" />
         </>
       )}
 
       {isAboutPage && (
         <>
           <img src={CubeImg} alt="" className="absolute top-[10%] right-[-10%] w-[24vw] opacity-100 rotate-[10deg]" />
-          <img 
-            src={CubeImg} 
-            alt="" 
-            className="absolute top-[31%] right-[-8%] w-[25vw] opacity-100 -rotate-0" 
-          />
+          <img src={CubeImg} alt="" className="absolute top-[31%] right-[-8%] w-[25vw] opacity-100 -rotate-0" />
         </>
       )}
+
       {isContactPage && (
         <>
-          <img 
-            src={CubeImg} 
-            alt="" 
-            className="absolute top-[64%] right-[-8%] w-[30vw] opacity-90 rotate-[25deg]" 
-          />
+          <img src={CubeImg} alt="" className="absolute top-[64%] right-[-8%] w-[30vw] opacity-90 rotate-[25deg]" />
         </>
       )}
+
       {isFAQPage && (
         <>
-          <img 
-            src={CubeImg} 
-            alt="" 
-            className="absolute top-[10%] right-[-8%] w-[25vw] opacity-100 rotate-[0deg]" 
-          />
-          <img 
-            src={CubeImg} 
-            alt="" 
-            className="absolute top-[25%] left-[-11%] w-[25vw] opacity-100 rotate-[0deg]" 
-          />
+          <img src={CubeImg} alt="" className="absolute top-[10%] right-[-8%] w-[25vw] opacity-100 rotate-[0deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[25%] left-[-11%] w-[25vw] opacity-100 rotate-[0deg]" />
+        </>
+      )}
+
+      {/* ================= NEW CUBES ================= */}
+      {isWorkPage && (
+        <>
+          <img src={CubeImg} alt="" className="absolute top-[8%] left-[-8%] w-[26vw] opacity-100 rotate-[15deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[45%] right-[-10%] w-[32vw] opacity-100 rotate-[0deg]" />
+        </>
+      )}
+
+      {isCaseStudyDetailsPage && (
+        <>
+          <img src={CubeImg} alt="" className="absolute top-[5%] right-[-6%] w-[22vw] opacity-100 rotate-[10deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[35%] left-[-12%] w-[28vw] opacity-100 -rotate-[5deg]" />
+          <img src={CubeImg} alt="" className="absolute top-[70%] right-[-15%] w-[35vw] opacity-100 rotate-[20deg]" />
         </>
       )}
     </div>
@@ -150,7 +149,7 @@ const App = () => (
         <div className="relative min-h-screen w-full bg-[#010a0f] overflow-x-hidden">
           
           {/* ================= GLOBAL GLOW SYSTEM (ABSOLUTE & REPEATING) ================= */}
-          <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
             
             {/* 1. TOP LEFT BLOB */}
             <div 
@@ -222,6 +221,11 @@ const App = () => (
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/services/:slug" element={<SubServicePage />} />
+                
+                {/* --- New Routes --- */}
+                <Route path="/work" element={<Work />} />
+                <Route path="/CaseStudyDetails" element={<CaseStudyDetails />} />
+                
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>

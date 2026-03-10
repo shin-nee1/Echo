@@ -1,5 +1,3 @@
-
-
 /* 2️⃣ Tailwind directives */
 @tailwind base;
 @tailwind components;
@@ -38,7 +36,13 @@
     --gradient-blue: linear-gradient(180deg, hsl(210, 80%, 30%) 0%, hsl(210, 50%, 4%) 100%);
   }
 
- 
+  /* === ADDED: HORIZONTAL SCROLLBAR FIX === */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  /* ======================================= */
+
   *, 
   *::before, 
   *::after, 
