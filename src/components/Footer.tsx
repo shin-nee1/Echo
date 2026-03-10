@@ -197,9 +197,7 @@ const Footer = () => {
             { icon: MapPin, label: "Location", val: "5225 Main St, Suit #4, Buffalo, NY, 14221" },
           ].map((item, i) => (
             <div key={i} className="flex items-center gap-4 justify-start">
-              {/* Removed background container, kept shrink-0 */}
               <div className="shrink-0">
-                {/* Increased size from w-4 h-4 to w-6 h-6 */}
                 <item.icon className="w-6 h-6 text-[#43c6e4]" />
               </div>
               <div className="min-w-0">
@@ -216,7 +214,10 @@ const Footer = () => {
 
         <div className="mt-12 text-center border-t border-white/10 pt-8">
           <p className="text-white text-xs opacity-80">
-            Echo & Impact. All rights reserved. 2026 Terms & Conditions | Privacy Policy
+            Echo & Impact. All rights reserved. 2026 {" "}
+            <Link to="/terms-conditions" className="hover:text-[#43c6e4] transition-colors">Terms & Conditions</Link> 
+            {" | "} 
+            <Link to="/privacyPolicy" className="hover:text-[#43c6e4] transition-colors">Privacy Policy</Link>
           </p>
         </div>
       </div>
