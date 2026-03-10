@@ -11,10 +11,7 @@ const ServiceCard = ({ title, items }: ServiceData) => {
 
   return (
     <div 
-      // VERTICAL LENGTH ADJUSTMENT:
-      // aspect-square remains for mobile/tablet/standard laptop.
-      // xl:aspect-[4/5] increases vertical length for 1440px screens.
-      className="relative w-full aspect-[2/3] md:aspect-[6/7] lg:aspect-[5/6] xl:aspect-[3/3] 2xl:aspect-[3/4] group"
+      className="relative w-full aspect-[3/4] md:aspect-[19/20] lg:aspect-[10/11] xl:aspect-[3/4] 2xl:aspect-[16/17] group"
       style={{ zIndex: isHovered ? 100 : 10 }} 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -28,11 +25,24 @@ const ServiceCard = ({ title, items }: ServiceData) => {
           ease: [0.22, 1, 0.36, 1], 
           duration: 0.5 
         }}
-        // Added xl:pb-12 to handle the extra vertical height gracefully
         className="relative z-30 w-full h-full rounded-[2rem] bg-white/[0.04] backdrop-blur-[35px] border border-white/[0.12] p-6 lg:p-9 xl:p-8 xl:pb-16 flex flex-col shadow-[0_40px_80px_-15px_rgba(0,0,0,0.8)] overflow-hidden will-change-transform"
       >
         <div className="absolute top-[5%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#00d8ff]/10 blur-[80px] rounded-full pointer-events-none" />
         
+        {/* ENHANCED BOTTOM GLOW EFFECT */}
+        <div 
+          className="absolute bottom-0 left-0 right-0 h-full pointer-events-none overflow-hidden rounded-[2rem]"
+          style={{ zIndex: 31 }}
+        >
+          <div 
+            className="absolute bottom-[-15%] left-1/2 -translate-x-1/2 w-[140%] h-[50%]"
+            style={{
+              background: 'radial-gradient(circle at bottom, rgba(0, 216, 255, 0.4) 0%, rgba(0, 216, 255, 0.1) 70%, transparent 80%)',
+              filter: 'blur(30px)',
+            }}
+          />
+        </div>
+
         <div className="relative z-40 flex flex-col h-full">
           <h3 className="text-[20px] md:text-[22px] lg:text-[22px] xl:text-[20px] font-bold text-white tracking-tight leading-[1.1] mb-3 lg:mb-5 font-display uppercase">
             {title}

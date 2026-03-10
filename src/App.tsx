@@ -17,6 +17,8 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Work from "./pages/Work"; // <-- New Import
 import CaseStudyDetails from "./pages/CaseStudyDetails"; // <-- New Import
+import TermsConditions from "./pages/termsConditions";
+import PrivacyPolicy from "./pages/privacyPolicy";
 
 // ASSETS
 import CubeImg from "@/assets/Cube.png";
@@ -131,7 +133,6 @@ const ScrollingCubes = () => {
         <>
           <img src={CubeImg} alt="" className="absolute top-[5%] right-[-6%] w-[22vw] opacity-100 rotate-[10deg]" />
           <img src={CubeImg} alt="" className="absolute top-[35%] left-[-12%] w-[28vw] opacity-100 -rotate-[5deg]" />
-          <img src={CubeImg} alt="" className="absolute top-[70%] right-[-15%] w-[35vw] opacity-100 rotate-[20deg]" />
         </>
       )}
     </div>
@@ -225,7 +226,8 @@ const App = () => (
                 {/* --- New Routes --- */}
                 <Route path="/work" element={<Work />} />
                 <Route path="/CaseStudyDetails" element={<CaseStudyDetails />} />
-                
+                <Route path="/terms-conditions" element={<TermsConditions />} />
+                <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
