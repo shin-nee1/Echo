@@ -167,9 +167,8 @@ const FAQ = () => {
       <CTASection 
         title="Still Have"
         highlight="Questions?"
-        subtitle="If something isn't covered here, or you want to discuss your specific situation, we're happy to help."
+        subtitle={<>If something isn't covered here, or you want to discuss your specific situation, we're happy to help.</>}
         primaryButtonText="Start A Conversation"
-        primaryButtonAction={() => navigate("/contact")} // <-- Routes to the contact page
       />
 
       <style>{`
