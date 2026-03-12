@@ -49,7 +49,7 @@ const CTASection = ({
                 <a href={href} className="inline-block outline-none">
                   <Button
                     variant="cyan"
-                    className="bg-[#47c2d2] hover:bg-[#3baab9] text-slate-900 rounded-lg font-bold cta-main-btn transition-all duration-300"
+                    className="bg-[#47c2d2] hover:bg-[#3baab9] text-[white] rounded-lg font-bold cta-main-btn transition-all duration-300"
                   >
                     {primaryButtonText}
                   </Button>
@@ -67,29 +67,27 @@ const CTASection = ({
         /* === MOBILE & TABLET IMAGE SWAP OVERRIDE === */
         @media (max-width: 1023px) {
           .cta-banner-card {
-            /* Default Mobile Image (cta2) */
             background-image: url('${BannerBGMobile}') !important;
             background-position: center bottom !important; 
             min-height: 480px !important; 
           }
         }
 
-        /* NEW: TABLET SPECIFIC OVERRIDE (768px - 1023px) */
+        /* TABLET SPECIFIC OVERRIDE (768px - 1023px) */
         @media (min-width: 768px) and (max-width: 1023px) {
           .cta-banner-card {
-            /* Tablet Image (cta-tablet) */
             background-image: url('${BannerBGTablet}') !important;
             background-position: center bottom !important;
-            min-height: 520px !important; /* Slightly taller to clear the phone graphics */
+            min-height: 520px !important; 
             display: flex;
-            align-items: flex-start !important; /* Move text up to avoid overlapping cards */
+            align-items: flex-start !important; 
             padding-top: 4rem !important;
           }
           .cta-title { font-size: 2.4rem !important; max-width: 450px; }
           .cta-subtitle { font-size: 1.05rem !important; max-width: 400px; }
         }
 
-        /* 1. MOBILE & TABLET (Base Settings - preserved) */
+        /* 1. MOBILE & TABLET (Base Settings) */
         .cta-section-wrapper { padding: 2rem 1rem; }
         .cta-banner-card { 
           border-radius: 1.5rem; 
@@ -98,22 +96,23 @@ const CTASection = ({
           background-size: cover;
           background-position: center right; 
         }
-        .cta-title { font-size: 1.6rem; margin-bottom: 0.8rem; }
-        .cta-subtitle { font-size: 0.85rem; margin-bottom: 1.5rem; max-width: 260px; }
+        .cta-title { font-size: 1.6rem; margin-bottom: 0.8rem; word-wrap: break-word; }
+        .cta-subtitle { font-size: 0.85rem; margin-bottom: 1.5rem; max-width: 260px; word-wrap: break-word; }
         .cta-main-btn { height: 2.6rem; padding: 0 1.2rem; }
 
-        /* 2. LAPTOP (1024px - 1439px) - UNTOUCHED */
+        /* 2. LAPTOP (1024px - 1439px) - FIXED OVERFLOW */
         @media (min-width: 1024px) {
           .cta-container { 
             max-width: 960px !important; 
             margin: 0 auto; 
           }
           .cta-banner-card { 
-            height: 300px; 
+            min-height: 300px;   /* Changed from fixed height */
+            height: auto;        /* Allows container to stretch */
             border-radius: 2rem; 
             display: flex;
             align-items: center;
-            padding: 0 3.5rem;
+            padding: 3rem 3.5rem; /* Added 3rem top/bottom padding to protect text */
             background-size: 100% 100% !important;
             background-position: center right !important;
           }
@@ -126,29 +125,34 @@ const CTASection = ({
           .cta-main-btn { padding: 0 1.5rem; height: 2.8rem; font-size: 0.9rem; }
         }
 
-        /* 3. LARGE DESKTOP (1440px+) - FIX APPLIED HERE */
+        /* 3. LARGE DESKTOP (1440px+) - FIXED OVERFLOW */
         @media (min-width: 1440px) {
           .cta-container { max-width: 1350px !important; }
           .cta-banner-card { 
+            min-height: 460px;    /* Replaced strict aspect ratio with min-height */
             height: auto;
-            aspect-ratio: 1400 / 460; 
-            padding: 0 5rem;
+            padding: 4rem 5rem;   /* Added 4rem top/bottom padding to protect text */
             background-size: cover !important;
             background-position: center right !important;
           }
           .cta-text-side { width: 55%; }
           .cta-title { 
             font-size: 3rem; 
-            text-wrap: balance; /* Replaced white-space: nowrap; to allow wrapping */
+            text-wrap: balance; 
           }
           .cta-subtitle { font-size: 1.15rem; max-width: 480px; margin-bottom: 2.2rem; }
           .cta-main-btn { height: 3rem; font-size: 0.95rem; }
         }
 
-        /* 4. 4K MONITORS - UNTOUCHED */
+        /* 4. 4K MONITORS - FIXED OVERFLOW */
         @media (min-width: 2560px) {
           .cta-container { max-width: 1900px !important; }
-          .cta-banner-card { aspect-ratio: 1900 / 540; border-radius: 3rem; }
+          .cta-banner-card { 
+            min-height: 540px; 
+            height: auto;
+            border-radius: 3rem; 
+            padding: 5rem 6rem;   /* Added 5rem top/bottom padding */
+          }
           .cta-title { font-size: 4.5rem; }
           .cta-subtitle { font-size: 1.5rem; max-width: 750px; }
           .cta-main-btn { height: 4rem; font-size: 1.4rem; padding: 0 3.5rem; }
