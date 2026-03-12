@@ -21,7 +21,7 @@ const ContactHeroMobile = () => {
 
     try {
       // REPLACE THIS URL with your Google Apps Script Web App URL
-      const scriptURL = "https://script.google.com/macros/s/AKfycbxbWPSjniXEEAWgOni26nxfjxBc8RFBr5LvC4XR16350f9vU0tQQFYIYHBn05qzxtx3/exec"; 
+      const scriptURL = "https://script.google.com/macros/s/AKfycbw3wEssyGWkjFkneoL1hb6K8ZSJ5POpCeXe0RFw0DPiP_wk92aLFbo_a91TYBd15ZTn4w/exec"; 
       
       const response = await fetch(scriptURL, {
         method: "POST",
