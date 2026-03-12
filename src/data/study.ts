@@ -10,9 +10,11 @@ export interface ProblemSolution {
 }
 
 export interface CaseStudy {
-  id: string; 
+  id: string;
   title: string;
   heroDescription: string[];
+  appStoreLink?: string;
+  playStoreLink?: string;
   workflow: {
     overview: string;
     steps: WorkflowStep[];
@@ -27,6 +29,8 @@ export const caseStudiesData: CaseStudy[] = [
   {
     id: "clearmind",
     title: "Clear Minds",
+    appStoreLink: "https://apps.apple.com/pk/app/clear-minds-hypnotherapy/id1600470480",
+    playStoreLink: "https://play.google.com/store/apps/details?id=com.clearmindhypnotherapy.app&hl=en&pli=1",
     heroDescription: [
       "Clear Minds is a mobile wellness application designed to help users improve mental clarity, reduce stress, and build healthier habits through guided hypnotherapy sessions, meditation programs, and structured self-improvement content.",
       "The application provides users with a curated library of audio sessions designed to address common mental wellness goals such as better sleep, anxiety management, confidence building, and habit transformation. Through a clean and calming interface, users can discover sessions, track their progress, and build a consistent personal improvement routine."
@@ -83,13 +87,13 @@ export const caseStudiesData: CaseStudy[] = [
       }
     ],
     techStack: "The Clear Minds application was built using a modern and scalable technology stack designed for performance and long-term maintainability.",
-    images: [
-      "/1.png", "/2.png", "/3.png", "/4.png", "/5.png", "/6.png", "/7.png", "/8.png", "/9.png"
-    ]
+    images: ["/1.png", "/2.png", "/3.png", "/4.png", "/5.png", "/6.png", "/7.png", "/8.png", "/9.png"]
   },
   {
     id: "bware",
     title: "BWARE",
+    appStoreLink: "https://apps.apple.com/nz/app/bware/id1531848912",
+    playStoreLink: "https://play.google.com/store/apps/details?id=com.root.bware&hl=en",
     heroDescription: [
       "BWARE is a mobile-first workplace safety and compliance platform designed to help businesses manage health and safety processes more efficiently. The application enables field teams to access safety plans, complete digital forms, report incidents, and track compliance activities directly from their mobile devices.",
       "The goal of the platform is to replace traditional paper-based safety management systems with a streamlined digital workflow. By combining structured safety frameworks with an intuitive mobile interface, BWARE helps organizations maintain compliance while improving efficiency across job sites. The mobile app acts as a companion to the broader BWARE platform, ensuring workers and managers can complete critical safety tasks anytime, anywhere."
@@ -139,13 +143,12 @@ export const caseStudiesData: CaseStudy[] = [
       }
     ],
     techStack: "The application was built using a scalable and secure technology stack to support both performance and long-term growth.",
-    images: [
-      "/11.png", "/22.png", "/33.png", "/44.png", "/55.png", "/66.png", "/77.png", "/88.png", "/99.png"
-    ]
+    images: ["/11.png", "/22.png", "/33.png", "/44.png", "/55.png", "/66.png", "/77.png", "/88.png", "/99.png"]
   },
   {
     id: "rateo",
     title: "Rateo",
+    playStoreLink: "https://play.google.com/store/apps/details?id=com.rateo.app",
     heroDescription: [
       "Rateo is a mobile application designed to help businesses collect, manage, and leverage customer reviews to strengthen their online reputation. The platform simplifies the feedback process by enabling businesses to request reviews through automated communication channels such as SMS and email.",
       "The app allows businesses to store customer contact information, send review requests at the right time, and guide satisfied customers toward leaving public reviews. With a simple and intuitive interface, Rateo helps businesses turn everyday customer interactions into valuable reputation-building opportunities."
@@ -195,8 +198,6 @@ export const caseStudiesData: CaseStudy[] = [
       }
     ],
     techStack: "The Rateo mobile application was built using a modern and scalable technology stack to ensure reliability and performance.",
-    images: [
-      "/111.png", "/222.png", "/333.png", "/444.png", "/555.png", "/666.png", "/777.png", "/888.png", "/999.png"
-    ]
+    images: ["/111.png", "/222.png", "/333.png", "/444.png", "/555.png", "/666.png", "/777.png", "/888.png", "/999.png"]
   }
 ];
