@@ -50,20 +50,16 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
             const isLast = index === steps.length - 1;
             const mobileTransform = (index < 4) ? "-translate-x-[12px]" : "translate-x-[12px]";
             
-            // GLOW LOGIC: 
-            // Odd process (1, 3, 5) -> bottom center (50% 100%)
-            // Even process (2, 4, 6) -> top center (50% 0%)
+            // GLOW LOGIC
             const isOddProcess = (index + 1) % 2 !== 0;
             const glowPosition = isOddProcess ? "50% 100%" : "50% 0%";
             
-            // Spread reduced by changing the transparent stop from 100% to 60%
             const glowGradient = `radial-gradient(circle at ${glowPosition}, rgba(66, 172, 192, 0.4) 0%, rgba(31, 81, 90, 0) 60%)`;
 
             return (
-              <div key={index} className={`w-full flex justify-center lg:grid lg:grid-cols-2 lg:h-[500px] ${isLast ? "mb-4" : "mb-12"} lg:mb-0 relative ${index > 0 ? "lg:-mt-20" : ""}`}>
+              <div key={index} className={`w-full flex justify-center lg:grid lg:grid-cols-2 lg:min-h-[500px] lg:h-auto ${isLast ? "mb-4" : "mb-12"} lg:mb-0 relative ${index > 0 ? "lg:-mt-20" : ""}`}>
                 <div className={`flex w-full justify-center items-center ${isLeft ? "lg:justify-start lg:order-1" : "lg:justify-end lg:order-2"}`}>
                   <motion.div
-                    /* ANIMATION CHANGED FOR MOBILE ONLY BELOW */
                     initial={{ 
                       opacity: 0, 
                       scale: (typeof window !== 'undefined' && window.innerWidth < 1024) ? 0.92 : 1,
@@ -83,11 +79,12 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                       relative w-full ${mobileTransform} lg:translate-x-0 mx-auto lg:mx-0 
                       backdrop-blur-xl border border-white/20 flex flex-col transition-all duration-500 
                       hover:border-[#47c2d2]/50 z-20 shadow-2xl rounded-[1.5rem] 
-                      p-3 lg:p-4 xl:p-5
+                      p-4 lg:p-5 xl:p-6
                       
+                      h-auto min-h-[400px]
                       max-w-[460px] 
-                      lg:max-w-[360px] lg:h-[420px]
-                      xl:max-w-[420px] xl:h-[420px]
+                      lg:max-w-[360px] lg:min-h-[420px]
+                      xl:max-w-[420px] xl:min-h-[420px]
                     `}
                     style={{ 
                         background: `${glowGradient}, linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)`,
@@ -96,43 +93,43 @@ const ProcessSection = ({ title, highlight, steps }: ProcessSectionProps) => {
                   >
                     {isLeft ? (
                       <>
-                        <div className="relative self-center w-full flex justify-center items-center flex-grow">
+                        <div className="relative self-center w-full flex justify-center items-center flex-grow py-2">
                           <img
                             src={step.image}
                             alt={step.title}
-                            className="object-contain w-60 h-60 md:w-62 md:h-62" 
+                            className="object-contain w-52 h-52 md:w-60 md:h-60" 
                           />
                         </div>
-                        <div className="w-full text-left mt-2 md:mt-4">
+                        <div className="w-full text-left mt-2 md:mt-4 shrink-0">
                           <span className="inline-block px-6 py-1.5 rounded-full bg-[#47c2d2]/15 backdrop-blur-xl border border-[#47c2d2]/30 text-white font-bold text-base md:text-lg mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
                             {step.number}
                           </span>
                           <h3 className="font-bold text-white uppercase mb-2 text-lg md:text-xl tracking-widest leading-tight">
                             {step.title}
                           </h3>
-                          <p className="text-white leading-relaxed font-light text-[0.95rem] md:text-base line-clamp-3">
+                          <p className="text-white leading-relaxed font-light text-[0.95rem] md:text-base">
                             {step.description}
                           </p>
                         </div>
                       </>
                     ) : (
                       <>
-                        <div className="w-full text-left mb-2 md:mb-4">
+                        <div className="w-full text-left mb-2 md:mb-4 shrink-0">
                           <span className="inline-block px-6 py-1.5 rounded-full bg-[#47c2d2]/15 backdrop-blur-xl border border-[#47c2d2]/30 text-white font-bold text-base md:text-lg mb-3 uppercase tracking-wider shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
                             {step.number}
                           </span>
                           <h3 className="font-bold text-white uppercase mb-2 text-lg md:text-xl tracking-widest leading-tight">
                             {step.title}
                           </h3>
-                          <p className="text-white leading-relaxed font-light text-[0.95rem] md:text-base line-clamp-3">
+                          <p className="text-white leading-relaxed font-light text-[0.95rem] md:text-base">
                             {step.description}
                           </p>
                         </div>
-                        <div className="relative self-center w-full flex justify-center items-center flex-grow">
+                        <div className="relative self-center w-full flex justify-center items-center flex-grow py-2">
                           <img
                             src={step.image}
                             alt={step.title}
-                            className="object-contain w-60 h-60 md:w-62 md:h-62" 
+                            className="object-contain w-52 h-52 md:w-60 md:h-60" 
                           />
                         </div>
                       </>

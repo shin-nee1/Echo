@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Mail, Phone, Home, ChevronDown } from "lucide-react";
-import ContactImg from "@/assets/telephone.png.png"; // Ensure this path is correct for your project
+import { Link } from "react-router-dom"; // ADDED THIS IMPORT
+import ContactImg from "@/assets/telephone.png.png"; 
 import ContactHeroMobile from "./ContactHeroMobile";
 import { servicesData } from "@/data/servicesData";
+import { Button } from "@/components/ui/button";
 
 const ContactHero = () => {
   const viewBoxSize = 1400;
@@ -11,7 +13,41 @@ const ContactHero = () => {
   const maxRadius = 540;
   const gap = 140;
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
+
   const noiseTexture = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.60' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E")`;
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      // REPLACE THIS URL with your Google Apps Script Web App URL
+      const scriptURL = "https://script.google.com/macros/s/AKfycbxbWPSjniXEEAWgOni26nxfjxBc8RFBr5LvC4XR16350f9vU0tQQFYIYHBn05qzxtx3/exec"; 
+      
+      const response = await fetch(scriptURL, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        setSubmitMessage("Request submitted successfully!");
+        form.reset(); // Clear the form
+      } else {
+        setSubmitMessage("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+      setSubmitMessage("Error connecting to server.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <>
@@ -33,7 +69,7 @@ const ContactHero = () => {
                 transform: "scale(clamp(0.8, calc(1vw * 0.02 + 0.7), 1))",
               }}
             >
-              {/* 1. SEMI-CIRCLES (Background Framework) - z-0 */}
+              {/* 1. SEMI-CIRCLES (Background Framework) */}
               <svg
                 width="100%"
                 height="100%"
@@ -65,7 +101,7 @@ const ContactHero = () => {
                 </g>
               </svg>
 
-              {/* 2. TELEPHONE - z-10 */}
+              {/* 2. TELEPHONE */}
               <div
                 className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                 style={{ width: "23%" }}
@@ -77,7 +113,7 @@ const ContactHero = () => {
                 />
               </div>
 
-              {/* 3. THE FORM CARD - z-20 */}
+              {/* 3. THE FORM CARD */}
               <div
                 className="absolute z-20 flex flex-col border border-white/20 shadow-2xl backdrop-blur-sm"
                 style={{
@@ -102,40 +138,46 @@ const ContactHero = () => {
                     Tell Us About Your Project
                   </h2>
 
-                  <form className="grid grid-cols-2 gap-3 flex-grow content-center">
+                  <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-3 flex-grow content-center">
                     {/* INPUTS */}
-                    {["Name*", "Email*", "Phone*", "Company"].map((p) => (
+                    {[
+                      { label: "Name*", name: "Name", type: "text" },
+                      { label: "Email*", name: "Email", type: "email" },
+                      { label: "Phone*", name: "Phone", type: "text" },
+                      { label: "Company", name: "Company", type: "text" }
+                    ].map((p) => (
                       <input
-                        key={p}
-                        type={p === "Email*" ? "email" : "text"}
-                        placeholder={p}
-                        required={p.includes("*")}
+                        key={p.name}
+                        name={p.name}
+                        type={p.type}
+                        placeholder={p.label}
+                        required={p.label.includes("*")}
                         className="rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white placeholder:text-white/30 placeholder:font-bold text-xs xl:text-sm h-10 focus:outline-none focus:border-[#00d2ff]/50 transition-all shadow-inner w-full"
                       />
                     ))}
 
                     {/* SERVICE INTEREST DROPDOWN */}
                     <div className="col-span-2 relative">
-                      <select defaultValue="" className="w-full rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white/50 text-xs xl:text-sm appearance-none h-10 cursor-pointer focus:outline-none focus:text-white">
+                      <select name="Service" defaultValue="" required className="w-full rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white/50 text-xs xl:text-sm appearance-none h-10 cursor-pointer focus:outline-none focus:text-white">
                         <option value="" disabled className="bg-[#050a0f]">
-                          Service Interest
+                          Service Interest*
                         </option>
                         
                         <optgroup label="Design Services" className="bg-[#050a0f]">
                           {servicesData.filter(s => s.category === "design").map((service) => (
-                            <option key={service.slug} value={service.slug}>{service.title}</option>
+                            <option key={service.slug} value={service.title}>{service.title}</option>
                           ))}
                         </optgroup>
 
                         <optgroup label="Development Services" className="bg-[#050a0f]">
                           {servicesData.filter(s => s.category === "develop").map((service) => (
-                            <option key={service.slug} value={service.slug}>{service.title}</option>
+                            <option key={service.slug} value={service.title}>{service.title}</option>
                           ))}
                         </optgroup>
 
                         <optgroup label="Marketing Services" className="bg-[#050a0f]">
                           {servicesData.filter(s => s.category === "market").map((service) => (
-                            <option key={service.slug} value={service.slug}>{service.title}</option>
+                            <option key={service.slug} value={service.title}>{service.title}</option>
                           ))}
                         </optgroup>
                       </select>
@@ -144,13 +186,16 @@ const ContactHero = () => {
 
                     {/* PROJECT DESCRIPTION */}
                     <textarea
+                      name="Description"
                       placeholder="Project Description..."
+                      required
                       className="col-span-2 rounded-xl px-4 py-3 bg-zinc-900/60 border border-white/10 text-white placeholder:text-white/30 placeholder:font-bold resize-none text-xs xl:text-sm focus:outline-none h-20 xl:h-24 shadow-inner"
                     />
 
                     {/* BUDGET RANGE (Input) */}
                     <div className="col-span-2">
                       <input
+                        name="Budget"
                         type="text"
                         placeholder="Budget Range (Min - Max $)"
                         className="w-full rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white placeholder:text-white/30 placeholder:font-bold text-xs xl:text-sm h-10 focus:outline-none focus:border-[#00d2ff]/50 transition-all shadow-inner"
@@ -159,9 +204,9 @@ const ContactHero = () => {
 
                     {/* TIMELINE DROPDOWN */}
                     <div className="col-span-2 relative">
-                      <select defaultValue="" className="w-full rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white/50 text-xs xl:text-sm appearance-none h-10 cursor-pointer focus:outline-none focus:text-white">
+                      <select name="Timeline" defaultValue="" required className="w-full rounded-xl px-4 bg-zinc-900/60 border border-white/10 text-white/50 text-xs xl:text-sm appearance-none h-10 cursor-pointer focus:outline-none focus:text-white">
                         <option value="" disabled className="bg-[#050a0f]">
-                          How soon do you want to start?
+                          How soon do you want to start?*
                         </option>
                         <option value="Immediately" className="bg-[#050a0f]">Immediately</option>
                         <option value="In a month" className="bg-[#050a0f]">In a month</option>
@@ -170,11 +215,53 @@ const ContactHero = () => {
                       </select>
                       <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 pointer-events-none" />
                     </div>
+
+                    {/* CONSENT CHECKBOX - NEWLY ADDED */}
+                    <div className="col-span-2 flex items-start gap-2 mt-2 mb-1">
+                      <input
+                        type="checkbox"
+                        id="consent"
+                        name="Consent"
+                        value="Yes"
+                        required
+                        className="mt-0.5 w-4 h-4 shrink-0 rounded border-white/10 bg-zinc-900/60 accent-[#00d2ff] cursor-pointer"
+                      />
+                      <label htmlFor="consent" className="text-white/70 text-[15px] xl:text-xs leading-tight">
+                        By checking this box, you consent to receive emails, text messages, and phone calls from Echo & Impact. For more info, please see our{" "}
+                        <Link to="/privacy-policy" className="text-[#00d2ff] hover:underline">
+                          Privacy Policy
+                        </Link>{" "}
+                        and{" "}
+                        <Link to="/terms-conditions" className="text-[#00d2ff] hover:underline">
+                          Terms and Conditions
+                        </Link>.
+                      </label>
+                    </div>
+
+                    {/* SUBMIT BUTTON */}
+                    <div className="col-span-2 mt-1">
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        variant="cyan"
+                        className="w-full bg-[#00d2ff] hover:bg-[#00b8e6] text-slate-900 rounded-lg font-bold transition-all duration-300 h-10"
+                      >
+                        {isSubmitting ? "Submitting..." : "Submit Project"}
+                      </Button>
+                      
+                      {/* Success/Error Message */}
+                      {submitMessage && (
+                        <p className="text-center text-white text-xs mt-2 font-medium">
+                          {submitMessage}
+                        </p>
+                      )}
+                    </div>
+
                   </form>
                 </div>
               </div>
 
-              {/* 4. TRANSPARENT INFO CARD - z-40 */}
+              {/* 4. TRANSPARENT INFO CARD */}
               <div
                 className="absolute left-[5%] z-40 hidden lg:block"
                 style={{

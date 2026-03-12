@@ -1,8 +1,20 @@
-import { Facebook, Linkedin, Twitter, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import { Facebook, Linkedin, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { serviceTitleToSlug } from "@/data/servicesData";
 // IMPORTING LOGO FROM ASSETS
 import logo from "@/assets/Echo & Impact Logo (White).png";
+
+// Custom X (formerly Twitter) Icon
+const XIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
 
 type FooterSection = {
   title: string;
@@ -92,6 +104,12 @@ const Footer = () => {
     return slug ? `/services/${slug}` : "/services";
   };
 
+  const socialLinks = [
+    { Icon: Facebook, url: "https://www.facebook.com/profile.php?id=61579962058682" },
+    { Icon: Linkedin, url: "https://www.linkedin.com/company/echoandimpact-official/" },
+    { Icon: XIcon, url: "https://x.com/impact_ech60954" },
+  ];
+
   return (
     <footer
       className="relative bg-transparent text-white"
@@ -132,10 +150,12 @@ const Footer = () => {
               Social links
             </span>
             <div className="flex gap-3">
-              {[Facebook, Linkedin, Twitter].map((Icon, i) => (
+              {socialLinks.map(({ Icon, url }, i) => (
                 <a
                   key={i}
-                  href="#"
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 bg-white/5 hover:border-[#43c6e4]/50 hover:bg-[#43c6e4]/10 transition-all duration-300 group"
                 >
                   <Icon className="w-4 h-4 text-white group-hover:text-[#43c6e4]" />

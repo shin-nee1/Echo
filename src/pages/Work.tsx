@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Work = () => {
-  // Updated the IDs to exactly match the string IDs in your study.ts file
   const caseStudies = [
     { 
       id: "rateo", 
@@ -25,12 +24,11 @@ const Work = () => {
   ];
 
   return (
-    // Restored max-w-5xl and w-full to keep image sizes manageable and prevent vertical scrollbars
     <div className="w-full pt-32 pb-12 px-6 md:px-10 max-w-5xl mx-auto relative z-10">
       
       {/* Page Title */}
-      <h1 className="text-4xl md:text-5xl font-bold mb-12 tracking-tight text-[#42ACC0]">
-        Case Study
+      <h1 className="text-4xl md:text-5xl font-bold mb-12 tracking-tight text-[#42ACC0] text-center">
+        Case Studies
       </h1>
 
       {/* Responsive 2x2 Grid Container */}
@@ -39,7 +37,7 @@ const Work = () => {
         {caseStudies.map((study) => (
           <div key={study.id} className="flex flex-col group">
             
-            {/* Clickable Real Image Asset - Updated the 'to' path */}
+            {/* Clickable Real Image Asset */}
             <Link 
               to={`/CaseStudyDetails?id=${study.id}`} 
               className="block w-full overflow-hidden transition-transform duration-300 group-hover:-translate-y-1"
@@ -53,7 +51,7 @@ const Work = () => {
               </div>
             </Link>
 
-            {/* Clickable Title - Updated the 'to' path */}
+            {/* Clickable Title */}
             <Link to={`/CaseStudyDetails?id=${study.id}`} className="inline-block w-fit mt-5">
               <h2 className="text-2xl font-semibold mb-3 text-white hover:underline decoration-2 underline-offset-4">
                 {study.title}

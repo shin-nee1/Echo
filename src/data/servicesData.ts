@@ -185,7 +185,7 @@ export const servicesData: ServiceData[] = [
     slug: "website-development",
     category: "develop",
     title: "Website Development",
-    nonHighlightedText: "Everything That Makes It A",
+    nonHighlightedText: "That Makes It A",
     highlightedText: "Website",
     subtitle: "Fast, responsive websites that convert visitors into customers.",
     ctaText: "Go Live",
